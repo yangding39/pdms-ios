@@ -18,5 +18,5 @@ class HistoryTableCell : UITableViewCell {
     
     @IBOutlet weak var birthday: UILabel!
     
-    @IBOutlet weak var address: UILabel!
+    //@IBOutlet weak var address: UILabel!
 }
