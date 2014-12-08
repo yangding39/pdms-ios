@@ -31,6 +31,13 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         // Dispose of any resources that can be recreated.
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let patientDetailViewController = storyboard.instantiateViewControllerWithIdentifier("patientDetailView") as PatientDetailViewController
+        self.navigationController?.pushViewController(patientDetailViewController, animated: true)
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.searchDisplayController?.searchResultsTableView {
             return searchResult.count

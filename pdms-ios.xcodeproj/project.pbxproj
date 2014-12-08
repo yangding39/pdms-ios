@@ -20,6 +20,7 @@
 		85D24A551A31785D00D2C7EF /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A541A31785D00D2C7EF /* Code.swift */; };
 		85D39FC31A31B48B0034F93B /* TotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D39FC21A31B48B0034F93B /* TotalViewController.swift */; };
 		85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D39FC41A35420D0034F93B /* AddPatientViewController.swift */; };
+		B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */; };
 		F3CFA9F69B69FD3F591A9C3C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1971B582EB70825C1A3F1F27 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		85D39FC41A35420D0034F93B /* AddPatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPatientViewController.swift; sourceTree = "<group>"; };
 		9CF5AE119AD28CCFB89A6953 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B611E8501A356E5D00AB4CEF /* PatientTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientTableCell.xib; sourceTree = "<group>"; };
+		B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
 		E9E3B41D812C23750686EA88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 				85D39FC21A31B48B0034F93B /* TotalViewController.swift */,
 				85D24A4D1A31599900D2C7EF /* HistoryTableCell.swift */,
 				85D39FC41A35420D0034F93B /* AddPatientViewController.swift */,
+				B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */,
 			);
 			name = Pantient;
 			sourceTree = "<group>";
@@ -261,7 +264,6 @@
 			files = (
 				85566DC91A314226004B44AB /* Main.storyboard in Resources */,
 				85566DCE1A314226004B44AB /* LaunchScreen.xib in Resources */,
-				B611E8511A356E5D00AB4CEF /* PatientTableCell.xib in Resources */,
 				85566DCB1A314226004B44AB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +322,7 @@
 				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
 				85D24A4E1A31599900D2C7EF /* HistoryTableCell.swift in Sources */,
 				85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */,
+				B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */,
 				85D24A501A3164A200D2C7EF /* Patient.swift in Sources */,
 				85D39FC31A31B48B0034F93B /* TotalViewController.swift in Sources */,
 			);
