@@ -124,5 +124,9 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         }
         
     }
+    
+    @IBAction func completeAdd(segue : UIStoryboardSegue) {
+        
+    }
 }
 
