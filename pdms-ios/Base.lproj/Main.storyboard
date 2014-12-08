@@ -7,6 +7,35 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Patient Detail View Controller-->
+        <scene sceneID="9Bq-Zr-JfF">
+            <objects>
+                <viewController storyboardIdentifier="patientDetailView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4QS-Sp-MfC" customClass="PatientDetailViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lDi-JB-A08"/>
+                        <viewControllerLayoutGuide type="bottom" id="fmJ-lr-p2I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QKW-Hi-na1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg1-aJ-GFE">
+                                <rect key="frame" x="16" y="72" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="Tg1-aJ-GFE" id="Ohc-jg-8ft"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j4U-70-ady" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1824" y="-689"/>
+        </scene>
         <!--病例管理-->
         <scene sceneID="alm-3k-1IR">
             <objects>
@@ -39,6 +68,7 @@
                     <connections>
                         <outlet property="searchDisplayController" destination="bZT-yH-yCb" id="82V-I6-CVo"/>
                         <outlet property="tableView" destination="5li-qU-reE" id="fKp-nK-CSv"/>
+                        <segue destination="4QS-Sp-MfC" kind="show" id="M69-vh-Clt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vnZ-KA-PJH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -569,6 +599,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MIr-Hs-yUI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-6" y="391"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Hsb-Mt-34j">
+            <objects>
+                <viewController id="u2H-A6-2dz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HxL-5w-zvQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="2SL-Kd-G2u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9kj-iW-oHu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xTo-iI-2cY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>
