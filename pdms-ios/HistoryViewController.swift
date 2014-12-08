@@ -8,15 +8,20 @@
 
 import UIKit
 
-class HistoryViewController: UITableViewController {
+class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
     
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    var tableDatas = Array<Patient>()
+    //@IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    var recentPatients: [Patient] = []
+    var searchResult: [Patient] = []
     override func viewDidLoad() {
-        tableDatas.removeAll(keepCapacity: true)
         super.viewDidLoad()
+        
+        let nib = UINib(nibName: "PatientTableCell", bundle: nil)
+        self.tableView.registerNib(nib, forCellReuseIdentifier: "patientCell")
+        self.searchDisplayController?.searchResultsTableView.registerNib(nib, forCellReuseIdentifier: "patientCell")
+        recentPatients.removeAll(keepCapacity: true)
      
-        loadingIndicator.startAnimating()
+       // loadingIndicator.startAnimating()
         self.loadData()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -27,36 +32,80 @@ class HistoryViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableDatas.count
+        if tableView == self.searchDisplayController?.searchResultsTableView {
+            return searchResult.count
+        } else {
+            return recentPatients.count
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("historyCell", forIndexPath: indexPath) as HistoryTableCell
-        let patient = self.tableDatas[indexPath.row]
-        cell.name.text = patient.name
-        cell.gender.text = patient.gender
-        cell.age.text = "\(patient.age!)"
-        cell.birthday.text = patient.birthday
+        //let cell = tableView.dequeueReusableCellWithIdentifier("historyCell", forIndexPath: indexPath) as HistoryTableCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("patientCell") as HistoryTableCell
+        if tableView == self.searchDisplayController?.searchResultsTableView {
+            let patient = self.searchResult[indexPath.row]
+            cell.name.text = patient.name
+            cell.gender.text = patient.gender
+            cell.age.text = String(patient.age)
+        } else {
+            let patient = self.recentPatients[indexPath.row]
+            cell.name.text = patient.name
+            cell.gender.text = patient.gender
+            cell.age.text = String(patient.age)
+        }
         return cell
     }
+    
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        println(searchString)
+        if (searchString != nil && !searchString.isEmpty) {
+            self.searchResult = []
+            self.searchPatient(controller, searchString: searchString)
+            return true
+        }
+        return false
+    }
+    
+    func searchPatient(controller: UISearchDisplayController, searchString: String) {
+        let manager = AFHTTPRequestOperationManager()
+        let url = SERVER_DOMAIN + "patients/search"
+        let parameters = ["token": TOKEN, "q": searchString]
+        manager.GET(url,
+            parameters: parameters,
+            success: {(operation: AFHTTPRequestOperation!, responseObject: AnyObject!) in
+                let json = JSON(responseObject)
+                println(json)
+                for (index: String, patientJson: JSON) in json {
+                    let patient = Patient()
+                    patient.id = patientJson["patientId"].int
+                    patient.name = patientJson["patientName"].string
+                    patient.gender = patientJson["gender"].string
+                    patient.age = patientJson["age"].int
+                    // patient.birthday = data["birthday"].string
+                    self.searchResult.append(patient)
+                    controller.searchResultsTableView.reloadData()
+                }
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
+                println(error)
+            }
+        )
+    }
+    
     func loadData() {
         let manager = AFHTTPRequestOperationManager()
         let url = SERVER_DOMAIN + "patients/recent?token=" + TOKEN
         manager.GET(url,
             parameters:[],
-            success: {(
-                operation: AFHTTPRequestOperation!,
-                responseObject: AnyObject!) in
-                self.loadingIndicator.hidden = true
-                self.loadingIndicator.stopAnimating()
+            success: {(operation: AFHTTPRequestOperation!, responseObject: AnyObject!) in
+                //self.loadingIndicator.hidden = true
+                //self.loadingIndicator.stopAnimating()
                 self.fillData(responseObject)
                 self.tableView.reloadData()
             },
-            failure: {(
-                operation: AFHTTPRequestOperation!,
-                error: NSError!) in
-                self.loadingIndicator.hidden = true
-                self.loadingIndicator.stopAnimating()
+            failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
+                //self.loadingIndicator.hidden = true
+                //self.loadingIndicator.stopAnimating()
                 println(error)
             }
         )
@@ -64,22 +113,14 @@ class HistoryViewController: UITableViewController {
     }
     func fillData(responseObject: AnyObject!) {
         let json = JSON(responseObject)
-        if json["stat"].int == 0 {
-            for (index: String, data: JSON) in json["data"] {
-                let patient = Patient()
-                patient.id = data["patientId"].int
-                patient.name = data["patientName"].string
-                patient.gender = data["gender"].string
-                if let age = data["age"].int {
-                    patient.age = age
-                } else {
-                    patient.age = 0
-                }
-                patient.birthday = data["birthday"].string
-                self.tableDatas.append(patient)
-            }
-        } else {
-            
+        for (index: String, patientJson: JSON) in json {
+            let patient = Patient()
+            patient.id = patientJson["patientId"].int
+            patient.name = patientJson["patientName"].string
+            patient.gender = patientJson["gender"].string
+            patient.age = patientJson["age"].int
+           // patient.birthday = data["birthday"].string
+            self.recentPatients.append(patient)
         }
         
     }
