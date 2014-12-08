@@ -6,4 +6,17 @@
 //  Copyright (c) 2014年 unimedsci. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class HistoryTableCell : UITableViewCell {
+    
+    @IBOutlet weak var name: UILabel!
+    
+    @IBOutlet weak var gender: UILabel!
+    
+    @IBOutlet weak var age: UILabel!
+    
+    @IBOutlet weak var birthday: UILabel!
+    
+    @IBOutlet weak var address: UILabel!
+}

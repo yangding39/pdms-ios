@@ -8,11 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		85566DC41A314226004B44AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC31A314226004B44AB /* AppDelegate.swift */; };
-		85566DC61A314226004B44AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC51A314226004B44AB /* ViewController.swift */; };
+		85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC51A314226004B44AB /* HistoryViewController.swift */; };
 		85566DC91A314226004B44AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85566DC71A314226004B44AB /* Main.storyboard */; };
 		85566DCB1A314226004B44AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCA1A314226004B44AB /* Images.xcassets */; };
 		85566DCE1A314226004B44AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCC1A314226004B44AB /* LaunchScreen.xib */; };
 		85566DDA1A314226004B44AB /* pdms_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DD91A314226004B44AB /* pdms_iosTests.swift */; };
+		85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A491A3153D600D2C7EF /* GlobalConst.swift */; };
+		85D24A4E1A31599900D2C7EF /* HistoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4D1A31599900D2C7EF /* HistoryTableCell.swift */; };
+		85D24A501A3164A200D2C7EF /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4F1A3164A200D2C7EF /* Patient.swift */; };
+		85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A521A3165DA00D2C7EF /* SwiftyJSON.swift */; };
+		85D24A551A31785D00D2C7EF /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A541A31785D00D2C7EF /* Code.swift */; };
+		85D39FC31A31B48B0034F93B /* TotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D39FC21A31B48B0034F93B /* TotalViewController.swift */; };
 		F3CFA9F69B69FD3F591A9C3C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1971B582EB70825C1A3F1F27 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +37,7 @@
 		85566DBE1A314226004B44AB /* pdms-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pdms-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85566DC21A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85566DC31A314226004B44AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		85566DC51A314226004B44AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		85566DC51A314226004B44AB /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		85566DC81A314226004B44AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		85566DCA1A314226004B44AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		85566DCD1A314226004B44AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -39,6 +45,12 @@
 		85566DD81A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85566DD91A314226004B44AB /* pdms_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdms_iosTests.swift; sourceTree = "<group>"; };
 		85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftObjectcBridge.h; sourceTree = "<group>"; };
+		85D24A491A3153D600D2C7EF /* GlobalConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConst.swift; sourceTree = "<group>"; };
+		85D24A4D1A31599900D2C7EF /* HistoryTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableCell.swift; sourceTree = "<group>"; };
+		85D24A4F1A3164A200D2C7EF /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		85D24A521A3165DA00D2C7EF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		85D24A541A31785D00D2C7EF /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
+		85D39FC21A31B48B0034F93B /* TotalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalViewController.swift; sourceTree = "<group>"; };
 		9CF5AE119AD28CCFB89A6953 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E9E3B41D812C23750686EA88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,12 +105,16 @@
 		85566DC01A314226004B44AB /* pdms-ios */ = {
 			isa = PBXGroup;
 			children = (
+				85D24A521A3165DA00D2C7EF /* SwiftyJSON.swift */,
 				85566DC31A314226004B44AB /* AppDelegate.swift */,
-				85566DC51A314226004B44AB /* ViewController.swift */,
+				85D24A541A31785D00D2C7EF /* Code.swift */,
+				85D24A4C1A31592C00D2C7EF /* Pantient */,
 				85566DC71A314226004B44AB /* Main.storyboard */,
 				85566DCA1A314226004B44AB /* Images.xcassets */,
 				85566DCC1A314226004B44AB /* LaunchScreen.xib */,
 				85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */,
+				85D24A491A3153D600D2C7EF /* GlobalConst.swift */,
+				85D24A511A3165A900D2C7EF /* model */,
 				85566DC11A314226004B44AB /* Supporting Files */,
 			);
 			path = "pdms-ios";
@@ -127,6 +143,24 @@
 				85566DD81A314226004B44AB /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		85D24A4C1A31592C00D2C7EF /* Pantient */ = {
+			isa = PBXGroup;
+			children = (
+				85566DC51A314226004B44AB /* HistoryViewController.swift */,
+				85D39FC21A31B48B0034F93B /* TotalViewController.swift */,
+				85D24A4D1A31599900D2C7EF /* HistoryTableCell.swift */,
+			);
+			name = Pantient;
+			sourceTree = "<group>";
+		};
+		85D24A511A3165A900D2C7EF /* model */ = {
+			isa = PBXGroup;
+			children = (
+				85D24A4F1A3164A200D2C7EF /* Patient.swift */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 		870E69F3A8FBFF9F89B10F69 /* Pods */ = {
@@ -273,8 +307,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85566DC61A314226004B44AB /* ViewController.swift in Sources */,
+				85D24A551A31785D00D2C7EF /* Code.swift in Sources */,
+				85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */,
+				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
 				85566DC41A314226004B44AB /* AppDelegate.swift in Sources */,
+				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
+				85D24A4E1A31599900D2C7EF /* HistoryTableCell.swift in Sources */,
+				85D24A501A3164A200D2C7EF /* Patient.swift in Sources */,
+				85D39FC31A31B48B0034F93B /* TotalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
