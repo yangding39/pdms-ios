@@ -8,10 +8,10 @@
 
 import Foundation
 class Patient {
-    var id : Int?
-    var name : String?
-    var gender : String?
-    var age : Int?
+    var id : Int!
+    var name : String!
+    var gender : String!
+    var age : Int!
     var birthday : String?
     
     init() {

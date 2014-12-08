@@ -35,8 +35,7 @@ class HistoryViewController: UITableViewController {
         let patient = self.tableDatas[indexPath.row]
         cell.name.text = patient.name
         cell.gender.text = patient.gender
-        cell.age.text = "\(patient.age!)"
-        cell.birthday.text = patient.birthday
+        cell.age.text = String(patient.age)
         return cell
     }
     func loadData() {
@@ -64,22 +63,14 @@ class HistoryViewController: UITableViewController {
     }
     func fillData(responseObject: AnyObject!) {
         let json = JSON(responseObject)
-        if json["stat"].int == 0 {
-            for (index: String, data: JSON) in json["data"] {
-                let patient = Patient()
-                patient.id = data["patientId"].int
-                patient.name = data["patientName"].string
-                patient.gender = data["gender"].string
-                if let age = data["age"].int {
-                    patient.age = age
-                } else {
-                    patient.age = 0
-                }
-                patient.birthday = data["birthday"].string
-                self.tableDatas.append(patient)
-            }
-        } else {
-            
+        for (index: String, patientJson: JSON) in json {
+            let patient = Patient()
+            patient.id = patientJson["patientId"].int
+            patient.name = patientJson["patientName"].string
+            patient.gender = patientJson["gender"].string
+            patient.age = patientJson["age"].int
+           // patient.birthday = data["birthday"].string
+            self.tableDatas.append(patient)
         }
         
     }
