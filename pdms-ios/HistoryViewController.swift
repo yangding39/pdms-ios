@@ -83,5 +83,9 @@ class HistoryViewController: UITableViewController {
         }
         
     }
+    
+    @IBAction func completeAdd(segue : UIStoryboardSegue) {
+        
+    }
 }
 
