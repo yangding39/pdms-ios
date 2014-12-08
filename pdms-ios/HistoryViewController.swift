@@ -106,8 +106,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
                 //self.loadingIndicator.hidden = true
                 //self.loadingIndicator.stopAnimating()
-                println(error)
-            }
+                           }
         )
         
     }
