@@ -8,12 +8,42 @@
 
 import UIKit
 
-class PatientDetailViewController: UIViewController {
-    @IBOutlet weak var nameLabel: UILabel!
-    
+class PatientDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.nameLabel.text = "hello"
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (section == 0) {
+            return 1
+        } else {
+            return 2
+        }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if (section == 0) {
+            return "基本信息"
+        }
+        return "test"
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if (indexPath.section == 0) {
+            var cell: PatientDetailTableCell = tableView.dequeueReusableCellWithIdentifier("patientDetailCell") as PatientDetailTableCell
+            cell.nameLabel?.text = "hello"
+            return cell
+        } else {
+            
+            var cell = tableView.dequeueReusableCellWithIdentifier("otherInformationCell") as UITableViewCell
+            cell.textLabel?.text = "oko"
+            return cell
+        }
     }
 }
