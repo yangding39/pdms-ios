@@ -36,10 +36,10 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         }
     }
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 66
+        return 63
     }
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 66
+        return 63
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -60,7 +60,6 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        println(searchString)
         if (searchString != nil && !searchString.isEmpty) {
             self.searchResult = []
             self.searchPatient(controller, searchString: searchString)
@@ -70,51 +69,17 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     func searchPatient(controller: UISearchDisplayController, searchString: String) {
-        let manager = AFHTTPRequestOperationManager()
         let url = SERVER_DOMAIN + "patients/search"
         let parameters = ["token": TOKEN, "q": searchString]
-        manager.GET(url,
-            parameters: parameters,
-            success: {(operation: AFHTTPRequestOperation!, responseObject: AnyObject!) in
-                let json = JSON(responseObject)
-                println(json)
-                for (index: String, patientJson: JSON) in json {
-                    let patient = Patient()
-                    patient.id = patientJson["patientId"].int
-                    patient.name = patientJson["patientName"].string
-                    patient.gender = patientJson["gender"].string
-                    patient.age = patientJson["age"].int
-                    // patient.birthday = data["birthday"].string
-                    self.searchResult.append(patient)
-                    controller.searchResultsTableView.reloadData()
-                }
-            },
-            failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
-                println(error)
-            }
-        )
+        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillSearchData, fail : nil)
     }
     
     func loadData() {
-        let manager = AFHTTPRequestOperationManager()
         let url = SERVER_DOMAIN + "patients/recent?token=" + TOKEN
-        manager.GET(url,
-            parameters:[],
-            success: {(operation: AFHTTPRequestOperation!, responseObject: AnyObject!) in
-                //self.loadingIndicator.hidden = true
-                //self.loadingIndicator.stopAnimating()
-                self.fillData(responseObject)
-                self.tableView.reloadData()
-            },
-            failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
-                //self.loadingIndicator.hidden = true
-                //self.loadingIndicator.stopAnimating()
-                           }
-        )
+        HttpApiClient.sharedInstance.get(url, paramters : nil, success: fillData, fail : nil)
         
     }
-    func fillData(responseObject: AnyObject!) {
-        let json = JSON(responseObject)
+    func fillData(json: JSON) -> Void{
         for (index: String, patientJson: JSON) in json {
             let patient = Patient()
             patient.id = patientJson["patientId"].int
@@ -124,7 +89,20 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
            // patient.birthday = data["birthday"].string
             self.recentPatients.append(patient)
         }
-        
+         self.tableView.reloadData()        
+    }
+    
+    func fillSearchData(json: JSON) -> Void{
+        for (index: String, patientJson: JSON) in json {
+            let patient = Patient()
+            patient.id = patientJson["patientId"].int
+            patient.name = patientJson["patientName"].string
+            patient.gender = patientJson["gender"].string
+            patient.age = patientJson["age"].int
+            // patient.birthday = data["birthday"].string
+            self.searchResult.append(patient)
+        }
+        self.searchDisplayController?.searchResultsTableView.reloadData()
     }
     
     @IBAction func completeAdd(segue : UIStoryboardSegue) {
