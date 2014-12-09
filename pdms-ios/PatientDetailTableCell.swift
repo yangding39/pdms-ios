@@ -9,6 +9,9 @@
 import UIKit
 
 class PatientDetailTableCell: UITableViewCell {
+    @IBOutlet weak var caseIdLabel: UILabel!
+    @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
     
     @IBOutlet weak var nameLabel: UILabel!
 }

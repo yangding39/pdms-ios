@@ -8,41 +8,31 @@
 
 import UIKit
 
-class PatientDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PatientDetailViewController: UITableViewController {
     
+    var patient: Patient!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == 0) {
-            return 1
-        } else {
-            return 2
-        }
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (section == 0) {
-            return "基本信息"
-        }
-        return "test"
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if (indexPath.section == 0) {
             var cell: PatientDetailTableCell = tableView.dequeueReusableCellWithIdentifier("patientDetailCell") as PatientDetailTableCell
-            cell.nameLabel?.text = "hello"
+            cell.nameLabel?.text = self.patient.name
+            cell.genderLabel?.text = self.patient.gender
+            cell.ageLabel?.text = String(self.patient.age)
             return cell
         } else {
             
             var cell = tableView.dequeueReusableCellWithIdentifier("otherInformationCell") as UITableViewCell
-            cell.textLabel?.text = "oko"
+            if (indexPath.row == 0) {
+                cell.textLabel?.text = "就诊记录"
+            }
+            if (indexPath.row == 1) {
+                cell.textLabel?.text = "数据指标"
+            }
             return cell
         }
     }

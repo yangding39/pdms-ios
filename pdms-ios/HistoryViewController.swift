@@ -111,6 +111,18 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "patientDetailSegue") {
+            let fromSearch = self.searchDisplayController?.active == true
+            var patient: Patient!
+            if (fromSearch) {
+                var indexPath = self.searchDisplayController?.searchResultsTableView.indexPathForSelectedRow()
+                patient = self.searchResult[indexPath!.row]
+            } else {
+                var indexPath = self.tableView.indexPathForSelectedRow()
+                patient = self.recentPatients[indexPath!.row]
+            }
+            
+            let patientDetailViewController = segue.destinationViewController as PatientDetailViewController
+            patientDetailViewController.patient = patient
         } else {
             
         }
