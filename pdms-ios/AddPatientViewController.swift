@@ -64,22 +64,12 @@ class AddPatientViewController: UITableViewController {
         let url = SERVER_DOMAIN + "patients/save?token=" + TOKEN
         let params = ["name" : patient.name, "gender" : patient.gender, "birthday" : patient.birthday,
             "age" : "\(patient.age)", "caseNo" : patient.caseNo]
-         manager.POST(url,
-            parameters: params,
-            success: {(
-                operation: AFHTTPRequestOperation!,
-                responseObject: AnyObject!) in
-                println("JSON:" + responseObject.description!)
-            },
-            failure: {(
-                operation: AFHTTPRequestOperation!,
-                error: NSError!) in
-            println("error : " + error.localizedDescription)
-            }
-        )
+        HttpApiClient.sharedInstance.post(url, paramters : params, success: addPatientResult, fail : nil)
        
     }
-    
+    func addPatientResult(json : JSON) {
+        println(json.description)
+    }
     func showDatePicker(sender: UITextField) {
         
         var datePicker: UIDatePicker = UIDatePicker(frame: CGRectMake(0, 0, self.view.bounds.width,50))

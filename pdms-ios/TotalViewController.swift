@@ -41,30 +41,13 @@ class TotalViewController: UITableViewController {
         return cell
     }
     func loadData() {
-        let manager = AFHTTPRequestOperationManager()
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN
-        manager.GET(url,
-            parameters:["page" : page],
-            success: {(
-                operation: AFHTTPRequestOperation!,
-                responseObject: AnyObject!) in
-                self.loadingIndicator.hidden = true
-                self.loadingIndicator.stopAnimating()
-                self.fillData(responseObject)
-                self.tableView.reloadData()
-            },
-            failure: {(
-                operation: AFHTTPRequestOperation!,
-                error: NSError!) in
-                self.loadingIndicator.hidden = true
-                self.loadingIndicator.stopAnimating()
-                println(error)
-            }
-        )
+        HttpApiClient.sharedInstance.get(url, paramters : nil, success: fillData, fail : fail)
         
     }
-    func fillData(responseObject: AnyObject!) {
-        let json = JSON(responseObject)
+    func fillData(json: JSON) {
+        self.loadingIndicator.hidden = true
+        self.loadingIndicator.stopAnimating()
         if json["stat"].int == 0 {
             for (index: String, data: JSON) in json["data"]["data"] {
                 let patient = Patient()
@@ -82,7 +65,12 @@ class TotalViewController: UITableViewController {
         } else {
             
         }
-        
+           self.tableView.reloadData()
+    }
+    
+    func fail() {
+        self.loadingIndicator.hidden = true
+        self.loadingIndicator.stopAnimating()
     }
 }
 
