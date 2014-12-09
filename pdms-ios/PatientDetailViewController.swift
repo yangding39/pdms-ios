@@ -10,30 +10,24 @@ import UIKit
 
 class PatientDetailViewController: UITableViewController {
     
+    @IBOutlet weak var name: UILabel!
+    
+    @IBOutlet weak var caseNo: UILabel!
+    
+    @IBOutlet weak var gender: UILabel!
+    
+    @IBOutlet weak var age: UILabel!
+    
+    @IBOutlet weak var birthday: UILabel!
+    
     var patient: Patient!
     override func viewDidLoad() {
         super.viewDidLoad()
+        name.text = patient.name
+        caseNo.text = patient.caseNo
+        gender.text = patient.gender
+        age.text = "\(patient.age)"
+        birthday.text = patient.birthday
     }
     
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        if (indexPath.section == 0) {
-            var cell: PatientDetailTableCell = tableView.dequeueReusableCellWithIdentifier("patientDetailCell") as PatientDetailTableCell
-            cell.nameLabel?.text = self.patient.name
-            cell.genderLabel?.text = self.patient.gender
-            cell.ageLabel?.text = String(self.patient.age)
-            return cell
-        } else {
-            
-            var cell = tableView.dequeueReusableCellWithIdentifier("otherInformationCell") as UITableViewCell
-            if (indexPath.row == 0) {
-                cell.textLabel?.text = "就诊记录"
-            }
-            if (indexPath.row == 1) {
-                cell.textLabel?.text = "数据指标"
-            }
-            return cell
-        }
-    }
 }
