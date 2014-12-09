@@ -8,7 +8,7 @@
 
 import Foundation
 
-let _HttpApiClient = HttpApiClient()
+private let _HttpApiClient = HttpApiClient()
 class HttpApiClient {
     class var sharedInstance : HttpApiClient {
         return _HttpApiClient

@@ -36,11 +36,37 @@
             </objects>
             <point key="canvasLocation" x="2601" y="728"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="osR-AO-7bp">
+            <objects>
+                <tableViewController id="BGy-Ob-Yxs" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fmJ-tn-9ZP">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5nI-ep-gdQ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5nI-ep-gdQ" id="LaX-3f-AUJ">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="BGy-Ob-Yxs" id="qVF-Aq-TwA"/>
+                            <outlet property="delegate" destination="BGy-Ob-Yxs" id="axl-Ko-d1G"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="niM-KY-fbU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3393" y="728"/>
+        </scene>
         <!--病例管理-->
         <scene sceneID="alm-3k-1IR">
             <objects>
                 <tableViewController id="hWb-FI-i7j" customClass="HistoryViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" id="5li-qU-reE">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="22" sectionFooterHeight="22" id="5li-qU-reE">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -535,10 +561,10 @@
             </objects>
             <point key="canvasLocation" x="912" y="51"/>
         </scene>
-        <!--病例管理-->
+        <!--全部病例-->
         <scene sceneID="X36-hX-cHC">
             <objects>
-                <tableViewController id="uTk-7s-3lO" customClass="TotalViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="全部病例" id="uTk-7s-3lO" customClass="TotalViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="22" sectionFooterHeight="22" id="m38-jt-rfh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -739,6 +765,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PKn-TA-jjl"/>
+        <segue reference="gxx-lJ-uY7"/>
     </inferredMetricsTieBreakers>
 </document>
