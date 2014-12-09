@@ -14,7 +14,7 @@
 		85566DCE1A314226004B44AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCC1A314226004B44AB /* LaunchScreen.xib */; };
 		85566DDA1A314226004B44AB /* pdms_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DD91A314226004B44AB /* pdms_iosTests.swift */; };
 		85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A491A3153D600D2C7EF /* GlobalConst.swift */; };
-		85D24A4E1A31599900D2C7EF /* HistoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4D1A31599900D2C7EF /* HistoryTableCell.swift */; };
+		85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4D1A31599900D2C7EF /* PatientTableCell.swift */; };
 		85D24A501A3164A200D2C7EF /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4F1A3164A200D2C7EF /* Patient.swift */; };
 		85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A521A3165DA00D2C7EF /* SwiftyJSON.swift */; };
 		85D24A551A31785D00D2C7EF /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A541A31785D00D2C7EF /* Code.swift */; };
@@ -48,14 +48,13 @@
 		85566DD91A314226004B44AB /* pdms_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdms_iosTests.swift; sourceTree = "<group>"; };
 		85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftObjectcBridge.h; sourceTree = "<group>"; };
 		85D24A491A3153D600D2C7EF /* GlobalConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConst.swift; sourceTree = "<group>"; };
-		85D24A4D1A31599900D2C7EF /* HistoryTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableCell.swift; sourceTree = "<group>"; };
+		85D24A4D1A31599900D2C7EF /* PatientTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientTableCell.swift; sourceTree = "<group>"; };
 		85D24A4F1A3164A200D2C7EF /* Patient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		85D24A521A3165DA00D2C7EF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		85D24A541A31785D00D2C7EF /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
 		85D39FC21A31B48B0034F93B /* TotalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalViewController.swift; sourceTree = "<group>"; };
 		85D39FC41A35420D0034F93B /* AddPatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPatientViewController.swift; sourceTree = "<group>"; };
 		9CF5AE119AD28CCFB89A6953 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		B611E8501A356E5D00AB4CEF /* PatientTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientTableCell.xib; sourceTree = "<group>"; };
 		B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
 		E9E3B41D812C23750686EA88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,7 +114,6 @@
 				85D24A541A31785D00D2C7EF /* Code.swift */,
 				85D24A4C1A31592C00D2C7EF /* Pantient */,
 				85566DC71A314226004B44AB /* Main.storyboard */,
-				B611E8501A356E5D00AB4CEF /* PatientTableCell.xib */,
 				85566DCA1A314226004B44AB /* Images.xcassets */,
 				85566DCC1A314226004B44AB /* LaunchScreen.xib */,
 				85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */,
@@ -156,7 +154,7 @@
 			children = (
 				85566DC51A314226004B44AB /* HistoryViewController.swift */,
 				85D39FC21A31B48B0034F93B /* TotalViewController.swift */,
-				85D24A4D1A31599900D2C7EF /* HistoryTableCell.swift */,
+				85D24A4D1A31599900D2C7EF /* PatientTableCell.swift */,
 				85D39FC41A35420D0034F93B /* AddPatientViewController.swift */,
 				B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */,
 			);
@@ -320,7 +318,7 @@
 				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
 				85566DC41A314226004B44AB /* AppDelegate.swift in Sources */,
 				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
-				85D24A4E1A31599900D2C7EF /* HistoryTableCell.swift in Sources */,
+				85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */,
 				85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */,
 				B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */,
 				85D24A501A3164A200D2C7EF /* Patient.swift in Sources */,

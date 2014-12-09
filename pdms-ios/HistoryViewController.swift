@@ -9,16 +9,12 @@
 import UIKit
 
 class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
-    
-    //@IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+   
     var recentPatients: [Patient] = []
     var searchResult: [Patient] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let nib = UINib(nibName: "PatientTableCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "patientCell")
-        self.searchDisplayController?.searchResultsTableView.registerNib(nib, forCellReuseIdentifier: "patientCell")
+ 
         recentPatients.removeAll(keepCapacity: true)
      
        // loadingIndicator.startAnimating()
@@ -31,12 +27,6 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let patientDetailViewController = storyboard.instantiateViewControllerWithIdentifier("patientDetailView") as PatientDetailViewController
-        self.navigationController?.pushViewController(patientDetailViewController, animated: true)
-    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.searchDisplayController?.searchResultsTableView {
@@ -45,10 +35,16 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             return recentPatients.count
         }
     }
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 66
+    }
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 66
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCellWithIdentifier("historyCell", forIndexPath: indexPath) as HistoryTableCell
-        let cell = tableView.dequeueReusableCellWithIdentifier("patientCell") as HistoryTableCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("patientCell") as PatientTableCell
         if tableView == self.searchDisplayController?.searchResultsTableView {
             let patient = self.searchResult[indexPath.row]
             cell.name.text = patient.name

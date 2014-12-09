@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryTableCell : UITableViewCell {
+class PatientTableCell : UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
     
