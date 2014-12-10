@@ -30,4 +30,10 @@ class PatientDetailViewController: UITableViewController {
         birthday.text = patient.birthday
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "visitByPatientSegue") {
+            let visitTabelViewController = segue.destinationViewController as VisitTableViewController
+            visitTabelViewController.patient = patient
+        }
+    }
 }

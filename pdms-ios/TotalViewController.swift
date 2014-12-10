@@ -42,7 +42,7 @@ class TotalViewController: UITableViewController {
     }
     func loadData() {
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN
-        HttpApiClient.sharedInstance.get(url, paramters : nil, success: fillData, fail : fail)
+        HttpApiClient.sharedInstance.get(url, paramters : ["page" : page], success: fillData, fail : fail)
         
     }
     func fillData(json: JSON) {
@@ -71,6 +71,17 @@ class TotalViewController: UITableViewController {
     func fail() {
         self.loadingIndicator.hidden = true
         self.loadingIndicator.stopAnimating()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "patientDetailSegue") {
+            let indexPath = self.tableView.indexPathForCell(sender as PatientTableCell)!
+            let patient = self.tableDatas[indexPath.row]
+            let patientDetailViewController = segue.destinationViewController as PatientDetailViewController
+            patientDetailViewController.patient = patient
+        } else {
+            
+        }
     }
 }
 

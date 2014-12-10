@@ -18,7 +18,7 @@ class AddPatientViewController: UITableViewController {
     
     @IBOutlet weak var caseNo: UITextField!
     
-    let options = ["男", "女"]
+    let options = ["男", "女", "未知"]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -32,6 +32,28 @@ class AddPatientViewController: UITableViewController {
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        
+        if name.text.isEmpty {
+            name.layer.borderColor = UIColor.redColor().CGColor
+            name.layer.borderWidth = 1.0
+            name.layer.cornerRadius = 5
+            return false
+        } else if gender.text.isEmpty {
+            gender.layer.borderColor = UIColor.redColor().CGColor
+            gender.layer.borderWidth = 1.0
+            gender.layer.cornerRadius = 5
+            return false
+        } else if birthday.text.isEmpty {
+            birthday.layer.borderColor = UIColor.redColor().CGColor
+            birthday.layer.borderWidth = 1.0
+            birthday.layer.cornerRadius = 5
+            return false
+        } else if caseNo.text.isEmpty {
+            caseNo.layer.borderColor = UIColor.redColor().CGColor
+            caseNo.layer.borderWidth = 1.0
+            caseNo.layer.cornerRadius = 5
+            return false
+        }
         return savePatient()
     }
    
@@ -42,9 +64,6 @@ class AddPatientViewController: UITableViewController {
         patient.birthday = birthday.text
         patient.caseNo = caseNo.text
         
-        if name.text.isEmpty || gender.text.isEmpty || birthday.text.isEmpty || caseNo.text.isEmpty{
-            return false
-        }
        let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let calendar = NSCalendar.currentCalendar()
@@ -60,7 +79,6 @@ class AddPatientViewController: UITableViewController {
     }
     
     func postData(patient : Patient) {
-        let manager = AFHTTPRequestOperationManager()
         let url = SERVER_DOMAIN + "patients/save?token=" + TOKEN
         let params = ["name" : patient.name, "gender" : patient.gender, "birthday" : patient.birthday,
             "age" : "\(patient.age)", "caseNo" : patient.caseNo]
@@ -132,7 +150,7 @@ extension AddPatientViewController : UIPickerViewDataSource {
     // returns the # of rows in each component..
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        return 2
+        return 3
     }
 }
 

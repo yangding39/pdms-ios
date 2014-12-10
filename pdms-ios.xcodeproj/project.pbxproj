@@ -13,6 +13,11 @@
 		85566DCB1A314226004B44AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCA1A314226004B44AB /* Images.xcassets */; };
 		85566DCE1A314226004B44AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCC1A314226004B44AB /* LaunchScreen.xib */; };
 		85566DDA1A314226004B44AB /* pdms_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DD91A314226004B44AB /* pdms_iosTests.swift */; };
+		85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E20E1A37D26D00132AD5 /* Visit.swift */; };
+		85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */; };
+		85C0E2141A37D64500132AD5 /* VisitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */; };
+		85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */; };
+		85C0E2191A381D6900132AD5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2181A381D6900132AD5 /* Option.swift */; };
 		85C1AB0F1A3697AA00968A1F /* HttpApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */; };
 		85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A491A3153D600D2C7EF /* GlobalConst.swift */; };
 		85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4D1A31599900D2C7EF /* PatientTableCell.swift */; };
@@ -47,6 +52,11 @@
 		85566DD31A314226004B44AB /* pdms-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pdms-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85566DD81A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85566DD91A314226004B44AB /* pdms_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdms_iosTests.swift; sourceTree = "<group>"; };
+		85C0E20E1A37D26D00132AD5 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
+		85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableCell.swift; sourceTree = "<group>"; };
+		85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableViewController.swift; sourceTree = "<group>"; };
+		85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVisitViewController.swift; sourceTree = "<group>"; };
+		85C0E2181A381D6900132AD5 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpApiClient.swift; sourceTree = "<group>"; };
 		85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftObjectcBridge.h; sourceTree = "<group>"; };
 		85D24A491A3153D600D2C7EF /* GlobalConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConst.swift; sourceTree = "<group>"; };
@@ -115,6 +125,7 @@
 				85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */,
 				85566DC31A314226004B44AB /* AppDelegate.swift */,
 				85D24A541A31785D00D2C7EF /* Code.swift */,
+				85C0E2121A37D3E800132AD5 /* Visit */,
 				85D24A4C1A31592C00D2C7EF /* Pantient */,
 				85566DC71A314226004B44AB /* Main.storyboard */,
 				85566DCA1A314226004B44AB /* Images.xcassets */,
@@ -152,6 +163,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		85C0E2121A37D3E800132AD5 /* Visit */ = {
+			isa = PBXGroup;
+			children = (
+				85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */,
+				85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */,
+				85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */,
+			);
+			name = Visit;
+			sourceTree = "<group>";
+		};
 		85D24A4C1A31592C00D2C7EF /* Pantient */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				85D24A4F1A3164A200D2C7EF /* Patient.swift */,
+				85C0E20E1A37D26D00132AD5 /* Visit.swift */,
+				85C0E2181A381D6900132AD5 /* Option.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -316,13 +339,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C0E2191A381D6900132AD5 /* Option.swift in Sources */,
 				85D24A551A31785D00D2C7EF /* Code.swift in Sources */,
 				85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */,
 				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
 				85566DC41A314226004B44AB /* AppDelegate.swift in Sources */,
 				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
+				85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */,
 				85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */,
+				85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */,
 				85C1AB0F1A3697AA00968A1F /* HttpApiClient.swift in Sources */,
+				85C0E2141A37D64500132AD5 /* VisitTableViewController.swift in Sources */,
+				85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */,
 				85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */,
 				B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */,
 				85D24A501A3164A200D2C7EF /* Patient.swift in Sources */,

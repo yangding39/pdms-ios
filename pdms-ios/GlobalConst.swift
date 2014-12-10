@@ -8,5 +8,5 @@
 
 import Foundation
 
-let SERVER_DOMAIN = "http://192.168.10.122:5000/"
+let SERVER_DOMAIN = "http://192.168.10.104:7070/"
 let TOKEN = "xxx"
