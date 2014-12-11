@@ -8,9 +8,10 @@
 
 import UIKit
 
-class QuotaTableViewController: UITableViewController {
+class QuotaByPatientTableViewController: UITableViewController {
 
     var patient : Patient!
+    var url : String!
     var crowDefintions = Array<CrowDefintion>()
     
     override func viewDidLoad() {

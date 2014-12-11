@@ -29,7 +29,7 @@
 		85E530BB1A397295002888AC /* CrowDefintion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530BA1A397295002888AC /* CrowDefintion.swift */; };
 		85E530BD1A397442002888AC /* Quota.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530BC1A397442002888AC /* Quota.swift */; };
 		85E530BF1A397596002888AC /* QuotaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530BE1A397596002888AC /* QuotaCell.swift */; };
-		85E530C21A3977A6002888AC /* QuotaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530C11A3977A6002888AC /* QuotaTableViewController.swift */; };
+		85E530C21A3977A6002888AC /* QuotaByPatientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */; };
 		B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */; };
 		F3CFA9F69B69FD3F591A9C3C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1971B582EB70825C1A3F1F27 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -73,7 +73,7 @@
 		85E530BA1A397295002888AC /* CrowDefintion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrowDefintion.swift; sourceTree = "<group>"; };
 		85E530BC1A397442002888AC /* Quota.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quota.swift; sourceTree = "<group>"; };
 		85E530BE1A397596002888AC /* QuotaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaCell.swift; sourceTree = "<group>"; };
-		85E530C11A3977A6002888AC /* QuotaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaTableViewController.swift; sourceTree = "<group>"; };
+		85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaByPatientTableViewController.swift; sourceTree = "<group>"; };
 		9CF5AE119AD28CCFB89A6953 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
 		E9E3B41D812C23750686EA88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				85E530BE1A397596002888AC /* QuotaCell.swift */,
-				85E530C11A3977A6002888AC /* QuotaTableViewController.swift */,
+				85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */,
 			);
 			name = Quota;
 			sourceTree = "<group>";
@@ -364,7 +364,7 @@
 				85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */,
 				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
 				85566DC41A314226004B44AB /* AppDelegate.swift in Sources */,
-				85E530C21A3977A6002888AC /* QuotaTableViewController.swift in Sources */,
+				85E530C21A3977A6002888AC /* QuotaByPatientTableViewController.swift in Sources */,
 				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
 				85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */,
 				85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */,

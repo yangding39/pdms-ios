@@ -35,7 +35,7 @@ class PatientDetailViewController: UITableViewController {
             let visitTabelViewController = segue.destinationViewController as VisitTableViewController
             visitTabelViewController.patient = patient
         } else if segue.identifier == "quotaByPatientSegue" {
-            let quotaViewController = segue.destinationViewController as QuotaTableViewController
+            let quotaViewController = segue.destinationViewController as QuotaByPatientTableViewController
             quotaViewController.patient = patient
         }
     }
