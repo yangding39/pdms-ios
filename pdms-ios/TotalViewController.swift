@@ -19,6 +19,10 @@ class TotalViewController: UITableViewController {
         
         loadingIndicator.startAnimating()
         self.loadData()
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "加载更多")
+        self.refreshControl?.addTarget(self, action: "loadMore:", forControlEvents: UIControlEvents.ValueChanged)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -81,6 +85,15 @@ class TotalViewController: UITableViewController {
             patientDetailViewController.patient = patient
         } else {
             
+        }
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        let currentOffset = scrollView.contentOffset.y
+        let maxOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        if maxOffset - currentOffset < 40.0 {
+            
+            println("111")
         }
     }
 }

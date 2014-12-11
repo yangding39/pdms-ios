@@ -31,9 +31,12 @@ class PatientDetailViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "visitByPatientSegue") {
+        if segue.identifier == "visitByPatientSegue" {
             let visitTabelViewController = segue.destinationViewController as VisitTableViewController
             visitTabelViewController.patient = patient
+        } else if segue.identifier == "quotaByPatientSegue" {
+            let quotaViewController = segue.destinationViewController as QuotaTableViewController
+            quotaViewController.patient = patient
         }
     }
 }

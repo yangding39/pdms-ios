@@ -56,6 +56,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             cell.gender.text = patient.gender
             cell.age.text = "\(patient.age)"
         }
+       
         return cell
     }
     

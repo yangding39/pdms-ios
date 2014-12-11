@@ -9,5 +9,6 @@
 #ifndef pdms_dynamic_SwiftObjectcBridge_h
 #define pdms_dynamic_SwiftObjectcBridge_h
 #import <AFNetworking/AFNetworking.h>
+#import <SWTableViewCell/SWTableViewCell.h>
 
 #endif
