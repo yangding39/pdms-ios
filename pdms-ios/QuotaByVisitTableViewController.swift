@@ -1,5 +1,5 @@
 //
-//  QuotaTableViewController.swift
+//  QuotaByVisitTableViewController.swift
 //  pdms-ios
 //
 //  Created by IMEDS on 14-12-11.
@@ -8,21 +8,23 @@
 
 import UIKit
 
-class QuotaByPatientTableViewController: UITableViewController {
-
+class QuotaByVisitTableViewController: UITableViewController {
+    
     var patient : Patient!
+    var visit : Visit!
     var crowDefintions = Array<CrowDefintion>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.loadData()    }
-
+        self.loadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return crowDefintions.count
     }
@@ -66,8 +68,7 @@ class QuotaByPatientTableViewController: UITableViewController {
             }
             crowDefintions.append(crowDefintion)
         }
-        
-    }
 
+    }
 }
 

@@ -13,6 +13,7 @@
 		85566DCB1A314226004B44AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCA1A314226004B44AB /* Images.xcassets */; };
 		85566DCE1A314226004B44AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCC1A314226004B44AB /* LaunchScreen.xib */; };
 		85566DDA1A314226004B44AB /* pdms_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DD91A314226004B44AB /* pdms_iosTests.swift */; };
+		8561A31A1A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */; };
 		85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E20E1A37D26D00132AD5 /* Visit.swift */; };
 		85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */; };
 		85C0E2141A37D64500132AD5 /* VisitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */; };
@@ -56,6 +57,7 @@
 		85566DD31A314226004B44AB /* pdms-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pdms-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85566DD81A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85566DD91A314226004B44AB /* pdms_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdms_iosTests.swift; sourceTree = "<group>"; };
+		8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaByVisitTableViewController.swift; sourceTree = "<group>"; };
 		85C0E20E1A37D26D00132AD5 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableCell.swift; sourceTree = "<group>"; };
 		85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			children = (
 				85E530BE1A397596002888AC /* QuotaCell.swift */,
 				85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */,
+				8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */,
 			);
 			name = Quota;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
 				85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */,
 				85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */,
+				8561A31A1A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift in Sources */,
 				85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */,
 				85E530BF1A397596002888AC /* QuotaCell.swift in Sources */,
 				85C1AB0F1A3697AA00968A1F /* HttpApiClient.swift in Sources */,

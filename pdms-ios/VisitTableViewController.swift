@@ -65,9 +65,14 @@ class VisitTableViewController : UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "addVisitSegue") {
+        if segue.identifier == "addVisitSegue" {
             let addVisitViewController = segue.destinationViewController as AddVisitViewController
-            
+        } else if segue.identifier == "quotaByVisitSegue" {
+            let quotaByVisitTableViewController = segue.destinationViewController as QuotaByVisitTableViewController
+            let indexPath = self.tableView.indexPathForCell(sender as QuotaCell)!
+            let visit = visits[indexPath.row]
+            quotaByVisitTableViewController.visit = visit
+            quotaByVisitTableViewController.patient = patient
         }
     }
     

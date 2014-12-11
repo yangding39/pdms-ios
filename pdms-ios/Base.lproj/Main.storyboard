@@ -1018,6 +1018,7 @@
                                     <outlet property="number" destination="eRa-EB-3Ws" id="fTu-Tg-KMh"/>
                                     <outlet property="time" destination="EuO-Mp-MM7" id="wCM-4u-8Mn"/>
                                     <outlet property="typeLabel" destination="KIe-aZ-gsd" id="zLn-LR-9cS"/>
+                                    <segue destination="Sue-sR-ptW" kind="show" identifier="quotaByVisitSegue" id="jGJ-0H-TMS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1185,7 +1186,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkh-6R-h8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3375" y="1059"/>
+            <point key="canvasLocation" x="2604" y="1079"/>
         </scene>
         <!--全部病例-->
         <scene sceneID="Sn1-5I-8QG">
@@ -1232,6 +1233,154 @@
                 </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="-6" y="390.99999999999994"/>
+        </scene>
+        <!--就诊指标列表-->
+        <scene sceneID="vI5-QC-zGe">
+            <objects>
+                <tableViewController title="就诊指标列表" id="Sue-sR-ptW" customClass="QuotaByVisitTableViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="85" sectionHeaderHeight="22" sectionFooterHeight="22" id="xgB-c4-7kz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="quotaCell" rowHeight="85" id="pKf-OD-824" customClass="QuotaCell" customModule="pdms_ios" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pKf-OD-824" id="czP-5l-R0W">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="疾病名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yl-J8-A38">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="诊断时间：2014-02-01 09:20:11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2x-XY-a29">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="247" id="G9W-v4-2Gv"/>
+                                                <constraint firstAttribute="height" constant="21" id="P9Y-dx-QVw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="G9W-v4-2Gv"/>
+                                                    <exclude reference="P9Y-dx-QVw"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="G9W-v4-2Gv"/>
+                                                    <include reference="P9Y-dx-QVw"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改时间：2014-02-01 09:20:11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0n-1Z-X9X">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建时间：2014-02-01 09:20:11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaG-ng-OB4">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="UDY-Vc-290"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="UDY-Vc-290"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="UDY-Vc-290"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="q2x-XY-a29" firstAttribute="trailing" secondItem="FaG-ng-OB4" secondAttribute="trailing" id="0GJ-vT-FSg"/>
+                                        <constraint firstItem="FaG-ng-OB4" firstAttribute="top" secondItem="2yl-J8-A38" secondAttribute="bottom" constant="15" id="32h-eX-zWW"/>
+                                        <constraint firstItem="q2x-XY-a29" firstAttribute="leading" secondItem="FaG-ng-OB4" secondAttribute="leading" id="3Pe-Mc-gsg"/>
+                                        <constraint firstItem="2yl-J8-A38" firstAttribute="top" secondItem="czP-5l-R0W" secondAttribute="topMargin" constant="2" id="5U9-7A-fRJ"/>
+                                        <constraint firstItem="q2x-XY-a29" firstAttribute="top" secondItem="czP-5l-R0W" secondAttribute="topMargin" constant="22" id="BgA-j1-deS"/>
+                                        <constraint firstItem="l0n-1Z-X9X" firstAttribute="leading" secondItem="czP-5l-R0W" secondAttribute="leadingMargin" id="HHZ-bN-M7A"/>
+                                        <constraint firstItem="2yl-J8-A38" firstAttribute="trailing" secondItem="czP-5l-R0W" secondAttribute="trailingMargin" id="NZn-Cf-iSK"/>
+                                        <constraint firstItem="l0n-1Z-X9X" firstAttribute="top" secondItem="q2x-XY-a29" secondAttribute="bottom" constant="11" id="Pf6-3R-3Zv"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="l0n-1Z-X9X" secondAttribute="bottom" constant="-7" id="TU7-KN-idy"/>
+                                        <constraint firstItem="l0n-1Z-X9X" firstAttribute="trailing" secondItem="FaG-ng-OB4" secondAttribute="trailing" id="fQT-Ko-HtJ"/>
+                                        <constraint firstItem="l0n-1Z-X9X" firstAttribute="leading" secondItem="FaG-ng-OB4" secondAttribute="leading" id="lUp-14-ocC"/>
+                                        <constraint firstItem="2yl-J8-A38" firstAttribute="leading" secondItem="q2x-XY-a29" secondAttribute="leading" id="vUd-ZN-eui"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="2yl-J8-A38"/>
+                                            <exclude reference="q2x-XY-a29"/>
+                                            <exclude reference="l0n-1Z-X9X"/>
+                                            <exclude reference="FaG-ng-OB4"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="3Pe-Mc-gsg"/>
+                                            <exclude reference="0GJ-vT-FSg"/>
+                                            <exclude reference="BgA-j1-deS"/>
+                                            <exclude reference="32h-eX-zWW"/>
+                                            <exclude reference="5U9-7A-fRJ"/>
+                                            <exclude reference="NZn-Cf-iSK"/>
+                                            <exclude reference="vUd-ZN-eui"/>
+                                            <exclude reference="HHZ-bN-M7A"/>
+                                            <exclude reference="fQT-Ko-HtJ"/>
+                                            <exclude reference="TU7-KN-idy"/>
+                                            <exclude reference="lUp-14-ocC"/>
+                                            <exclude reference="Pf6-3R-3Zv"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="2yl-J8-A38"/>
+                                            <include reference="q2x-XY-a29"/>
+                                            <include reference="l0n-1Z-X9X"/>
+                                            <include reference="FaG-ng-OB4"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="3Pe-Mc-gsg"/>
+                                            <include reference="0GJ-vT-FSg"/>
+                                            <include reference="BgA-j1-deS"/>
+                                            <include reference="32h-eX-zWW"/>
+                                            <include reference="5U9-7A-fRJ"/>
+                                            <include reference="NZn-Cf-iSK"/>
+                                            <include reference="vUd-ZN-eui"/>
+                                            <include reference="HHZ-bN-M7A"/>
+                                            <include reference="fQT-Ko-HtJ"/>
+                                            <include reference="TU7-KN-idy"/>
+                                            <include reference="lUp-14-ocC"/>
+                                            <include reference="Pf6-3R-3Zv"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="checkTime" destination="q2x-XY-a29" id="oHn-14-b8q"/>
+                                    <outlet property="createTime" destination="FaG-ng-OB4" id="0ol-ee-khB"/>
+                                    <outlet property="lastModifiedTime" destination="l0n-1Z-X9X" id="n5B-dL-nzJ"/>
+                                    <outlet property="name" destination="2yl-J8-A38" id="1YN-dH-YEA"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Sue-sR-ptW" id="VIy-Ja-DNH"/>
+                            <outlet property="delegate" destination="Sue-sR-ptW" id="K9e-aQ-8SD"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="数据指标" id="RWQ-Jp-ber">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="9yR-F9-E31"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zt2-Vg-0fM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3375" y="1079"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
