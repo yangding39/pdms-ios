@@ -9,7 +9,8 @@
 class GroupDefinition {
     var id : Int32!
     var name : String!
-    
+    var quota  = Array<Quota>()
+
     init() {
         
     }

@@ -12,7 +12,7 @@ import UIKit
 class CategoryTableViewController : UITableViewController {
 
     var visit : Visit!
-    var categoryDatas = Array<CrowDefintion>()
+    var categoryDatas = Array<GroupDefinition>()
     var searchQuotaData = Array<GroupDefinition>()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,15 +62,15 @@ class CategoryTableViewController : UITableViewController {
         categoryDatas.removeAll(keepCapacity: true)
         if categoryIndex == 0 {
             for i in 1...4 {
-                let crowDefintion = CrowDefintion()
-                crowDefintion.name = "生活史\(i)"
-                categoryDatas.append(crowDefintion)
+                let groupDefintion = GroupDefinition()
+                groupDefintion.name = "生活史\(i)"
+                categoryDatas.append(groupDefintion)
             }
         } else {
             for i in 1...4 {
-                let crowDefintion = CrowDefintion()
-                crowDefintion.name = "疾病诊断\(i)"
-                categoryDatas.append(crowDefintion)
+                let groupDefintion = GroupDefinition()
+                groupDefintion.name = "疾病诊断\(i)"
+                categoryDatas.append(groupDefintion)
             }
 
         }

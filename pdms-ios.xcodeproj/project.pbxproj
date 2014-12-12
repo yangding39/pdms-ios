@@ -30,7 +30,6 @@
 		85D24A551A31785D00D2C7EF /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A541A31785D00D2C7EF /* Code.swift */; };
 		85D39FC31A31B48B0034F93B /* TotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D39FC21A31B48B0034F93B /* TotalViewController.swift */; };
 		85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D39FC41A35420D0034F93B /* AddPatientViewController.swift */; };
-		85E530BB1A397295002888AC /* CrowDefintion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530BA1A397295002888AC /* CrowDefintion.swift */; };
 		85E530BD1A397442002888AC /* Quota.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530BC1A397442002888AC /* Quota.swift */; };
 		85E530BF1A397596002888AC /* QuotaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530BE1A397596002888AC /* QuotaCell.swift */; };
 		85E530C21A3977A6002888AC /* QuotaByPatientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */; };
@@ -78,7 +77,6 @@
 		85D24A541A31785D00D2C7EF /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
 		85D39FC21A31B48B0034F93B /* TotalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalViewController.swift; sourceTree = "<group>"; };
 		85D39FC41A35420D0034F93B /* AddPatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPatientViewController.swift; sourceTree = "<group>"; };
-		85E530BA1A397295002888AC /* CrowDefintion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrowDefintion.swift; sourceTree = "<group>"; };
 		85E530BC1A397442002888AC /* Quota.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quota.swift; sourceTree = "<group>"; };
 		85E530BE1A397596002888AC /* QuotaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaCell.swift; sourceTree = "<group>"; };
 		85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaByPatientTableViewController.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 				85D24A4F1A3164A200D2C7EF /* Patient.swift */,
 				85C0E20E1A37D26D00132AD5 /* Visit.swift */,
 				85C0E2181A381D6900132AD5 /* Option.swift */,
-				85E530BA1A397295002888AC /* CrowDefintion.swift */,
 				85E530BC1A397442002888AC /* Quota.swift */,
 				8561A31F1A3A8A4E00D3BDA5 /* GroupDefinition.swift */,
 			);
@@ -385,7 +382,6 @@
 				85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */,
 				85E530BF1A397596002888AC /* QuotaCell.swift in Sources */,
 				85C1AB0F1A3697AA00968A1F /* HttpApiClient.swift in Sources */,
-				85E530BB1A397295002888AC /* CrowDefintion.swift in Sources */,
 				85C0E2141A37D64500132AD5 /* VisitTableViewController.swift in Sources */,
 				859530DB1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift in Sources */,
 				8561A31C1A3A784800D3BDA5 /* CategoryTableViewController.swift in Sources */,

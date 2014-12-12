@@ -11,7 +11,7 @@ import UIKit
 class QuotaByPatientTableViewController: UITableViewController {
 
     var patient : Patient!
-    var crowDefintions = Array<CrowDefintion>()
+    var groupDefinitions = Array<GroupDefinition>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +24,12 @@ class QuotaByPatientTableViewController: UITableViewController {
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return crowDefintions.count
+        return groupDefinitions.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return crowDefintions[section].quota.count
+        return groupDefinitions[section].quota.count
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -38,7 +38,7 @@ class QuotaByPatientTableViewController: UITableViewController {
         sectionHeaderView.addSubview(headerLabel)
         
         headerLabel.font = UIFont(name: "Verdana", size: 14)
-        headerLabel.text = crowDefintions[section].name
+        headerLabel.text = groupDefinitions[section].name
         sectionHeaderView.backgroundColor = UIColor.lightGrayColor()
         headerLabel.backgroundColor = UIColor.lightGrayColor()
         
@@ -50,21 +50,21 @@ class QuotaByPatientTableViewController: UITableViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
-        cell.name.text = crowDefintions[indexPath.section].quota[indexPath.row].name
+        cell.name.text = groupDefinitions[indexPath.section].quota[indexPath.row].name
         
         return cell
     }
     
     func loadData() {
         for i in 1...3 {
-            var crowDefintion = CrowDefintion()
-            crowDefintion.name = "生活史\(i)"
+            var groupDefinition = GroupDefinition()
+            groupDefinition.name = "生活史\(i)"
             for j in 1...2 {
                 var quota = Quota()
                 quota.name = "霍乱\(i)-\(j)"
-                crowDefintion.quota.append(quota)
+                groupDefinition.quota.append(quota)
             }
-            crowDefintions.append(crowDefintion)
+            groupDefinitions.append(groupDefinition)
         }
         
     }
