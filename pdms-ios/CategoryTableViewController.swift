@@ -40,7 +40,7 @@ class CategoryTableViewController : UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == self.searchDisplayController?.searchResultsTableView {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel.text = searchQuotaData[indexPath.row].name
+            cell.textLabel?.text = searchQuotaData[indexPath.row].name
             return cell
         } else {
            if indexPath.row == 0 {
@@ -48,7 +48,7 @@ class CategoryTableViewController : UITableViewController {
               return cell
            } else {
               let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as UITableViewCell
-              cell.textLabel.text = categoryDatas[indexPath.row - 1 ].name
+              cell.textLabel?.text = categoryDatas[indexPath.row - 1 ].name
               return cell
            }
         }

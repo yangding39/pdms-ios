@@ -30,7 +30,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("groupDefinitionCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel.text = groupDefinitions[indexPath.row].name
+        cell.textLabel?.text = groupDefinitions[indexPath.row].name
         return cell
     }
 
