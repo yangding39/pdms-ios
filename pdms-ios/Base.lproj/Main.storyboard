@@ -1454,16 +1454,111 @@
         <!--用户管理-->
         <scene sceneID="gfu-Am-o0W">
             <objects>
-                <viewController id="etG-LX-hU5" sceneMemberID="viewController">
+                <viewController id="etG-LX-hU5" customClass="UserSettingViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RLS-Ji-sFK"/>
                         <viewControllerLayoutGuide type="bottom" id="aMk-vW-VaS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pdd-xJ-Prf">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKn-EM-3tY">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="72" width="34" height="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邮箱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBp-BS-Odq">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="113" width="34" height="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1i-Zt-wKM">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="152" width="34" height="21"/>
+                                </variation>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qRb-K3-vfy">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="326" id="QUR-PT-cuk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="QUR-PT-cuk"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="58" y="72" width="326" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="QUR-PT-cuk"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jak-wg-8QG">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="58" y="148" width="326" height="30"/>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1SL-Ey-JN3">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="58" y="110" width="326" height="30"/>
+                                </variation>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="dKn-EM-3tY"/>
+                                <exclude reference="fBp-BS-Odq"/>
+                                <exclude reference="R1i-Zt-wKM"/>
+                                <exclude reference="qRb-K3-vfy"/>
+                                <exclude reference="Jak-wg-8QG"/>
+                                <exclude reference="1SL-Ey-JN3"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="dKn-EM-3tY"/>
+                                <include reference="fBp-BS-Odq"/>
+                                <include reference="R1i-Zt-wKM"/>
+                                <include reference="qRb-K3-vfy"/>
+                                <include reference="Jak-wg-8QG"/>
+                                <include reference="1SL-Ey-JN3"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="用户管理" id="nLH-VB-g65"/>
+                    <navigationItem key="navigationItem" title="用户管理" id="V5f-lv-hNx">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="Tog-Jr-j6Z">
+                            <connections>
+                                <action selector="saveUserSetting:" destination="etG-LX-hU5" id="7vf-ds-Ucf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addressText" destination="Jak-wg-8QG" id="2hL-kd-WWT"/>
+                        <outlet property="emailText" destination="1SL-Ey-JN3" id="ARk-IM-79S"/>
+                        <outlet property="mobileText" destination="qRb-K3-vfy" id="ecy-g4-n3Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qK8-I1-E9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1863,6 +1958,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xbF-Lt-IEs"/>
+        <segue reference="QeM-cy-n9e"/>
     </inferredMetricsTieBreakers>
 </document>
