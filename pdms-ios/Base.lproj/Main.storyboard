@@ -1498,7 +1498,7 @@
         <!--动态指标列表-->
         <scene sceneID="d0A-OH-2sv">
             <objects>
-                <tableViewController title="动态指标列表" id="pXc-Ey-Uyh" customClass="NextLevelGroupDefinitionTableViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="nextLevelGroupDefinitionTableViewController" title="动态指标列表" id="pXc-Ey-Uyh" customClass="NextLevelGroupDefinitionTableViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wiJ-Mh-oIo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1520,6 +1520,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="7zc-6Q-N2Q" kind="show" identifier="formSegue" id="Fd9-kg-HK9"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1532,6 +1535,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Us6-y4-t6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4896" y="1079"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="trK-3D-pyx">
+            <objects>
+                <tableViewController storyboardIdentifier="formViewController" id="7zc-6Q-N2Q" customClass="FormTableViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="w7I-ou-KIp">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="inputCell" id="UrF-2N-MK2">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UrF-2N-MK2" id="ARM-Yo-EUj">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7zc-6Q-N2Q" id="m1o-Gl-Vda"/>
+                            <outlet property="delegate" destination="7zc-6Q-N2Q" id="MoL-4C-7ok"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="J9e-ld-ZBj"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LL7-AE-ZtS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5578.5" y="1079"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

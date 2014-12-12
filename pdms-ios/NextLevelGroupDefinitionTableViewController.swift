@@ -43,5 +43,31 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
         }
         self.tableView.reloadData()
     }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        let hasNext = hasNextLevelGroup()
+        if hasNext {
+             let nextGroupDefinitionVC = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("nextLevelGroupDefinitionTableViewController") as NextLevelGroupDefinitionTableViewController
+            let indexPath = self.tableView.indexPathForCell(sender as UITableViewCell)!
+            nextGroupDefinitionVC.navigationItem.title = groupDefinitions[indexPath.row].name
+            nextGroupDefinitionVC.visit = visit
+            nextGroupDefinitionVC.parentId = groupDefinitions[indexPath.row].id
+            self.navigationController?.pushViewController(nextGroupDefinitionVC, animated: true)
+            
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "formSegue" {
+            let formTableViewController = segue.destinationViewController as FormTableViewController
+        }
+    }
+    
+    func hasNextLevelGroup() -> Bool {
+        return true
+    }
 }
 

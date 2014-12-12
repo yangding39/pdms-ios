@@ -16,6 +16,7 @@
 		8561A31A1A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */; };
 		8561A31C1A3A784800D3BDA5 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */; };
 		8561A3201A3A8A4E00D3BDA5 /* GroupDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A31F1A3A8A4E00D3BDA5 /* GroupDefinition.swift */; };
+		857B649D1A3A9B06008FC52D /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857B649C1A3A9B06008FC52D /* FormTableViewController.swift */; };
 		859530DB1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */; };
 		85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E20E1A37D26D00132AD5 /* Visit.swift */; };
 		85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */; };
@@ -62,6 +63,7 @@
 		8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaByVisitTableViewController.swift; sourceTree = "<group>"; };
 		8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		8561A31F1A3A8A4E00D3BDA5 /* GroupDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDefinition.swift; sourceTree = "<group>"; };
+		857B649C1A3A9B06008FC52D /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextLevelGroupDefinitionTableViewController.swift; sourceTree = "<group>"; };
 		85C0E20E1A37D26D00132AD5 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableCell.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				85E530BE1A397596002888AC /* QuotaCell.swift */,
 				8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */,
+				857B649C1A3A9B06008FC52D /* FormTableViewController.swift */,
 				859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */,
 				85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */,
 				8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */,
@@ -387,6 +390,7 @@
 				8561A31C1A3A784800D3BDA5 /* CategoryTableViewController.swift in Sources */,
 				85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */,
 				85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */,
+				857B649D1A3A9B06008FC52D /* FormTableViewController.swift in Sources */,
 				B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */,
 				85D24A501A3164A200D2C7EF /* Patient.swift in Sources */,
 				85E530BD1A397442002888AC /* Quota.swift in Sources */,
