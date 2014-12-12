@@ -49,16 +49,6 @@ class VisitTableViewController : UITableViewController {
     }
     
     func loadData() {
-        let visit = Visit()
-        visit.id = 11
-        visit.typeLabel = "门诊"
-        visit.number = "1111323"
-        visit.departmentLabel = "肝胆内科"
-        visit.mainDiagonse = "肝硬化"
-        visit.startTime = "2014-02-11"
-        visit.endTime = "2014-02-11"
-        visits.append(visit)
-        
         loadingIndicator.startAnimating()
         let url = SERVER_DOMAIN + "visit/\(patient.id)"
         let parameters = ["token": TOKEN]

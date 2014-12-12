@@ -1327,18 +1327,18 @@
                                             <exclude reference="FaG-ng-OB4"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="3Pe-Mc-gsg"/>
-                                            <exclude reference="0GJ-vT-FSg"/>
-                                            <exclude reference="BgA-j1-deS"/>
-                                            <exclude reference="32h-eX-zWW"/>
                                             <exclude reference="5U9-7A-fRJ"/>
                                             <exclude reference="NZn-Cf-iSK"/>
                                             <exclude reference="vUd-ZN-eui"/>
+                                            <exclude reference="32h-eX-zWW"/>
                                             <exclude reference="HHZ-bN-M7A"/>
-                                            <exclude reference="fQT-Ko-HtJ"/>
-                                            <exclude reference="TU7-KN-idy"/>
-                                            <exclude reference="lUp-14-ocC"/>
                                             <exclude reference="Pf6-3R-3Zv"/>
+                                            <exclude reference="TU7-KN-idy"/>
+                                            <exclude reference="fQT-Ko-HtJ"/>
+                                            <exclude reference="lUp-14-ocC"/>
+                                            <exclude reference="0GJ-vT-FSg"/>
+                                            <exclude reference="3Pe-Mc-gsg"/>
+                                            <exclude reference="BgA-j1-deS"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -1349,18 +1349,18 @@
                                             <include reference="FaG-ng-OB4"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="3Pe-Mc-gsg"/>
-                                            <include reference="0GJ-vT-FSg"/>
-                                            <include reference="BgA-j1-deS"/>
-                                            <include reference="32h-eX-zWW"/>
                                             <include reference="5U9-7A-fRJ"/>
                                             <include reference="NZn-Cf-iSK"/>
                                             <include reference="vUd-ZN-eui"/>
+                                            <include reference="32h-eX-zWW"/>
                                             <include reference="HHZ-bN-M7A"/>
-                                            <include reference="fQT-Ko-HtJ"/>
-                                            <include reference="TU7-KN-idy"/>
-                                            <include reference="lUp-14-ocC"/>
                                             <include reference="Pf6-3R-3Zv"/>
+                                            <include reference="TU7-KN-idy"/>
+                                            <include reference="fQT-Ko-HtJ"/>
+                                            <include reference="lUp-14-ocC"/>
+                                            <include reference="0GJ-vT-FSg"/>
+                                            <include reference="3Pe-Mc-gsg"/>
+                                            <include reference="BgA-j1-deS"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -1394,10 +1394,11 @@
             <objects>
                 <tableViewController title="指标项首页" id="PxJ-gv-FLt" customClass="CategoryTableViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6Ri-up-hvc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="快速搜索指标数据" id="qVA-f5-RaW">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -1405,7 +1406,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categorySelectCell" id="I1d-Yw-gyD">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categorySelectCell" rowHeight="44" id="I1d-Yw-gyD">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I1d-Yw-gyD" id="s3N-zc-2Hr">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1465,6 +1466,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="pXc-Ey-Uyh" kind="show" identifier="nextGroupDefinitionSegue" id="9VL-9V-fjx"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -1490,6 +1494,44 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="4162.5" y="1076"/>
+        </scene>
+        <!--动态指标列表-->
+        <scene sceneID="d0A-OH-2sv">
+            <objects>
+                <tableViewController title="动态指标列表" id="pXc-Ey-Uyh" customClass="NextLevelGroupDefinitionTableViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wiJ-Mh-oIo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="groupDefinitionCell" textLabel="sEp-3f-BJP" style="IBUITableViewCellStyleDefault" id="yD8-6P-Unn">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yD8-6P-Unn" id="asL-QE-bDw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sEp-3f-BJP">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pXc-Ey-Uyh" id="gXN-cJ-l9a"/>
+                            <outlet property="delegate" destination="pXc-Ey-Uyh" id="5uC-49-cKx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="title" id="bU5-hC-Tnj"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Us6-y4-t6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4896" y="1079"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

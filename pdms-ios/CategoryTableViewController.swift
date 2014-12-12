@@ -11,8 +11,9 @@ import UIKit
 
 class CategoryTableViewController : UITableViewController {
 
+    var visit : Visit!
     var categoryDatas = Array<CrowDefintion>()
-    var searchQuotaData = Array<QuotaData>()
+    var searchQuotaData = Array<GroupDefinition>()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData(0)
@@ -75,6 +76,22 @@ class CategoryTableViewController : UITableViewController {
         }
         
         self.tableView.reloadData()
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if self.searchDisplayController?.active == true {
+            
+        } else {
+            if segue.identifier == "nextGroupDefinitionSegue" {
+                let nextGroupDefinitionVC = segue.destinationViewController as NextLevelGroupDefinitionTableViewController
+                let indexPath = self.tableView.indexPathForCell(sender as UITableViewCell)!
+                nextGroupDefinitionVC.navigationItem.title = categoryDatas[indexPath.row - 1].name
+                nextGroupDefinitionVC.visit = visit
+                nextGroupDefinitionVC.parentId = categoryDatas[indexPath.row - 1].id
+            }
+
+        }
     }
 }
 
