@@ -12,8 +12,8 @@ class Patient {
     var name : String!
     var gender : String!
     var age : Int!
-    var birthday : String?
-    var caseNo : String?
+    var birthday : String!
+    var caseNo : String!
     init() {
         
     }

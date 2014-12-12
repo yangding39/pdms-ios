@@ -40,7 +40,25 @@ class VisitTableViewController : UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 77
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 77
+    }
+    
     func loadData() {
+        let visit = Visit()
+        visit.id = 11
+        visit.typeLabel = "门诊"
+        visit.number = "1111323"
+        visit.departmentLabel = "肝胆内科"
+        visit.mainDiagonse = "肝硬化"
+        visit.startTime = "2014-02-11"
+        visit.endTime = "2014-02-11"
+        visits.append(visit)
+        
         loadingIndicator.startAnimating()
         let url = SERVER_DOMAIN + "visit/\(patient.id)"
         let parameters = ["token": TOKEN]
@@ -69,7 +87,7 @@ class VisitTableViewController : UITableViewController {
             let addVisitViewController = segue.destinationViewController as AddVisitViewController
         } else if segue.identifier == "quotaByVisitSegue" {
             let quotaByVisitTableViewController = segue.destinationViewController as QuotaByVisitTableViewController
-            let indexPath = self.tableView.indexPathForCell(sender as QuotaCell)!
+            let indexPath = self.tableView.indexPathForCell(sender as VisitTableCell)!
             let visit = visits[indexPath.row]
             quotaByVisitTableViewController.visit = visit
             quotaByVisitTableViewController.patient = patient

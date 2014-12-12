@@ -14,6 +14,8 @@
 		85566DCE1A314226004B44AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCC1A314226004B44AB /* LaunchScreen.xib */; };
 		85566DDA1A314226004B44AB /* pdms_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DD91A314226004B44AB /* pdms_iosTests.swift */; };
 		8561A31A1A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */; };
+		8561A31C1A3A784800D3BDA5 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */; };
+		8561A31E1A3A837C00D3BDA5 /* QuotaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A31D1A3A837C00D3BDA5 /* QuotaData.swift */; };
 		85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E20E1A37D26D00132AD5 /* Visit.swift */; };
 		85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */; };
 		85C0E2141A37D64500132AD5 /* VisitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */; };
@@ -58,6 +60,8 @@
 		85566DD81A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85566DD91A314226004B44AB /* pdms_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pdms_iosTests.swift; sourceTree = "<group>"; };
 		8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaByVisitTableViewController.swift; sourceTree = "<group>"; };
+		8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		8561A31D1A3A837C00D3BDA5 /* QuotaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaData.swift; sourceTree = "<group>"; };
 		85C0E20E1A37D26D00132AD5 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableCell.swift; sourceTree = "<group>"; };
 		85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				85D24A4F1A3164A200D2C7EF /* Patient.swift */,
+				8561A31D1A3A837C00D3BDA5 /* QuotaData.swift */,
 				85C0E20E1A37D26D00132AD5 /* Visit.swift */,
 				85C0E2181A381D6900132AD5 /* Option.swift */,
 				85E530BA1A397295002888AC /* CrowDefintion.swift */,
@@ -212,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				85E530BE1A397596002888AC /* QuotaCell.swift */,
+				8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */,
 				85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */,
 				8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */,
 			);
@@ -364,6 +370,7 @@
 			files = (
 				85C0E2191A381D6900132AD5 /* Option.swift in Sources */,
 				85D24A551A31785D00D2C7EF /* Code.swift in Sources */,
+				8561A31E1A3A837C00D3BDA5 /* QuotaData.swift in Sources */,
 				85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */,
 				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
 				85566DC41A314226004B44AB /* AppDelegate.swift in Sources */,
@@ -377,6 +384,7 @@
 				85C1AB0F1A3697AA00968A1F /* HttpApiClient.swift in Sources */,
 				85E530BB1A397295002888AC /* CrowDefintion.swift in Sources */,
 				85C0E2141A37D64500132AD5 /* VisitTableViewController.swift in Sources */,
+				8561A31C1A3A784800D3BDA5 /* CategoryTableViewController.swift in Sources */,
 				85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */,
 				85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */,
 				B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */,

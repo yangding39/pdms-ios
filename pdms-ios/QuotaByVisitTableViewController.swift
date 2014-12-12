@@ -9,7 +9,7 @@
 import UIKit
 
 class QuotaByVisitTableViewController: UITableViewController {
-    
+
     var patient : Patient!
     var visit : Visit!
     var crowDefintions = Array<CrowDefintion>()
@@ -70,5 +70,7 @@ class QuotaByVisitTableViewController: UITableViewController {
         }
 
     }
+    
+  
 }
 
