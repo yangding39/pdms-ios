@@ -8,7 +8,7 @@
 
 import Foundation
 class Quota {
-    var id : Int32!
+    var id : Int!
     var name : String!
     var checkTime : String!
     var createTime : String!

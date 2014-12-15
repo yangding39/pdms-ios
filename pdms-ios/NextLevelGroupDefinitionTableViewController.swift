@@ -11,7 +11,7 @@ import UIKit
 class NextLevelGroupDefinitionTableViewController : UITableViewController {
 
     var visit : Visit!
-    var parentId : Int32!
+    var parentGroupDefinition : GroupDefinition!
     var groupDefinitions = Array<GroupDefinition> ()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("groupDefinitionCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.text = groupDefinitions[indexPath.row].name
+        cell.textLabel.text = groupDefinitions[indexPath.row].name
         return cell
     }
 
@@ -51,7 +51,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
             let indexPath = self.tableView.indexPathForCell(sender as UITableViewCell)!
             nextGroupDefinitionVC.navigationItem.title = groupDefinitions[indexPath.row].name
             nextGroupDefinitionVC.visit = visit
-            nextGroupDefinitionVC.parentId = groupDefinitions[indexPath.row].id
+            nextGroupDefinitionVC.parentGroupDefinition = groupDefinitions[indexPath.row]
             self.navigationController?.pushViewController(nextGroupDefinitionVC, animated: true)
             
             return false
@@ -63,6 +63,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "formSegue" {
             let formTableViewController = segue.destinationViewController as FormTableViewController
+            formTableViewController.visit = visit
         }
     }
     

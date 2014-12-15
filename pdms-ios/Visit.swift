@@ -11,10 +11,10 @@ import Foundation
 class Visit {
     var id : Int!
     var typeLabel : String!
-    var type : Int32!
+    var type : Int!
     var number : String!
     var departmentLabel : String!
-    var department : Int32!
+    var department : Int!
     var mainDiagonse : String!
     var startTime : String!
     var endTime :  String!
