@@ -10,9 +10,9 @@ import Foundation
 
 class Option {
     var label : String
-    var value : Int32
+    var value : Int
     
-    init(label : String, value : Int32) {
+    init(label : String, value : Int) {
         self.label = label
         self.value = value
     }

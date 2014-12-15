@@ -52,23 +52,37 @@ class QuotaByVisitTableViewController: UITableViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
-        cell.name.text = groupDefinitions[indexPath.section].quota[indexPath.row].name
-        
+        let quota = groupDefinitions[indexPath.section].quota[indexPath.row]
+        cell.name.text = quota.name
+        cell.checkTime.text = "诊断时间：\(quota.checkTime)"
+        cell.createTime.text = "创建时间：\(quota.createTime)"
+        cell.lastModifiedTime.text = "修改时间：\(quota.lastModifiedTime)"
         return cell
     }
     
     func loadData() {
-        for i in 1...3 {
-            var groupDefinition = GroupDefinition()
-            groupDefinition.name = "生活史\(i)"
-            for j in 1...2 {
-                var quota = Quota()
-                quota.name = "霍乱\(i)-\(j)"
+       let url = SERVER_DOMAIN + "visit/\(visit.id)/quota/list"
+        let parameters = ["token": TOKEN]
+        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
+    }
+    
+    func fillData(json : JSON) {
+        for (groupIndex: String, groupJson : JSON) in json["data"]["crowdDefinitions"]  {
+            let groupDefinition = GroupDefinition()
+            groupDefinition.id = groupJson["crowdDefinitionId"].int
+            groupDefinition.name = groupJson["crowdDefinitionName"].string
+            for (quotaIndex: String, quotaJson : JSON) in groupJson["listQuotaData"] {
+                let quota = Quota()
+                quota.id = quotaJson["groupDefinitionId"].int
+                quota.name = quotaJson["groupDefinitionName"].string
+                quota.createTime = quotaJson["createdTimestampStr"].string
+                quota.checkTime = quotaJson["checkTimestampStr"].string
+                quota.lastModifiedTime = quotaJson["lastModifiedStr"].string
                 groupDefinition.quota.append(quota)
             }
             groupDefinitions.append(groupDefinition)
-        }
-
+       }
+        self.tableView.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

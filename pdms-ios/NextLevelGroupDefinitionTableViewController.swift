@@ -68,7 +68,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     }
     
     func hasNextLevelGroup() -> Bool {
-        return false
+        return true
     }
 }
 
