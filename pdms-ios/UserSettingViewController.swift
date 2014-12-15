@@ -23,6 +23,7 @@ class UserSettingViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         user = User()
         user.mobile = "15370201245"
         user.email = "sdfdsf@g.com"

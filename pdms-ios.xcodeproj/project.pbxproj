@@ -39,6 +39,7 @@
 		B6082E911A3AC87500C6E0FF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E901A3AC87500C6E0FF /* User.swift */; };
 		B6082E931A3AD81A00C6E0FF /* UserSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E921A3AD81A00C6E0FF /* UserSettingViewController.swift */; };
 		B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */; };
+		B681A4DC1A3E7668005C48EE /* UserPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681A4DB1A3E7668005C48EE /* UserPasswordViewController.swift */; };
 		F3CFA9F69B69FD3F591A9C3C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1971B582EB70825C1A3F1F27 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		B6082E901A3AC87500C6E0FF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6082E921A3AD81A00C6E0FF /* UserSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingViewController.swift; sourceTree = "<group>"; };
 		B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
+		B681A4DB1A3E7668005C48EE /* UserPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPasswordViewController.swift; sourceTree = "<group>"; };
 		E9E3B41D812C23750686EA88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -252,6 +254,7 @@
 			children = (
 				B6082E8E1A3AC5DE00C6E0FF /* UserCenterViewController.swift */,
 				B6082E921A3AD81A00C6E0FF /* UserSettingViewController.swift */,
+				B681A4DB1A3E7668005C48EE /* UserPasswordViewController.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				85C0E2191A381D6900132AD5 /* Option.swift in Sources */,
 				85D24A551A31785D00D2C7EF /* Code.swift in Sources */,
 				85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */,
+				B681A4DC1A3E7668005C48EE /* UserPasswordViewController.swift in Sources */,
 				B6082E931A3AD81A00C6E0FF /* UserSettingViewController.swift in Sources */,
 				B6082E8F1A3AC5DE00C6E0FF /* UserCenterViewController.swift in Sources */,
 				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
