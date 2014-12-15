@@ -68,6 +68,18 @@ class QuotaByPatientTableViewController: UITableViewController {
         }
         
     }
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        println("1232")
+        return true
+       
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+           println("11232")
+         if segue.identifier == "showQuotaDetailSegue" {
+            println("11232")
+        }
+    }
 
 }
 

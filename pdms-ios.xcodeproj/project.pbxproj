@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85473C731A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85473C721A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift */; };
 		85566DC41A314226004B44AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC31A314226004B44AB /* AppDelegate.swift */; };
 		85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC51A314226004B44AB /* HistoryViewController.swift */; };
 		85566DC91A314226004B44AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85566DC71A314226004B44AB /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		1971B582EB70825C1A3F1F27 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		85473C721A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaDetailTabelViewController.swift; sourceTree = "<group>"; };
 		85566DBE1A314226004B44AB /* pdms-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pdms-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85566DC21A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85566DC31A314226004B44AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */,
 				85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */,
 				8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */,
+				85473C721A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift */,
 			);
 			name = Quota;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				8561A31C1A3A784800D3BDA5 /* CategoryTableViewController.swift in Sources */,
 				85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */,
 				85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */,
+				85473C731A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift in Sources */,
 				857B649D1A3A9B06008FC52D /* FormTableViewController.swift in Sources */,
 				B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */,
 				857B64A01A3E72A7008FC52D /* QuotaFormCell.swift in Sources */,

@@ -1177,6 +1177,7 @@
                                     <outlet property="createTime" destination="e8C-rm-bKv" id="rOQ-TU-Zlg"/>
                                     <outlet property="lastModifiedTime" destination="whf-P8-Ogh" id="JrP-Sj-P0J"/>
                                     <outlet property="name" destination="pyg-MJ-hDb" id="s1m-c4-lqd"/>
+                                    <segue destination="uU4-w9-qRI" kind="show" id="nxL-Vw-gyR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1190,6 +1191,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkh-6R-h8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3522" y="1079"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="cF7-Xy-jSW">
+            <objects>
+                <tableViewController id="uU4-w9-qRI" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="osi-nf-TE4">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="w4o-zr-aF1">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w4o-zr-aF1" id="u1c-pP-Msd">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uU4-w9-qRI" id="8T7-3H-CnN"/>
+                            <outlet property="delegate" destination="uU4-w9-qRI" id="orj-r6-u4U"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bve-W1-Sue" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3871.5" y="1819"/>
         </scene>
         <!--用户中心-->
         <scene sceneID="OKe-Cq-gDX">
@@ -1668,6 +1694,12 @@
                                 <exclude reference="fBp-BS-Odq"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="pPx-wP-MPE"/>
+                                <exclude reference="MHt-ax-7dq"/>
+                                <exclude reference="ekk-jY-6Pd"/>
+                                <exclude reference="bds-9e-DNA"/>
+                                <exclude reference="iQT-Yx-f5m"/>
+                                <exclude reference="rFe-Sd-bKX"/>
                                 <exclude reference="1dS-ai-JrK"/>
                                 <exclude reference="1g3-9h-gRv"/>
                                 <exclude reference="87e-Jm-1eh"/>
@@ -1676,12 +1708,6 @@
                                 <exclude reference="F7y-hg-Ert"/>
                                 <exclude reference="IeE-25-wpD"/>
                                 <exclude reference="rao-GF-NBp"/>
-                                <exclude reference="pPx-wP-MPE"/>
-                                <exclude reference="bds-9e-DNA"/>
-                                <exclude reference="iQT-Yx-f5m"/>
-                                <exclude reference="rFe-Sd-bKX"/>
-                                <exclude reference="MHt-ax-7dq"/>
-                                <exclude reference="ekk-jY-6Pd"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1694,6 +1720,12 @@
                                 <include reference="fBp-BS-Odq"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="pPx-wP-MPE"/>
+                                <include reference="MHt-ax-7dq"/>
+                                <include reference="ekk-jY-6Pd"/>
+                                <include reference="bds-9e-DNA"/>
+                                <include reference="iQT-Yx-f5m"/>
+                                <include reference="rFe-Sd-bKX"/>
                                 <include reference="1dS-ai-JrK"/>
                                 <include reference="1g3-9h-gRv"/>
                                 <include reference="87e-Jm-1eh"/>
@@ -1702,12 +1734,6 @@
                                 <include reference="F7y-hg-Ert"/>
                                 <include reference="IeE-25-wpD"/>
                                 <include reference="rao-GF-NBp"/>
-                                <include reference="pPx-wP-MPE"/>
-                                <include reference="bds-9e-DNA"/>
-                                <include reference="iQT-Yx-f5m"/>
-                                <include reference="rFe-Sd-bKX"/>
-                                <include reference="MHt-ax-7dq"/>
-                                <include reference="ekk-jY-6Pd"/>
                             </mask>
                         </variation>
                     </view>
@@ -2192,6 +2218,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QeM-cy-n9e"/>
+        <segue reference="xbF-Lt-IEs"/>
     </inferredMetricsTieBreakers>
 </document>

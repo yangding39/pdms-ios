@@ -86,9 +86,12 @@ class QuotaByVisitTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "showSearchCatgorySegue") {
+     
+        if segue.identifier == "showSearchCatgorySegue" {
             let categoryTableviewController = segue.destinationViewController  as CategoryTableViewController
             categoryTableviewController.visit = visit
+        } else if segue.identifier == "showQuotaDetailSegue" {
+            println("11232")
         }
     }
   
