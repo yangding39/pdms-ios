@@ -40,7 +40,7 @@ class CategoryTableViewController : UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == self.searchDisplayController?.searchResultsTableView {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel?.text = searchQuotaData[indexPath.row].name
+            cell.textLabel.text = searchQuotaData[indexPath.row].name
             return cell
         } else {
            if indexPath.row == 0 {
@@ -48,7 +48,7 @@ class CategoryTableViewController : UITableViewController {
               return cell
            } else {
               let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as UITableViewCell
-              cell.textLabel?.text = categoryDatas[indexPath.row - 1 ].name
+              cell.textLabel.text = categoryDatas[indexPath.row - 1 ].name
               return cell
            }
         }
@@ -81,17 +81,21 @@ class CategoryTableViewController : UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if self.searchDisplayController?.active == true {
-            
+            //todo
         } else {
             if segue.identifier == "nextGroupDefinitionSegue" {
                 let nextGroupDefinitionVC = segue.destinationViewController as NextLevelGroupDefinitionTableViewController
                 let indexPath = self.tableView.indexPathForCell(sender as UITableViewCell)!
                 nextGroupDefinitionVC.navigationItem.title = categoryDatas[indexPath.row - 1].name
                 nextGroupDefinitionVC.visit = visit
-                nextGroupDefinitionVC.parentId = categoryDatas[indexPath.row - 1].id
+                nextGroupDefinitionVC.parentGroupDefinition = categoryDatas[indexPath.row - 1]
             }
 
         }
+    }
+    
+    @IBAction func saveQuotaComplete(segue : UIStoryboardSegue) {
+    
     }
 }
 
