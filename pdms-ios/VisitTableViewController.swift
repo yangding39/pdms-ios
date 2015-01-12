@@ -35,8 +35,23 @@ class VisitTableViewController : UITableViewController {
         cell.typeLabel.text = visit.typeLabel
         cell.number.text =  "就诊号：\(visit.number)"
         cell.departmentLabel.text = "科室：\(visit.departmentLabel)"
-        cell.mainDiagnose.text = "疾病诊断：\(visit.mainDiagonse)"
-        cell.time.text = "就诊时间：\(visit.startTime) ~ \(visit.endTime)"
+        cell.departmentLabel.adjustsFontSizeToFitWidth = true
+        cell.mainDiagnose.text = "\(visit.mainDiagonse)"
+        cell.mainDiagnose.adjustsFontSizeToFitWidth = true
+       
+        var timeText = "就诊时间："
+        if let startTime =  visit.startTime {
+            timeText += startTime
+        }
+        
+        if visit.startTime != nil || visit.endTime != nil {
+            timeText += "~"
+        }
+        
+        if let endTime = visit.endTime {
+            timeText += endTime
+        }
+         cell.time.text = timeText
         return cell
     }
     
@@ -49,6 +64,7 @@ class VisitTableViewController : UITableViewController {
     }
     
     func loadData() {
+        visits.removeAll(keepCapacity: true)
         loadingIndicator.startAnimating()
         let url = SERVER_DOMAIN + "visit/\(patient.id)"
         let parameters = ["token": TOKEN]
@@ -84,8 +100,8 @@ class VisitTableViewController : UITableViewController {
         }
     }
     
-    @IBAction func completeAdd(segue : UIStoryboardSegue) {
-        
+    @IBAction func completeAddVisit(segue : UIStoryboardSegue) {
+        self.loadData()
     }
 }
 

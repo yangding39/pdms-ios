@@ -14,9 +14,6 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     var searchResult: [Patient] = []
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-        recentPatients.removeAll(keepCapacity: true)
-     
        // loadingIndicator.startAnimating()
         self.loadData()
         // Do any additional setup after loading the view, typically from a nib.
@@ -76,6 +73,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     func loadData() {
+        recentPatients.removeAll(keepCapacity: true)
         let url = SERVER_DOMAIN + "patients/recent?token=" + TOKEN
         HttpApiClient.sharedInstance.get(url, paramters : nil, success: fillData, fail : nil)
         
@@ -106,8 +104,8 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         self.searchDisplayController?.searchResultsTableView.reloadData()
     }
     
-    @IBAction func completeAdd(segue : UIStoryboardSegue) {
-        
+    @IBAction func completeAddPatient(segue : UIStoryboardSegue) {
+        self.loadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

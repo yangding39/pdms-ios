@@ -54,10 +54,11 @@ class AddPatientViewController: UITableViewController {
             caseNo.layer.cornerRadius = 5
             return false
         }
-        return savePatient()
+        savePatient()
+        return false
     }
    
-    func savePatient() -> Bool{
+    func savePatient(){
         var patient = Patient()
         patient.name = name.text
         patient.gender = gender.text
@@ -74,33 +75,35 @@ class AddPatientViewController: UITableViewController {
                 options: nil)
         let age = ageComponents.year
         patient.age = age
-        postData(patient) 
-        return true
+        postData(patient)
     }
     
     func postData(patient : Patient) {
-        let url = SERVER_DOMAIN + "patients/save?token=" + TOKEN
-        let params = ["name" : patient.name, "gender" : patient.gender, "birthday" : patient.birthday,
-            "age" : "\(patient.age)", "caseNo" : patient.caseNo]
+        let url = SERVER_DOMAIN + "patients/save"
+        let params : [String : AnyObject] = ["token" : TOKEN, "patientName" : patient.name, "gender" : patient.gender, "birthday" : patient.birthday,
+            "age" : patient.age, "caseNo" : patient.caseNo]
         HttpApiClient.sharedInstance.post(url, paramters : params, success: addPatientResult, fail : nil)
        
     }
     func addPatientResult(json : JSON) {
-        println(json.description)
+        var fieldErrors = Array<String>()
+        var saveResult = false
+        println(json)
+        //set result and error from server
+        saveResult = json["stat"].int == 0 ? true : false
+        for (index: String, errorJson: JSON) in json["fieldErrors"] {
+            if let error = errorJson[index].string {
+                fieldErrors.append(error)
+            }
+        }
+        if saveResult && fieldErrors.count == 0 {
+            self.performSegueWithIdentifier("completeAddPatientSegue", sender: self)
+        }
+
     }
     func showDatePicker(sender: UITextField) {
-        
-        var datePicker: UIDatePicker = UIDatePicker(frame: CGRectMake(0, 0, self.view.bounds.width,50))
-        datePicker.datePickerMode = UIDatePickerMode.Date
-        sender.inputView = datePicker
-        
-        var toolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.bounds.width,44))
-        toolbar.barStyle = UIBarStyle.BlackTranslucent
-        var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var barItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: Selector("handleDatePicker:"))
-        toolbar.setItems([flexSpace, barItem], animated: true)
-        sender.inputAccessoryView = toolbar
-        
+        sender.inputView = UIDatePicker().customPickerStyle(self.view)
+        sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleDatePicker:"), target : self)
     }
     
     func handleDatePicker(sender: UIBarButtonItem) {
@@ -109,30 +112,17 @@ class AddPatientViewController: UITableViewController {
         var datePicker = birthday.inputView as UIDatePicker?
         if let date = datePicker?.date {
             birthday.text = dateFormatter.stringFromDate(date)
-           birthday.endEditing(true)
-            
+            birthday.endEditing(true)
         }
         
     }
     
     func showSelectPicker(sender: UITextField) {
-        let selectPicker = UIPickerView(frame: CGRectMake(0, 0, self.view.bounds.width, 10))
-        selectPicker.dataSource = self
-        selectPicker.delegate = self
-        sender.inputView = selectPicker
-        selectPicker.backgroundColor = UIColor.whiteColor()
-        selectPicker.showsSelectionIndicator = true
-        
-        var toolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.bounds.width,44))
-        toolbar.barStyle = UIBarStyle.BlackTranslucent
-        var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var barItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: Selector("handleSelectPicker:"))
-        toolbar.setItems([flexSpace, barItem], animated: true)
-        gender.inputAccessoryView = toolbar
+        sender.inputView = UIPickerView().customPickerStyle(self.view, delegate: self, dataSource: self)
+        sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleSelectPicker:"), target : self)
     }
     
     func handleSelectPicker(sender: UIBarButtonItem) {
-        
         var uiPicker = gender.inputView as UIPickerView?
         if let index = uiPicker?.selectedRowInComponent(0) {
             gender.text = self.options[index]
@@ -156,14 +146,9 @@ extension AddPatientViewController : UIPickerViewDataSource {
 
 extension AddPatientViewController : UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        
         return options[row]
     }
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let titleData = options[row]
-        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blueColor()])
-        return myTitle
-    }
+
     
 }
 

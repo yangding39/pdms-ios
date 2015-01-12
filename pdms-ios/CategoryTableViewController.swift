@@ -12,6 +12,7 @@ import UIKit
 class CategoryTableViewController : UITableViewController {
 
     var visit : Visit!
+    var patient : Patient!
     var categoryDatas = Array<GroupDefinition>()
     var searchQuotaData = Array<GroupDefinition>()
     override func viewDidLoad() {
@@ -40,7 +41,7 @@ class CategoryTableViewController : UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == self.searchDisplayController?.searchResultsTableView {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel.text = searchQuotaData[indexPath.row].name
+            cell.textLabel?.text = searchQuotaData[indexPath.row].name
             return cell
         } else {
            if indexPath.row == 0 {
@@ -48,7 +49,7 @@ class CategoryTableViewController : UITableViewController {
               return cell
            } else {
               let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as UITableViewCell
-              cell.textLabel.text = categoryDatas[indexPath.row - 1 ].name
+              cell.textLabel?.text = categoryDatas[indexPath.row - 1 ].name
               return cell
            }
         }
@@ -60,25 +61,20 @@ class CategoryTableViewController : UITableViewController {
     
     func loadData(categoryIndex : Int) {
         categoryDatas.removeAll(keepCapacity: true)
-        if categoryIndex == 0 {
-            for i in 1...4 {
-                let groupDefintion = GroupDefinition()
-                groupDefintion.name = "生活史\(i)"
-                categoryDatas.append(groupDefintion)
-            }
-        } else {
-            for i in 1...4 {
-                let groupDefintion = GroupDefinition()
-                groupDefintion.name = "疾病诊断\(i)"
-                categoryDatas.append(groupDefintion)
-            }
-
-        }
-        
-        self.tableView.reloadData()
+        let url = SERVER_DOMAIN + "quota/favoriteCategory"
+        let parameters = ["token": TOKEN]
+        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
     }
     
-    
+    func fillData(json : JSON) {
+        for (index: String, favoriteJson: JSON) in json["data"]  {
+            let groupDefintion = GroupDefinition()
+            groupDefintion.id = favoriteJson["groupDefinitionId"].int
+            groupDefintion.name = favoriteJson["groupDefinitionName"].string
+            categoryDatas.append(groupDefintion)
+        }
+        self.tableView.reloadData()
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if self.searchDisplayController?.active == true {
             //todo
@@ -88,14 +84,13 @@ class CategoryTableViewController : UITableViewController {
                 let indexPath = self.tableView.indexPathForCell(sender as UITableViewCell)!
                 nextGroupDefinitionVC.navigationItem.title = categoryDatas[indexPath.row - 1].name
                 nextGroupDefinitionVC.visit = visit
+                nextGroupDefinitionVC.patient = patient
                 nextGroupDefinitionVC.parentGroupDefinition = categoryDatas[indexPath.row - 1]
+                nextGroupDefinitionVC.crowDefinition = categoryDatas[indexPath.row - 1]
             }
 
         }
     }
-    
-    @IBAction func saveQuotaComplete(segue : UIStoryboardSegue) {
-    
-    }
+   
 }
 

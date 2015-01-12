@@ -14,18 +14,17 @@ class TotalViewController: UITableViewController {
     var tableDatas = Array<Patient>()
     var page = 1
     override func viewDidLoad() {
-        tableDatas.removeAll(keepCapacity: true)
         super.viewDidLoad()
         
         loadingIndicator.startAnimating()
         self.loadData()
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.attributedTitle = NSAttributedString(string: "加载更多")
-        self.refreshControl?.addTarget(self, action: "loadMore:", forControlEvents: UIControlEvents.ValueChanged)
         
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.loadData()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -45,6 +44,7 @@ class TotalViewController: UITableViewController {
         return cell
     }
     func loadData() {
+        self.tableDatas.removeAll(keepCapacity: true)
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN
         HttpApiClient.sharedInstance.get(url, paramters : ["page" : page], success: fillData, fail : fail)
         

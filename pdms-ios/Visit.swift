@@ -18,6 +18,7 @@ class Visit {
     var mainDiagonse : String!
     var startTime : String!
     var endTime :  String!
+    var patient : Patient!
     init() {
         
     }

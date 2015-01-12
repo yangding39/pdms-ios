@@ -9,11 +9,9 @@
 import Foundation
 
 class Option {
-    var label : String
-    var value : Int
+    var label : String!
+    var value : Int!
     
-    init(label : String, value : Int) {
-        self.label = label
-        self.value = value
+    init() {
     }
 }

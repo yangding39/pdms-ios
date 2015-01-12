@@ -23,7 +23,7 @@ class HttpApiClient {
                 success(json)
             },
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
-                //println(error)
+               // println(error)
                 if (fail != nil) {
                     fail()
                 }

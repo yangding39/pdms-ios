@@ -56,13 +56,29 @@ class AddVisitViewController: UITableViewController {
     }
     
     func fillOptions(json : JSON) {
-        //todo
+        for (index: String, subJson: JSON) in json["data"]  {
+            let dictId = subJson["dictId"].int
+            for (optionIndex : String, optionJson : JSON) in subJson["options"] {
+                let option = Option()
+
+                option.label = optionJson["lable"].string!
+                option.value = optionJson["value"].int!
+                if dictId == 5 {
+                    self.typeOptions.append(option)
+                } else if dictId == 6 {
+                    self.departmentOptions.append(option)
+                }
+            }
+        }
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        return saveVisit()
+        if identifier == "completeAddVisitSegue" {
+            saveVisit()
+        }
+        return false
     }
-    func saveVisit() -> Bool{
+    func saveVisit() {
         let visit = Visit()
         for option in typeOptions {
             if option.label == typeLabel.text {
@@ -80,35 +96,38 @@ class AddVisitViewController: UITableViewController {
         visit.startTime = startTime.text
         visit.endTime = endTime.text
         postData(visit)
-        return true
     }
     func postData(visit : Visit) {
         let url = SERVER_DOMAIN + "visit/save?token=" + TOKEN
-        let params = ["patientId" : "\(patient.id!)", "visitType" : "\(visit.type!)", "visitNumber" : visit.number!, "department" : "\(visit.department!)", "startTime" : visit.startTime!, "endTime" : visit.endTime!]
+        let params : [String : AnyObject] = ["patientId" : patient.id!, "visitType" : visit.type, "visitNumber" : visit.number, "department" : visit.department, "startTime" : visit.startTime!, "endTime" : visit.endTime!]
         HttpApiClient.sharedInstance.post(url, paramters : params, success: addVisitResult, fail : nil)
     }
     
     func addVisitResult(json : JSON) {
-        //todo
+        var fieldErrors = Array<String>()
+        var saveResult = false
+        //set result and error from server
+        saveResult = json["stat"].int == 0 ? true : false
+        for (index: String, errorJson: JSON) in json["fieldErrors"] {
+            if let error = errorJson[index].string {
+                fieldErrors.append(error)
+            }
+        }
+        if saveResult && fieldErrors.count == 0 {
+            self.performSegueWithIdentifier("completeAddVisitSegue", sender: self)
+        }
+
     }
     func showDatePicker(sender: UITextField) {
-        var datePicker: UIDatePicker = UIDatePicker(frame: CGRectMake(0, 0, self.view.bounds.width,50))
-        datePicker.datePickerMode = UIDatePickerMode.Date
-        sender.inputView = datePicker
-        
-        var toolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.bounds.width,44))
-        toolbar.barStyle = UIBarStyle.BlackTranslucent
-        var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        sender.inputView = UIDatePicker().customPickerStyle(self.view)
+
         var selector : Selector!
         if (sender == self.startTime) {
             selector = Selector("handleStartTimeDatePicker:")
         } else {
             selector = Selector("handleEndTimeDatePicker:")
         }
-        var barItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: selector)
-        toolbar.setItems([flexSpace, barItem], animated: true)
-        sender.inputAccessoryView = toolbar
-        
+        sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: selector, target : self)
     }
     
     func handleStartTimeDatePicker(sender: UIBarButtonItem) {
@@ -138,20 +157,8 @@ class AddVisitViewController: UITableViewController {
         } else {
             currentOptions = self.departmentOptions
         }
-        
-        let selectPicker = UIPickerView(frame: CGRectMake(0, 0, self.view.bounds.width, 10))
-        selectPicker.dataSource = self
-        selectPicker.delegate = self
-        sender.inputView = selectPicker
-        selectPicker.backgroundColor = UIColor.whiteColor()
-        selectPicker.showsSelectionIndicator = true
-        
-        var toolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.bounds.width,44))
-        toolbar.barStyle = UIBarStyle.BlackTranslucent
-        var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var barItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: self, action: Selector("handleSelectPicker:"))
-        toolbar.setItems([flexSpace, barItem], animated: true)
-        sender.inputAccessoryView = toolbar
+        sender.inputView = UIPickerView().customPickerStyle(self.view, delegate: self, dataSource: self)
+        sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleSelectPicker:"), target : self)
         currentTextField = sender
     }
     
@@ -183,10 +190,4 @@ extension AddVisitViewController : UIPickerViewDelegate {
         
         return currentOptions[row].label
     }
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let titleData = currentOptions[row].label
-        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blueColor()])
-        return myTitle
-    }
-    
 }

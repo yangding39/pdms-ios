@@ -35,14 +35,9 @@ class QuotaByVisitTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
-        let headerLabel = UILabel(frame: CGRectMake(10, 10, sectionHeaderView.frame.size.width, 25))
-        sectionHeaderView.addSubview(headerLabel)
-        
-        headerLabel.font = UIFont(name: "Verdana", size: 14)
-        headerLabel.text = groupDefinitions[section].name
-        sectionHeaderView.backgroundColor = UIColor.lightGrayColor()
-        headerLabel.backgroundColor = UIColor.lightGrayColor()
+        let sectionHeaderView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
+        sectionHeaderView.textLabel.text = groupDefinitions[section].name
+        sectionHeaderView.tintColor = UIColor.sectionColor()
         
         return sectionHeaderView
     }
@@ -61,6 +56,7 @@ class QuotaByVisitTableViewController: UITableViewController {
     }
     
     func loadData() {
+        groupDefinitions.removeAll(keepCapacity: true)
        let url = SERVER_DOMAIN + "visit/\(visit.id)/quota/list"
         let parameters = ["token": TOKEN]
         HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
@@ -71,9 +67,9 @@ class QuotaByVisitTableViewController: UITableViewController {
             let groupDefinition = GroupDefinition()
             groupDefinition.id = groupJson["crowdDefinitionId"].int
             groupDefinition.name = groupJson["crowdDefinitionName"].string
-            for (quotaIndex: String, quotaJson : JSON) in groupJson["listQuotaData"] {
+            for (quotaIndex: String, quotaJson : JSON) in groupJson["quotaDatas"] {
                 let quota = Quota()
-                quota.id = quotaJson["groupDefinitionId"].int
+                quota.id = quotaJson["quotaDataId"].int
                 quota.name = quotaJson["groupDefinitionName"].string
                 quota.createTime = quotaJson["createdTimestampStr"].string
                 quota.checkTime = quotaJson["checkTimestampStr"].string
@@ -90,10 +86,18 @@ class QuotaByVisitTableViewController: UITableViewController {
         if segue.identifier == "showSearchCatgorySegue" {
             let categoryTableviewController = segue.destinationViewController  as CategoryTableViewController
             categoryTableviewController.visit = visit
+            categoryTableviewController.patient = patient
         } else if segue.identifier == "showQuotaDetailSegue" {
-            println("11232")
+           let indexPath = self.tableView.indexPathForCell(sender as QuotaCell)!
+           let quota = groupDefinitions[indexPath.section].quota[indexPath.row]
+           let quotaDetailViewController = segue.destinationViewController as QuotaDetailTabelViewController
+            quotaDetailViewController.quota = quota
+            quotaDetailViewController.patient = patient
         }
     }
-  
+   
+    @IBAction func addQuotaByVisitComplete(segue : UIStoryboardSegue) {
+         self.loadData()
+    }
 }
 

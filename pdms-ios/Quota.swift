@@ -13,7 +13,7 @@ class Quota {
     var checkTime : String!
     var createTime : String!
     var lastModifiedTime : String!
-    
+    var quotaDatas = Array<Data>()
     init() {
         
     }

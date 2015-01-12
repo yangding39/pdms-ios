@@ -33,15 +33,10 @@ class QuotaByPatientTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
-        let headerLabel = UILabel(frame: CGRectMake(10, 10, sectionHeaderView.frame.size.width, 25))
-        sectionHeaderView.addSubview(headerLabel)
-        
-        headerLabel.font = UIFont(name: "Verdana", size: 14)
-        headerLabel.text = groupDefinitions[section].name
-        sectionHeaderView.backgroundColor = UIColor.lightGrayColor()
-        headerLabel.backgroundColor = UIColor.lightGrayColor()
-        
+        let sectionHeaderView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
+       
+        sectionHeaderView.tintColor = UIColor.appColor()
+        sectionHeaderView.textLabel.text = groupDefinitions[section].name
         return sectionHeaderView
     }
     
@@ -51,7 +46,6 @@ class QuotaByPatientTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
         cell.name.text = groupDefinitions[indexPath.section].quota[indexPath.row].name
-        
         return cell
     }
     
@@ -68,16 +62,14 @@ class QuotaByPatientTableViewController: UITableViewController {
         }
         
     }
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        println("1232")
-        return true
-       
-    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-           println("11232")
          if segue.identifier == "showQuotaDetailSegue" {
-            println("11232")
+            let indexPath = self.tableView.indexPathForCell(sender as QuotaCell)!
+            let quota = groupDefinitions[indexPath.section].quota[indexPath.row]
+            let quotaDetailViewController = segue.destinationViewController as QuotaDetailTabelViewController
+            quotaDetailViewController.quota = quota
+            quotaDetailViewController.patient = patient
         }
     }
 

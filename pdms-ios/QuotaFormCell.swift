@@ -13,4 +13,5 @@ class QuotaFormCell : UITableViewCell {
     @IBOutlet weak var name: UILabel!
 
     @IBOutlet weak var value: UITextField!
+    @IBOutlet weak var unit: UILabel!
 }
