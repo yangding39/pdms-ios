@@ -8,13 +8,21 @@
 
 import UIKit
 
-class TotalViewController: UITableViewController {
+class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    var loadMoreTableFooterView : LoadMoreTableFooterView!
+    var isLoadMoreing = false
     var tableDatas = Array<Patient>()
     var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (loadMoreTableFooterView == nil) {
+            loadMoreTableFooterView = LoadMoreTableFooterView(frame: CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height))
+            loadMoreTableFooterView.delegate = self
+            self.tableView.addSubview(loadMoreTableFooterView)
+        }
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -49,9 +57,13 @@ class TotalViewController: UITableViewController {
     func fillData(json: JSON) {
         self.loadingIndicator.hidden = true
         self.loadingIndicator.stopAnimating()
-        self.tableDatas.removeAll(keepCapacity: true)
+        if page == 1 {
+             self.tableDatas.removeAll(keepCapacity: true)
+        }
         if json["stat"].int == 0 {
+            var hasData = false
             for (index: String, data: JSON) in json["data"]["data"] {
+                hasData = true
                 let patient = Patient()
                 patient.id = data["patientId"].int
                 patient.name = data["patientName"].string
@@ -64,10 +76,15 @@ class TotalViewController: UITableViewController {
                 patient.birthday = data["birthday"].string
                 self.tableDatas.append(patient)
             }
+            if hasData {
+                page += 1
+            }
         } else {
             
         }
-           self.tableView.reloadData()
+        self.tableView.reloadData()
+        loadMoreTableFooterView.frame = CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height)
+        isLoadMoreing = false
     }
     
     func fail() {
@@ -87,14 +104,20 @@ class TotalViewController: UITableViewController {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        let height = scrollView.frame.size.height;
-        let contentYoffset = scrollView.contentOffset.y;
-        let distanceFromBottom = scrollView.contentSize.height - contentYoffset;
-        
-        if distanceFromBottom < height {
-            
-            println("111")
-        }
+        self.loadMoreTableFooterView.loadMoreScrollViewDidScroll(scrollView)
     }
+    
+    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.loadMoreTableFooterView.loadMoreScrollViewDidEndDragging(scrollView)
+    }
+   func loadMoreTableFooterDidTriggerLoadMore(view : LoadMoreTableFooterView) {
+       isLoadMoreing = true
+       self.loadData()
+    }
+    
+    func loadMoreTableFooterDataSourceIsLoading(view : LoadMoreTableFooterView) -> Bool {
+        return isLoadMoreing
+    }
+
 }
 

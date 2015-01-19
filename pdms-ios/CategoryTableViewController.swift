@@ -96,7 +96,6 @@ class CategoryTableViewController : UITableViewController {
     }
     
     func fillSearchData(json: JSON) -> Void{
-        println(json)
         for (index: String, favoriteJson: JSON) in json["data"]  {
             let groupDefintion = GroupDefinition()
             groupDefintion.id = favoriteJson["groupDefinitionId"].int

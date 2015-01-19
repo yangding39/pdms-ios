@@ -44,7 +44,7 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
             cell.textLabel?.text = fieldData.columnName
             cell.detailTextLabel?.text = fieldData.value
             return cell
-        }else {
+        } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormCell", forIndexPath: indexPath) as QuotaFormCell
             cell.name.text = fieldData.columnName
             cell.name.sizeToFit()
@@ -74,6 +74,23 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func loadData() {
+            let url = SERVER_DOMAIN + "quota/toAddQuota"
+            let parameters : [ String : AnyObject] = ["token": TOKEN, "groupDefinitionId": parentGroupDefinition.id, "patientSeeDoctorId" : visit.id,
+                "patientId" : patient.id
+            ]
+            HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
+        
+    }
+    
+    func fillData(json : JSON) {
+        let crowDefinitionId = json["data"]["crowdDefinitionId"].int
+        let crowDefinitionName = json["data"]["crowdDefinitionName"].string
+        if crowDefinition == nil {
+            crowDefinition = GroupDefinition()
+        }
+        crowDefinition.id = crowDefinitionId
+        crowDefinition.name = crowDefinitionName
+        
         if parentGroupDefinition.type == GroupDefinition.TYPE.TEXT {
             if crowDefinition.name == "疾病诊断" {
                 let switchData = Data()
@@ -92,15 +109,6 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         if let dDate = Data.generateCheckTime(crowDefinition) {
             fieldDatas.append(dDate)
         }
-            let url = SERVER_DOMAIN + "quota/toAddQuota"
-            let parameters : [ String : AnyObject] = ["token": TOKEN, "groupDefinitionId": parentGroupDefinition.id, "patientSeeDoctorId" : visit.id,
-                "patientId" : patient.id
-            ]
-            HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
-        
-    }
-    
-    func fillData(json : JSON) {
         for (index: String, fieldDatasJson: JSON) in json["data"]["quotaFieldDatas"]  {
             let fieldData = Data()
             fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].int

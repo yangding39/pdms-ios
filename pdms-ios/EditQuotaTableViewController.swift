@@ -39,7 +39,13 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
             cell.name.text = fieldData.columnName
             cell.swtichBtn.on = getBool(fieldData.value.toInt()!)
             return cell
-        } else {
+        } else if fieldData.visibleType == Data.VisibleType.TEXT {
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormTextCell", forIndexPath: indexPath) as UITableViewCell
+            cell.textLabel?.text = fieldData.columnName
+            cell.detailTextLabel?.text = fieldData.value
+            return cell
+        }  else {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormCell", forIndexPath: indexPath) as QuotaFormCell
             cell.name.text = fieldData.columnName
             cell.name.sizeToFit()
@@ -131,6 +137,7 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
             fieldData.unitName = fieldDatasJson["unitName"].string
             fieldData.isDrug = getBool(fieldDatasJson["isDrug"].int!)
             fieldData.isValid = getBool(fieldDatasJson["isValid"].int!)
+            setVisibleTypeForDrug(fieldData)
             fieldDatas.append(fieldData)
         }
         self.tableView.reloadData()
@@ -265,6 +272,14 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
         }
         if saveResult && fieldErrors.count == 0 {
             self.performSegueWithIdentifier("completeEditQuotaSegue", sender: self)
+        }
+    }
+    
+    func setVisibleTypeForDrug(data : Data) {
+        if data.columnName == "中文商品名" ||  data.columnName == "英文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
+            data.visibleType = Data.VisibleType.SELECT
+        } else if data.columnName == "中文通用名" || data.columnName == "英文通用名" {
+            data.visibleType = Data.VisibleType.TEXT
         }
     }
 }
