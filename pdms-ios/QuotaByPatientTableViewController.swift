@@ -16,13 +16,16 @@ class QuotaByPatientTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.loadData()    }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func viewDidAppear(animated: Bool) {
+         self.loadData()
+    }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return groupDefinitions.count
     }
@@ -50,17 +53,29 @@ class QuotaByPatientTableViewController: UITableViewController {
     }
     
     func loadData() {
-        for i in 1...3 {
-            var groupDefinition = GroupDefinition()
-            groupDefinition.name = "生活史\(i)"
-            for j in 1...2 {
-                var quota = Quota()
-                quota.name = "霍乱\(i)-\(j)"
+        groupDefinitions.removeAll(keepCapacity: true)
+        let url = SERVER_DOMAIN + "visit/patientQuotas"
+        let parameters : [String : AnyObject] = ["token": TOKEN, "patientId": patient.id]
+        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
+    }
+    
+    func fillData(json : JSON) {
+        for (groupIndex: String, groupJson : JSON) in json["data"]["crowdDefinitions"]  {
+            let groupDefinition = GroupDefinition()
+            groupDefinition.id = groupJson["crowdDefinitionId"].int
+            groupDefinition.name = groupJson["crowdDefinitionName"].string
+            for (quotaIndex: String, quotaJson : JSON) in groupJson["quotaDatas"] {
+                let quota = Quota()
+                quota.id = quotaJson["quotaDataId"].int
+                quota.name = quotaJson["groupDefinitionName"].string
+                quota.createTime = quotaJson["createdTimestampStr"].string
+                quota.checkTime = quotaJson["checkTimestampStr"].string
+                quota.lastModifiedTime = quotaJson["lastModifiedStr"].string
                 groupDefinition.quota.append(quota)
             }
             groupDefinitions.append(groupDefinition)
         }
-        
+        self.tableView.reloadData()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -70,7 +85,8 @@ class QuotaByPatientTableViewController: UITableViewController {
             let quotaDetailViewController = segue.destinationViewController as QuotaDetailTabelViewController
             quotaDetailViewController.quota = quota
             quotaDetailViewController.patient = patient
-        }
+            quotaDetailViewController.crowDefition = groupDefinitions[indexPath.section]
+        } 
     }
 
 }

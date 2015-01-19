@@ -24,7 +24,7 @@ class Data {
         static let CHECKBOX = 3 //多选框
         static let TIME = 4 //日期控件
         static let DERAIL = 5 //开关控件
-        
+        static let TEXT = 6 //不可编辑文本
     }
     
     struct BoolIntValue {
@@ -34,8 +34,9 @@ class Data {
     
     struct DefinitionId {
         static let DIAG_DATE = -1
-        static let DIAG_MAIN = -2   
+        static let DIAG_MAIN = -2
     }
+    var id : Int!
     var definitionId : Int!
     var columnName : String!
     var value : String!
@@ -48,5 +49,29 @@ class Data {
 
     init(){
         
+    }
+    
+    class func generateCheckTime(crowDefinition : GroupDefinition) -> Data?{
+        let dDate = Data()
+        dDate.definitionId = Data.DefinitionId.DIAG_DATE
+        dDate.columnName = "诊断日期"
+        dDate.value = ""
+        dDate.columnType = Data.ColumnType.DATE
+        dDate.isRequired = true
+        dDate.visibleType = Data.VisibleType.TIME
+        dDate.unitName = nil
+        dDate.isDrug = false
+        dDate.isValid = false
+        let crowName = crowDefinition.name
+        if crowName == "个人史" || crowName == "遗传家族史" || crowName == "药物治疗"{
+            return nil
+        } else if crowName == "疾病诊断" || crowName == "症状体征" {
+            dDate.columnName = "诊断日期"
+        } else if crowName == "体格检查" || crowName == "实验室检查" || crowName == "辅助检查"{
+            dDate.columnName = "检查时间"
+        } else if crowName == "治疗操作" {
+            dDate.columnName = "操作时间"
+        }
+        return dDate
     }
 }

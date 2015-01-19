@@ -1,19 +1,20 @@
 //
-//  FormTableViewController.swift
+//  EditQuotaTableViewController.swift
 //  pdms-ios
 //
-//  Created by IMEDS on 14-12-12.
-//  Copyright (c) 2014年 unimedsci. All rights reserved.
+//  Created by IMEDS on 15-1-13.
+//  Copyright (c) 2015年 unimedsci. All rights reserved.
 //
+
+
 
 import UIKit
 
-class FormTableViewController: UITableViewController, UITextFieldDelegate {
-
+class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
     var visit : Visit!
     var patient : Patient!
-    var parentGroupDefinition : GroupDefinition!
     var crowDefinition : GroupDefinition!
+    var quota : Quota!
     var fieldDatas = Array<Data>()
     
     var currentEditField : UITextField!
@@ -27,7 +28,6 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fieldDatas.count
     }
@@ -37,14 +37,9 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         if fieldData.visibleType == Data.VisibleType.DERAIL {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormSwitchCell", forIndexPath: indexPath) as QuotaFormSwitchCell
             cell.name.text = fieldData.columnName
+            cell.swtichBtn.on = getBool(fieldData.value.toInt()!)
             return cell
-        } else if fieldData.visibleType == Data.VisibleType.TEXT {
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormTextCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel?.text = fieldData.columnName
-            cell.detailTextLabel?.text = fieldData.value
-            return cell
-        }else {
+        } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormCell", forIndexPath: indexPath) as QuotaFormCell
             cell.name.text = fieldData.columnName
             cell.name.sizeToFit()
@@ -68,41 +63,65 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
                 }
             }
             return cell
-
+            
         }
         
     }
     
     func loadData() {
-        if parentGroupDefinition.type == GroupDefinition.TYPE.TEXT {
-            if crowDefinition.name == "疾病诊断" {
-                let switchData = Data()
-                switchData.definitionId = Data.DefinitionId.DIAG_MAIN
-                switchData.columnName = "主要诊断"
-                switchData.value = ""
-                switchData.columnType = Data.ColumnType.NUMBER
-                switchData.isRequired = true
-                switchData.visibleType = Data.VisibleType.DERAIL
-                switchData.unitName = nil
-                switchData.isDrug = false
-                switchData.isValid = false
-                fieldDatas.append(switchData)
-            }
-        }
-        if let dDate = Data.generateCheckTime(crowDefinition) {
-            fieldDatas.append(dDate)
-        }
-            let url = SERVER_DOMAIN + "quota/toAddQuota"
-            let parameters : [ String : AnyObject] = ["token": TOKEN, "groupDefinitionId": parentGroupDefinition.id, "patientSeeDoctorId" : visit.id,
-                "patientId" : patient.id
-            ]
-            HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
-        
+        let url = SERVER_DOMAIN + "quota/toEditQuota"
+        let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDataId": quota.id, "patientSeeDoctorId" : 1, "patientId" : 1]
+        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
     }
     
     func fillData(json : JSON) {
+        if patient == nil {
+            patient = Patient()
+        }
+        if visit == nil {
+            visit = Visit()
+        }
+        if quota == nil {
+            quota = Quota()
+        }
+        
+        patient.id = json["data"]["patientId"].int
+        visit.id = json["data"]["patientSeeDoctorId"].int
+        quota.name = json["data"]["groupDefinitionName"].string
+        quota.groupNamePath = json["data"]["groupNamePath"].string
+        
+        if let type = json["data"]["groupDefinitionType"].int {
+            if type == GroupDefinition.TYPE.TEXT {
+                if crowDefinition.name == "疾病诊断" {
+                    let switchData = Data()
+                    switchData.id = Data.DefinitionId.DIAG_MAIN
+                    switchData.definitionId = Data.DefinitionId.DIAG_MAIN
+                    switchData.columnName = "主要诊断"
+                    switchData.columnType = Data.ColumnType.NUMBER
+                    switchData.isRequired = true
+                    switchData.visibleType = Data.VisibleType.DERAIL
+                    switchData.unitName = nil
+                    switchData.isDrug = false
+                    switchData.isValid = false
+                    switchData.value = "0"
+                    if let isImprotant = json["data"]["isImportant"].int {
+                        if isImprotant ==  Data.BoolIntValue.TRUE {
+                            switchData.value = "\(isImprotant)"
+                        }
+                    }
+                    fieldDatas.append(switchData)
+                }
+            }
+            
+        }
+        if let dDate = Data.generateCheckTime(crowDefinition) {
+            dDate.value = json["data"]["checkTimestampStr"].string
+            dDate.id = Data.DefinitionId.DIAG_DATE
+            fieldDatas.append(dDate)
+        }
         for (index: String, fieldDatasJson: JSON) in json["data"]["quotaFieldDatas"]  {
             let fieldData = Data()
+            fieldData.id = fieldDatasJson["quotaFieldDataId"].int
             fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].int
             fieldData.columnName = fieldDatasJson["columnName"].string
             fieldData.value = fieldDatasJson["quotaFieldValue"].string
@@ -112,7 +131,6 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
             fieldData.unitName = fieldDatasJson["unitName"].string
             fieldData.isDrug = getBool(fieldDatasJson["isDrug"].int!)
             fieldData.isValid = getBool(fieldDatasJson["isValid"].int!)
-            setVisibleTypeForDrug(fieldData)
             fieldDatas.append(fieldData)
         }
         self.tableView.reloadData()
@@ -131,12 +149,30 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         if let date = datePicker?.date {
             currentEditField.text = dateFormatter.stringFromDate(date)
             currentEditField.endEditing(true)
-            
         }
     }
-   
+    
+    func getBool(intValue : Int) -> Bool {
+        if intValue == Data.BoolIntValue.FALSE {
+            return false
+        } else if intValue == Data.BoolIntValue.TRUE {
+            return true
+        }
+        return false
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        if let cell = textField.superview?.superview?.superview as? QuotaFormCell {
+            let indexPath = self.tableView.indexPathForCell(cell)!
+            let data = fieldDatas[indexPath.row]
+            if data.visibleType == Data.VisibleType.INPUT || data.visibleType == Data.VisibleType.TIME {
+                data.value = textField.text
+            }
+        }
+    }
+    
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        if identifier == "showOptionSegue" {
+        if identifier == "showEditOptionSegue" {
             if let cell = sender as? QuotaFormCell {
                 let indexPath = self.tableView.indexPathForCell(cell)!
                 let data = fieldDatas[indexPath.row]
@@ -144,26 +180,25 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
                     return true
                 }
             }
-        } else if identifier == "addQuotaCompleteSegue" {
+        } else if identifier == "completeEditQuotaSegue" {
             self.saveQuotaForm()
         }
         return false
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showOptionSegue" {
+        if segue.identifier == "showEditOptionSegue" {
             let optionsTableViewController = segue.destinationViewController as OptionsTableViewController
             let cell = sender as QuotaFormCell
             let indexPath = self.tableView.indexPathForCell(cell)!
             let data = fieldDatas[indexPath.row]
             optionsTableViewController.navigationItem.title = data.columnName
             optionsTableViewController.data = data
-            optionsTableViewController.parentGroupDefinition = parentGroupDefinition
             optionsTableViewController.editingCell = cell
             if data.visibleType == Data.VisibleType.CHECKBOX {
                 optionsTableViewController.mutilSelect = true
             }
         }
-
+        
     }
     
     @IBAction func completeSelectOption(segue : UIStoryboardSegue) {
@@ -179,31 +214,10 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    func getBool(intValue : Int) -> Bool {
-        if intValue == Data.BoolIntValue.FALSE {
-            return false
-        } else if intValue == Data.BoolIntValue.TRUE {
-            return true
-        }
-        return false
-    }
-    
     func setTextFieldValueAndData(cell: QuotaFormCell, textFieldValue: String?, dataValue : String?) {
-            cell.value.text = textFieldValue
-            let indexPath = self.tableView.indexPathForCell(cell)!
-            fieldDatas[indexPath.row].value = dataValue
-    }
-    
-    
-   func textFieldDidEndEditing(textField: UITextField) {
-        if let cell = textField.superview?.superview?.superview as? QuotaFormCell {
-            if let indexPath = self.tableView.indexPathForCell(cell) {
-                let data = fieldDatas[indexPath.row]
-                if data.visibleType == Data.VisibleType.INPUT || data.visibleType == Data.VisibleType.TIME {
-                    data.value = textField.text
-                }
-            }
-        }
+        cell.value.text = textFieldValue
+        let indexPath = self.tableView.indexPathForCell(cell)!
+        fieldDatas[indexPath.row].value = dataValue
     }
     
     @IBAction func swithcDidEndEditing(sender: UISwitch) {
@@ -213,26 +227,26 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         if sender.on {
             data.value = "\(Data.BoolIntValue.TRUE)"
         } else {
-             data.value = "\(Data.BoolIntValue.FALSE)"
+            data.value = "\(Data.BoolIntValue.FALSE)"
         }
     }
+    
     func saveQuotaForm() {
-        let url = SERVER_DOMAIN + "quota/addQuota"
-        let quotaDefinitionIds = ",".join(fieldDatas.map({ "\($0.definitionId)" }))
+        let url = SERVER_DOMAIN + "quota/editQuota"
+        let quotaFieldDataIds = ",".join(fieldDatas.map({ "\($0.id)" }))
         let columnTypes = ",".join(fieldDatas.map({ "\($0.columnType)" }))
         let columnNames = ",".join(fieldDatas.map({ "\($0.columnName)" }))
-        let quotaFieldValues = ",".join(fieldDatas.map({ "\(StringUtil.igonreNilString($0.value))" }))
-        
+        let quotaFieldValues = ",".join(fieldDatas.map({ "\($0.value)" }))
         let parameters : [ String : AnyObject] = [
             "token": TOKEN,
             "patientSeeDoctorId": visit.id,
-            "quotaDefinitionIds" : quotaDefinitionIds,
+            "quotaFieldDataId" : quotaFieldDataIds,
             "crowdDefinitionId" : crowDefinition.id,
             "columnTypes" : columnTypes,
             "columnNames" : columnNames,
             "quotaFieldValues" : quotaFieldValues,
             "patientId" : patient.id,
-            "groupDefinitionId" : parentGroupDefinition.id
+            "quotaDataId" : quota.id
         ]
         HttpApiClient.sharedInstance.post(url, paramters : parameters, success: addResult, fail : nil)
     }
@@ -246,19 +260,11 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         saveResult = json["stat"].int == 0 ? true : false
         for (index: String, errorJson: JSON) in json["fieldErrors"] {
             if let error = errorJson[index].string {
-                 fieldErrors.append(error)
+                fieldErrors.append(error)
             }
         }
         if saveResult && fieldErrors.count == 0 {
-            self.performSegueWithIdentifier("addQuotaCompleteSegue", sender: self)
-        }
-    }
-    
-    func setVisibleTypeForDrug(data : Data) {
-        if data.columnName == "中文商品名" ||  data.columnName == "英文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
-             data.visibleType = Data.VisibleType.SELECT
-        } else if data.columnName == "中文通用名" || data.columnName == "英文通用名" {
-            data.visibleType = Data.VisibleType.TEXT
+            self.performSegueWithIdentifier("completeEditQuotaSegue", sender: self)
         }
     }
 }

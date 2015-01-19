@@ -12,13 +12,24 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
    
     var recentPatients: [Patient] = []
     var searchResult: [Patient] = []
+    var toDetail = false
+    var detailPatient : Patient!
     override func viewDidLoad() {
         super.viewDidLoad()
        // loadingIndicator.startAnimating()
-        self.loadData()
-        // Do any additional setup after loading the view, typically from a nib.
+                // Do any additional setup after loading the view, typically from a nib.
     }
-
+    override func viewWillAppear(animated: Bool) {
+        if toDetail {
+            let patientDetailView = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("patitentDetailViewController") as PatientDetailViewController
+            patientDetailView.patient = detailPatient
+            self.navigationController?.pushViewController(patientDetailView, animated: true)
+           toDetail = false
+        } else {
+            self.loadData()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -104,27 +115,29 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         self.searchDisplayController?.searchResultsTableView.reloadData()
     }
     
-    @IBAction func completeAddPatient(segue : UIStoryboardSegue) {
-        self.loadData()
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "patientDetailSegue") {
             let fromSearch = self.searchDisplayController?.active == true
             var patient: Patient!
             if (fromSearch) {
-                var indexPath = self.searchDisplayController?.searchResultsTableView.indexPathForSelectedRow()
+                var indexPath = self.searchDisplayController?.searchResultsTableView.indexPathForCell(sender as PatientTableCell)
                 patient = self.searchResult[indexPath!.row]
             } else {
-                var indexPath = self.tableView.indexPathForSelectedRow()
+                var indexPath = self.tableView.indexPathForCell(sender as PatientTableCell)
                 patient = self.recentPatients[indexPath!.row]
             }
             
             let patientDetailViewController = segue.destinationViewController as PatientDetailViewController
             patientDetailViewController.patient = patient
-        } else {
-            
+        } else if segue.identifier == "showAddPatientSegue" {
+//
         }
+    }
+    @IBAction func completeAddPatient(segue : UIStoryboardSegue) {
+        let addPatientViewController = segue.sourceViewController as AddPatientViewController
+        let patient = addPatientViewController.patient
+        detailPatient = patient
+        toDetail = true
     }
 }
 

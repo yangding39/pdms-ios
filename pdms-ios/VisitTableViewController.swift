@@ -14,12 +14,24 @@ class VisitTableViewController : UITableViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     var visits = Array<Visit>()
     var patient : Patient!
+    var toDetail = false
+    var detailVisit : Visit!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadData()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    override func viewWillAppear(animated: Bool) {
+        if toDetail {
+            let quotaByVisitTableViewController = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("quotaByVisitTableViewController") as QuotaByVisitTableViewController
+            quotaByVisitTableViewController.patient = patient
+            quotaByVisitTableViewController.visit = detailVisit
+            self.navigationController?.pushViewController(quotaByVisitTableViewController, animated: true)
+            toDetail = false
+        } else {
+             self.loadData()
+        }
+      
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,16 +76,17 @@ class VisitTableViewController : UITableViewController {
     }
     
     func loadData() {
-        visits.removeAll(keepCapacity: true)
         loadingIndicator.startAnimating()
         let url = SERVER_DOMAIN + "visit/\(patient.id)"
         let parameters = ["token": TOKEN]
         HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
-        self.loadingIndicator.hidden = true
-        self.loadingIndicator.stopAnimating()
+        
     }
     
     func fillData(json : JSON) {
+        visits.removeAll(keepCapacity: true)
+        self.loadingIndicator.hidden = true
+        self.loadingIndicator.stopAnimating()
         for (index: String, visitJson: JSON) in json["data"]  {
             let visit = Visit()
             visit.id = visitJson["visitId"].int
@@ -81,8 +94,8 @@ class VisitTableViewController : UITableViewController {
             visit.number = visitJson["visitNumber"].string
             visit.departmentLabel = visitJson["departmentLabel"].string
             visit.mainDiagonse = visitJson["mainDiagnose"].string
-            visit.startTime = visitJson["startTime"].string
-            visit.endTime = visitJson["endTime"].string
+            visit.startTime = visitJson["startDate"].string
+            visit.endTime = visitJson["endDate"].string
             visits.append(visit)
         }
         self.tableView.reloadData()
@@ -90,7 +103,9 @@ class VisitTableViewController : UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addVisitSegue" {
-            let addVisitViewController = segue.destinationViewController as AddVisitViewController
+            let navigateController =  segue.destinationViewController as UINavigationController
+            let addVisitViewController = navigateController.topViewController as AddVisitViewController
+            addVisitViewController.patient = patient
         } else if segue.identifier == "quotaByVisitSegue" {
             let quotaByVisitTableViewController = segue.destinationViewController as QuotaByVisitTableViewController
             let indexPath = self.tableView.indexPathForCell(sender as VisitTableCell)!
@@ -101,7 +116,10 @@ class VisitTableViewController : UITableViewController {
     }
     
     @IBAction func completeAddVisit(segue : UIStoryboardSegue) {
-        self.loadData()
+        let addVisitViewController = segue.sourceViewController as AddVisitViewController
+        detailVisit = addVisitViewController.visit
+        toDetail = true
     }
+    
 }
 

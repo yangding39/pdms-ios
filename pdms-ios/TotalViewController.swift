@@ -15,14 +15,11 @@ class TotalViewController: UITableViewController {
     var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadingIndicator.startAnimating()
-        self.loadData()
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewDidAppear(animated: Bool) {
+       loadingIndicator.startAnimating()
         self.loadData()
     }
     override func didReceiveMemoryWarning() {
@@ -43,8 +40,8 @@ class TotalViewController: UITableViewController {
         cell.birthday.text = patient.birthday
         return cell
     }
+    
     func loadData() {
-        self.tableDatas.removeAll(keepCapacity: true)
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN
         HttpApiClient.sharedInstance.get(url, paramters : ["page" : page], success: fillData, fail : fail)
         
@@ -52,6 +49,7 @@ class TotalViewController: UITableViewController {
     func fillData(json: JSON) {
         self.loadingIndicator.hidden = true
         self.loadingIndicator.stopAnimating()
+        self.tableDatas.removeAll(keepCapacity: true)
         if json["stat"].int == 0 {
             for (index: String, data: JSON) in json["data"]["data"] {
                 let patient = Patient()
@@ -89,9 +87,11 @@ class TotalViewController: UITableViewController {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        let currentOffset = scrollView.contentOffset.y
-        let maxOffset = scrollView.contentSize.height - scrollView.frame.size.height
-        if maxOffset - currentOffset < 40.0 {
+        let height = scrollView.frame.size.height;
+        let contentYoffset = scrollView.contentOffset.y;
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset;
+        
+        if distanceFromBottom < height {
             
             println("111")
         }

@@ -1,18 +1,18 @@
 //
-//  AddVisitViewController.swift
+//  EditVisitTableViewController.swift
 //  pdms-ios
 //
-//  Created by IMEDS on 14-12-10.
-//  Copyright (c) 2014年 unimedsci. All rights reserved.
+//  Created by IMEDS on 15-1-13.
+//  Copyright (c) 2015年 unimedsci. All rights reserved.
 //
 
 
 import UIKit
 
-class AddVisitViewController: UITableViewController {
+class EditVisitTableViewController: UITableViewController {
 
     @IBOutlet weak var typeLabel: UITextField!
-
+    
     @IBOutlet weak var number: UITextField!
     
     @IBOutlet weak var departmentLabel: UITextField!
@@ -30,13 +30,16 @@ class AddVisitViewController: UITableViewController {
     var currentTextField : UITextField?
     
     var patient : Patient!
-    
-    var visit = Visit()
-    
+    var visit : Visit!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.loadOptions()
+        
+        typeLabel.text = visit.typeLabel
+        number.text = visit.number
+        departmentLabel.text = visit.departmentLabel
+        startTime.text =  visit.startTime
+        endTime.text = visit.endTime
         
         startTime.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
         endTime.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
@@ -50,7 +53,6 @@ class AddVisitViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     func loadOptions() {
         let url = SERVER_DOMAIN + "visit/add"
         let parameters = ["token": TOKEN]
@@ -62,7 +64,7 @@ class AddVisitViewController: UITableViewController {
             let dictId = subJson["dictId"].int
             for (optionIndex : String, optionJson : JSON) in subJson["options"] {
                 let option = Option()
-
+                
                 option.label = optionJson["lable"].string!
                 option.value = optionJson["value"].int!
                 if dictId == 5 {
@@ -75,7 +77,7 @@ class AddVisitViewController: UITableViewController {
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        if identifier == "completeAddVisitSegue" {
+        if identifier == "completeEditVisitSegue" {
             saveVisit()
         }
         return false
@@ -102,7 +104,7 @@ class AddVisitViewController: UITableViewController {
     }
     func postData(visit : Visit) {
         let url = SERVER_DOMAIN + "visit/save"
-        let params : [String : AnyObject] = ["token" : TOKEN, "patientId" : patient.id, "visitType" : visit.type, "visitNumber" : visit.number, "department" : visit.department, "startTime" : visit.startTime, "endTime" : visit.endTime]
+        let params : [String : AnyObject] = ["token" : TOKEN, "patientId" : patient.id, "visitId" : visit.id, "visitType" : visit.type, "visitNumber" : visit.number, "department" : visit.department, "startTime" : visit.startTime, "endTime" : visit.endTime]
         HttpApiClient.sharedInstance.post(url, paramters : params, success: addVisitResult, fail : nil)
     }
     
@@ -117,13 +119,14 @@ class AddVisitViewController: UITableViewController {
             }
         }
         if saveResult && fieldErrors.count == 0 {
-            self.performSegueWithIdentifier("completeAddVisitSegue", sender: self)
+            self.performSegueWithIdentifier("completeEditVisitSegue", sender: self)
         }
-
+        
     }
+    
     func showDatePicker(sender: UITextField) {
         sender.inputView = UIDatePicker().customPickerStyle(self.view)
-
+        
         var selector : Selector!
         if (sender == self.startTime) {
             selector = Selector("handleStartTimeDatePicker:")
@@ -173,13 +176,14 @@ class AddVisitViewController: UITableViewController {
             currentTextField!.endEditing(true)
         }
     }
-    
     @IBAction func didCancelBtn(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
 }
 
-extension AddVisitViewController : UIPickerViewDataSource {
+
+extension EditVisitTableViewController : UIPickerViewDataSource {
     // returns the number of 'columns' to display.
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -192,7 +196,7 @@ extension AddVisitViewController : UIPickerViewDataSource {
     }
 }
 
-extension AddVisitViewController : UIPickerViewDelegate {
+extension EditVisitTableViewController : UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         
         return currentOptions[row].label

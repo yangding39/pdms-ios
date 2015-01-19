@@ -8,11 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		851D03AC1A5FAF1800AC38D6 /* QuotaFormSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D03AB1A5FAF1800AC38D6 /* QuotaFormSwitchCell.swift */; };
+		851D03AE1A636D4B00AC38D6 /* BasciDetailPatientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D03AD1A636D4B00AC38D6 /* BasciDetailPatientTableViewController.swift */; };
 		852EF0EC1A591AF500FC1229 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852EF0EB1A591AF500FC1229 /* Data.swift */; };
 		852EF0EF1A5BCF3C00FC1229 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852EF0EE1A5BCF3C00FC1229 /* OptionsTableViewController.swift */; };
 		852EF0F21A5BD2F700FC1229 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 852EF0F01A5BD2F700FC1229 /* Main.storyboard */; };
 		853ED9F21A41757F00AA67A8 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853ED9F11A41757F00AA67A8 /* CustomColor.swift */; };
 		85473C731A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85473C721A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift */; };
+		8547F4B91A64C2680094AE6B /* VisitDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547F4B81A64C2680094AE6B /* VisitDetailTableViewController.swift */; };
+		8547F4BB1A64C6E80094AE6B /* EditVisitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547F4BA1A64C6E80094AE6B /* EditVisitTableViewController.swift */; };
+		8547F4BD1A64F64D0094AE6B /* EditQuotaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547F4BC1A64F64D0094AE6B /* EditQuotaTableViewController.swift */; };
+		8547F4BF1A6523D90094AE6B /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547F4BE1A6523D90094AE6B /* StringUtil.swift */; };
 		85566DC41A314226004B44AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC31A314226004B44AB /* AppDelegate.swift */; };
 		85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC51A314226004B44AB /* HistoryViewController.swift */; };
 		85566DCB1A314226004B44AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCA1A314226004B44AB /* Images.xcassets */; };
@@ -63,11 +68,16 @@
 /* Begin PBXFileReference section */
 		1971B582EB70825C1A3F1F27 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		851D03AB1A5FAF1800AC38D6 /* QuotaFormSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaFormSwitchCell.swift; sourceTree = "<group>"; };
+		851D03AD1A636D4B00AC38D6 /* BasciDetailPatientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasciDetailPatientTableViewController.swift; sourceTree = "<group>"; };
 		852EF0EB1A591AF500FC1229 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		852EF0EE1A5BCF3C00FC1229 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
 		852EF0F11A5BD2F700FC1229 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		853ED9F11A41757F00AA67A8 /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		85473C721A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaDetailTabelViewController.swift; sourceTree = "<group>"; };
+		8547F4B81A64C2680094AE6B /* VisitDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitDetailTableViewController.swift; sourceTree = "<group>"; };
+		8547F4BA1A64C6E80094AE6B /* EditVisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditVisitTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8547F4BC1A64F64D0094AE6B /* EditQuotaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditQuotaTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		8547F4BE1A6523D90094AE6B /* StringUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
 		85566DBE1A314226004B44AB /* pdms-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pdms-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85566DC21A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85566DC31A314226004B44AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,14 +90,14 @@
 		8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaByVisitTableViewController.swift; sourceTree = "<group>"; };
 		8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		8561A31F1A3A8A4E00D3BDA5 /* GroupDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDefinition.swift; sourceTree = "<group>"; };
-		857B649C1A3A9B06008FC52D /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
+		857B649C1A3A9B06008FC52D /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FormTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		857B649F1A3E72A7008FC52D /* QuotaFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaFormCell.swift; sourceTree = "<group>"; };
 		859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextLevelGroupDefinitionTableViewController.swift; sourceTree = "<group>"; };
 		859B6C011A415DC3004EC0A2 /* CustomPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 		85C0E20E1A37D26D00132AD5 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableCell.swift; sourceTree = "<group>"; };
 		85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableViewController.swift; sourceTree = "<group>"; };
-		85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVisitViewController.swift; sourceTree = "<group>"; };
+		85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddVisitViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		85C0E2181A381D6900132AD5 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpApiClient.swift; sourceTree = "<group>"; };
 		85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftObjectcBridge.h; sourceTree = "<group>"; };
@@ -97,7 +107,7 @@
 		85D24A521A3165DA00D2C7EF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		85D24A541A31785D00D2C7EF /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
 		85D39FC21A31B48B0034F93B /* TotalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalViewController.swift; sourceTree = "<group>"; };
-		85D39FC41A35420D0034F93B /* AddPatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPatientViewController.swift; sourceTree = "<group>"; };
+		85D39FC41A35420D0034F93B /* AddPatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddPatientViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		85E530BC1A397442002888AC /* Quota.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quota.swift; sourceTree = "<group>"; };
 		85E530BE1A397596002888AC /* QuotaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaCell.swift; sourceTree = "<group>"; };
 		85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaByPatientTableViewController.swift; sourceTree = "<group>"; };
@@ -107,7 +117,7 @@
 		B6082E921A3AD81A00C6E0FF /* UserSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingViewController.swift; sourceTree = "<group>"; };
 		B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
 		B681A4DB1A3E7668005C48EE /* UserPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPasswordViewController.swift; sourceTree = "<group>"; };
-		B681A4DD1A3EB2CE005C48EE /* EditPatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPatientViewController.swift; sourceTree = "<group>"; };
+		B681A4DD1A3EB2CE005C48EE /* EditPatientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditPatientViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E9E3B41D812C23750686EA88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +185,7 @@
 				85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */,
 				85566DC31A314226004B44AB /* AppDelegate.swift */,
 				85D24A491A3153D600D2C7EF /* GlobalConst.swift */,
+				8547F4BE1A6523D90094AE6B /* StringUtil.swift */,
 				85D24A541A31785D00D2C7EF /* Code.swift */,
 				853ED9F01A41755400AA67A8 /* UI */,
 				85E530C01A3975A0002888AC /* Quota */,
@@ -221,6 +232,8 @@
 				85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */,
 				85C0E2131A37D64500132AD5 /* VisitTableViewController.swift */,
 				85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */,
+				8547F4BA1A64C6E80094AE6B /* EditVisitTableViewController.swift */,
+				8547F4B81A64C2680094AE6B /* VisitDetailTableViewController.swift */,
 			);
 			name = Visit;
 			sourceTree = "<group>";
@@ -234,6 +247,7 @@
 				85D39FC41A35420D0034F93B /* AddPatientViewController.swift */,
 				B611E8521A35892300AB4CEF /* PatientDetailViewController.swift */,
 				B681A4DD1A3EB2CE005C48EE /* EditPatientViewController.swift */,
+				851D03AD1A636D4B00AC38D6 /* BasciDetailPatientTableViewController.swift */,
 			);
 			name = Pantient;
 			sourceTree = "<group>";
@@ -260,6 +274,7 @@
 				851D03AB1A5FAF1800AC38D6 /* QuotaFormSwitchCell.swift */,
 				8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */,
 				857B649C1A3A9B06008FC52D /* FormTableViewController.swift */,
+				8547F4BC1A64F64D0094AE6B /* EditQuotaTableViewController.swift */,
 				859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */,
 				85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */,
 				8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */,
@@ -431,9 +446,11 @@
 				B681A4DC1A3E7668005C48EE /* UserPasswordViewController.swift in Sources */,
 				B6082E931A3AD81A00C6E0FF /* UserSettingViewController.swift in Sources */,
 				852EF0EC1A591AF500FC1229 /* Data.swift in Sources */,
+				8547F4BB1A64C6E80094AE6B /* EditVisitTableViewController.swift in Sources */,
 				B6082E8F1A3AC5DE00C6E0FF /* UserCenterViewController.swift in Sources */,
 				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
 				85566DC41A314226004B44AB /* AppDelegate.swift in Sources */,
+				8547F4BD1A64F64D0094AE6B /* EditQuotaTableViewController.swift in Sources */,
 				8561A3201A3A8A4E00D3BDA5 /* GroupDefinition.swift in Sources */,
 				85E530C21A3977A6002888AC /* QuotaByPatientTableViewController.swift in Sources */,
 				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
@@ -449,6 +466,7 @@
 				859B6C021A415DC3004EC0A2 /* CustomPickerView.swift in Sources */,
 				8561A31C1A3A784800D3BDA5 /* CategoryTableViewController.swift in Sources */,
 				852EF0EF1A5BCF3C00FC1229 /* OptionsTableViewController.swift in Sources */,
+				851D03AE1A636D4B00AC38D6 /* BasciDetailPatientTableViewController.swift in Sources */,
 				85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */,
 				85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */,
 				85473C731A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift in Sources */,
@@ -457,7 +475,9 @@
 				857B64A01A3E72A7008FC52D /* QuotaFormCell.swift in Sources */,
 				851D03AC1A5FAF1800AC38D6 /* QuotaFormSwitchCell.swift in Sources */,
 				85D24A501A3164A200D2C7EF /* Patient.swift in Sources */,
+				8547F4BF1A6523D90094AE6B /* StringUtil.swift in Sources */,
 				85E530BD1A397442002888AC /* Quota.swift in Sources */,
+				8547F4B91A64C2680094AE6B /* VisitDetailTableViewController.swift in Sources */,
 				85D39FC31A31B48B0034F93B /* TotalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

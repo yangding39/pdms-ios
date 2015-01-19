@@ -19,6 +19,8 @@ class AddPatientViewController: UITableViewController {
     @IBOutlet weak var caseNo: UITextField!
     
     let options = ["男", "女", "未知"]
+    let patient = Patient()
+    var historyViewController : HistoryViewController!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -30,7 +32,8 @@ class AddPatientViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func viewWillAppear(animated: Bool) {
+    }
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
         if name.text.isEmpty {
@@ -48,18 +51,18 @@ class AddPatientViewController: UITableViewController {
             birthday.layer.borderWidth = 1.0
             birthday.layer.cornerRadius = 5
             return false
-        } else if caseNo.text.isEmpty {
-            caseNo.layer.borderColor = UIColor.redColor().CGColor
-            caseNo.layer.borderWidth = 1.0
-            caseNo.layer.cornerRadius = 5
-            return false
         }
         savePatient()
         return false
     }
    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "completeAddPatientSegue" {
+//            let patientDetailViewController = segue.destinationViewController as PatientDetailViewController
+//            patientDetailViewController.patient = patient
+        }
+    }
     func savePatient(){
-        var patient = Patient()
         patient.name = name.text
         patient.gender = gender.text
         patient.birthday = birthday.text
@@ -88,9 +91,8 @@ class AddPatientViewController: UITableViewController {
     func addPatientResult(json : JSON) {
         var fieldErrors = Array<String>()
         var saveResult = false
-        println(json)
         //set result and error from server
-        saveResult = json["stat"].int == 0 ? true : false
+        saveResult = (json["stat"].int == 0 )
         for (index: String, errorJson: JSON) in json["fieldErrors"] {
             if let error = errorJson[index].string {
                 fieldErrors.append(error)
@@ -130,6 +132,9 @@ class AddPatientViewController: UITableViewController {
         }
     }
     
+    @IBAction func didCancelBtn(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 extension AddPatientViewController : UIPickerViewDataSource {
     // returns the number of 'columns' to display.

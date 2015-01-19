@@ -13,6 +13,7 @@ extension UIDatePicker {
         
         var datePicker: UIDatePicker = UIDatePicker(frame: CGRectMake(0, 0, parentView.bounds.width,50))
         datePicker.datePickerMode = UIDatePickerMode.Date
+        //datePicker.locale = NSLocale(localeIdentifier: "en_GB")
         self.backgroundColor = UIColor(red: 147.0, green: 146.0, blue: 144.0, alpha: 40.0)
         
         return datePicker

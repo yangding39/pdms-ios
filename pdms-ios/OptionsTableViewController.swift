@@ -12,6 +12,7 @@ import UIKit
 class OptionsTableViewController: UITableViewController {
     
     var data : Data!
+    var parentGroupDefinition : GroupDefinition!
     var editingCell : QuotaFormCell!
     var options = Array<Option>()
     var mutilSelect : Bool = false
@@ -60,10 +61,14 @@ class OptionsTableViewController: UITableViewController {
 
     }
     
-    
     func loadData() {
         let url = SERVER_DOMAIN + "quota/listDicts"
-        let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDefinitionId": data.definitionId]
+        var isDrug = 0
+        let columnName = editingCell.name.text
+        if parentGroupDefinition.type == GroupDefinition.TYPE.DRUG && (columnName != "用法" && columnName != "单位") {
+            isDrug = 1
+        }
+        let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDefinitionId": data.definitionId, "drugType" : isDrug]
         HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
     }
     
