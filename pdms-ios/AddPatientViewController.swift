@@ -82,10 +82,11 @@ class AddPatientViewController: UITableViewController {
     }
     
     func postData(patient : Patient) {
+        
         let url = SERVER_DOMAIN + "patients/save"
         let params : [String : AnyObject] = ["token" : TOKEN, "patientName" : patient.name, "gender" : patient.gender, "birthday" : patient.birthday,
             "age" : patient.age, "caseNo" : patient.caseNo]
-        HttpApiClient.sharedInstance.post(url, paramters : params, success: addPatientResult, fail : nil)
+         HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: addPatientResult, fail: nil)
        
     }
     func addPatientResult(json : JSON) {
@@ -99,10 +100,20 @@ class AddPatientViewController: UITableViewController {
             }
         }
         if saveResult && fieldErrors.count == 0 {
+            patient.id = json["data"]["patientId"].int
+            patient.name = json["data"]["patientName"].string
+            patient.gender = json["data"]["gender"].string
+            if let age = json["data"]["age"].int {
+                patient.age = age
+            } else {
+                patient.age = 0
+            }
+            patient.birthday = json["data"]["birthday"].string
             self.performSegueWithIdentifier("completeAddPatientSegue", sender: self)
         }
 
     }
+    
     func showDatePicker(sender: UITextField) {
         sender.inputView = UIDatePicker().customPickerStyle(self.view)
         sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleDatePicker:"), target : self)

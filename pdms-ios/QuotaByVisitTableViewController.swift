@@ -97,7 +97,7 @@ class QuotaByVisitTableViewController: UITableViewController,UIActionSheetDelega
         groupDefinitions.removeAll(keepCapacity: true)
        let url = SERVER_DOMAIN + "visit/\(visit.id)/quota/list"
         let parameters = ["token": TOKEN]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {
@@ -182,7 +182,7 @@ class QuotaByVisitTableViewController: UITableViewController,UIActionSheetDelega
     func removeVisit() {
         let url = SERVER_DOMAIN + "visit/delete"
         let params : [String : AnyObject] = ["token" : TOKEN, "visitId" : visit.id]
-        HttpApiClient.sharedInstance.post(url, paramters : params, success: removeResult, fail : nil)
+         HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removeResult, fail: nil)
     }
     
     func removeResult(json : JSON) {

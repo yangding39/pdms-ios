@@ -56,7 +56,7 @@ class EditVisitTableViewController: UITableViewController {
     func loadOptions() {
         let url = SERVER_DOMAIN + "visit/add"
         let parameters = ["token": TOKEN]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillOptions, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillOptions, fail: nil)
     }
     
     func fillOptions(json : JSON) {
@@ -105,7 +105,7 @@ class EditVisitTableViewController: UITableViewController {
     func postData(visit : Visit) {
         let url = SERVER_DOMAIN + "visit/save"
         let params : [String : AnyObject] = ["token" : TOKEN, "patientId" : patient.id, "visitId" : visit.id, "visitType" : visit.type, "visitNumber" : visit.number, "department" : visit.department, "startTime" : visit.startTime, "endTime" : visit.endTime]
-        HttpApiClient.sharedInstance.post(url, paramters : params, success: addVisitResult, fail : nil)
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: addVisitResult, fail: nil)
     }
     
     func addVisitResult(json : JSON) {

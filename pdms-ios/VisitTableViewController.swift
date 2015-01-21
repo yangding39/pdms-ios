@@ -11,7 +11,6 @@ import UIKit
 
 class VisitTableViewController : UITableViewController {
 
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     var visits = Array<Visit>()
     var patient : Patient!
     var toDetail = false
@@ -25,7 +24,7 @@ class VisitTableViewController : UITableViewController {
             let quotaByVisitTableViewController = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("quotaByVisitTableViewController") as QuotaByVisitTableViewController
             quotaByVisitTableViewController.patient = patient
             quotaByVisitTableViewController.visit = detailVisit
-            self.navigationController?.pushViewController(quotaByVisitTableViewController, animated: true)
+            self.navigationController?.pushViewController(quotaByVisitTableViewController, animated: false)
             toDetail = false
         } else {
              self.loadData()
@@ -76,17 +75,13 @@ class VisitTableViewController : UITableViewController {
     }
     
     func loadData() {
-        loadingIndicator.startAnimating()
         let url = SERVER_DOMAIN + "visit/\(patient.id)"
         let parameters = ["token": TOKEN]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
-        
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {
         visits.removeAll(keepCapacity: true)
-        self.loadingIndicator.hidden = true
-        self.loadingIndicator.stopAnimating()
         for (index: String, visitJson: JSON) in json["data"]  {
             let visit = Visit()
             visit.id = visitJson["visitId"].int

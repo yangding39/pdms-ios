@@ -78,8 +78,7 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
             let parameters : [ String : AnyObject] = ["token": TOKEN, "groupDefinitionId": parentGroupDefinition.id, "patientSeeDoctorId" : visit.id,
                 "patientId" : patient.id
             ]
-            HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
-        
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {
@@ -242,7 +241,7 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
             "patientId" : patient.id,
             "groupDefinitionId" : parentGroupDefinition.id
         ]
-        HttpApiClient.sharedInstance.post(url, paramters : parameters, success: addResult, fail : nil)
+        HttpApiClient.sharedInstance.save(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: addResult, fail: nil)
     }
     
     

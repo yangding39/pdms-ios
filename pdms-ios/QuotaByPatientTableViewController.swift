@@ -56,7 +56,7 @@ class QuotaByPatientTableViewController: UITableViewController {
         groupDefinitions.removeAll(keepCapacity: true)
         let url = SERVER_DOMAIN + "visit/patientQuotas"
         let parameters : [String : AnyObject] = ["token": TOKEN, "patientId": patient.id]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {

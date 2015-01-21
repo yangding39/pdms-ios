@@ -69,7 +69,7 @@ class OptionsTableViewController: UITableViewController {
             isDrug = 1
         }
         let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDefinitionId": data.definitionId, "drugType" : isDrug]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {

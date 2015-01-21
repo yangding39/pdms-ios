@@ -66,7 +66,7 @@ class CategoryTableViewController : UITableViewController {
             var url = SERVER_DOMAIN + "quota/allQuotas"
         }
         let parameters = ["token": TOKEN]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {

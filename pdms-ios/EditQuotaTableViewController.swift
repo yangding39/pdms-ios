@@ -77,7 +77,7 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
     func loadData() {
         let url = SERVER_DOMAIN + "quota/toEditQuota"
         let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDataId": quota.id, "patientSeeDoctorId" : 1, "patientId" : 1]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {
@@ -255,7 +255,7 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
             "patientId" : patient.id,
             "quotaDataId" : quota.id
         ]
-        HttpApiClient.sharedInstance.post(url, paramters : parameters, success: addResult, fail : nil)
+        HttpApiClient.sharedInstance.save(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: addResult, fail: nil)
     }
     
     

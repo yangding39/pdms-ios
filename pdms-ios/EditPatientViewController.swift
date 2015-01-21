@@ -76,13 +76,12 @@ class EditPatientViewController: UITableViewController {
         let url = SERVER_DOMAIN + "patients/save"
         let params : [String : AnyObject] = ["token" : TOKEN, "patientName" : patient.name, "gender" : patient.gender, "birthday" : patient.birthday,
             "age" : patient.age, "caseNo" : patient.caseNo, "patientId" : patient.id]
-        HttpApiClient.sharedInstance.post(url, paramters : params, success: addPatientResult, fail : nil)
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: addPatientResult, fail: nil)
         
     }
     func addPatientResult(json : JSON) {
         var fieldErrors = Array<String>()
         var saveResult = false
-        println(json)
         //set result and error from server
         saveResult = json["stat"].int == 0 ? true : false
         for (index: String, errorJson: JSON) in json["fieldErrors"] {

@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" id="vgz-nn-DWQ">
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" text="" placeholder="输入姓名" id="vgz-nn-DWQ">
                             <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
@@ -92,6 +92,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="病例管理" id="ZLX-OK-dGZ">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="K54-kR-IdF">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="Z1W-rR-hb2" kind="presentation" identifier="showAddPatientSegue" id="kF2-aE-28F"/>
                             </connections>
@@ -596,7 +597,7 @@
                         <sections>
                             <tableViewSection id="RTL-V0-NAW">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailPatitentCell" textLabel="GAK-Ol-Onb" detailTextLabel="LaY-cm-msS" style="IBUITableViewCellStyleValue1" id="0SP-sI-2Vp">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailPatitentCell" textLabel="GAK-Ol-Onb" detailTextLabel="E8t-hp-vRp" style="IBUITableViewCellStyleValue1" id="0SP-sI-2Vp">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0SP-sI-2Vp" id="o7f-LJ-cav">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -609,13 +610,16 @@
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LaY-cm-msS">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E8t-hp-vRp">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
                                                 </label>
@@ -635,13 +639,19 @@
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="guk-0n-Wb7">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="guk-0n-Wb7">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
                                                 </label>
@@ -661,13 +671,19 @@
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N1r-fc-vWb">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N1r-fc-vWb">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
                                                 </label>
@@ -687,13 +703,19 @@
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="15T-1M-rPe">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="15T-1M-rPe">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
                                                 </label>
@@ -713,13 +735,19 @@
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rDx-iX-bf2">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rDx-iX-bf2">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     </variation>
                                                 </label>
@@ -742,11 +770,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="ageLabel" destination="15T-1M-rPe" id="8HU-2A-P5a"/>
-                        <outlet property="birthdayLabel" destination="N1r-fc-vWb" id="XtS-UM-Rja"/>
-                        <outlet property="caseNoLabel" destination="rDx-iX-bf2" id="Fso-CP-IOh"/>
-                        <outlet property="genderLabel" destination="guk-0n-Wb7" id="dZE-fN-hvY"/>
-                        <outlet property="nameLabel" destination="LaY-cm-msS" id="VDX-Kf-NiO"/>
+                        <outlet property="ageLabel" destination="15T-1M-rPe" id="p5Q-11-739"/>
+                        <outlet property="birthdayLabel" destination="N1r-fc-vWb" id="SJo-Xi-GE0"/>
+                        <outlet property="caseNoLabel" destination="rDx-iX-bf2" id="SJ9-VI-aMY"/>
+                        <outlet property="genderLabel" destination="guk-0n-Wb7" id="Gzt-NP-fWp"/>
+                        <outlet property="nameLabel" destination="E8t-hp-vRp" id="9K3-2n-zcK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ixs-hg-b9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1126,11 +1154,16 @@
         <scene sceneID="deJ-MQ-8Tm">
             <objects>
                 <navigationController storyboardIdentifier="rootNavigateViewController" automaticallyAdjustsScrollViewInsets="NO" id="u4u-TK-G2c" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" id="6Hm-Th-sSC"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="home" selectedImage="home-selected" id="6Hm-Th-sSC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9E0-VJ-vqK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.61176470589999998" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1149,10 +1182,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Ozc-xM-JwQ">
-                            <rect key="frame" x="0.0" y="149" width="600" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="patientCell" rowHeight="63" id="qZa-st-UrP" customClass="PatientTableCell" customModule="pdms_ios" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1221,7 +1250,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="病例管理" id="9ia-P5-tnY"/>
                     <connections>
-                        <outlet property="loadingIndicator" destination="Ozc-xM-JwQ" id="2Uf-Ok-zNh"/>
                         <outlet property="searchDisplayController" destination="ztY-8X-d6w" id="qI2-Sy-3aF"/>
                     </connections>
                 </tableViewController>
@@ -1405,10 +1433,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="VUU-pS-dRa">
-                            <rect key="frame" x="0.0" y="163" width="600" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="visitAllCell" rowHeight="77" id="CST-qk-Qs5" customClass="VisitTableCell" customModule="pdms_ios" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1531,9 +1555,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="loadingIndicator" destination="VUU-pS-dRa" id="9Ii-I7-Cyn"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4PE-3I-iiP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2292,11 +2313,16 @@
         <scene sceneID="Sn1-5I-8QG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T69-Xv-DMW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="全部病例" id="bkU-q3-AzW"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="全部病例" image="allpatient" selectedImage="allpatient-selected" id="bkU-q3-AzW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="v6j-wH-qw5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.61176470589999998" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -3127,11 +3153,16 @@
         <scene sceneID="kiL-ax-uMB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dQM-YS-VMO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="用户中心" id="y7d-87-6cT"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="用户中心" image="user" selectedImage="user-selected" id="y7d-87-6cT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rhp-8U-SZd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.61176470589999998" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -3759,14 +3790,14 @@
                                             <exclude reference="TyJ-fH-hQz"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="gW1-O9-DIC"/>
-                                            <exclude reference="iby-hW-cnd"/>
-                                            <exclude reference="m3j-1v-0bK"/>
-                                            <exclude reference="y3h-Yn-MhI"/>
                                             <exclude reference="JMN-Uh-1of"/>
                                             <exclude reference="cbZ-Lo-fo3"/>
                                             <exclude reference="pxZ-KT-ftg"/>
                                             <exclude reference="sco-Dm-Vk5"/>
+                                            <exclude reference="gW1-O9-DIC"/>
+                                            <exclude reference="iby-hW-cnd"/>
+                                            <exclude reference="m3j-1v-0bK"/>
+                                            <exclude reference="y3h-Yn-MhI"/>
                                             <exclude reference="PD3-OV-bDT"/>
                                             <exclude reference="Ry5-8E-xGE"/>
                                             <exclude reference="WKd-M8-fiH"/>
@@ -3782,10 +3813,10 @@
                                             <include reference="TyJ-fH-hQz"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="gW1-O9-DIC"/>
-                                            <include reference="m3j-1v-0bK"/>
                                             <include reference="JMN-Uh-1of"/>
                                             <include reference="pxZ-KT-ftg"/>
+                                            <include reference="gW1-O9-DIC"/>
+                                            <include reference="m3j-1v-0bK"/>
                                             <include reference="PD3-OV-bDT"/>
                                             <include reference="Ry5-8E-xGE"/>
                                             <include reference="bQE-9d-StP"/>
@@ -3793,14 +3824,14 @@
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="constraints">
-                                            <exclude reference="gW1-O9-DIC"/>
-                                            <include reference="iby-hW-cnd"/>
-                                            <exclude reference="m3j-1v-0bK"/>
-                                            <include reference="y3h-Yn-MhI"/>
                                             <exclude reference="JMN-Uh-1of"/>
                                             <include reference="cbZ-Lo-fo3"/>
                                             <exclude reference="pxZ-KT-ftg"/>
                                             <include reference="sco-Dm-Vk5"/>
+                                            <exclude reference="gW1-O9-DIC"/>
+                                            <include reference="iby-hW-cnd"/>
+                                            <exclude reference="m3j-1v-0bK"/>
+                                            <include reference="y3h-Yn-MhI"/>
                                             <exclude reference="PD3-OV-bDT"/>
                                             <exclude reference="Ry5-8E-xGE"/>
                                             <include reference="WKd-M8-fiH"/>
@@ -3965,6 +3996,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LBF-fs-3Tv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.61176470589999998" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -3983,6 +4019,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8aC-y1-1tB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.61176470589999998" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -4001,6 +4042,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Abv-y9-8K3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.61176470589999998" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -4019,6 +4065,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ToS-QW-A8g">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.61176470589999998" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -4030,8 +4081,16 @@
             <point key="canvasLocation" x="6148.5" y="-312.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="allpatient" width="25" height="25"/>
+        <image name="allpatient-selected" width="25" height="25"/>
+        <image name="home" width="25" height="25"/>
+        <image name="home-selected" width="25" height="25"/>
+        <image name="user" width="25" height="25"/>
+        <image name="user-selected" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xbF-Lt-IEs"/>
+        <segue reference="QeM-cy-n9e"/>
         <segue reference="GdD-IB-jUL"/>
         <segue reference="7hT-QL-6mm"/>
         <segue reference="l5R-dC-wfa"/>

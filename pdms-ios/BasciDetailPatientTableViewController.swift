@@ -25,7 +25,7 @@ class BasciDetailPatientTableViewController: UITableViewController {
     }
     override func viewWillAppear(animated: Bool) {
         if editCompelete {
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(false)
             editCompelete = false
         } else {
             fillLabel()
@@ -38,7 +38,7 @@ class BasciDetailPatientTableViewController: UITableViewController {
     }
     func loadData() {
         let url = SERVER_DOMAIN + "patients/basic/\(patient.id)?token=" + TOKEN
-        HttpApiClient.sharedInstance.get(url, paramters : nil, success: fillData, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: nil, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
         
     }
     func fillData(json: JSON) {

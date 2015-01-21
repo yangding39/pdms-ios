@@ -63,8 +63,7 @@ class QuotaDetailTabelViewController: UITableViewController, UIActionSheetDelega
     func loadData() {
         let url = SERVER_DOMAIN + "quota/quotaDetails"
         let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDataId": quota.id]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillData, fail : nil)
-        
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {
@@ -156,7 +155,7 @@ class QuotaDetailTabelViewController: UITableViewController, UIActionSheetDelega
     func removeQuota() {
         let url = SERVER_DOMAIN + "quota/delete"
         let params : [String : AnyObject] = ["token" : TOKEN, "quotaDataId" : quota.id]
-        HttpApiClient.sharedInstance.post(url, paramters : params, success: removeResult, fail : nil)
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removeResult, fail: nil)
     }
     
     func removeResult(json : JSON) {

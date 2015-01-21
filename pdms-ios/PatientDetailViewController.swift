@@ -23,6 +23,7 @@ class PatientDetailViewController: UITableViewController, UIActionSheetDelegate 
     var patient: Patient!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.saveToRecent()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -31,6 +32,16 @@ class PatientDetailViewController: UITableViewController, UIActionSheetDelegate 
             gender.text = patient.gender
             age.text = "\(patient.age)"
             birthday.text = patient.birthday
+    }
+    
+    func saveToRecent() {
+        let url = SERVER_DOMAIN + "patients/searchView"
+        let parameters: [String : AnyObject] = ["token": TOKEN, "patientId": patient.id]
+        HttpApiClient.sharedInstance.post(url, paramters : parameters, success: fillSaveResult, fail : nil)
+    }
+    
+    func fillSaveResult(json : JSON) {
+        
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "visitByPatientSegue" {
@@ -78,7 +89,7 @@ class PatientDetailViewController: UITableViewController, UIActionSheetDelegate 
     func removePatient() {
         let url = SERVER_DOMAIN + "patients/delete"
         let params : [String : AnyObject] = ["token" : TOKEN, "patientId" : patient.id]
-        HttpApiClient.sharedInstance.post(url, paramters : params, success: removePatientResult, fail : nil)
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removePatientResult, fail: nil)
     }
     
     func removePatientResult(json : JSON) {

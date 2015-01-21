@@ -54,7 +54,7 @@ class AddVisitViewController: UITableViewController {
     func loadOptions() {
         let url = SERVER_DOMAIN + "visit/add"
         let parameters = ["token": TOKEN]
-        HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillOptions, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillOptions, fail: nil)
     }
     
     func fillOptions(json : JSON) {
@@ -103,7 +103,7 @@ class AddVisitViewController: UITableViewController {
     func postData(visit : Visit) {
         let url = SERVER_DOMAIN + "visit/save"
         let params : [String : AnyObject] = ["token" : TOKEN, "patientId" : patient.id, "visitType" : visit.type, "visitNumber" : visit.number, "department" : visit.department, "startTime" : visit.startTime, "endTime" : visit.endTime]
-        HttpApiClient.sharedInstance.post(url, paramters : params, success: addVisitResult, fail : nil)
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: addVisitResult, fail: nil)
     }
     
     func addVisitResult(json : JSON) {
@@ -117,6 +117,14 @@ class AddVisitViewController: UITableViewController {
             }
         }
         if saveResult && fieldErrors.count == 0 {
+            visit.id = json["data"]["visitId"].int
+            visit.typeLabel = json["data"]["visitTypeLabel"].string
+            visit.number = json["data"]["visitNumber"].string
+            visit.departmentLabel = json["data"]["departmentLabel"].string
+            visit.mainDiagonse = json["data"]["mainDiagnose"].string
+            visit.startTime = json["data"]["startDate"].string
+            visit.endTime = json["data"]["endDate"].string
+
             self.performSegueWithIdentifier("completeAddVisitSegue", sender: self)
         }
 

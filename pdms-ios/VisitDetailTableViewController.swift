@@ -27,7 +27,7 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
             }
     override func viewWillAppear(animated: Bool) {
         if editCompelete {
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewControllerAnimated(false)
             editCompelete = false
         } else {
             typeLabel.text = visit.typeLabel

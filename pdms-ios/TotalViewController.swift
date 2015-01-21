@@ -9,8 +9,6 @@
 import UIKit
 
 class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
-    
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     var loadMoreTableFooterView : LoadMoreTableFooterView!
     var isLoadMoreing = false
     var tableDatas = Array<Patient>()
@@ -27,7 +25,6 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-       loadingIndicator.startAnimating()
         self.loadData()
     }
     override func didReceiveMemoryWarning() {
@@ -51,12 +48,11 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     
     func loadData() {
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN
-        HttpApiClient.sharedInstance.get(url, paramters : ["page" : page], success: fillData, fail : fail)
+        let params : [String : AnyObject] = ["page" : page]
+        HttpApiClient.sharedInstance.getLoading(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
         
     }
     func fillData(json: JSON) {
-        self.loadingIndicator.hidden = true
-        self.loadingIndicator.stopAnimating()
         if page == 1 {
              self.tableDatas.removeAll(keepCapacity: true)
         }
@@ -88,8 +84,6 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     }
     
     func fail() {
-        self.loadingIndicator.hidden = true
-        self.loadingIndicator.stopAnimating()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

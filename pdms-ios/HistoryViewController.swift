@@ -23,7 +23,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         if toDetail {
             let patientDetailView = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("patitentDetailViewController") as PatientDetailViewController
             patientDetailView.patient = detailPatient
-            self.navigationController?.pushViewController(patientDetailView, animated: true)
+            self.navigationController?.pushViewController(patientDetailView, animated: false)
            toDetail = false
         } else {
             self.loadData()
@@ -86,7 +86,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     func loadData() {
         recentPatients.removeAll(keepCapacity: true)
         let url = SERVER_DOMAIN + "patients/recent?token=" + TOKEN
-        HttpApiClient.sharedInstance.get(url, paramters : nil, success: fillData, fail : nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: nil, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
         
     }
     func fillData(json: JSON) -> Void{
@@ -96,7 +96,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             patient.name = patientJson["patientName"].string
             patient.gender = patientJson["gender"].string
             patient.age = patientJson["age"].int
-           // patient.birthday = data["birthday"].string
+            patient.birthday = patientJson["birthday"].string
             self.recentPatients.append(patient)
         }
          self.tableView.reloadData()        
@@ -109,7 +109,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             patient.name = patientJson["patientName"].string
             patient.gender = patientJson["gender"].string
             patient.age = patientJson["age"].int
-            // patient.birthday = data["birthday"].string
+            patient.birthday = patientJson["birthday"].string
             self.searchResult.append(patient)
         }
         self.searchDisplayController?.searchResultsTableView.reloadData()
