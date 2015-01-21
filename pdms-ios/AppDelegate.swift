@@ -16,6 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if let controller = window?.rootViewController as? UITabBarController {
+            if let barItems = controller.tabBar.items {
+                if let homeBarItem = barItems[0] as? UITabBarItem {
+                    homeBarItem.image = UIImage(named: "home")
+                    homeBarItem.selectedImage = UIImage(named: "home-selected")
+                }
+                if let allPatientsBarItem = barItems[1] as? UITabBarItem {
+                    allPatientsBarItem.image = UIImage(named: "allpatient")
+                    allPatientsBarItem.selectedImage = UIImage(named: "allpatient-selected")
+                }
+
+                if let userBarItem = barItems[2] as? UITabBarItem {
+                    userBarItem.image = UIImage(named: "user")
+                    userBarItem.selectedImage = UIImage(named: "huser-selected")
+                }
+
+            }
+        }
         return true
     }
 

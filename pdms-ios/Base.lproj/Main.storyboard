@@ -91,12 +91,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="病例管理" id="ZLX-OK-dGZ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="K54-kR-IdF">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="Z1W-rR-hb2" kind="presentation" identifier="showAddPatientSegue" id="kF2-aE-28F"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SKc-99-8dA"/>
                     </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="bZT-yH-yCb" id="82V-I6-CVo"/>
@@ -1154,7 +1149,7 @@
         <scene sceneID="deJ-MQ-8Tm">
             <objects>
                 <navigationController storyboardIdentifier="rootNavigateViewController" automaticallyAdjustsScrollViewInsets="NO" id="u4u-TK-G2c" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" image="home" selectedImage="home-selected" id="6Hm-Th-sSC"/>
+                    <tabBarItem key="tabBarItem" title="首页" id="6Hm-Th-sSC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9E0-VJ-vqK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2313,7 +2308,7 @@
         <scene sceneID="Sn1-5I-8QG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T69-Xv-DMW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="全部病例" image="allpatient" selectedImage="allpatient-selected" id="bkU-q3-AzW"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="全部病例" id="bkU-q3-AzW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="v6j-wH-qw5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3153,7 +3148,7 @@
         <scene sceneID="kiL-ax-uMB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dQM-YS-VMO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="2" title="用户中心" image="user" selectedImage="user-selected" id="y7d-87-6cT"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="用户中心" id="y7d-87-6cT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rhp-8U-SZd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -4081,14 +4076,6 @@
             <point key="canvasLocation" x="6148.5" y="-312.75"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="allpatient" width="25" height="25"/>
-        <image name="allpatient-selected" width="25" height="25"/>
-        <image name="home" width="25" height="25"/>
-        <image name="home-selected" width="25" height="25"/>
-        <image name="user" width="25" height="25"/>
-        <image name="user-selected" width="25" height="25"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QeM-cy-n9e"/>
         <segue reference="GdD-IB-jUL"/>

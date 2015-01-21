@@ -20,7 +20,6 @@
 		8547F4BF1A6523D90094AE6B /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547F4BE1A6523D90094AE6B /* StringUtil.swift */; };
 		85566DC41A314226004B44AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC31A314226004B44AB /* AppDelegate.swift */; };
 		85566DC61A314226004B44AB /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DC51A314226004B44AB /* HistoryViewController.swift */; };
-		85566DCB1A314226004B44AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCA1A314226004B44AB /* Images.xcassets */; };
 		85566DCE1A314226004B44AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85566DCC1A314226004B44AB /* LaunchScreen.xib */; };
 		85566DDA1A314226004B44AB /* pdms_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85566DD91A314226004B44AB /* pdms_iosTests.swift */; };
 		8561A31A1A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A3191A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift */; };
@@ -36,6 +35,7 @@
 		85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */; };
 		85C0E2191A381D6900132AD5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2181A381D6900132AD5 /* Option.swift */; };
 		85C1AB0F1A3697AA00968A1F /* HttpApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */; };
+		85D169071A6F4FF400FCDE40 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D169061A6F4FF400FCDE40 /* Images.xcassets */; };
 		85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A491A3153D600D2C7EF /* GlobalConst.swift */; };
 		85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4D1A31599900D2C7EF /* PatientTableCell.swift */; };
 		85D24A501A3164A200D2C7EF /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4F1A3164A200D2C7EF /* Patient.swift */; };
@@ -82,7 +82,6 @@
 		85566DC21A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85566DC31A314226004B44AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85566DC51A314226004B44AB /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
-		85566DCA1A314226004B44AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		85566DCD1A314226004B44AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		85566DD31A314226004B44AB /* pdms-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pdms-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85566DD81A314226004B44AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +99,7 @@
 		85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddVisitViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		85C0E2181A381D6900132AD5 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpApiClient.swift; sourceTree = "<group>"; };
+		85D169061A6F4FF400FCDE40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftObjectcBridge.h; sourceTree = "<group>"; };
 		85D24A491A3153D600D2C7EF /* GlobalConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConst.swift; sourceTree = "<group>"; };
 		85D24A4D1A31599900D2C7EF /* PatientTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientTableCell.swift; sourceTree = "<group>"; };
@@ -191,9 +191,9 @@
 				85E530C01A3975A0002888AC /* Quota */,
 				85C0E2121A37D3E800132AD5 /* Visit */,
 				85D24A4C1A31592C00D2C7EF /* Pantient */,
-				85566DCA1A314226004B44AB /* Images.xcassets */,
 				852EF0F01A5BD2F700FC1229 /* Main.storyboard */,
 				85566DCC1A314226004B44AB /* LaunchScreen.xib */,
+				85D169061A6F4FF400FCDE40 /* Images.xcassets */,
 				85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */,
 				85D24A511A3165A900D2C7EF /* model */,
 				85566DC11A314226004B44AB /* Supporting Files */,
@@ -385,9 +385,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85D169071A6F4FF400FCDE40 /* Images.xcassets in Resources */,
 				852EF0F21A5BD2F700FC1229 /* Main.storyboard in Resources */,
 				85566DCE1A314226004B44AB /* LaunchScreen.xib in Resources */,
-				85566DCB1A314226004B44AB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
