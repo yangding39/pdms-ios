@@ -15,11 +15,6 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (loadMoreTableFooterView == nil) {
-            loadMoreTableFooterView = LoadMoreTableFooterView(frame: CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height))
-            loadMoreTableFooterView.delegate = self
-            self.tableView.addSubview(loadMoreTableFooterView)
-        }
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -79,6 +74,11 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
             
         }
         self.tableView.reloadData()
+        if (loadMoreTableFooterView == nil) {
+            loadMoreTableFooterView = LoadMoreTableFooterView(frame: CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height))
+            loadMoreTableFooterView.delegate = self
+            self.tableView.addSubview(loadMoreTableFooterView)
+        }
         loadMoreTableFooterView.frame = CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height)
         isLoadMoreing = false
     }
@@ -98,11 +98,16 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.loadMoreTableFooterView.loadMoreScrollViewDidScroll(scrollView)
+        if loadMoreTableFooterView != nil {
+            self.loadMoreTableFooterView.loadMoreScrollViewDidScroll(scrollView)
+        }
+        
     }
     
     override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.loadMoreTableFooterView.loadMoreScrollViewDidEndDragging(scrollView)
+        if loadMoreTableFooterView != nil {
+            self.loadMoreTableFooterView.loadMoreScrollViewDidEndDragging(scrollView)
+        }
     }
    func loadMoreTableFooterDidTriggerLoadMore(view : LoadMoreTableFooterView) {
        isLoadMoreing = true
