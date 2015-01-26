@@ -65,9 +65,21 @@ class HttpApiClient {
                 self.dismissLoadingIndicator(loadingPosition, activityIndicator: activityIndicator, viewController: viewController, completeView: completeView)
             },
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
-                if (fail != nil) {
-                    fail()
+                var statusCode : StatusCode?
+                if let response = operation.response {
+                    statusCode = StatusCode(httpCode: response.statusCode)
                 }
+                if statusCode == StatusCode.STATUS_NO_AUTH {
+                    self.showLoginView(viewController)
+                } else {
+                    if statusCode == StatusCode.STATUS_ERROR {
+                        CustomAlertView.showMessage("无网络连接", parentViewController:viewController)
+                    }
+                    if (fail != nil) {
+                        fail()
+                    }
+                }
+               
                 self.dismissLoadingIndicator(loadingPosition, activityIndicator: activityIndicator, viewController: viewController, completeView: completeView)
             }
         )
@@ -82,12 +94,32 @@ class HttpApiClient {
             parameters:paramters,
             success: {(operation: AFHTTPRequestOperation!, responseObject: AnyObject!) in
                 let json = JSON(responseObject)
+                var fieldErrors = Array<String>()
+                for (index: String, errorJson: JSON) in json["fieldErrors"] {
+                    if let error = errorJson["message"].string {
+                        fieldErrors.append(error)
+                    }
+                }
+                let message =  ";".join(fieldErrors)
+                CustomAlertView.showMessage(message, parentViewController:viewController)
+                
                 success(json)
                 self.dismissLoadingIndicator(loadingPosition, activityIndicator: activityIndicator, viewController: viewController, completeView: completeView)
             },
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
-                if (fail != nil) {
-                    fail()
+                var statusCode : StatusCode?
+                if let response = operation.response {
+                    statusCode = StatusCode(httpCode: response.statusCode)
+                }
+                if statusCode == StatusCode.STATUS_NO_AUTH {
+                    self.showLoginView(viewController)
+                } else {
+                    if statusCode == StatusCode.STATUS_ERROR {
+                        CustomAlertView.showMessage("无网络连接", parentViewController:viewController)
+                    }
+                    if (fail != nil) {
+                        fail()
+                    }
                 }
                 self.dismissLoadingIndicator(loadingPosition, activityIndicator: activityIndicator, viewController: viewController, completeView: completeView)
             }
@@ -154,5 +186,10 @@ class HttpApiClient {
                 
             }
         }
+    }
+    
+    func showLoginView(viewController : UIViewController) {
+            let loginViewController = viewController.storyboard?.instantiateViewControllerWithIdentifier("loginTableViewController") as LoginTableViewController
+            viewController.presentViewController(loginViewController, animated: true, completion: nil)
     }
 }

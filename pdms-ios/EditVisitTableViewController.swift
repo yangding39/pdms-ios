@@ -9,7 +9,7 @@
 
 import UIKit
 
-class EditVisitTableViewController: UITableViewController {
+class EditVisitTableViewController: UITableViewController,UIActionSheetDelegate {
 
     @IBOutlet weak var typeLabel: UITextField!
     
@@ -56,7 +56,7 @@ class EditVisitTableViewController: UITableViewController {
     func loadOptions() {
         let url = SERVER_DOMAIN + "visit/add"
         let parameters = ["token": TOKEN]
-        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillOptions, fail: nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: fillOptions, fail: nil)
     }
     
     func fillOptions(json : JSON) {
@@ -180,6 +180,60 @@ class EditVisitTableViewController: UITableViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func didDeleteAction(sender: AnyObject) {
+        
+        if NSClassFromString("UIAlertController") != nil {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let deleteAction = UIAlertAction(title: "删除", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.removeVisit()
+            })
+            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                println("Cancelled")
+            })
+            
+            optionMenu.addAction(deleteAction)
+            optionMenu.addAction(cancelAction)
+            self.presentViewController(optionMenu, animated: true, completion: nil)
+        } else {
+            let myActionSheet = UIActionSheet()
+            myActionSheet.addButtonWithTitle("删除")
+            myActionSheet.addButtonWithTitle("取消")
+            myActionSheet.cancelButtonIndex = 1
+            myActionSheet.showInView(self.view)
+            myActionSheet.delegate = self
+        }
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int){
+        if buttonIndex == 0 {
+            removeVisit()
+        }
+    }
+    
+    func removeVisit() {
+        let url = SERVER_DOMAIN + "visit/delete"
+        let params : [String : AnyObject] = ["token" : TOKEN, "visitId" : visit.id]
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removeResult, fail: nil)
+    }
+    
+    func removeResult(json : JSON) {
+        var fieldErrors = Array<String>()
+        var removeResult = false
+        //set result and error from server
+        removeResult = json["stat"].int == 0 ? true : false
+        for (index: String, errorJson: JSON) in json["fieldErrors"] {
+            if let error = errorJson[index].string {
+                fieldErrors.append(error)
+            }
+        }
+        if removeResult && fieldErrors.count == 0 {
+            self.dismissViewControllerAnimated(false, completion: nil)
+            self.performSegueWithIdentifier("completeDeleteVisitSegue", sender: self)
+        }
+    }
+
 }
 
 

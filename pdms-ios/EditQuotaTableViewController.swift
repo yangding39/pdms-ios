@@ -10,7 +10,7 @@
 
 import UIKit
 
-class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
+class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate {
     var visit : Visit!
     var patient : Patient!
     var crowDefinition : GroupDefinition!
@@ -47,11 +47,11 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
             return cell
         }  else {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormCell", forIndexPath: indexPath) as QuotaFormCell
+            cell.name.numberOfLines = 0
             cell.name.text = fieldData.columnName
             cell.name.sizeToFit()
             cell.unit.text = fieldData.unitName
             cell.value.text = fieldData.value
-            cell.value.delegate = self
             if let visibleType = fieldData.visibleType {
                 switch visibleType {
                 case Data.VisibleType.INPUT :
@@ -72,6 +72,12 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
             
         }
         
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let fieldData = fieldDatas[indexPath.row]
+        let labelHeight = UILabel.heightForDynamicText(fieldData.columnName, font: UIFont.systemFontOfSize(17.0), width: 125.0)
+        return 23 + labelHeight
     }
     
     func loadData() {
@@ -168,16 +174,6 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
         return false
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        if let cell = textField.superview?.superview?.superview as? QuotaFormCell {
-            let indexPath = self.tableView.indexPathForCell(cell)!
-            let data = fieldDatas[indexPath.row]
-            if data.visibleType == Data.VisibleType.INPUT || data.visibleType == Data.VisibleType.TIME {
-                data.value = textField.text
-            }
-        }
-    }
-    
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if identifier == "showEditOptionSegue" {
             if let cell = sender as? QuotaFormCell {
@@ -188,6 +184,23 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
                 }
             }
         } else if identifier == "completeEditQuotaSegue" {
+            for var i = 0 ; i < fieldDatas.count; ++i {
+                let indexPath = NSIndexPath(forRow: i, inSection: 0)
+                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? QuotaFormCell {
+                    if let textField = cell.value {
+                        fieldDatas[i].value = textField.text
+                    }
+                } else if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? QuotaFormSwitchCell {
+                    if let swtihcBtn = cell.swtichBtn {
+                        if swtihcBtn.on {
+                            fieldDatas[i].value = "\(Data.BoolIntValue.TRUE)"
+                        } else {
+                            fieldDatas[i].value = "\(Data.BoolIntValue.FALSE)"
+                        }
+                    }
+                }
+            }
+           
             self.saveQuotaForm()
         }
         return false
@@ -227,23 +240,12 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
         fieldDatas[indexPath.row].value = dataValue
     }
     
-    @IBAction func swithcDidEndEditing(sender: UISwitch) {
-        let cell = sender.superview?.superview?.superview as QuotaFormSwitchCell
-        let indexPath = self.tableView.indexPathForCell(cell)!
-        let data = fieldDatas[indexPath.row]
-        if sender.on {
-            data.value = "\(Data.BoolIntValue.TRUE)"
-        } else {
-            data.value = "\(Data.BoolIntValue.FALSE)"
-        }
-    }
-    
     func saveQuotaForm() {
         let url = SERVER_DOMAIN + "quota/editQuota"
         let quotaFieldDataIds = ",".join(fieldDatas.map({ "\($0.id)" }))
         let columnTypes = ",".join(fieldDatas.map({ "\($0.columnType)" }))
         let columnNames = ",".join(fieldDatas.map({ "\($0.columnName)" }))
-        let quotaFieldValues = ",".join(fieldDatas.map({ "\($0.value)" }))
+        let quotaFieldValues = ",".join(fieldDatas.map({ "\(StringUtil.igonreNilString($0.value))" }))
         let parameters : [ String : AnyObject] = [
             "token": TOKEN,
             "patientSeeDoctorId": visit.id,
@@ -280,6 +282,60 @@ class EditQuotaTableViewController: UITableViewController,UITextFieldDelegate {
             data.visibleType = Data.VisibleType.SELECT
         } else if data.columnName == "中文通用名" || data.columnName == "英文通用名" {
             data.visibleType = Data.VisibleType.TEXT
+        }
+    }
+    
+    @IBAction func didDeleteAction(sender: AnyObject) {
+        if NSClassFromString("UIAlertController") != nil {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let deleteAction = UIAlertAction(title: "删除", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.removeQuota()
+            })
+            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                println("Cancelled")
+            })
+            
+            optionMenu.addAction(deleteAction)
+            optionMenu.addAction(cancelAction)
+            self.presentViewController(optionMenu, animated: true, completion: nil)
+        } else {
+            let myActionSheet = UIActionSheet()
+            myActionSheet.addButtonWithTitle("删除")
+            myActionSheet.addButtonWithTitle("取消")
+            myActionSheet.cancelButtonIndex = 1
+            myActionSheet.showInView(self.view)
+            myActionSheet.delegate = self
+        }
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int){
+        if buttonIndex == 0 {
+            removeQuota()
+        }
+    }
+    
+    func removeQuota() {
+        let url = SERVER_DOMAIN + "quota/delete"
+        let params : [String : AnyObject] = ["token" : TOKEN, "quotaDataId" : quota.id]
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removeResult, fail: nil)
+    }
+    
+    func removeResult(json : JSON) {
+        var fieldErrors = Array<String>()
+        var removeResult = false
+        //set result and error from server
+        removeResult = json["stat"].int == 0 ? true : false
+        for (index: String, errorJson: JSON) in json["fieldErrors"] {
+            if let error = errorJson[index].string {
+                fieldErrors.append(error)
+            }
+        }
+        if removeResult && fieldErrors.count == 0 {
+            self.dismissViewControllerAnimated(false, completion: nil)
+            self.performSegueWithIdentifier("completeDeleteQuotaSegue", sender: self)
+
         }
     }
 }

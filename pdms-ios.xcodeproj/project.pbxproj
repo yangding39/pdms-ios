@@ -12,6 +12,8 @@
 		852EF0EC1A591AF500FC1229 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852EF0EB1A591AF500FC1229 /* Data.swift */; };
 		852EF0EF1A5BCF3C00FC1229 /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852EF0EE1A5BCF3C00FC1229 /* OptionsTableViewController.swift */; };
 		852EF0F21A5BD2F700FC1229 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 852EF0F01A5BD2F700FC1229 /* Main.storyboard */; };
+		8532C5A41A73A52600EA3444 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8532C5A31A73A52600EA3444 /* CustomLabel.swift */; };
+		8532C5A61A75ED3C00EA3444 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8532C5A51A75ED3C00EA3444 /* CustomAlertView.swift */; };
 		853ED9F21A41757F00AA67A8 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853ED9F11A41757F00AA67A8 /* CustomColor.swift */; };
 		85473C731A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85473C721A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift */; };
 		8547F4B91A64C2680094AE6B /* VisitDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547F4B81A64C2680094AE6B /* VisitDetailTableViewController.swift */; };
@@ -28,6 +30,8 @@
 		857B649D1A3A9B06008FC52D /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857B649C1A3A9B06008FC52D /* FormTableViewController.swift */; };
 		857B64A01A3E72A7008FC52D /* QuotaFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857B649F1A3E72A7008FC52D /* QuotaFormCell.swift */; };
 		859530DB1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */; };
+		859752531A70CFC9005CE917 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859752521A70CFC9005CE917 /* LoginTableViewController.swift */; };
+		859752551A70F914005CE917 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859752541A70F914005CE917 /* AboutViewController.swift */; };
 		859B6C021A415DC3004EC0A2 /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B6C011A415DC3004EC0A2 /* CustomPickerView.swift */; };
 		85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E20E1A37D26D00132AD5 /* Visit.swift */; };
 		85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */; };
@@ -72,6 +76,8 @@
 		852EF0EB1A591AF500FC1229 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		852EF0EE1A5BCF3C00FC1229 /* OptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
 		852EF0F11A5BD2F700FC1229 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8532C5A31A73A52600EA3444 /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		8532C5A51A75ED3C00EA3444 /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		853ED9F11A41757F00AA67A8 /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		85473C721A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaDetailTabelViewController.swift; sourceTree = "<group>"; };
 		8547F4B81A64C2680094AE6B /* VisitDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +98,8 @@
 		857B649C1A3A9B06008FC52D /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FormTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		857B649F1A3E72A7008FC52D /* QuotaFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaFormCell.swift; sourceTree = "<group>"; };
 		859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextLevelGroupDefinitionTableViewController.swift; sourceTree = "<group>"; };
+		859752521A70CFC9005CE917 /* LoginTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewController.swift; sourceTree = "<group>"; };
+		859752541A70F914005CE917 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		859B6C011A415DC3004EC0A2 /* CustomPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 		85C0E20E1A37D26D00132AD5 /* Visit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
 		85C0E2101A37D3DD00132AD5 /* VisitTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitTableCell.swift; sourceTree = "<group>"; };
@@ -152,7 +160,9 @@
 			isa = PBXGroup;
 			children = (
 				859B6C011A415DC3004EC0A2 /* CustomPickerView.swift */,
+				8532C5A31A73A52600EA3444 /* CustomLabel.swift */,
 				853ED9F11A41757F00AA67A8 /* CustomColor.swift */,
+				8532C5A51A75ED3C00EA3444 /* CustomAlertView.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -298,7 +308,9 @@
 			children = (
 				B6082E8E1A3AC5DE00C6E0FF /* UserCenterViewController.swift */,
 				B6082E921A3AD81A00C6E0FF /* UserSettingViewController.swift */,
+				859752541A70F914005CE917 /* AboutViewController.swift */,
 				B681A4DB1A3E7668005C48EE /* UserPasswordViewController.swift */,
+				859752521A70CFC9005CE917 /* LoginTableViewController.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -354,6 +366,7 @@
 				TargetAttributes = {
 					85566DBD1A314226004B44AB = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 7345VHNYR9;
 					};
 					85566DD21A314226004B44AB = {
 						CreatedOnToolsVersion = 6.1;
@@ -468,17 +481,21 @@
 				852EF0EF1A5BCF3C00FC1229 /* OptionsTableViewController.swift in Sources */,
 				851D03AE1A636D4B00AC38D6 /* BasciDetailPatientTableViewController.swift in Sources */,
 				85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */,
+				8532C5A61A75ED3C00EA3444 /* CustomAlertView.swift in Sources */,
 				85D39FC51A35420D0034F93B /* AddPatientViewController.swift in Sources */,
 				85473C731A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift in Sources */,
 				857B649D1A3A9B06008FC52D /* FormTableViewController.swift in Sources */,
 				B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */,
 				857B64A01A3E72A7008FC52D /* QuotaFormCell.swift in Sources */,
+				8532C5A41A73A52600EA3444 /* CustomLabel.swift in Sources */,
 				851D03AC1A5FAF1800AC38D6 /* QuotaFormSwitchCell.swift in Sources */,
 				85D24A501A3164A200D2C7EF /* Patient.swift in Sources */,
+				859752551A70F914005CE917 /* AboutViewController.swift in Sources */,
 				8547F4BF1A6523D90094AE6B /* StringUtil.swift in Sources */,
 				85E530BD1A397442002888AC /* Quota.swift in Sources */,
 				8547F4B91A64C2680094AE6B /* VisitDetailTableViewController.swift in Sources */,
 				85D39FC31A31B48B0034F93B /* TotalViewController.swift in Sources */,
+				859752531A70CFC9005CE917 /* LoginTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

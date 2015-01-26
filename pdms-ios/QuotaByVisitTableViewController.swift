@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuotaByVisitTableViewController: UITableViewController,UIActionSheetDelegate {
+class QuotaByVisitTableViewController: UITableViewController {
 
     var patient : Patient!
     var visit : Visit!
@@ -16,7 +16,11 @@ class QuotaByVisitTableViewController: UITableViewController,UIActionSheetDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib
+        if var frame = self.tableView.tableFooterView?.frame {
+            frame.size.height = 44
+            self.tableView.tableFooterView?.frame = frame
+            self.tableView.updateConstraintsIfNeeded()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,8 +52,8 @@ class QuotaByVisitTableViewController: UITableViewController,UIActionSheetDelega
             sectionHeaderView.textLabel.text = groupDefinitions[section - 1].name
         }
         
-        sectionHeaderView.tintColor = UIColor.sectionColor()
-        
+        //sectionHeaderView.contentView.backgroundColor = UIColor.sectionColor()
+        //sectionHeaderView.textLabel.textColor = UIColor.whiteColor()
         return sectionHeaderView
     }
     
@@ -60,25 +64,13 @@ class QuotaByVisitTableViewController: UITableViewController,UIActionSheetDelega
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("visitDetailCell", forIndexPath: indexPath) as VisitTableCell
             cell.typeLabel.text = visit.typeLabel
-            cell.number.text =  "就诊号：\(visit.number)"
-            cell.departmentLabel.text = "科室：\(visit.departmentLabel)"
-            cell.departmentLabel.adjustsFontSizeToFitWidth = true
-            cell.mainDiagnose.text = "\(visit.mainDiagonse)"
-            cell.mainDiagnose.adjustsFontSizeToFitWidth = true
-            
-            var timeText = "就诊时间："
-            if let startTime =  visit.startTime {
-                timeText += startTime
+            if let number = visit.number {
+                cell.number.text =  "就诊号：\(visit.number)"
             }
-            
-            if visit.startTime != nil || visit.endTime != nil {
-                timeText += "~"
-            }
-            
-            if let endTime = visit.endTime {
-                timeText += endTime
-            }
-            cell.time.text = timeText
+            let detailString = visit.generateDetail()
+            cell.detailLabel.numberOfLines = 0
+            cell.detailLabel.text = detailString
+            cell.detailLabel.sizeToFit()
             return cell
 
         } else {
@@ -93,6 +85,16 @@ class QuotaByVisitTableViewController: UITableViewController,UIActionSheetDelega
         
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            let detailString = visit.generateDetail()
+            let labelHeight = UILabel.heightForDynamicText(detailString, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 59 )
+            return 46 + labelHeight
+        } else {
+            return 85
+        }
+        
+    }
     func loadData() {
         groupDefinitions.removeAll(keepCapacity: true)
        let url = SERVER_DOMAIN + "visit/\(visit.id)/quota/list"
@@ -145,62 +147,9 @@ class QuotaByVisitTableViewController: UITableViewController,UIActionSheetDelega
     @IBAction func addQuotaByVisitComplete(segue : UIStoryboardSegue) {
          self.loadData()
     }
-  
     
-    @IBAction func didDeleteAction(sender: AnyObject) {
+    @IBAction func completeDeleteQuota(segue : UIStoryboardSegue) {
         
-        if NSClassFromString("UIAlertController") != nil {
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let deleteAction = UIAlertAction(title: "删除", style: .Default, handler: {
-                (alert: UIAlertAction!) -> Void in
-                self.removeVisit()
-            })
-            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: {
-                (alert: UIAlertAction!) -> Void in
-                println("Cancelled")
-            })
-            
-            optionMenu.addAction(deleteAction)
-            optionMenu.addAction(cancelAction)
-            self.presentViewController(optionMenu, animated: true, completion: nil)
-        } else {
-            let myActionSheet = UIActionSheet()
-            myActionSheet.addButtonWithTitle("删除")
-            myActionSheet.addButtonWithTitle("取消")
-            myActionSheet.cancelButtonIndex = 1
-            myActionSheet.showInView(self.view)
-            myActionSheet.delegate = self
-        }
     }
-    
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int){
-        if buttonIndex == 0 {
-            removeVisit()
-        }
-    }
-    
-    func removeVisit() {
-        let url = SERVER_DOMAIN + "visit/delete"
-        let params : [String : AnyObject] = ["token" : TOKEN, "visitId" : visit.id]
-         HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removeResult, fail: nil)
-    }
-    
-    func removeResult(json : JSON) {
-        var fieldErrors = Array<String>()
-        var removeResult = false
-        //set result and error from server
-        removeResult = json["stat"].int == 0 ? true : false
-        for (index: String, errorJson: JSON) in json["fieldErrors"] {
-            if let error = errorJson[index].string {
-                fieldErrors.append(error)
-            }
-        }
-        if removeResult && fieldErrors.count == 0 {
-            //self.performSegueWithIdentifier("completeAddPatientSegue", sender: self)
-            self.navigationController?.popViewControllerAnimated(true)
-        }
-    }
-
-    
 }
 

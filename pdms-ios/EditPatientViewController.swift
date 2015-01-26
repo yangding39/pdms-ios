@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditPatientViewController: UITableViewController {
+class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
     
     @IBOutlet weak var nameText: UITextField!
     
@@ -29,27 +29,36 @@ class EditPatientViewController: UITableViewController {
         
         birthdayText.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
         genderText.addTarget(self, action: "showSelectPicker:", forControlEvents: UIControlEvents.EditingDidBegin)
+        
+        if var frame = self.tableView.tableFooterView?.frame {
+            frame.size.height = 44
+            self.tableView.tableFooterView?.frame = frame
+            self.tableView.updateConstraintsIfNeeded()
+        }
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
-        if nameText.text.isEmpty {
-            nameText.layer.borderColor = UIColor.redColor().CGColor
-            nameText.layer.borderWidth = 1.0
-            nameText.layer.cornerRadius = 5
-            return false
-        } else if genderText.text.isEmpty {
-            genderText.layer.borderColor = UIColor.redColor().CGColor
-            genderText.layer.borderWidth = 1.0
-            genderText.layer.cornerRadius = 5
-            return false
-        } else if birthdayText.text.isEmpty {
-            birthdayText.layer.borderColor = UIColor.redColor().CGColor
-            birthdayText.layer.borderWidth = 1.0
-            birthdayText.layer.cornerRadius = 5
-            return false
-        } 
-        savePatient()
+        if identifier == "completeAddPatientSegue" {
+            if nameText.text.isEmpty {
+                nameText.layer.borderColor = UIColor.redColor().CGColor
+                nameText.layer.borderWidth = 1.0
+                nameText.layer.cornerRadius = 5
+                return false
+            } else if genderText.text.isEmpty {
+                genderText.layer.borderColor = UIColor.redColor().CGColor
+                genderText.layer.borderWidth = 1.0
+                genderText.layer.cornerRadius = 5
+                return false
+            } else if birthdayText.text.isEmpty {
+                birthdayText.layer.borderColor = UIColor.redColor().CGColor
+                birthdayText.layer.borderWidth = 1.0
+                birthdayText.layer.cornerRadius = 5
+                return false
+            } 
+            savePatient()
+
+        }
         return false
     }
     
@@ -125,6 +134,60 @@ class EditPatientViewController: UITableViewController {
     @IBAction func didCancelBtn(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func didClickDeleteBtn(sender: AnyObject) {
+        if NSClassFromString("UIAlertController") != nil {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let deleteAction = UIAlertAction(title: "删除", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.removePatient()
+            })
+            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                println("Cancelled")
+            })
+            
+            optionMenu.addAction(deleteAction)
+            optionMenu.addAction(cancelAction)
+            self.presentViewController(optionMenu, animated: true, completion: nil)
+        } else {
+            let myActionSheet = UIActionSheet()
+            myActionSheet.addButtonWithTitle("删除")
+            myActionSheet.addButtonWithTitle("取消")
+            myActionSheet.cancelButtonIndex = 1
+            myActionSheet.showInView(self.view)
+            myActionSheet.delegate = self
+        }
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int){
+        if buttonIndex == 0 {
+            removePatient()
+        }
+    }
+    
+    func removePatient() {
+        let url = SERVER_DOMAIN + "patients/delete"
+        let params : [String : AnyObject] = ["token" : TOKEN, "patientId" : patient.id]
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removePatientResult, fail: nil)
+    }
+    
+    func removePatientResult(json : JSON) {
+        var fieldErrors = Array<String>()
+        var removeResult = false
+        //set result and error from server
+        removeResult = json["stat"].int == 0 ? true : false
+        for (index: String, errorJson: JSON) in json["fieldErrors"] {
+            if let error = errorJson[index].string {
+                fieldErrors.append(error)
+            }
+        }
+        if removeResult && fieldErrors.count == 0 {
+            self.dismissViewControllerAnimated(false, completion: nil)
+            self.performSegueWithIdentifier("completeDeletePatientSegue", sender: self)
+        }
+    }
+    
     
 }
 

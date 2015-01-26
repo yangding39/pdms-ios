@@ -11,4 +11,6 @@ class User {
     var mobile = ""
     var email = ""
     var address = ""
+    var title = ""
+    var hospital = ""
 }

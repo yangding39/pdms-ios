@@ -44,36 +44,23 @@ class VisitTableViewController : UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("visitAllCell", forIndexPath: indexPath) as VisitTableCell
         let visit  = visits[indexPath.row]
         cell.typeLabel.text = visit.typeLabel
-        cell.number.text =  "就诊号：\(visit.number)"
-        cell.departmentLabel.text = "科室：\(visit.departmentLabel)"
-        cell.departmentLabel.adjustsFontSizeToFitWidth = true
-        cell.mainDiagnose.text = "\(visit.mainDiagonse)"
-        cell.mainDiagnose.adjustsFontSizeToFitWidth = true
-       
-        var timeText = "就诊时间："
-        if let startTime =  visit.startTime {
-            timeText += startTime
+        if let number = visit.number {
+            cell.number.text =  "就诊号：\(visit.number)"
         }
         
-        if visit.startTime != nil || visit.endTime != nil {
-            timeText += "~"
-        }
-        
-        if let endTime = visit.endTime {
-            timeText += endTime
-        }
-         cell.time.text = timeText
+        let detailString = visit.generateDetail()
+        cell.detailLabel.numberOfLines = 0
+        cell.detailLabel.text = detailString
+        cell.detailLabel.sizeToFit()
         return cell
     }
-    
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 77
-    }
-    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 77
+        let visit = visits[indexPath.row]
+        let detailString = visit.generateDetail()
+        let labelHeight = UILabel.heightForDynamicText(detailString, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 59 )
+        return 44 + labelHeight
     }
-    
+
     func loadData() {
         let url = SERVER_DOMAIN + "visit/\(patient.id)"
         let parameters = ["token": TOKEN]
@@ -116,5 +103,8 @@ class VisitTableViewController : UITableViewController {
         toDetail = true
     }
     
+    @IBAction func completeDeleteVisit(segue : UIStoryboardSegue) {
+        
+    }
 }
 

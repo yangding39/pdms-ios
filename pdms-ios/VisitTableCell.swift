@@ -14,9 +14,6 @@ class VisitTableCell : UITableViewCell {
     
     @IBOutlet weak var number: UILabel!
     
-    @IBOutlet weak var departmentLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
     
-    @IBOutlet weak var mainDiagnose: UILabel!
-    
-    @IBOutlet weak var time: UILabel!
 }

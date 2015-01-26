@@ -38,7 +38,8 @@ class QuotaByPatientTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeaderView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
        
-        sectionHeaderView.tintColor = UIColor.appColor()
+        //sectionHeaderView.contentView.backgroundColor = UIColor.sectionColor()
+        //sectionHeaderView.textLabel.textColor = UIColor.whiteColor()
         sectionHeaderView.textLabel.text = groupDefinitions[section].name
         return sectionHeaderView
     }

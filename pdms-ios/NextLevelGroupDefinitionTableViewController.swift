@@ -32,8 +32,16 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("groupDefinitionCell", forIndexPath: indexPath) as UITableViewCell
+        cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = groupDefinitions[indexPath.row].name
+        cell.textLabel?.sizeToFit()
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let groupDefinition = groupDefinitions[indexPath.row]
+        let labelHeight = UILabel.heightForDynamicText(groupDefinition.name, font: UIFont.systemFontOfSize(17.0), width: self.tableView.bounds.width)
+        return 23 + labelHeight
     }
 
     func loadData() {

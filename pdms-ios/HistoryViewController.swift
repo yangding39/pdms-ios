@@ -89,7 +89,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         HttpApiClient.sharedInstance.getLoading(url, paramters: nil, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
         
     }
-    func fillData(json: JSON) -> Void{
+    func fillData(json: JSON) -> Void {
         for (index: String, patientJson: JSON) in json["data"] {
             let patient = Patient()
             patient.id = patientJson["patientId"].int
@@ -138,6 +138,10 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         let patient = addPatientViewController.patient
         detailPatient = patient
         toDetail = true
+    }
+    
+    @IBAction func completeDeletePatient(segue : UIStoryboardSegue) {
+        
     }
 }
 
