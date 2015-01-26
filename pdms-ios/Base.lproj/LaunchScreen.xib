@@ -11,33 +11,33 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lanuch-image" translatesAutoresizingMaskIntoConstraints="NO" id="3iH-xB-5Q2">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="lanuch-image" translatesAutoresizingMaskIntoConstraints="NO" id="3iH-xB-5Q2">
                     <rect key="frame" x="8" y="46" width="480" height="480"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="3iH-xB-5Q2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-23" id="A9w-Aw-cX8"/>
-                <constraint firstItem="3iH-xB-5Q2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Hq0-8B-NER"/>
-                <constraint firstItem="3iH-xB-5Q2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ObI-Uf-31Y"/>
-                <constraint firstItem="3iH-xB-5Q2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-15" id="fdD-0x-6aN"/>
+                <constraint firstItem="3iH-xB-5Q2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="c91-VR-ptr"/>
+                <constraint firstItem="3iH-xB-5Q2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fcg-mA-ezA"/>
+                <constraint firstAttribute="trailing" secondItem="3iH-xB-5Q2" secondAttribute="trailing" id="gDg-ux-P96"/>
+                <constraint firstAttribute="bottom" secondItem="3iH-xB-5Q2" secondAttribute="bottom" id="qDe-BB-q5Q"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="A9w-Aw-cX8"/>
-                    <exclude reference="Hq0-8B-NER"/>
-                    <exclude reference="ObI-Uf-31Y"/>
-                    <exclude reference="fdD-0x-6aN"/>
+                    <exclude reference="c91-VR-ptr"/>
+                    <exclude reference="fcg-mA-ezA"/>
+                    <exclude reference="gDg-ux-P96"/>
+                    <exclude reference="qDe-BB-q5Q"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="constraints">
-                    <include reference="A9w-Aw-cX8"/>
-                    <include reference="Hq0-8B-NER"/>
-                    <include reference="ObI-Uf-31Y"/>
-                    <include reference="fdD-0x-6aN"/>
+                    <include reference="c91-VR-ptr"/>
+                    <include reference="fcg-mA-ezA"/>
+                    <include reference="gDg-ux-P96"/>
+                    <include reference="qDe-BB-q5Q"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="548" y="455"/>
