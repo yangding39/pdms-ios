@@ -64,6 +64,9 @@ class QuotaDetailTabelViewController: UITableViewController{
         return cell
     }
   
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     func loadData() {
         let url = SERVER_DOMAIN + "quota/quotaDetails"
         let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDataId": quota.id]

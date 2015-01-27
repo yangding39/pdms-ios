@@ -7,10 +7,16 @@
 //
 
 class User {
+    var id : NSNumber!
     var name = ""
     var mobile = ""
     var email = ""
     var address = ""
     var title = ""
     var hospital = ""
+    var department = ""
+    
+    init() {
+        
+    }
 }

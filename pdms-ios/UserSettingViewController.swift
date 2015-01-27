@@ -15,14 +15,30 @@ class UserSettingViewController: UITableViewController {
     var user: User!
     
     @IBAction func saveUserSetting(sender: AnyObject) {
-        self.saveSetting()
+        let emailReg = "^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+        let mobileReg = "^(13|14|15|16|17|18|19)[0-9]{9}$"
+        if mobileText.text.isEmpty {
+            CustomAlertView.showMessage("手机必填", parentViewController:self)
+        } else if emailText.text.isEmpty {
+            CustomAlertView.showMessage("邮箱必填", parentViewController:self)
+        } else if !Regex(_pattern: emailReg).test(emailText.text) {
+            CustomAlertView.showMessage("请输入有效的邮箱地址", parentViewController:self)
+        } else if !Regex(_pattern: mobileReg).test(mobileText.text) {
+            CustomAlertView.showMessage("请输入有效的手机号码", parentViewController:self)
+        } else {
+            self.saveSetting()
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
-    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     func loadData() {
         let url = SERVER_DOMAIN + "user/toSetting?token=" + TOKEN
         HttpApiClient.sharedInstance.getLoading(url, paramters: nil, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)

@@ -16,11 +16,7 @@ class QuotaByVisitTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if var frame = self.tableView.tableFooterView?.frame {
-            frame.size.height = 44
-            self.tableView.tableFooterView?.frame = frame
-            self.tableView.updateConstraintsIfNeeded()
-        }
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func didReceiveMemoryWarning() {
@@ -94,6 +90,10 @@ class QuotaByVisitTableViewController: UITableViewController {
             return 85
         }
         
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     func loadData() {
         groupDefinitions.removeAll(keepCapacity: true)

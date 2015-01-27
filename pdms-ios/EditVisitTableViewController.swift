@@ -46,12 +46,17 @@ class EditVisitTableViewController: UITableViewController,UIActionSheetDelegate 
         
         typeLabel.addTarget(self, action: "showSelectPicker:", forControlEvents: UIControlEvents.EditingDidBegin)
         departmentLabel.addTarget(self, action: "showSelectPicker:", forControlEvents: UIControlEvents.EditingDidBegin)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     func loadOptions() {
         let url = SERVER_DOMAIN + "visit/add"
@@ -78,6 +83,22 @@ class EditVisitTableViewController: UITableViewController,UIActionSheetDelegate 
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if identifier == "completeEditVisitSegue" {
+            if typeLabel.text.isEmpty {
+                CustomAlertView.showMessage("就诊类型必填", parentViewController: self)
+                return false
+            } else if number.text.isEmpty{
+                CustomAlertView.showMessage("就诊号必填", parentViewController: self)
+                return false
+            } else if departmentLabel.text.isEmpty{
+                CustomAlertView.showMessage("科室必填", parentViewController: self)
+                return false
+            } else if startTime.text.isEmpty{
+                CustomAlertView.showMessage("开始时间必填", parentViewController: self)
+                return false
+            } else if endTime.text.isEmpty{
+                CustomAlertView.showMessage("结束时间必填", parentViewController: self)
+                return false
+            }
             saveVisit()
         }
         return false

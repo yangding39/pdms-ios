@@ -39,6 +39,10 @@ class LoginTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 
     @IBAction func didLoginBtn(sender: AnyObject) {
         self.login()
@@ -62,6 +66,20 @@ class LoginTableViewController: UITableViewController {
             }
         }
         if saveResult && fieldErrors.count == 0 {
+            let user = User()
+            if let id = json["data"]["id"].number {
+                user.id = id
+            }
+            if let name = json["data"]["userName"].string {
+                user.name = name
+            }
+            if let hospital = json["data"]["companyName"].string {
+                user.hospital = hospital
+            }
+            if let department = json["data"]["organizationName"].string {
+                user.department = department
+            }
+            LOGIN_USER = user
             if let token = json["data"]["token"].string {
                 TOKEN = token
                 self.dismissViewControllerAnimated(true, completion: nil)

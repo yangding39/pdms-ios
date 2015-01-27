@@ -16,18 +16,22 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     var detailPatient : Patient!
     override func viewDidLoad() {
         super.viewDidLoad()
-       // loadingIndicator.startAnimating()
-                // Do any additional setup after loading the view, typically from a nib.
+        if TOKEN.isEmpty {
+            let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("loginTableViewController") as LoginTableViewController
+            self.presentViewController(loginViewController, animated: true, completion: nil)
+        }
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     override func viewWillAppear(animated: Bool) {
         if toDetail {
             let patientDetailView = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("patitentDetailViewController") as PatientDetailViewController
             patientDetailView.patient = detailPatient
             self.navigationController?.pushViewController(patientDetailView, animated: false)
-           toDetail = false
+            toDetail = false
         } else {
             self.loadData()
         }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,21 +57,22 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCellWithIdentifier("historyCell", forIndexPath: indexPath) as HistoryTableCell
         let cell = self.tableView.dequeueReusableCellWithIdentifier("patientCell") as PatientTableCell
+        var patient : Patient!
         if tableView == self.searchDisplayController?.searchResultsTableView {
-            let patient = self.searchResult[indexPath.row]
-            cell.name.text = patient.name
-            cell.gender.text = patient.gender
-            cell.age.text = "\(patient.age)"
+            patient = self.searchResult[indexPath.row]
         } else {
-            let patient = self.recentPatients[indexPath.row]
-            cell.name.text = patient.name
-            cell.gender.text = patient.gender
-            cell.age.text = "\(patient.age)"
+            patient = self.recentPatients[indexPath.row]
         }
-       
+        cell.name.text = patient.name
+        cell.gender.text = "性别：" + patient.gender
+        cell.age.text = "年龄：\(patient.age)"
+        cell.birthday.text = "生日：" + patient.birthday
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
         if (searchString != nil && !searchString.isEmpty) {
             self.searchResult = []
@@ -97,6 +102,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             patient.gender = patientJson["gender"].string
             patient.age = patientJson["age"].int
             patient.birthday = patientJson["birthday"].string
+            patient.caseNo = patientJson["patientNo"].string
             self.recentPatients.append(patient)
         }
          self.tableView.reloadData()        
@@ -110,6 +116,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             patient.gender = patientJson["gender"].string
             patient.age = patientJson["age"].int
             patient.birthday = patientJson["birthday"].string
+            patient.caseNo = patientJson["patientNo"].string
             self.searchResult.append(patient)
         }
         self.searchDisplayController?.searchResultsTableView.reloadData()

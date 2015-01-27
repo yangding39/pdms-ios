@@ -41,7 +41,7 @@ class Data {
     var columnName : String!
     var value : String!
     var columnType : Int!
-    var isRequired : Bool!
+    var isRequired = false
     var visibleType :  Int!
     var unitName : String!
     var isDrug : Bool!

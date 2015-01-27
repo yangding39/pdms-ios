@@ -23,6 +23,7 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
     var editCompelete = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view, typically from a nib.
             }
     override func viewWillAppear(animated: Bool) {
@@ -41,7 +42,9 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editVisitSegue" {
             let navigateController =  segue.destinationViewController as UINavigationController

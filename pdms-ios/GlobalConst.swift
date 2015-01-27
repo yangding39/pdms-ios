@@ -10,3 +10,4 @@ import Foundation
 
 let SERVER_DOMAIN = "http://192.168.10.116:7070/"
 var TOKEN = ""
+var LOGIN_USER = User()

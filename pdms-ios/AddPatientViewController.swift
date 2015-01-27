@@ -26,6 +26,7 @@ class AddPatientViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         birthday.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
         gender.addTarget(self, action: "showSelectPicker:", forControlEvents: UIControlEvents.EditingDidBegin)
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,19 +38,13 @@ class AddPatientViewController: UITableViewController {
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
         if name.text.isEmpty {
-            name.layer.borderColor = UIColor.redColor().CGColor
-            name.layer.borderWidth = 1.0
-            name.layer.cornerRadius = 5
+            CustomAlertView.showMessage("姓名必填", parentViewController: self)
             return false
         } else if gender.text.isEmpty {
-            gender.layer.borderColor = UIColor.redColor().CGColor
-            gender.layer.borderWidth = 1.0
-            gender.layer.cornerRadius = 5
+            CustomAlertView.showMessage("性别必填", parentViewController: self)
             return false
         } else if birthday.text.isEmpty {
-            birthday.layer.borderColor = UIColor.redColor().CGColor
-            birthday.layer.borderWidth = 1.0
-            birthday.layer.cornerRadius = 5
+            CustomAlertView.showMessage("生日必填", parentViewController: self)
             return false
         }
         savePatient()
@@ -85,7 +80,7 @@ class AddPatientViewController: UITableViewController {
         
         let url = SERVER_DOMAIN + "patients/save"
         let params : [String : AnyObject] = ["token" : TOKEN, "patientName" : patient.name, "gender" : patient.gender, "birthday" : patient.birthday,
-            "age" : patient.age, "caseNo" : patient.caseNo]
+            "age" : patient.age, "patientNo" : patient.caseNo]
          HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: addPatientResult, fail: nil)
        
     }
@@ -109,6 +104,7 @@ class AddPatientViewController: UITableViewController {
                 patient.age = 0
             }
             patient.birthday = json["data"]["birthday"].string
+            patient.caseNo = json["data"]["patientNo"].string
             self.performSegueWithIdentifier("completeAddPatientSegue", sender: self)
         }
 

@@ -18,6 +18,7 @@ class CategoryTableViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData(0)
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -54,6 +55,9 @@ class CategoryTableViewController : UITableViewController {
            }
         }
        
+    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     @IBAction func categoryChanged(sender: UISegmentedControl) {
         loadData(sender.selectedSegmentIndex)

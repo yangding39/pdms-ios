@@ -21,6 +21,7 @@ class OptionsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view, typically from a nib.
     }
 

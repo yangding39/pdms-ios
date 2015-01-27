@@ -14,11 +14,22 @@ class UserPasswordViewController: UITableViewController {
     @IBOutlet weak var oldPasswordText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     @IBAction func updatePassword(sender: AnyObject) {
         let newPassword = newPasswordText.text
         let passwordConfirm = passwordConfirmText.text
-        if (newPassword != passwordConfirm) {
+        if oldPasswordText.text.isEmpty {
+            CustomAlertView.showMessage("原密码必填", parentViewController:self)
+        } else if newPasswordText.text.isEmpty {
+            CustomAlertView.showMessage("新密码必填", parentViewController:self)
+        } else if countElements(newPasswordText.text) < 0 || countElements(newPasswordText.text) > 32 {
+            CustomAlertView.showMessage("新密码必须是1-32个字符", parentViewController:self)
+        } else if (newPassword != passwordConfirm) {
             CustomAlertView.showMessage("两次密码不一致", parentViewController:self)
         } else {
             self.updatePassword()

@@ -18,6 +18,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -43,7 +44,9 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
         let labelHeight = UILabel.heightForDynamicText(groupDefinition.name, font: UIFont.systemFontOfSize(17.0), width: self.tableView.bounds.width)
         return 23 + labelHeight
     }
-
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     func loadData() {
         let url = SERVER_DOMAIN + "quota/nextLevelQuota"
         let parameters : [ String : AnyObject] = ["token": TOKEN, "groupDefinitionId": parentGroupDefinition.id]

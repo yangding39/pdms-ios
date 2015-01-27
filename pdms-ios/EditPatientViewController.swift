@@ -36,26 +36,22 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
             self.tableView.updateConstraintsIfNeeded()
         }
     }
-    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
-        if identifier == "completeAddPatientSegue" {
+        if identifier == "completeEditPatientSegue" {
             if nameText.text.isEmpty {
-                nameText.layer.borderColor = UIColor.redColor().CGColor
-                nameText.layer.borderWidth = 1.0
-                nameText.layer.cornerRadius = 5
+                CustomAlertView.showMessage("姓名必填", parentViewController: self)
                 return false
             } else if genderText.text.isEmpty {
-                genderText.layer.borderColor = UIColor.redColor().CGColor
-                genderText.layer.borderWidth = 1.0
-                genderText.layer.cornerRadius = 5
+                CustomAlertView.showMessage("性别必填", parentViewController: self)
                 return false
             } else if birthdayText.text.isEmpty {
-                birthdayText.layer.borderColor = UIColor.redColor().CGColor
-                birthdayText.layer.borderWidth = 1.0
-                birthdayText.layer.cornerRadius = 5
+                CustomAlertView.showMessage("生日必填", parentViewController: self)
                 return false
-            } 
+            }
             savePatient()
 
         }
@@ -84,7 +80,7 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
     func postData(patient : Patient) {
         let url = SERVER_DOMAIN + "patients/save"
         let params : [String : AnyObject] = ["token" : TOKEN, "patientName" : patient.name, "gender" : patient.gender, "birthday" : patient.birthday,
-            "age" : patient.age, "caseNo" : patient.caseNo, "patientId" : patient.id]
+            "age" : patient.age, "patientNo" : patient.caseNo, "patientId" : patient.id]
         HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: addPatientResult, fail: nil)
         
     }

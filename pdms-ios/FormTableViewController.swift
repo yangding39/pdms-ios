@@ -20,6 +20,7 @@ class FormTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -78,6 +79,11 @@ class FormTableViewController: UITableViewController {
         let labelHeight = UILabel.heightForDynamicText(fieldData.columnName, font: UIFont.systemFontOfSize(17.0), width: 125.0)
         return 23 + labelHeight
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     func loadData() {
             let url = SERVER_DOMAIN + "quota/toAddQuota"
             let parameters : [ String : AnyObject] = ["token": TOKEN, "groupDefinitionId": parentGroupDefinition.id, "patientSeeDoctorId" : visit.id,
@@ -171,6 +177,10 @@ class FormTableViewController: UITableViewController {
                             fieldDatas[i].value = "\(Data.BoolIntValue.FALSE)"
                         }
                     }
+                }
+                if fieldDatas[i].isRequired && fieldDatas[i].value.isEmpty {
+                    CustomAlertView.showMessage(fieldDatas[i].columnName + "必填", parentViewController: self)
+                    return false
                 }
             }
             self.saveQuotaForm()

@@ -15,7 +15,7 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -35,12 +35,14 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("patientCell", forIndexPath: indexPath) as PatientTableCell
         let patient = self.tableDatas[indexPath.row]
         cell.name.text = patient.name
-        cell.gender.text = patient.gender
-        cell.age.text = "\(patient.age!)"
-        cell.birthday.text = patient.birthday
+        cell.gender.text = "性别：" + patient.gender
+        cell.age.text = "年龄：\(patient.age)"
+        cell.birthday.text = "生日：" + patient.birthday
         return cell
     }
-    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     func loadData() {
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN
         let params : [String : AnyObject] = ["page" : page]
@@ -65,6 +67,7 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
                     patient.age = 0
                 }
                 patient.birthday = data["birthday"].string
+                patient.caseNo = data["patientNo"].string
                 self.tableDatas.append(patient)
             }
             if hasData {

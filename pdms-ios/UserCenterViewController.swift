@@ -10,16 +10,8 @@ import UIKit
 
 class UserCenterViewController: UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var hospitalLabel: UILabel!
     override func viewDidLoad() {
-        var user = User()
-        user.name = "茅医生"
-        user.title = "住院医师"
-        user.hospital = "上海仁济医院 消化内科"
-        self.nameLabel.text = user.name
-        self.titleLabel.text = user.title
-        self.hospitalLabel.text = user.hospital
         
         let backgroundImage = UIImage(named: "user-bg")
         let backgroundView = UIImageView(image: backgroundImage)
@@ -39,7 +31,16 @@ class UserCenterViewController: UITableViewController {
         }
         
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        var user = LOGIN_USER
+        self.nameLabel.text = user.name
+        self.hospitalLabel.text = user.hospital + "  " + user.department
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     @IBAction func didLogoutBtn(sender: AnyObject) {
         logout()
     }

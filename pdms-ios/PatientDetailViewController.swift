@@ -23,21 +23,26 @@ class PatientDetailViewController: UITableViewController{
         name.text = patient.name
         var detailString = ""
         if let gender = patient.gender {
-            detailString += gender
+            detailString += "性别：" + patient.gender
         }
         if let age = patient.age {
-            detailString += "      \(age)      "
+            detailString += "   年龄：\(patient.age)   "
         }
         if let birthday = patient.birthday {
-            detailString += birthday
+            detailString += "生日：" + patient.birthday
         }
         if let caseNo = patient.caseNo {
-            detailString += "      病案号：\(caseNo)"
+            if !caseNo.isEmpty {
+                detailString += "      病案号：\(caseNo)"
+            }
         }
         detailLabel.text = detailString
         detailLabel.adjustsFontSizeToFitWidth = true
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     func saveToRecent() {
         let url = SERVER_DOMAIN + "patients/searchView"
         let parameters: [String : AnyObject] = ["token": TOKEN, "patientId": patient.id]

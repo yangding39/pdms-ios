@@ -15,6 +15,7 @@ class QuotaByPatientTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -49,8 +50,16 @@ class QuotaByPatientTableViewController: UITableViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
-        cell.name.text = groupDefinitions[indexPath.section].quota[indexPath.row].name
+        let quota = groupDefinitions[indexPath.section].quota[indexPath.row]
+        cell.name.text = quota.name
+        cell.checkTime.text = "诊断时间：\(quota.checkTime)"
+        cell.createTime.text = "创建时间：\(quota.createTime)"
+        cell.lastModifiedTime.text = "修改时间：\(quota.lastModifiedTime)"
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func loadData() {

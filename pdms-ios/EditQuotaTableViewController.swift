@@ -80,6 +80,10 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
         return 23 + labelHeight
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     func loadData() {
         let url = SERVER_DOMAIN + "quota/toEditQuota"
         let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDataId": quota.id, "patientSeeDoctorId" : 1, "patientId" : 1]
@@ -198,6 +202,10 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
                             fieldDatas[i].value = "\(Data.BoolIntValue.FALSE)"
                         }
                     }
+                }
+                if fieldDatas[i].isRequired && fieldDatas[i].value.isEmpty {
+                    CustomAlertView.showMessage(fieldDatas[i].columnName + "必填", parentViewController: self)
+                    return false
                 }
             }
            

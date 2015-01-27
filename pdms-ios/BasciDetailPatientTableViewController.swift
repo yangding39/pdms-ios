@@ -20,7 +20,7 @@ class BasciDetailPatientTableViewController: UITableViewController {
     var editCompelete = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(animated: Bool) {
@@ -35,6 +35,10 @@ class BasciDetailPatientTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     func loadData() {
         let url = SERVER_DOMAIN + "patients/basic/\(patient.id)?token=" + TOKEN
@@ -52,6 +56,7 @@ class BasciDetailPatientTableViewController: UITableViewController {
                     patient.age = 0
                 }
                 patient.birthday = json["data"]["birthday"].string
+                patient.caseNo = json["data"]["patientNo"].string
                 fillLabel()
         } else {
             
