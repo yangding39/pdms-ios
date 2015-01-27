@@ -72,7 +72,7 @@ class CategoryTableViewController : UITableViewController {
     func fillData(json : JSON) {
         for (index: String, favoriteJson: JSON) in json["data"]  {
             let groupDefintion = GroupDefinition()
-            groupDefintion.id = favoriteJson["groupDefinitionId"].int
+            groupDefintion.id = favoriteJson["groupDefinitionId"].number
             groupDefintion.name = favoriteJson["groupDefinitionName"].string
             groupDefintion.type = favoriteJson["groupDefinitionType"].int
             categoryDatas.append(groupDefintion)
@@ -98,7 +98,7 @@ class CategoryTableViewController : UITableViewController {
     func fillSearchData(json: JSON) -> Void{
         for (index: String, favoriteJson: JSON) in json["data"]  {
             let groupDefintion = GroupDefinition()
-            groupDefintion.id = favoriteJson["groupDefinitionId"].int
+            groupDefintion.id = favoriteJson["groupDefinitionId"].number
             groupDefintion.name = favoriteJson["groupDefinitionName"].string
             groupDefintion.type = favoriteJson["groupDefinitionType"].int
             searchQuotaData.append(groupDefintion)

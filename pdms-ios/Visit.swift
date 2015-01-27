@@ -9,12 +9,12 @@
 import Foundation
 
 class Visit {
-    var id : Int!
+    var id : NSNumber!
     var typeLabel : String!
-    var type : Int!
+    var type : NSNumber!
     var number : String!
     var departmentLabel : String!
-    var department : Int!
+    var department : NSNumber!
     var mainDiagonse : String!
     var startTime : String!
     var endTime :  String!

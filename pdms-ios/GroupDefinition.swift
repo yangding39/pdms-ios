@@ -13,7 +13,7 @@ class GroupDefinition {
         static let QUOTA = 2  //指标
         static let DRUG = 3  //药物
     }
-    var id : Int!
+    var id : NSNumber!
     var name : String!
     var type : Int!
     var quota  = Array<Quota>()

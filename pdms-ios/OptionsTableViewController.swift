@@ -76,7 +76,7 @@ class OptionsTableViewController: UITableViewController {
         for (index: String, optionsJson: JSON) in json["data"]["options"]  {
              let option = Option()
              option.label = optionsJson["lable"].string
-             option.value = optionsJson["value"].int
+             option.value = optionsJson["value"].number
              self.options.append(option)
         }
         self.tableView.reloadData()

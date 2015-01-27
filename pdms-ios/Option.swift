@@ -10,7 +10,7 @@ import Foundation
 
 class Option {
     var label : String!
-    var value : Int!
+    var value : NSNumber!
     
     init() {
     }

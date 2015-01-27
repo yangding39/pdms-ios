@@ -92,7 +92,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     func fillData(json: JSON) -> Void {
         for (index: String, patientJson: JSON) in json["data"] {
             let patient = Patient()
-            patient.id = patientJson["patientId"].int
+            patient.id = patientJson["patientId"].number
             patient.name = patientJson["patientName"].string
             patient.gender = patientJson["gender"].string
             patient.age = patientJson["age"].int
@@ -105,7 +105,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     func fillSearchData(json: JSON) -> Void{
         for (index: String, patientJson: JSON) in json["data"]  {
             let patient = Patient()
-            patient.id = patientJson["patientId"].int
+            patient.id = patientJson["patientId"].number
             patient.name = patientJson["patientName"].string
             patient.gender = patientJson["gender"].string
             patient.age = patientJson["age"].int

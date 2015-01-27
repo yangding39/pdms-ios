@@ -56,7 +56,7 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
             for (index: String, data: JSON) in json["data"]["data"] {
                 hasData = true
                 let patient = Patient()
-                patient.id = data["patientId"].int
+                patient.id = data["patientId"].number
                 patient.name = data["patientName"].string
                 patient.gender = data["gender"].string
                 if let age = data["age"].int {

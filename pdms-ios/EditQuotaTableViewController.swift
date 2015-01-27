@@ -97,8 +97,8 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             quota = Quota()
         }
         
-        patient.id = json["data"]["patientId"].int
-        visit.id = json["data"]["patientSeeDoctorId"].int
+        patient.id = json["data"]["patientId"].number
+        visit.id = json["data"]["patientSeeDoctorId"].number
         quota.name = json["data"]["groupDefinitionName"].string
         quota.groupNamePath = json["data"]["groupNamePath"].string
         
@@ -133,8 +133,8 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
         }
         for (index: String, fieldDatasJson: JSON) in json["data"]["quotaFieldDatas"]  {
             let fieldData = Data()
-            fieldData.id = fieldDatasJson["quotaFieldDataId"].int
-            fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].int
+            fieldData.id = fieldDatasJson["quotaFieldDataId"].number
+            fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].number
             fieldData.columnName = fieldDatasJson["columnName"].string
             fieldData.value = fieldDatasJson["quotaFieldValue"].string
             fieldData.columnType = fieldDatasJson["columnType"].int

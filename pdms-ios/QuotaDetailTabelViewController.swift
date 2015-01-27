@@ -99,7 +99,7 @@ class QuotaDetailTabelViewController: UITableViewController{
         }
         for (groupIndex: String, fieldDatasJson : JSON) in json["data"]["quotaFieldDatas"]  {
                 let fieldData = Data()
-                //fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].int
+                //fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].number
                 fieldData.columnName = fieldDatasJson["columnName"].string
                 fieldData.value = fieldDatasJson["quotaFieldValue"].string
                 fieldData.unitName = fieldDatasJson["unitName"].string

@@ -8,7 +8,7 @@
 
 import Foundation
 class Patient {
-    var id : Int!
+    var id : NSNumber!
     var name : String!
     var gender : String!
     var age : Int!

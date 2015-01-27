@@ -53,7 +53,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     func fillData(json : JSON) {
         for (index: String, groupJson: JSON) in json["data"]["groupDefinitions"]  {
             let groupDefintion = GroupDefinition()
-            groupDefintion.id = groupJson["groupDefinitionId"].int
+            groupDefintion.id = groupJson["groupDefinitionId"].number
             groupDefintion.name = groupJson["groupDefinitionName"].string
             groupDefintion.type = groupJson["groupDefinitionType"].int
             groupDefinitions.append(groupDefintion)

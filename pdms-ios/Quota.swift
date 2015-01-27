@@ -8,7 +8,7 @@
 
 import Foundation
 class Quota {
-    var id : Int!
+    var id : NSNumber!
     var name : String!
     var checkTime : String!
     var createTime : String!

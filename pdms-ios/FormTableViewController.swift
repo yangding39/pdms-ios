@@ -87,7 +87,7 @@ class FormTableViewController: UITableViewController {
     }
     
     func fillData(json : JSON) {
-        let crowDefinitionId = json["data"]["crowdDefinitionId"].int
+        let crowDefinitionId = json["data"]["crowdDefinitionId"].number
         let crowDefinitionName = json["data"]["crowdDefinitionName"].string
         if crowDefinition == nil {
             crowDefinition = GroupDefinition()
@@ -115,7 +115,7 @@ class FormTableViewController: UITableViewController {
         }
         for (index: String, fieldDatasJson: JSON) in json["data"]["quotaFieldDatas"]  {
             let fieldData = Data()
-            fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].int
+            fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].number
             fieldData.columnName = fieldDatasJson["columnName"].string
             fieldData.value = fieldDatasJson["quotaFieldValue"].string
             fieldData.columnType = fieldDatasJson["columnType"].int

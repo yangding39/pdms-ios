@@ -100,7 +100,7 @@ class AddPatientViewController: UITableViewController {
             }
         }
         if saveResult && fieldErrors.count == 0 {
-            patient.id = json["data"]["patientId"].int
+            patient.id = json["data"]["patientId"].number
             patient.name = json["data"]["patientName"].string
             patient.gender = json["data"]["gender"].string
             if let age = json["data"]["age"].int {

@@ -63,11 +63,11 @@ class QuotaByPatientTableViewController: UITableViewController {
     func fillData(json : JSON) {
         for (groupIndex: String, groupJson : JSON) in json["data"]["crowdDefinitions"]  {
             let groupDefinition = GroupDefinition()
-            groupDefinition.id = groupJson["crowdDefinitionId"].int
+            groupDefinition.id = groupJson["crowdDefinitionId"].number
             groupDefinition.name = groupJson["crowdDefinitionName"].string
             for (quotaIndex: String, quotaJson : JSON) in groupJson["quotaDatas"] {
                 let quota = Quota()
-                quota.id = quotaJson["quotaDataId"].int
+                quota.id = quotaJson["quotaDataId"].number
                 quota.name = quotaJson["groupDefinitionName"].string
                 quota.createTime = quotaJson["createdTimestampStr"].string
                 quota.checkTime = quotaJson["checkTimestampStr"].string

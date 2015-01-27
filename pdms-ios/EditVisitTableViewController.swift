@@ -61,12 +61,12 @@ class EditVisitTableViewController: UITableViewController,UIActionSheetDelegate 
     
     func fillOptions(json : JSON) {
         for (index: String, subJson: JSON) in json["data"]  {
-            let dictId = subJson["dictId"].int
+            let dictId = subJson["dictId"].number
             for (optionIndex : String, optionJson : JSON) in subJson["options"] {
                 let option = Option()
                 
                 option.label = optionJson["lable"].string!
-                option.value = optionJson["value"].int!
+                option.value = optionJson["value"].number!
                 if dictId == 5 {
                     self.typeOptions.append(option)
                 } else if dictId == 6 {

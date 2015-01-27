@@ -36,8 +36,8 @@ class Data {
         static let DIAG_DATE = -1
         static let DIAG_MAIN = -2
     }
-    var id : Int!
-    var definitionId : Int!
+    var id : NSNumber!
+    var definitionId : NSNumber!
     var columnName : String!
     var value : String!
     var columnType : Int!

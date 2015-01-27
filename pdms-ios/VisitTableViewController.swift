@@ -71,7 +71,7 @@ class VisitTableViewController : UITableViewController {
         visits.removeAll(keepCapacity: true)
         for (index: String, visitJson: JSON) in json["data"]  {
             let visit = Visit()
-            visit.id = visitJson["visitId"].int
+            visit.id = visitJson["visitId"].number
             visit.typeLabel = visitJson["visitTypeLabel"].string
             visit.number = visitJson["visitNumber"].string
             visit.departmentLabel = visitJson["departmentLabel"].string

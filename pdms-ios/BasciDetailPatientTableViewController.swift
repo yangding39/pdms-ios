@@ -43,7 +43,7 @@ class BasciDetailPatientTableViewController: UITableViewController {
     }
     func fillData(json: JSON) {
         if json["stat"].int == 0 {
-                patient.id = json["data"]["patientId"].int
+                patient.id = json["data"]["patientId"].number
                 patient.name = json["data"]["patientName"].string
                 patient.gender = json["data"]["gender"].string
                 if let age = json["data"]["age"].int {
