@@ -45,7 +45,7 @@ class Data {
     var visibleType :  Int!
     var unitName : String!
     var isDrug : Bool!
-    var isValid : Bool!
+    var isValid = true
 
     init(){
         
@@ -61,7 +61,7 @@ class Data {
         dDate.visibleType = Data.VisibleType.TIME
         dDate.unitName = nil
         dDate.isDrug = false
-        dDate.isValid = false
+        dDate.isValid = true
         let crowName = crowDefinition.name
         if crowName == "个人史" || crowName == "遗传家族史" || crowName == "药物治疗"{
             return nil

@@ -27,4 +27,38 @@ class CustomAlertView {
             }
         }
     }
+    
+    class func showDialog(message : String, parentViewController : UIViewController,okFunc : (() -> Void)!, cancelFunc :(() -> Void)!) {
+        if !message.isEmpty {
+            if NSClassFromString("UIAlertController") != nil {
+                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+                parentViewController.presentViewController(alertController, animated: true, completion: nil)
+                let okAction = UIAlertAction(title: "确定", style: .Default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    if okFunc != nil {
+                        okFunc()
+                    }
+                })
+                let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    if cancelFunc != nil {
+                        cancelFunc()
+                    }
+                })
+                alertController.addAction(okAction)
+                alertController.addAction(cancelAction)
+            } else {
+                let alert = UIAlertView()
+                alert.title = "出错了"
+                alert.message = message
+                alert.addButtonWithTitle("确定")
+                alert.addButtonWithTitle("取消")
+                alert.show()
+            }
+        }
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        
+    }
 }

@@ -12,8 +12,6 @@ class VisitTableCell : UITableViewCell {
     
     @IBOutlet weak var typeLabel: UILabel!
     
-    @IBOutlet weak var number: UILabel!
-    
     @IBOutlet weak var detailLabel: UILabel!
     
 }

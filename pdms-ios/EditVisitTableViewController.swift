@@ -89,6 +89,9 @@ class EditVisitTableViewController: UITableViewController,UIActionSheetDelegate 
             } else if number.text.isEmpty{
                 CustomAlertView.showMessage("就诊号必填", parentViewController: self)
                 return false
+            }  else if countElements(number.text) > 20 {
+                CustomAlertView.showMessage("就诊号长度不能超过20", parentViewController: self)
+                return false
             } else if departmentLabel.text.isEmpty{
                 CustomAlertView.showMessage("科室必填", parentViewController: self)
                 return false

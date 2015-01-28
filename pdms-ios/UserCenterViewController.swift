@@ -19,7 +19,7 @@ class UserCenterViewController: UITableViewController {
         self.tableView.backgroundView = backgroundView
         
         if var frame = self.tableView.tableHeaderView?.frame {
-             frame.size.height = UIScreen.mainScreen().bounds.size.width/400 * 200
+             frame.size.height = UIScreen.mainScreen().bounds.size.width/400 * 120
              self.tableView.tableHeaderView?.frame = frame
             self.tableView.updateConstraintsIfNeeded()
         }

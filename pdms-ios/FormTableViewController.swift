@@ -52,11 +52,12 @@ class FormTableViewController: UITableViewController {
             cell.name.sizeToFit()
             cell.unit.text = fieldData.unitName
             cell.value.text = fieldData.value
+            cell.value.tag = fieldData.visibleType
             if let visibleType = fieldData.visibleType {
                 switch visibleType {
                 case Data.VisibleType.INPUT :
                     if fieldData.columnType == Data.ColumnType.NUMBER {
-                        cell.value.keyboardType = UIKeyboardType.NumberPad
+                        cell.value.keyboardType = UIKeyboardType.DecimalPad
                     }
                 case Data.VisibleType.TIME :
                     cell.value.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
@@ -129,7 +130,12 @@ class FormTableViewController: UITableViewController {
             fieldData.visibleType = fieldDatasJson["visibleType"].int
             fieldData.unitName = fieldDatasJson["unitName"].string
             fieldData.isDrug = getBool(fieldDatasJson["isDrug"].int!)
-            fieldData.isValid = getBool(fieldDatasJson["isValid"].int!)
+            let isValid = fieldDatasJson["isValid"].int!
+            if isValid == 0 {
+                fieldData.isValid = true
+            } else if isValid == 1 {
+                fieldData.isValid = false
+            }
             setVisibleTypeForDrug(fieldData)
             fieldDatas.append(fieldData)
         }
@@ -137,9 +143,14 @@ class FormTableViewController: UITableViewController {
     }
     
     func showDatePicker(sender: UITextField) {
-        currentEditField = sender
-        sender.inputView = UIDatePicker().customPickerStyle(self.view)
-        sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleDatePicker:"), target : self)
+        if sender.tag == Data.VisibleType.TIME {
+            currentEditField = sender
+            sender.inputView = UIDatePicker().customPickerStyle(self.view)
+            sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleDatePicker:"), target : self)
+        } else {
+            sender.inputView = nil
+            sender.inputAccessoryView = nil
+        }
     }
     
     func handleDatePicker(sender: UIBarButtonItem) {

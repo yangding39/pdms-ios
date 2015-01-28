@@ -33,7 +33,6 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let fieldData = fieldDatas[indexPath.row]
-        
         if fieldData.visibleType == Data.VisibleType.DERAIL {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormSwitchCell", forIndexPath: indexPath) as QuotaFormSwitchCell
             cell.name.text = fieldData.columnName
@@ -52,11 +51,15 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             cell.name.sizeToFit()
             cell.unit.text = fieldData.unitName
             cell.value.text = fieldData.value
+            cell.value.tag = fieldData.visibleType
+//            if !fieldData.isValid {
+//                cell.value.textColor = UIColor.redColor()
+//            }
             if let visibleType = fieldData.visibleType {
                 switch visibleType {
                 case Data.VisibleType.INPUT :
                     if fieldData.columnType == Data.ColumnType.NUMBER {
-                        cell.value.keyboardType = UIKeyboardType.NumberPad
+                        cell.value.keyboardType = UIKeyboardType.DecimalPad
                     }
                 case Data.VisibleType.TIME :
                     cell.value.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
@@ -146,17 +149,29 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             fieldData.visibleType = fieldDatasJson["visibleType"].int
             fieldData.unitName = fieldDatasJson["unitName"].string
             fieldData.isDrug = getBool(fieldDatasJson["isDrug"].int!)
-            fieldData.isValid = getBool(fieldDatasJson["isValid"].int!)
+            let isValid = fieldDatasJson["isValid"].int!
+            if isValid == 0 {
+                fieldData.isValid = true
+            } else if isValid == 1 {
+                fieldData.isValid = false
+            }
             setVisibleTypeForDrug(fieldData)
             fieldDatas.append(fieldData)
+            
         }
         self.tableView.reloadData()
     }
-    
+
     func showDatePicker(sender: UITextField) {
-        currentEditField = sender
-        sender.inputView = UIDatePicker().customPickerStyle(self.view)
-        sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleDatePicker:"), target : self)
+        if sender.tag == Data.VisibleType.TIME {
+            currentEditField = sender
+            sender.inputView = UIDatePicker().customPickerStyle(self.view)
+            sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleDatePicker:"), target : self)
+        } else {
+            sender.inputView = nil
+            sender.inputAccessoryView = nil
+        }
+        
     }
     
     func handleDatePicker(sender: UIBarButtonItem) {
@@ -167,6 +182,9 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             currentEditField.text = dateFormatter.stringFromDate(date)
             currentEditField.endEditing(true)
         }
+        
+       currentEditField.inputView = nil
+        currentEditField.inputAccessoryView = nil
     }
     
     func getBool(intValue : Int) -> Bool {

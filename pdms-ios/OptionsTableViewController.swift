@@ -22,6 +22,9 @@ class OptionsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.loadData()
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        if !mutilSelect {
+            self.navigationItem.rightBarButtonItem = nil
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -58,9 +61,11 @@ class OptionsTableViewController: UITableViewController {
                     otherSelectedCell.accessoryType = UITableViewCellAccessoryType.None
                 }
             }
+            self.performSegueWithIdentifier("completeSelectOptionSegue", sender: self)
         }
 
     }
+
     
     func loadData() {
         let url = SERVER_DOMAIN + "quota/listDicts"

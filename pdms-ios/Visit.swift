@@ -26,11 +26,14 @@ class Visit {
     func generateDetail() -> String {
         var detailString = ""
         
+        if let number = self.number {
+            detailString +=  "就诊号：\(self.number)"
+        }
         if let department = self.departmentLabel {
-            detailString = "科室：\(self.departmentLabel)"
+            detailString += "\n科室：\(self.departmentLabel)"
         }
         if let mainDiagonse = self.mainDiagonse {
-            detailString += "      \(self.mainDiagonse)"
+            detailString += "\n\(self.mainDiagonse)"
         }
         
         var timeText = "\n就诊时间："

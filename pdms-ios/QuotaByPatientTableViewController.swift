@@ -52,6 +52,7 @@ class QuotaByPatientTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
         let quota = groupDefinitions[indexPath.section].quota[indexPath.row]
         cell.name.text = quota.name
+        cell.name.adjustsFontSizeToFitWidth = true
         cell.checkTime.text = "诊断时间：\(quota.checkTime)"
         cell.createTime.text = "创建时间：\(quota.createTime)"
         cell.lastModifiedTime.text = "修改时间：\(quota.lastModifiedTime)"

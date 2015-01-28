@@ -60,9 +60,6 @@ class QuotaByVisitTableViewController: UITableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("visitDetailCell", forIndexPath: indexPath) as VisitTableCell
             cell.typeLabel.text = visit.typeLabel
-            if let number = visit.number {
-                cell.number.text =  "就诊号：\(visit.number)"
-            }
             let detailString = visit.generateDetail()
             cell.detailLabel.numberOfLines = 0
             cell.detailLabel.text = detailString
@@ -73,6 +70,7 @@ class QuotaByVisitTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
             let quota = groupDefinitions[indexPath.section - 1].quota[indexPath.row]
             cell.name.text = quota.name
+            cell.name.adjustsFontSizeToFitWidth = true
             cell.checkTime.text = "诊断时间：\(quota.checkTime)"
             cell.createTime.text = "创建时间：\(quota.createTime)"
             cell.lastModifiedTime.text = "修改时间：\(quota.lastModifiedTime)"

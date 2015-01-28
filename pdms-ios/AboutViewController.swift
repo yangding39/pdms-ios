@@ -13,7 +13,7 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let label = UILabel(frame: CGRectMake(20, 180 , self.view.bounds.size.width - 40, 150))
+        let label = UILabel(frame: CGRectMake(20, 160 , self.view.bounds.size.width - 40, 150))
         label.lineBreakMode = NSLineBreakMode.ByWordWrapping
         label.numberOfLines = 0
         label.font = UIFont.systemFontOfSize(14)

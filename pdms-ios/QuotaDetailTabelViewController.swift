@@ -61,6 +61,9 @@ class QuotaDetailTabelViewController: UITableViewController{
         } else {
             cell.detailTextLabel?.text = data.value
         }
+        if !data.isValid {
+            cell.detailTextLabel?.textColor = UIColor.redColor()
+        }
         return cell
     }
   
@@ -110,7 +113,12 @@ class QuotaDetailTabelViewController: UITableViewController{
                 //fieldData.isRequired = getBool(fieldDatasJson["isRequired"].int!)
                 //fieldData.visibleType = fieldDatasJson["visibleType"].int
                 //fieldData.isDrug = getBool(fieldDatasJson["isDrug"].int!)
-                //fieldData.isValid = getBool(fieldDatasJson["isValid"].int!)
+                let isValid = fieldDatasJson["isValid"].int
+                if isValid == 0 {
+                    fieldData.isValid = true
+                } else if isValid == 1 {
+                    fieldData.isValid = false
+                }
                 datas.append(fieldData)
         }
         self.tableView.reloadData()
@@ -127,5 +135,5 @@ class QuotaDetailTabelViewController: UITableViewController{
     @IBAction func completeEditQuota(segue : UIStoryboardSegue) {
         self.loadData()
     }
-    
+   
 }

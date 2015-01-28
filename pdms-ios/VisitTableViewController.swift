@@ -45,9 +45,6 @@ class VisitTableViewController : UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("visitAllCell", forIndexPath: indexPath) as VisitTableCell
         let visit  = visits[indexPath.row]
         cell.typeLabel.text = visit.typeLabel
-        if let number = visit.number {
-            cell.number.text =  "就诊号：\(visit.number)"
-        }
         
         let detailString = visit.generateDetail()
         cell.detailLabel.numberOfLines = 0
@@ -59,7 +56,7 @@ class VisitTableViewController : UITableViewController {
         let visit = visits[indexPath.row]
         let detailString = visit.generateDetail()
         let labelHeight = UILabel.heightForDynamicText(detailString, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 59 )
-        return 44 + labelHeight
+        return 46 + labelHeight
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
