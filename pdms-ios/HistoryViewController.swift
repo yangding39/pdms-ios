@@ -10,6 +10,7 @@ import UIKit
 
 class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
    
+    @IBOutlet weak var searchBar: UISearchBar!
     var recentPatients: [Patient] = []
     var searchResult: [Patient] = []
     var toDetail = false

@@ -184,6 +184,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="vgz-nn-DWQ" id="cRM-La-NMD"/>
                         <outlet property="searchDisplayController" destination="bZT-yH-yCb" id="82V-I6-CVo"/>
                         <outlet property="tableView" destination="5li-qU-reE" id="fKp-nK-CSv"/>
                     </connections>
@@ -4205,6 +4206,7 @@
                                                 <segment title="常用数据"/>
                                                 <segment title="全部数据"/>
                                             </segments>
+                                            <color key="tintColor" red="0.32941176470588235" green="0.70196078431372544" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="categoryChanged:" destination="PxJ-gv-FLt" eventType="valueChanged" id="uEF-Kt-k9K"/>
                                             </connections>
@@ -4494,6 +4496,9 @@
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MVw-kQ-ttw">
                                             <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="swithcDidEndEditing:" destination="7zc-6Q-N2Q" eventType="valueChanged" id="pqx-cT-etF"/>
+                                            </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYG-EM-gIl">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5712,6 +5717,9 @@
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3tT-ic-6UT">
                                             <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="swithcDidEndEditing:" destination="9eV-j9-bjf" eventType="valueChanged" id="O0e-N8-0rD"/>
+                                            </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fm-EZ-CwU">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5949,9 +5957,9 @@
         <image name="usersetting-ttitle" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fd9-kg-HK9"/>
+        <segue reference="7hT-QL-6mm"/>
         <segue reference="QeM-cy-n9e"/>
         <segue reference="GdD-IB-jUL"/>
-        <segue reference="l5R-dC-wfa"/>
+        <segue reference="mza-cw-LKh"/>
     </inferredMetricsTieBreakers>
 </document>

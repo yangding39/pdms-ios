@@ -8,14 +8,14 @@
 
 import UIKit
 
-class FormTableViewController: UITableViewController {
+class FormTableViewController: UITableViewController, UITextFieldDelegate {
 
     var visit : Visit!
     var patient : Patient!
     var parentGroupDefinition : GroupDefinition!
     var crowDefinition : GroupDefinition!
     var fieldDatas = Array<Data>()
-    
+    var inputDict = Dictionary<UIView, Int>()
     var currentEditField : UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,7 @@ class FormTableViewController: UITableViewController {
         if fieldData.visibleType == Data.VisibleType.DERAIL {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormSwitchCell", forIndexPath: indexPath) as QuotaFormSwitchCell
             cell.name.text = fieldData.columnName
+            inputDict[cell.swtichBtn] = indexPath.row
             return cell
         } else if fieldData.visibleType == Data.VisibleType.TEXT {
             
@@ -53,6 +54,8 @@ class FormTableViewController: UITableViewController {
             cell.unit.text = fieldData.unitName
             cell.value.text = fieldData.value
             cell.value.tag = fieldData.visibleType
+            cell.value.delegate = self
+            inputDict[cell.value] = indexPath.row
             if let visibleType = fieldData.visibleType {
                 switch visibleType {
                 case Data.VisibleType.INPUT :
@@ -174,21 +177,8 @@ class FormTableViewController: UITableViewController {
                 }
             }
         } else if identifier == "addQuotaCompleteSegue" {
+            endTextFieldEditing()
             for var i = 0 ; i < fieldDatas.count; ++i {
-                let indexPath = NSIndexPath(forRow: i, inSection: 0)
-                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? QuotaFormCell {
-                    if let textField = cell.value {
-                        fieldDatas[i].value = textField.text
-                    }
-                } else if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? QuotaFormSwitchCell {
-                    if let swtihcBtn = cell.swtichBtn {
-                        if swtihcBtn.on {
-                            fieldDatas[i].value = "\(Data.BoolIntValue.TRUE)"
-                        } else {
-                            fieldDatas[i].value = "\(Data.BoolIntValue.FALSE)"
-                        }
-                    }
-                }
                 if fieldDatas[i].isRequired && fieldDatas[i].value.isEmpty {
                     CustomAlertView.showMessage(fieldDatas[i].columnName + "必填", parentViewController: self)
                     return false
@@ -200,6 +190,7 @@ class FormTableViewController: UITableViewController {
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showOptionSegue" {
+            endTextFieldEditing()
             let optionsTableViewController = segue.destinationViewController as OptionsTableViewController
             let cell = sender as QuotaFormCell
             let indexPath = self.tableView.indexPathForCell(cell)!
@@ -242,7 +233,25 @@ class FormTableViewController: UITableViewController {
             let indexPath = self.tableView.indexPathForCell(cell)!
             fieldDatas[indexPath.row].value = dataValue
     }
-   
+    func textFieldDidEndEditing(textField: UITextField) {
+        if let row = inputDict[textField] {
+            let data = fieldDatas[row]
+            if data.visibleType == Data.VisibleType.INPUT || data.visibleType == Data.VisibleType.TIME {
+                data.value = textField.text
+            }
+        }
+    }
+    
+    @IBAction func swithcDidEndEditing(sender: UISwitch) {
+        if let row = inputDict[sender] {
+            let data = fieldDatas[row]
+            if sender.on {
+                data.value = "\(Data.BoolIntValue.TRUE)"
+            } else {
+                data.value = "\(Data.BoolIntValue.FALSE)"
+            }
+        }
+    }
     func saveQuotaForm() {
         let url = SERVER_DOMAIN + "quota/addQuota"
         let quotaDefinitionIds = ",".join(fieldDatas.map({ "\($0.definitionId)" }))
@@ -283,9 +292,20 @@ class FormTableViewController: UITableViewController {
     
     func setVisibleTypeForDrug(data : Data) {
         if data.columnName == "中文商品名" ||  data.columnName == "英文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
+            if data.columnName == "英文商品名" {
+                data.isRequired = false
+            }
              data.visibleType = Data.VisibleType.SELECT
         } else if data.columnName == "中文通用名" || data.columnName == "英文通用名" {
             data.visibleType = Data.VisibleType.TEXT
+        }
+    }
+    
+    func endTextFieldEditing() {
+        for key in inputDict.keys {
+            if let textField = key as? UITextField {
+                textField.endEditing(true)
+            }
         }
     }
 }

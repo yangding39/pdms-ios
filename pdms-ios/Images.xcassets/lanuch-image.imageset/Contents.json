@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "lanuch-image.jpg"
+      "filename" : "640x960.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "lanuch-image@2x.jpg"
+      "filename" : "640x960-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "lanuch-image@3x.jpg"
+      "filename" : "640x1136.png"
     }
   ],
   "info" : {

@@ -49,16 +49,12 @@ class CustomAlertView {
                 alertController.addAction(cancelAction)
             } else {
                 let alert = UIAlertView()
-                alert.title = "出错了"
                 alert.message = message
                 alert.addButtonWithTitle("确定")
                 alert.addButtonWithTitle("取消")
+                alert.delegate = parentViewController
                 alert.show()
             }
         }
-    }
-    
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        
     }
 }

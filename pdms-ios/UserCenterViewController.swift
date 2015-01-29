@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserCenterViewController: UITableViewController {
+class UserCenterViewController: UITableViewController,UIAlertViewDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hospitalLabel: UILabel!
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class UserCenterViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     @IBAction func didLogoutBtn(sender: AnyObject) {
-        logout()
+        CustomAlertView.showDialog("确定退出登录？", parentViewController: self, okFunc: logout, cancelFunc: nil)
     }
     
     func logout() {
@@ -67,5 +67,10 @@ class UserCenterViewController: UITableViewController {
             self.presentViewController(loginViewController, animated: true, completion: nil)
         }
         
+    }
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 0 {
+            self.logout()
+        }
     }
 }

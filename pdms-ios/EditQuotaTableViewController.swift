@@ -10,13 +10,13 @@
 
 import UIKit
 
-class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate {
+class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate,UITextFieldDelegate {
     var visit : Visit!
     var patient : Patient!
     var crowDefinition : GroupDefinition!
     var quota : Quota!
     var fieldDatas = Array<Data>()
-    
+    var inputDict = Dictionary<UIView, Int>()
     var currentEditField : UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,7 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormSwitchCell", forIndexPath: indexPath) as QuotaFormSwitchCell
             cell.name.text = fieldData.columnName
             cell.swtichBtn.on = getBool(fieldData.value.toInt()!)
+            inputDict[cell.swtichBtn] = indexPath.row
             return cell
         } else if fieldData.visibleType == Data.VisibleType.TEXT {
             
@@ -52,6 +53,8 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             cell.unit.text = fieldData.unitName
             cell.value.text = fieldData.value
             cell.value.tag = fieldData.visibleType
+            cell.value.delegate = self
+            inputDict[cell.value] = indexPath.row
 //            if !fieldData.isValid {
 //                cell.value.textColor = UIColor.redColor()
 //            }
@@ -206,33 +209,20 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
                 }
             }
         } else if identifier == "completeEditQuotaSegue" {
+            endTextFieldEditing()
             for var i = 0 ; i < fieldDatas.count; ++i {
-                let indexPath = NSIndexPath(forRow: i, inSection: 0)
-                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? QuotaFormCell {
-                    if let textField = cell.value {
-                        fieldDatas[i].value = textField.text
-                    }
-                } else if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? QuotaFormSwitchCell {
-                    if let swtihcBtn = cell.swtichBtn {
-                        if swtihcBtn.on {
-                            fieldDatas[i].value = "\(Data.BoolIntValue.TRUE)"
-                        } else {
-                            fieldDatas[i].value = "\(Data.BoolIntValue.FALSE)"
-                        }
-                    }
-                }
                 if fieldDatas[i].isRequired && fieldDatas[i].value.isEmpty {
                     CustomAlertView.showMessage(fieldDatas[i].columnName + "必填", parentViewController: self)
                     return false
                 }
             }
-           
             self.saveQuotaForm()
         }
         return false
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showEditOptionSegue" {
+            endTextFieldEditing()
             let optionsTableViewController = segue.destinationViewController as OptionsTableViewController
             let cell = sender as QuotaFormCell
             let indexPath = self.tableView.indexPathForCell(cell)!
@@ -240,6 +230,7 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             optionsTableViewController.navigationItem.title = data.columnName
             optionsTableViewController.data = data
             optionsTableViewController.editingCell = cell
+            //optionsTableViewController.parentGroupDefinition = parentGroupDefinition
             if data.visibleType == Data.VisibleType.CHECKBOX {
                 optionsTableViewController.mutilSelect = true
             }
@@ -265,7 +256,27 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
         let indexPath = self.tableView.indexPathForCell(cell)!
         fieldDatas[indexPath.row].value = dataValue
     }
+    func textFieldDidEndEditing(textField: UITextField) {
+        if let row = inputDict[textField] {
+            let data = fieldDatas[row]
+            if data.visibleType == Data.VisibleType.INPUT || data.visibleType == Data.VisibleType.TIME {
+                data.value = textField.text
+            }
+        }
+    }
     
+    @IBAction func swithcDidEndEditing(sender: UISwitch) {
+        if let row = inputDict[sender] {
+          let data = fieldDatas[row]
+          if sender.on {
+              data.value = "\(Data.BoolIntValue.TRUE)"
+            } else {
+                data.value = "\(Data.BoolIntValue.FALSE)"
+            }
+        }
+    }
+
+
     func saveQuotaForm() {
         let url = SERVER_DOMAIN + "quota/editQuota"
         let quotaFieldDataIds = ",".join(fieldDatas.map({ "\($0.id)" }))
@@ -305,6 +316,9 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
     
     func setVisibleTypeForDrug(data : Data) {
         if data.columnName == "中文商品名" ||  data.columnName == "英文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
+            if data.columnName == "英文商品名" {
+                data.isRequired = false
+            }
             data.visibleType = Data.VisibleType.SELECT
         } else if data.columnName == "中文通用名" || data.columnName == "英文通用名" {
             data.visibleType = Data.VisibleType.TEXT
@@ -362,6 +376,14 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             self.dismissViewControllerAnimated(false, completion: nil)
             self.performSegueWithIdentifier("completeDeleteQuotaSegue", sender: self)
 
+        }
+    }
+    
+    func endTextFieldEditing() {
+        for key in inputDict.keys {
+            if let textField = key as? UITextField {
+                textField.endEditing(true)
+            }
         }
     }
 }
