@@ -45,11 +45,17 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
             if nameText.text.isEmpty {
                 CustomAlertView.showMessage("姓名必填", parentViewController: self)
                 return false
+            } else if countElements(nameText.text) > 10 {
+                CustomAlertView.showMessage("姓名不能超过10", parentViewController: self)
+                return false
             } else if genderText.text.isEmpty {
                 CustomAlertView.showMessage("性别必填", parentViewController: self)
                 return false
             } else if birthdayText.text.isEmpty {
                 CustomAlertView.showMessage("生日必填", parentViewController: self)
+                return false
+            } else if countElements(caseNoText.text) > 20 {
+                CustomAlertView.showMessage("病案号不能超过20", parentViewController: self)
                 return false
             }
             savePatient()

@@ -41,18 +41,28 @@ class QuotaByVisitTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
-        if section == 0 {
-            sectionHeaderView.textLabel.text = "就诊记录"
-        } else {
-            sectionHeaderView.textLabel.text = groupDefinitions[section - 1].name
-        }
-        
-        //sectionHeaderView.contentView.backgroundColor = UIColor.sectionColor()
-        //sectionHeaderView.textLabel.textColor = UIColor.whiteColor()
+        let sectionHeaderView = UIView()
+        let label = UILabel(frame: CGRectMake(15, 8, self.tableView.bounds.width, 20))
+        label.font = UIFont.systemFontOfSize(18)
+        label.textColor = UIColor.grayColor()
+        label.text = self.tableView(tableView, titleForHeaderInSection: section)
+        sectionHeaderView.addSubview(label)
+        sectionHeaderView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         return sectionHeaderView
     }
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "就诊记录"
+        } else {
+            if section - 1 < groupDefinitions.count {
+                return groupDefinitions[section - 1].name
+            } else {
+                return ""
+            }
+            
+        }
+    }
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }

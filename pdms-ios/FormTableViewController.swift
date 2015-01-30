@@ -179,7 +179,8 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         } else if identifier == "addQuotaCompleteSegue" {
             endTextFieldEditing()
             for var i = 0 ; i < fieldDatas.count; ++i {
-                if fieldDatas[i].isRequired && fieldDatas[i].value.isEmpty {
+                let fieldData = fieldDatas[i]
+                if fieldData.isRequired && (fieldData.value == nil || fieldData.value.isEmpty) {
                     CustomAlertView.showMessage(fieldDatas[i].columnName + "必填", parentViewController: self)
                     return false
                 }
@@ -197,7 +198,6 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
             let data = fieldDatas[indexPath.row]
             optionsTableViewController.navigationItem.title = data.columnName
             optionsTableViewController.data = data
-            optionsTableViewController.parentGroupDefinition = parentGroupDefinition
             optionsTableViewController.editingCell = cell
             if data.visibleType == Data.VisibleType.CHECKBOX {
                 optionsTableViewController.mutilSelect = true

@@ -32,21 +32,42 @@ class QuotaDetailTabelViewController: UITableViewController{
     }
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, tableView.frame.size.width, 80))
         
-        sectionHeaderView.tintColor = UIColor.sectionColor()
-        var label:UILabel = UILabel(frame: CGRectMake(10
-            ,10, sectionHeaderView.frame.size.width - 10, 70));
-        label.numberOfLines = 0;
-        label.font = UIFont.systemFontOfSize(17.0);
-        label.text = "\( quota.groupNamePath )\n检查时间：\(quota.checkTime)";
-        sectionHeaderView.addSubview(label);
-        label.adjustsFontSizeToFitWidth = true
+        
+        let label = UILabel(frame: CGRectMake(15, 8, self.tableView.bounds.width - 30, 40))
+        label.font = UIFont.systemFontOfSize(18)
+        label.textColor = UIColor.grayColor()
+        label.numberOfLines = 0
+        label.text = self.tableView(tableView, titleForHeaderInSection: section)
+        label.sizeToFit()
+        let sectionHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.bounds.width, label.frame.height))
+        sectionHeaderView.addSubview(label)
+        sectionHeaderView.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        
         return sectionHeaderView
     }
-    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var title = ""
+        if let namePath = quota.groupNamePath {
+            title += namePath
+            if let checkTime = quota.checkTime {
+                title += "\n检查时间 ：" + checkTime
+            }
+        }
+       
+        return title
+    }
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        if let title = self.tableView(tableView, titleForHeaderInSection: section) {
+            let height = UILabel.heightForDynamicText(title, font: UIFont.systemFontOfSize(18.0), width: self.tableView.bounds.width - 30 )
+            if height == 0 {
+                return 0
+            } else {
+              return height + 16
+            }
+        } else {
+            return 0
+        }
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datas.count
@@ -63,6 +84,8 @@ class QuotaDetailTabelViewController: UITableViewController{
         }
         if !data.isValid {
             cell.detailTextLabel?.textColor = UIColor.redColor()
+        } else {
+            cell.detailTextLabel?.textColor = UIColor.lightGrayColor()
         }
         return cell
     }
@@ -91,7 +114,7 @@ class QuotaDetailTabelViewController: UITableViewController{
                 switchData.visibleType = Data.VisibleType.DERAIL
                 switchData.unitName = nil
                 switchData.isDrug = false
-                switchData.isValid = false
+                switchData.isValid = true
                 switchData.value = "否"
                 if let isImprotant = json["data"]["isImportant"].int {
                     if isImprotant ==  Data.BoolIntValue.TRUE {

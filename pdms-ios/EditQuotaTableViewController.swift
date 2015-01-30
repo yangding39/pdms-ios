@@ -211,7 +211,8 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
         } else if identifier == "completeEditQuotaSegue" {
             endTextFieldEditing()
             for var i = 0 ; i < fieldDatas.count; ++i {
-                if fieldDatas[i].isRequired && fieldDatas[i].value.isEmpty {
+                let fieldData = fieldDatas[i]
+                if fieldData.isRequired && (fieldData.value == nil || fieldData.value.isEmpty) {
                     CustomAlertView.showMessage(fieldDatas[i].columnName + "必填", parentViewController: self)
                     return false
                 }

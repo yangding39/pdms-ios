@@ -44,7 +44,7 @@ class Data {
     var isRequired = false
     var visibleType :  Int!
     var unitName : String!
-    var isDrug : Bool!
+    var isDrug = false
     var isValid = true
 
     init(){

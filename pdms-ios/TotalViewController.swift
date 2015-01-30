@@ -44,6 +44,7 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     func loadData() {
+        
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN
         let params : [String : AnyObject] = ["page" : page]
         HttpApiClient.sharedInstance.getLoading(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
@@ -76,14 +77,12 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
         } else {
             
         }
-        self.tableView.reloadData()
-        if (loadMoreTableFooterView == nil) {
-            loadMoreTableFooterView = LoadMoreTableFooterView(frame: CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height))
-            loadMoreTableFooterView.delegate = self
-            self.tableView.addSubview(loadMoreTableFooterView)
+         self.tableView.reloadData()
+        if loadMoreTableFooterView != nil {
+            loadMoreTableFooterView.frame = CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height)
         }
-        loadMoreTableFooterView.frame = CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height)
         isLoadMoreing = false
+       
     }
     
     func fail() {
@@ -101,16 +100,26 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset
+        if contentOffset.y == 0 {
+            scrollView.contentOffset = CGPointMake(0, -63)
+        }
         if loadMoreTableFooterView != nil {
             self.loadMoreTableFooterView.loadMoreScrollViewDidScroll(scrollView)
         }
-        
     }
     
     override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if loadMoreTableFooterView != nil {
-            self.loadMoreTableFooterView.loadMoreScrollViewDidEndDragging(scrollView)
+        if (loadMoreTableFooterView == nil) {
+            loadMoreTableFooterView = LoadMoreTableFooterView(frame: CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height))
+            loadMoreTableFooterView.delegate = self
+            self.tableView.addSubview(loadMoreTableFooterView)
         }
+        self.loadMoreTableFooterView.loadMoreScrollViewDidEndDragging(scrollView)
+    }
+    
+    override func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+        scrollView.contentOffset = CGPointMake(0, 0)
     }
    func loadMoreTableFooterDidTriggerLoadMore(view : LoadMoreTableFooterView) {
        isLoadMoreing = true

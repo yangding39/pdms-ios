@@ -11,15 +11,16 @@ import UIKit
 class UserCenterViewController: UITableViewController,UIAlertViewDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hospitalLabel: UILabel!
+    @IBOutlet weak var departmentLabel: UILabel!
     override func viewDidLoad() {
         
-        let backgroundImage = UIImage(named: "user-bg")
-        let backgroundView = UIImageView(image: backgroundImage)
-        backgroundView.frame = self.tableView.frame
-        self.tableView.backgroundView = backgroundView
+//        let backgroundImage = UIImage(named: "user-bg")
+//        let backgroundView = UIImageView(image: backgroundImage)
+//        backgroundView.frame = self.tableView.frame
+//        self.tableView.backgroundView = backgroundView
         
         if var frame = self.tableView.tableHeaderView?.frame {
-             frame.size.height = UIScreen.mainScreen().bounds.size.width/400 * 120
+             frame.size.height = UIScreen.mainScreen().bounds.size.width/400 * 145
              self.tableView.tableHeaderView?.frame = frame
             self.tableView.updateConstraintsIfNeeded()
         }
@@ -35,7 +36,10 @@ class UserCenterViewController: UITableViewController,UIAlertViewDelegate {
     override func viewWillAppear(animated: Bool) {
         var user = LOGIN_USER
         self.nameLabel.text = user.name
-        self.hospitalLabel.text = user.hospital + "  " + user.department
+        self.hospitalLabel.text = user.hospital
+        self.hospitalLabel.adjustsFontSizeToFitWidth = true
+        self.departmentLabel.text = user.department
+        self.departmentLabel.adjustsFontSizeToFitWidth = true
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

@@ -37,14 +37,19 @@ class QuotaByPatientTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
-       
-        //sectionHeaderView.contentView.backgroundColor = UIColor.sectionColor()
-        //sectionHeaderView.textLabel.textColor = UIColor.whiteColor()
-        sectionHeaderView.textLabel.text = groupDefinitions[section].name
+        let sectionHeaderView = UIView()
+        let label = UILabel(frame: CGRectMake(15, 8, self.tableView.bounds.width, 20))
+        label.font = UIFont.systemFontOfSize(18)
+        label.textColor = UIColor.grayColor()
+        label.text = self.tableView(tableView, titleForHeaderInSection: section)
+        sectionHeaderView.addSubview(label)
+        sectionHeaderView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         return sectionHeaderView
     }
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return groupDefinitions[section].name
+    }
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }

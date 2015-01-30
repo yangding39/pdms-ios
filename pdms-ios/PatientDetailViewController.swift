@@ -21,27 +21,24 @@ class PatientDetailViewController: UITableViewController{
     
     override func viewWillAppear(animated: Bool) {
         name.text = patient.name
-        var detailString = ""
-        if let gender = patient.gender {
-            detailString += "性别：" + patient.gender
-        }
-        if let age = patient.age {
-            detailString += "   年龄：\(patient.age)   "
-        }
-        if let birthday = patient.birthday {
-            detailString += "生日：" + patient.birthday
-        }
-        if let caseNo = patient.caseNo {
-            if !caseNo.isEmpty {
-                detailString += "      病案号：\(caseNo)"
-            }
-        }
+        let detailString = patient.generateDetail()
+        detailLabel.numberOfLines = 0
         detailLabel.text = detailString
-        detailLabel.adjustsFontSizeToFitWidth = true
+        detailLabel.sizeToFit()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            let detailString = patient.generateDetail()
+            let labelHeight = UILabel.heightForDynamicText(detailString, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 49 )
+            return 52 + labelHeight
+        } else {
+            return 44
+        }
     }
     func saveToRecent() {
         let url = SERVER_DOMAIN + "patients/searchView"

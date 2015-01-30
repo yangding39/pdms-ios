@@ -17,4 +17,24 @@ class Patient {
     init() {
         
     }
+    
+    func generateDetail() -> String {
+        var detailString = ""
+        
+        if let gender = self.gender {
+            detailString += "性别：" + self.gender
+        }
+        if let age = self.age {
+            detailString += "   年龄：\(self.age)   "
+        }
+        if let birthday = self.birthday {
+            detailString += "生日：" + self.birthday
+        }
+        if let caseNo = self.caseNo {
+            if !caseNo.isEmpty {
+                detailString += "\n病案号：\(caseNo)"
+            }
+        }
+        return detailString
+    }
 }

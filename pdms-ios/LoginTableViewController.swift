@@ -9,21 +9,21 @@
 
 import UIKit
 
-class LoginTableViewController: UITableViewController {
+class LoginTableViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var userNameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let backgroundImage = UIImage(named: "user-bg") {
-            let backgroundView = UIImageView(image: backgroundImage)
-            backgroundView.frame = self.tableView.frame
-            self.tableView.backgroundView = backgroundView
-        }
-        
+//        if let backgroundImage = UIImage(named: "user-bg") {
+//            let backgroundView = UIImageView(image: backgroundImage)
+//            backgroundView.frame = self.tableView.frame
+//            self.tableView.backgroundView = backgroundView
+//        }
+//        
         if var frame = self.tableView.tableHeaderView?.frame {
-            frame.size.height = self.tableView.bounds.width / 400 * 200
+            frame.size.height = self.tableView.bounds.width / 400 * 190
             self.tableView.tableHeaderView?.frame = frame
         }
         
@@ -32,7 +32,8 @@ class LoginTableViewController: UITableViewController {
             self.tableView.tableFooterView?.frame = frame
         }
         self.tableView.updateConstraintsIfNeeded()
-
+        userNameTextField.delegate = self
+        passwordTextField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,14 +46,24 @@ class LoginTableViewController: UITableViewController {
     }
 
     @IBAction func didLoginBtn(sender: AnyObject) {
+        userNameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
         self.login()
+    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.login()
+        return true
     }
     func login() {
         let name = userNameTextField.text
         let password = passwordTextField.text
-        let url = SERVER_DOMAIN + "user/login"
-        let params : [String : AnyObject] = ["name" : name, "password" : password]
-        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: loginResult, fail: nil)
+        if !name.isEmpty && !password.isEmpty {
+            let url = SERVER_DOMAIN + "user/login"
+            let params : [String : AnyObject] = ["name" : name, "password" : password]
+            HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: loginResult, fail: nil)
+        }
+        
     }
     
     func loginResult(json : JSON) {
