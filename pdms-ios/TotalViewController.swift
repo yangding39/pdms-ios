@@ -35,14 +35,12 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("patientCell", forIndexPath: indexPath) as PatientTableCell
         let patient = self.tableDatas[indexPath.row]
         cell.name.text = patient.name
-        cell.gender.text = "性别：" + patient.gender
+        cell.gender.text = patient.gender
         cell.age.text = "年龄：\(patient.age)"
-        cell.birthday.text = "生日：" + patient.birthday
+        cell.birthday.text = "出生日期：" + patient.birthday
         return cell
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     func loadData() {
         
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN

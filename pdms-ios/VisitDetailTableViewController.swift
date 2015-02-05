@@ -21,6 +21,7 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
     var patient : Patient!
     var visit : Visit!
     var editCompelete = false
+    var deleteComplete = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -30,6 +31,17 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
         if editCompelete {
             self.navigationController?.popViewControllerAnimated(false)
             editCompelete = false
+        } else if deleteComplete {
+            if let viewControllers = self.navigationController?.viewControllers{
+                for viewController in viewControllers {
+                    if let visitTableViewController = viewController as? VisitTableViewController {
+                        self.navigationController?.popToViewController(visitTableViewController, animated: false)
+                        break
+                    }
+                }
+            }
+            
+            deleteComplete = false
         } else {
             typeLabel.text = visit.typeLabel
             numberLabel.text = visit.number
@@ -42,9 +54,7 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editVisitSegue" {
             let navigateController =  segue.destinationViewController as UINavigationController
@@ -58,5 +68,8 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
         editCompelete = true
     }
 
+    @IBAction func completeDeleteVisit(segue : UIStoryboardSegue) {
+        deleteComplete = true
+    }
 }
 

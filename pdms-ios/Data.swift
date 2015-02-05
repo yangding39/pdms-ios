@@ -51,7 +51,9 @@ class Data {
         
     }
     
-    class func generateCheckTime(crowDefinition : GroupDefinition) -> Data?{
+    class func generateCheckTime(crowDefinition : GroupDefinition, forForm : Bool) -> Data?{
+        
+        let crowName = crowDefinition.name
         let dDate = Data()
         dDate.definitionId = Data.DefinitionId.DIAG_DATE
         dDate.columnName = "诊断日期"
@@ -62,15 +64,21 @@ class Data {
         dDate.unitName = nil
         dDate.isDrug = false
         dDate.isValid = true
-        let crowName = crowDefinition.name
-        if crowName == "个人史" || crowName == "遗传家族史" || crowName == "药物治疗"{
-            return nil
-        } else if crowName == "疾病诊断" || crowName == "症状体征" {
+        if crowName == "个人史" || crowName == "遗传家族史"{
+            dDate.columnName = "记录时间"
+        } else if crowName == "药物治疗" {
+            dDate.columnName = "医嘱时间"
+        }else if crowName == "疾病诊断" || crowName == "症状体征" {
             dDate.columnName = "诊断日期"
         } else if crowName == "体格检查" || crowName == "实验室检查" || crowName == "辅助检查"{
             dDate.columnName = "检查时间"
         } else if crowName == "治疗操作" {
             dDate.columnName = "操作时间"
+        }
+        if forForm {
+            if crowName == "个人史" || crowName == "遗传家族史" || crowName == "药物治疗" {
+                return nil
+            }
         }
         return dDate
     }

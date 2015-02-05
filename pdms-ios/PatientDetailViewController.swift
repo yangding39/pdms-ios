@@ -14,12 +14,19 @@ class PatientDetailViewController: UITableViewController{
     
     @IBOutlet weak var detailLabel: UILabel!
     var patient: Patient!
+    var isDeleted = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.saveToRecent()
     }
     
     override func viewWillAppear(animated: Bool) {
+        if isDeleted{
+            self.navigationController?.popToRootViewControllerAnimated(false)
+            isDeleted = false
+        } else {
+            
+        }
         name.text = patient.name
         let detailString = patient.generateDetail()
         detailLabel.numberOfLines = 0
@@ -27,9 +34,7 @@ class PatientDetailViewController: UITableViewController{
         detailLabel.sizeToFit()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
@@ -62,4 +67,7 @@ class PatientDetailViewController: UITableViewController{
         }
     }
     
+    @IBAction func completeDeletePatient(segue : UIStoryboardSegue) {
+        isDeleted = true
+    }
 }

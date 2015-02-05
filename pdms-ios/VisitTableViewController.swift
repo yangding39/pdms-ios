@@ -58,9 +58,7 @@ class VisitTableViewController : UITableViewController {
         let labelHeight = UILabel.heightForDynamicText(detailString, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 59 )
         return 46 + labelHeight
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     func loadData() {
         let url = SERVER_DOMAIN + "visit/\(patient.id)"
         let parameters = ["token": TOKEN]
@@ -103,8 +101,5 @@ class VisitTableViewController : UITableViewController {
         toDetail = true
     }
     
-    @IBAction func completeDeleteVisit(segue : UIStoryboardSegue) {
-        
-    }
 }
 

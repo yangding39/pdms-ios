@@ -17,9 +17,7 @@ class UserPasswordViewController: UITableViewController {
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     @IBAction func updatePassword(sender: AnyObject) {
         let newPassword = newPasswordText.text
         let passwordConfirm = passwordConfirmText.text

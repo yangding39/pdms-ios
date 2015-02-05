@@ -42,9 +42,7 @@ class UserCenterViewController: UITableViewController,UIAlertViewDelegate {
         self.departmentLabel.adjustsFontSizeToFitWidth = true
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     @IBAction func didLogoutBtn(sender: AnyObject) {
         CustomAlertView.showDialog("确定退出登录？", parentViewController: self, okFunc: logout, cancelFunc: nil)
     }

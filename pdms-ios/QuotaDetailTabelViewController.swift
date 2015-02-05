@@ -15,11 +15,7 @@ class QuotaDetailTabelViewController: UITableViewController{
     var crowDefition : GroupDefinition!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if var frame = self.tableView.tableFooterView?.frame {
-            frame.size.height = 44
-            self.tableView.tableFooterView?.frame = frame
-            self.tableView.updateConstraintsIfNeeded()
-        }
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,7 +47,9 @@ class QuotaDetailTabelViewController: UITableViewController{
         if let namePath = quota.groupNamePath {
             title += namePath
             if let checkTime = quota.checkTime {
-                title += "\n检查时间 ：" + checkTime
+                if let checkDate = Data.generateCheckTime(crowDefition,forForm : false) {
+                    title += "\n\(checkDate.columnName)：" + checkTime
+                }
             }
         }
        
@@ -76,7 +74,9 @@ class QuotaDetailTabelViewController: UITableViewController{
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("showQuotaCell", forIndexPath: indexPath) as UITableViewCell
         let data = datas[indexPath.row]
+        cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = data.columnName
+        //cell.detailTextLabel?.numberOfLines = 0
         if data.unitName != nil {
             cell.detailTextLabel?.text = "\(data.value) \(data.unitName)"
         } else {
@@ -90,9 +90,7 @@ class QuotaDetailTabelViewController: UITableViewController{
         return cell
     }
   
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     func loadData() {
         let url = SERVER_DOMAIN + "quota/quotaDetails"
         let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDataId": quota.id]

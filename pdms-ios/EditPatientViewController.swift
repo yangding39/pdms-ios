@@ -36,9 +36,7 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
             self.tableView.updateConstraintsIfNeeded()
         }
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
         if identifier == "completeEditPatientSegue" {
@@ -52,7 +50,7 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
                 CustomAlertView.showMessage("性别必填", parentViewController: self)
                 return false
             } else if birthdayText.text.isEmpty {
-                CustomAlertView.showMessage("生日必填", parentViewController: self)
+                CustomAlertView.showMessage("出生日期必填", parentViewController: self)
                 return false
             } else if countElements(caseNoText.text) > 20 {
                 CustomAlertView.showMessage("病案号不能超过20", parentViewController: self)
@@ -185,8 +183,8 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
             }
         }
         if removeResult && fieldErrors.count == 0 {
-            self.dismissViewControllerAnimated(false, completion: nil)
             self.performSegueWithIdentifier("completeDeletePatientSegue", sender: self)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

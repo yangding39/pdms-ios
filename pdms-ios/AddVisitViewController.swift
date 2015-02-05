@@ -23,9 +23,9 @@ class AddVisitViewController: UITableViewController {
     
     var typeOptions = Array<Option>()
     
-    var departmentOptions = Array<Option>()
+    var departmentOptions : Dictionary<String, Array<Option>> = [:]
     
-    var currentOptions = Array<Option>()
+    var isDepartmentOptions = false
     
     var currentTextField : UITextField?
     
@@ -52,9 +52,7 @@ class AddVisitViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     func loadOptions() {
         let url = SERVER_DOMAIN + "visit/add"
         let parameters = ["token": TOKEN]
@@ -64,15 +62,18 @@ class AddVisitViewController: UITableViewController {
     func fillOptions(json : JSON) {
         for (index: String, subJson: JSON) in json["data"]  {
             let dictId = subJson["dictId"].number
-            for (optionIndex : String, optionJson : JSON) in subJson["options"] {
-                let option = Option()
-
-                option.label = optionJson["lable"].string!
-                option.value = optionJson["value"].number!
-                if dictId == 5 {
-                    self.typeOptions.append(option)
-                } else if dictId == 6 {
-                    self.departmentOptions.append(option)
+            if let dictName = subJson["dictName"].string {
+                var subOptions = Array<Option>()
+                for (optionIndex : String, optionJson : JSON) in subJson["options"] {
+                    let option = Option()
+                    option.label = optionJson["lable"].string!
+                    option.value = optionJson["value"].number!
+                    subOptions.append(option)
+                }
+                if dictName == "就诊类型" {
+                    self.typeOptions = subOptions
+                } else {
+                    self.departmentOptions[dictName] = subOptions
                 }
             }
         }
@@ -112,11 +113,13 @@ class AddVisitViewController: UITableViewController {
             }
         }
         visit.number = number.text
-        for option in departmentOptions {
-            if option.label == departmentLabel.text {
-                visit.department = option.value
-                visit.departmentLabel = option.label
-                break
+        for options in departmentOptions.values {
+            for option in options {
+                if option.label == departmentLabel.text {
+                    visit.department = option.value
+                    visit.departmentLabel = option.label
+                    break
+                }
             }
         }
         visit.startTime = startTime.text
@@ -169,8 +172,14 @@ class AddVisitViewController: UITableViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         var datePicker = startTime.inputView as UIDatePicker?
         if let date = datePicker?.date {
-            startTime.text = dateFormatter.stringFromDate(date)
-            startTime.endEditing(true)
+            if datePicker?.datePickerMode == UIDatePickerMode.Date {
+                datePicker?.datePickerMode = UIDatePickerMode.Time
+            } else {
+                var dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                startTime.text = dateFormatter.stringFromDate(date)
+                startTime.endEditing(true)
+            }
         }
     }
     
@@ -179,17 +188,23 @@ class AddVisitViewController: UITableViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         var datePicker = endTime.inputView as UIDatePicker?
         if let date = datePicker?.date {
-            endTime.text = dateFormatter.stringFromDate(date)
-            endTime.endEditing(true)
+            if datePicker?.datePickerMode == UIDatePickerMode.Date {
+                datePicker?.datePickerMode = UIDatePickerMode.Time
+            } else {
+                var dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                endTime.text = dateFormatter.stringFromDate(date)
+                endTime.endEditing(true)
+            }
         }
     }
     
     func showSelectPicker(sender: UITextField) {
         
         if (sender == self.typeLabel) {
-            currentOptions = self.typeOptions
+            isDepartmentOptions = false
         } else {
-            currentOptions = self.departmentOptions
+            isDepartmentOptions = true
         }
         sender.inputView = UIPickerView().customPickerStyle(self.view, delegate: self, dataSource: self)
         sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleSelectPicker:"), target : self)
@@ -200,7 +215,17 @@ class AddVisitViewController: UITableViewController {
         
         var uiPicker = currentTextField!.inputView as UIPickerView?
         if let index = uiPicker?.selectedRowInComponent(0) {
-            currentTextField!.text = self.currentOptions[index].label
+            if isDepartmentOptions {
+                let fisrtLabel = self.departmentOptions.keys.array[index]
+                if let subIndex = uiPicker?.selectedRowInComponent(1) {
+                    if let options = self.departmentOptions[fisrtLabel] {
+                         currentTextField!.text = options[subIndex].label
+                    }
+                }
+            } else {
+                currentTextField!.text = self.typeOptions[index].label
+            }
+            
             currentTextField!.endEditing(true)
         }
     }
@@ -213,19 +238,68 @@ class AddVisitViewController: UITableViewController {
 extension AddVisitViewController : UIPickerViewDataSource {
     // returns the number of 'columns' to display.
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        if isDepartmentOptions {
+            return 2
+        }
         return 1
     }
     
     // returns the # of rows in each component..
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        return currentOptions.count
+        if isDepartmentOptions {
+            if component == 0 {
+                return self.departmentOptions.keys.array.count
+            } else {
+                let index = pickerView.selectedRowInComponent(0)
+                let key = self.departmentOptions.keys.array[index]
+                if let options = self.departmentOptions[key] {
+                     return  options.count
+                } else {
+                    return 0
+                }
+            }
+        } else {
+              return self.typeOptions.count
+        }
     }
 }
 
 extension AddVisitViewController : UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        
-        return currentOptions[row].label
+        if isDepartmentOptions {
+            if component == 0 {
+                return self.departmentOptions.keys.array[row]
+            } else {
+                let index = pickerView.selectedRowInComponent(0)
+                let key = self.departmentOptions.keys.array[index]
+                if let options = self.departmentOptions[key] {
+                    return  options[row].label
+                } else {
+                    return nil
+                }
+            }
+        } else {
+            return self.typeOptions[row].label
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if isDepartmentOptions {
+            if component == 0 {
+                pickerView.reloadComponent(1)
+            }
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+        let pickerLabel = UILabel()
+        if isDepartmentOptions {
+            pickerLabel.font = UIFont.systemFontOfSize(18.0)
+        } else {
+            pickerLabel.font = UIFont.systemFontOfSize(20.0)
+        }
+        pickerLabel.textAlignment = NSTextAlignment.Center
+        pickerLabel.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+        return pickerLabel
     }
 }

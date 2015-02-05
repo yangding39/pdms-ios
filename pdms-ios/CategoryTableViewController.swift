@@ -15,6 +15,7 @@ class CategoryTableViewController : UITableViewController {
     var patient : Patient!
     var categoryDatas = Array<GroupDefinition>()
     var searchQuotaData = Array<GroupDefinition>()
+    var isFavorite = true
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData(0)
@@ -56,24 +57,24 @@ class CategoryTableViewController : UITableViewController {
         }
        
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     @IBAction func categoryChanged(sender: UISegmentedControl) {
         loadData(sender.selectedSegmentIndex)
     }
     
     func loadData(categoryIndex : Int) {
-        categoryDatas.removeAll(keepCapacity: true)
         var url = SERVER_DOMAIN + "quota/favoriteCategory"
+        isFavorite = true
         if categoryIndex == 1 {
             var url = SERVER_DOMAIN + "quota/allQuotas"
+            isFavorite = false
         }
         let parameters = ["token": TOKEN]
         HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {
+        categoryDatas.removeAll(keepCapacity: true)
         for (index: String, favoriteJson: JSON) in json["data"]  {
             let groupDefintion = GroupDefinition()
             groupDefintion.id = favoriteJson["groupDefinitionId"].number
@@ -132,6 +133,7 @@ class CategoryTableViewController : UITableViewController {
                 nextGroupDefinitionVC.patient = patient
                 nextGroupDefinitionVC.parentGroupDefinition = categoryDatas[indexPath.row - 1]
                 nextGroupDefinitionVC.crowDefinition = categoryDatas[indexPath.row - 1]
+                nextGroupDefinitionVC.isFavorite = isFavorite
             }
 
         }

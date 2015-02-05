@@ -12,7 +12,7 @@ class CustomAlertView {
     class func showMessage(message : String, parentViewController : UIViewController) {
         if !message.isEmpty {
             if NSClassFromString("UIAlertController") != nil {
-                let alertController = UIAlertController(title: "出错了", message: message, preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "提示", message: message, preferredStyle: .Alert)
                 parentViewController.presentViewController(alertController, animated: true, completion: nil)
                 let cancelAction = UIAlertAction(title: "确定", style: .Default, handler: {
                     (alert: UIAlertAction!) -> Void in
@@ -20,7 +20,7 @@ class CustomAlertView {
                 alertController.addAction(cancelAction)
             } else {
                 let alert = UIAlertView()
-                alert.title = "出错了"
+                alert.title = "提示"
                 alert.message = message
                 alert.addButtonWithTitle("确定")
                 alert.show()

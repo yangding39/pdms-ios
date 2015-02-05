@@ -65,15 +65,19 @@ class HttpApiClient {
                 self.dismissLoadingIndicator(loadingPosition, activityIndicator: activityIndicator, viewController: viewController, completeView: completeView)
             },
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) in
+                
                 var statusCode : StatusCode?
                 if let response = operation.response {
                     statusCode = StatusCode(httpCode: response.statusCode)
                 }
+                
                 if statusCode == StatusCode.STATUS_NO_AUTH {
                     self.showLoginView(viewController)
                 } else {
                     if statusCode == StatusCode.STATUS_ERROR {
-                        CustomAlertView.showMessage("无网络连接", parentViewController:viewController)
+                        CustomAlertView.showMessage(" 无法连接服务器", parentViewController:viewController)
+                    } else if error != nil {
+                        CustomAlertView.showMessage(" 无法连接服务器", parentViewController:viewController)
                     }
                     if (fail != nil) {
                         fail()
@@ -115,7 +119,9 @@ class HttpApiClient {
                     self.showLoginView(viewController)
                 } else {
                     if statusCode == StatusCode.STATUS_ERROR {
-                        CustomAlertView.showMessage("无网络连接", parentViewController:viewController)
+                        CustomAlertView.showMessage(" 无法连接服务器", parentViewController:viewController)
+                    } else if error != nil {
+                        CustomAlertView.showMessage(" 无法连接服务器", parentViewController:viewController)
                     }
                     if (fail != nil) {
                         fail()

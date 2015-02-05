@@ -41,9 +41,7 @@ class LoginTableViewController: UITableViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
 
     @IBAction func didLoginBtn(sender: AnyObject) {
         userNameTextField.resignFirstResponder()
@@ -93,12 +91,23 @@ class LoginTableViewController: UITableViewController, UITextFieldDelegate {
             LOGIN_USER = user
             if let token = json["data"]["token"].string {
                 TOKEN = token
+                if let tabBarController = self.presentingViewController as? UITabBarController {
+                    tabBarController.selectedIndex = 0
+                    if let viewControllers = tabBarController.viewControllers {
+                        for viewController in viewControllers {
+                            if let navigationController = viewController as? UINavigationController {
+                                navigationController.popToRootViewControllerAnimated(false)
+                            }
+                        }
+                    }
+                    
+                }
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
            
         }
         
     }
-    
+   
 }
 

@@ -28,8 +28,11 @@
 		8561A31C1A3A784800D3BDA5 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */; };
 		8561A3201A3A8A4E00D3BDA5 /* GroupDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8561A31F1A3A8A4E00D3BDA5 /* GroupDefinition.swift */; };
 		8578F8521A777C60004B6A67 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578F8511A777C60004B6A67 /* Regex.swift */; };
+		8578F8541A7B3338004B6A67 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578F8531A7B3338004B6A67 /* CustomDatePicker.swift */; };
+		8578F8561A7CCBC2004B6A67 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8578F8551A7CCBC2004B6A67 /* QuartzCore.framework */; };
 		857B649D1A3A9B06008FC52D /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857B649C1A3A9B06008FC52D /* FormTableViewController.swift */; };
 		857B64A01A3E72A7008FC52D /* QuotaFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857B649F1A3E72A7008FC52D /* QuotaFormCell.swift */; };
+		858361BA1A7F6A4D0037369E /* CustomUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858361B91A7F6A4D0037369E /* CustomUITableViewController.swift */; };
 		859530DB1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */; };
 		859752531A70CFC9005CE917 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859752521A70CFC9005CE917 /* LoginTableViewController.swift */; };
 		859752551A70F914005CE917 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859752541A70F914005CE917 /* AboutViewController.swift */; };
@@ -97,8 +100,11 @@
 		8561A31B1A3A784800D3BDA5 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		8561A31F1A3A8A4E00D3BDA5 /* GroupDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDefinition.swift; sourceTree = "<group>"; };
 		8578F8511A777C60004B6A67 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		8578F8531A7B3338004B6A67 /* CustomDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		8578F8551A7CCBC2004B6A67 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		857B649C1A3A9B06008FC52D /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FormTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		857B649F1A3E72A7008FC52D /* QuotaFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaFormCell.swift; sourceTree = "<group>"; };
+		858361B91A7F6A4D0037369E /* CustomUITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUITableViewController.swift; sourceTree = "<group>"; };
 		859530DA1A3A8CC0006D9252 /* NextLevelGroupDefinitionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextLevelGroupDefinitionTableViewController.swift; sourceTree = "<group>"; };
 		859752521A70CFC9005CE917 /* LoginTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewController.swift; sourceTree = "<group>"; };
 		859752541A70F914005CE917 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8578F8561A7CCBC2004B6A67 /* QuartzCore.framework in Frameworks */,
 				F3CFA9F69B69FD3F591A9C3C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +160,7 @@
 		08BE1E29ECA21174847904D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8578F8551A7CCBC2004B6A67 /* QuartzCore.framework */,
 				1971B582EB70825C1A3F1F27 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -162,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				859B6C011A415DC3004EC0A2 /* CustomPickerView.swift */,
+				8578F8531A7B3338004B6A67 /* CustomDatePicker.swift */,
+				858361B91A7F6A4D0037369E /* CustomUITableViewController.swift */,
 				8532C5A31A73A52600EA3444 /* CustomLabel.swift */,
 				853ED9F11A41757F00AA67A8 /* CustomColor.swift */,
 				8532C5A51A75ED3C00EA3444 /* CustomAlertView.swift */,
@@ -490,9 +500,11 @@
 				857B649D1A3A9B06008FC52D /* FormTableViewController.swift in Sources */,
 				B611E8531A35892300AB4CEF /* PatientDetailViewController.swift in Sources */,
 				8578F8521A777C60004B6A67 /* Regex.swift in Sources */,
+				858361BA1A7F6A4D0037369E /* CustomUITableViewController.swift in Sources */,
 				857B64A01A3E72A7008FC52D /* QuotaFormCell.swift in Sources */,
 				8532C5A41A73A52600EA3444 /* CustomLabel.swift in Sources */,
 				851D03AC1A5FAF1800AC38D6 /* QuotaFormSwitchCell.swift in Sources */,
+				8578F8541A7B3338004B6A67 /* CustomDatePicker.swift in Sources */,
 				85D24A501A3164A200D2C7EF /* Patient.swift in Sources */,
 				859752551A70F914005CE917 /* AboutViewController.swift in Sources */,
 				8547F4BF1A6523D90094AE6B /* StringUtil.swift in Sources */,

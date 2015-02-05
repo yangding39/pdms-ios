@@ -17,10 +17,28 @@ class AboutViewController: UIViewController {
         label.lineBreakMode = NSLineBreakMode.ByWordWrapping
         label.numberOfLines = 0
         label.font = UIFont.systemFontOfSize(14)
-        label.text = "大数据的浪潮已经悄然降临，并已渗透到医疗服务的方方面面。在大数据时代，从简单的数据收集到数据的挖掘与应用都发生了很大的变化。\n\n PDMS以医疗服务为核心，致力于医疗数据的采集、处理、管理和利用，开发和建立高效便捷的系统工具与服务平台，让医生、医疗机构、医药企业及普通人群充分利用各种有用的临床数据，为医疗、科研、保健、疾病预防和公共卫生发挥最大的价值。\n\n PDMS网页版：www.ydata.org"
+        label.text = "大数据的浪潮已经悄然降临，并已渗透到医疗服务的方方面面。在大数据时代，从简单的数据收集到数据的挖掘与应用都发生了很大的变化。\n\n PDMS以医疗服务为核心，致力于医疗数据的采集、处理、管理和利用，开发和建立高效便捷的系统工具与服务平台，让医生、医疗机构、医药企业及普通人群充分利用各种有用的临床数据，为医疗、科研、保健、疾病预防和公共卫生发挥最大的价值。\n"
+        
         label.sizeToFit()
         self.view.addSubview(label)
         self.view.updateConstraintsIfNeeded()
+        
+        let linkView = UIView(frame: CGRectMake(20, 160 + label.frame.height, self.view.bounds.size.width - 40, 21))
+        let label1 = UILabel(frame: CGRectMake(0, 0, 100, 21))
+        label1.font = UIFont.systemFontOfSize(14)
+        label1.text = "PDMS网页版："
+        linkView.addSubview(label1)
+        
+        let label2 = UILabel(frame: CGRectMake(0 + label1.frame.width, 0, 100, 21))
+        label2.textColor = UIColor.blueColor()
+        label2.font = UIFont.systemFontOfSize(14)
+        label2.text = "www.ydata.org"
+        linkView.addSubview(label2)
+        self.view.addSubview(linkView)
+        
+        label2.userInteractionEnabled = true
+        let gestureRec = UITapGestureRecognizer(target: self, action: "openWebPage")
+        label2.addGestureRecognizer(gestureRec)
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +46,10 @@ class AboutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func openWebPage() {
+        let url = NSURL(string: "http://www.ydata.org")
+        UIApplication.sharedApplication().openURL(url!)
+    }
 
 }
 

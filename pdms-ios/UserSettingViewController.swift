@@ -36,9 +36,7 @@ class UserSettingViewController: UITableViewController {
         self.loadData()
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     func loadData() {
         let url = SERVER_DOMAIN + "user/toSetting?token=" + TOKEN
         HttpApiClient.sharedInstance.getLoading(url, paramters: nil, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)

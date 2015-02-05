@@ -42,7 +42,9 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
         } else if fieldData.visibleType == Data.VisibleType.TEXT {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormTextCell", forIndexPath: indexPath) as UITableViewCell
+            cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = fieldData.columnName
+            cell.detailTextLabel?.numberOfLines = 0
             cell.detailTextLabel?.text = fieldData.value
             return cell
         }  else {
@@ -55,6 +57,7 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             cell.value.tag = fieldData.visibleType
             cell.value.delegate = self
             inputDict[cell.value] = indexPath.row
+            cell.value.userInteractionEnabled = true
 //            if !fieldData.isValid {
 //                cell.value.textColor = UIColor.redColor()
 //            }
@@ -86,9 +89,7 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
         return 23 + labelHeight
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     
     func loadData() {
         let url = SERVER_DOMAIN + "quota/toEditQuota"
@@ -136,7 +137,7 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             }
             
         }
-        if let dDate = Data.generateCheckTime(crowDefinition) {
+        if let dDate = Data.generateCheckTime(crowDefinition, forForm : true) {
             dDate.value = json["data"]["checkTimestampStr"].string
             dDate.id = Data.DefinitionId.DIAG_DATE
             fieldDatas.append(dDate)
@@ -178,16 +179,19 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
     }
     
     func handleDatePicker(sender: UIBarButtonItem) {
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
         var datePicker = currentEditField.inputView as UIDatePicker?
         if let date = datePicker?.date {
-            currentEditField.text = dateFormatter.stringFromDate(date)
-            currentEditField.endEditing(true)
+            if datePicker?.datePickerMode == UIDatePickerMode.Date {
+                datePicker?.datePickerMode = UIDatePickerMode.Time
+            } else {
+                var dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                currentEditField.text = dateFormatter.stringFromDate(date)
+                currentEditField.endEditing(true)
+            }
         }
         
-       currentEditField.inputView = nil
-        currentEditField.inputAccessoryView = nil
     }
     
     func getBool(intValue : Int) -> Bool {
@@ -262,6 +266,7 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
             let data = fieldDatas[row]
             if data.visibleType == Data.VisibleType.INPUT || data.visibleType == Data.VisibleType.TIME {
                 data.value = textField.text
+                setDrugQuantityAndTime()
             }
         }
     }
@@ -317,15 +322,129 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
     
     func setVisibleTypeForDrug(data : Data) {
         if data.columnName == "中文商品名" ||  data.columnName == "英文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
-            if data.columnName == "英文商品名" {
+            if data.columnName == "英文商品名" || data.columnName == "中文商品名" {
                 data.isRequired = false
             }
             data.visibleType = Data.VisibleType.SELECT
-        } else if data.columnName == "中文通用名" || data.columnName == "英文通用名" {
+        } else if data.columnName == "中文通用名" || data.columnName == "英文通用名" || data.columnName == "日剂量" || data.columnName == "总天数" || data.columnName == "总剂量" {
             data.visibleType = Data.VisibleType.TEXT
         }
     }
     
+    func setDrugQuantityAndTime() {
+        var startTime : Data?
+        var endTime : Data?
+        var quantityUnit : Data?
+        var day : Data?
+        var number : Data?
+        
+        var dayQuantity : Data?
+        var dayNumber : Data?
+        var totalQuantity : Data?
+        for data in fieldDatas {
+            if data.columnName == "开始时间" {
+                startTime = data
+            } else if data.columnName == "结束时间" {
+                endTime = data
+            } else if data.columnName == "剂量" {
+                quantityUnit = data
+            } else if data.columnName == "天" {
+                day = data
+            } else if data.columnName == "次" {
+                number = data
+            } else if data.columnName == "日剂量" {
+                dayQuantity = data
+            } else if data.columnName == "总天数" {
+                dayNumber = data
+            }  else if data.columnName == "总剂量" {
+                totalQuantity = data
+            }
+        }
+        
+        dayQuantity?.value = getDayQuantity(quantityUnit, day: day, number: number)
+        let days = getDays(startTime, endTime: endTime)
+        dayNumber?.value = "\(days)"
+        totalQuantity?.value = getTotalQuantity(dayQuantity, dayNumber: dayNumber)
+        
+        for var i = 0; i < fieldDatas.count; ++i {
+            let data = fieldDatas[i]
+            let indexPath = NSIndexPath(forRow: i, inSection: 0)
+            if let cell = self.tableView.cellForRowAtIndexPath(indexPath) {
+                if cell.textLabel?.text != data.columnName {
+                    continue
+                }
+                if data.columnName == "日剂量" {
+                    cell.detailTextLabel?.text = dayQuantity?.value
+                } else if data.columnName == "总天数" {
+                    cell.detailTextLabel?.text = dayNumber?.value
+                }  else if data.columnName == "总剂量" {
+                    cell.detailTextLabel?.text = totalQuantity?.value
+                }
+            }
+        }
+        
+    }
+    
+    func getDays(startTime : Data?, endTime : Data?) -> String {
+        if var startTimeValue = startTime?.value {
+            if var endTimeValue = endTime?.value {
+                if startTimeValue.isEmpty || endTimeValue.isEmpty {
+                    return ""
+                }
+                startTimeValue = startTimeValue.componentsSeparatedByString(" ")[0]
+                endTimeValue = endTimeValue.componentsSeparatedByString(" ")[0]
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let calendar = NSCalendar.currentCalendar()
+                let timeComponents = calendar.components(.CalendarUnitDay,
+                    fromDate: dateFormatter.dateFromString(startTimeValue)!,
+                    toDate: dateFormatter.dateFromString(endTimeValue)!,
+                    options: nil)
+                if timeComponents.day < 0 {
+                    return ""
+                } else if timeComponents.day == 0 {
+                    return "1"
+                }else {
+                    return "\(timeComponents.day)"
+                }
+            }
+        }
+        return ""
+    }
+    
+    func getDayQuantity(quantityUnit : Data?, day : Data?, number : Data?) -> String {
+        if let quantityUnitValue = quantityUnit?.value {
+            if let dayValue = day?.value {
+                if let numberValue = number?.value {
+                    let quantityUnitDouble = (quantityUnitValue as NSString).doubleValue
+                    let numberDouble = (numberValue  as NSString).doubleValue
+                    let dayDouble = (dayValue as NSString).doubleValue
+                    let dayQuantity = quantityUnitDouble * numberDouble / dayDouble
+                    if dayQuantity <= 0 {
+                        return ""
+                    }
+                    return String(format:"%.2f", dayQuantity)
+                }
+            }
+        }
+        return ""
+    }
+    
+    
+    func getTotalQuantity(dayQuantity : Data?, dayNumber : Data?) -> String {
+        if let dayQuantityValue = dayQuantity?.value {
+            if let dayNumberValue = dayNumber?.value {
+                let dayQuantityDouble = (dayQuantityValue as NSString).doubleValue
+                let dayNumberDouble = (dayNumberValue as NSString).doubleValue
+                let totalQuantity = dayQuantityDouble * dayNumberDouble
+                if totalQuantity <= 0 {
+                    return ""
+                }
+                return String(format:"%.2f", totalQuantity)
+            }
+        }
+        return ""
+    }
     @IBAction func didDeleteAction(sender: AnyObject) {
         if NSClassFromString("UIAlertController") != nil {
             let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)

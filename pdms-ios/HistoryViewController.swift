@@ -65,15 +65,13 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             patient = self.recentPatients[indexPath.row]
         }
         cell.name.text = patient.name
-        cell.gender.text = "性别：" + patient.gender
+        cell.gender.text = patient.gender
         cell.age.text = "年龄：\(patient.age)"
-        cell.birthday.text = "生日：" + patient.birthday
+        cell.birthday.text = "出生日期：" + patient.birthday
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
         if (searchString != nil && !searchString.isEmpty) {
             self.searchResult = []
@@ -90,12 +88,12 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     func loadData() {
-        recentPatients.removeAll(keepCapacity: true)
         let url = SERVER_DOMAIN + "patients/recent?token=" + TOKEN
         HttpApiClient.sharedInstance.getLoading(url, paramters: nil, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
         
     }
     func fillData(json: JSON) -> Void {
+        recentPatients.removeAll(keepCapacity: true)
         for (index: String, patientJson: JSON) in json["data"] {
             let patient = Patient()
             patient.id = patientJson["patientId"].number
@@ -147,9 +145,6 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         detailPatient = patient
         toDetail = true
     }
-    
-    @IBAction func completeDeletePatient(segue : UIStoryboardSegue) {
-        
-    }
+   
 }
 

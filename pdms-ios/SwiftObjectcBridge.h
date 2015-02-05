@@ -11,4 +11,6 @@
 #import <AFNetworking/AFNetworking.h>
 #import <EGORefreshTableHeaderView.h>
 #import <LoadMoreTableFooterView.h>
+#import <UIScrollView+SVPullToRefresh.h>
+#import <UIScrollView+SVInfiniteScrolling.h>
 #endif

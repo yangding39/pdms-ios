@@ -36,19 +36,14 @@ class Visit {
             detailString += "\n\(self.mainDiagonse)"
         }
         
-        var timeText = "\n就诊时间："
         if let startTime =  self.startTime {
-            timeText += startTime
-        }
-        
-        if self.startTime != nil || self.endTime != nil {
-            timeText += "~"
+            detailString += "\n开始时间：" + startTime
         }
         
         if let endTime = self.endTime {
-            timeText += endTime
+            detailString += "\n结束时间：" + endTime
         }
-        detailString += timeText
+        
         return detailString
     }
 }

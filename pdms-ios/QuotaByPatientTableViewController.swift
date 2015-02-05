@@ -64,18 +64,16 @@ class QuotaByPatientTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
+    
     
     func loadData() {
-        groupDefinitions.removeAll(keepCapacity: true)
         let url = SERVER_DOMAIN + "visit/patientQuotas"
         let parameters : [String : AnyObject] = ["token": TOKEN, "patientId": patient.id]
         HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
     }
     
     func fillData(json : JSON) {
+        groupDefinitions.removeAll(keepCapacity: true)
         for (groupIndex: String, groupJson : JSON) in json["data"]["crowdDefinitions"]  {
             let groupDefinition = GroupDefinition()
             groupDefinition.id = groupJson["crowdDefinitionId"].number

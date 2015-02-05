@@ -10,13 +10,13 @@ import UIKit
 
 class AddPatientViewController: UITableViewController {
 
-    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var nameText: UITextField!
     
-    @IBOutlet weak var gender: UITextField!
+    @IBOutlet weak var genderText: UITextField!
     
-    @IBOutlet weak var birthday: UITextField!
+    @IBOutlet weak var birthdayText: UITextField!
     
-    @IBOutlet weak var caseNo: UITextField!
+    @IBOutlet weak var caseNoText: UITextField!
     
     let options = ["男", "女", "未知"]
     let patient = Patient()
@@ -24,8 +24,8 @@ class AddPatientViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        birthday.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
-        gender.addTarget(self, action: "showSelectPicker:", forControlEvents: UIControlEvents.EditingDidBegin)
+        birthdayText.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
+        genderText.addTarget(self, action: "showSelectPicker:", forControlEvents: UIControlEvents.EditingDidBegin)
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
 
@@ -37,19 +37,19 @@ class AddPatientViewController: UITableViewController {
     }
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
-        if name.text.isEmpty {
+        if nameText.text.isEmpty {
             CustomAlertView.showMessage("姓名必填", parentViewController: self)
             return false
-        } else if countElements(name.text) > 10 {
+        } else if countElements(nameText.text) > 10 {
             CustomAlertView.showMessage("姓名不能超过10", parentViewController: self)
             return false
-        } else if gender.text.isEmpty {
+        } else if genderText.text.isEmpty {
             CustomAlertView.showMessage("性别必填", parentViewController: self)
             return false
-        } else if birthday.text.isEmpty {
-            CustomAlertView.showMessage("生日必填", parentViewController: self)
+        } else if birthdayText.text.isEmpty {
+            CustomAlertView.showMessage("出生日期必填", parentViewController: self)
             return false
-        } else if countElements(caseNo.text) > 20 {
+        } else if countElements(caseNoText.text) > 20 {
             CustomAlertView.showMessage("病案号不能超过20", parentViewController: self)
             return false
         }
@@ -64,17 +64,17 @@ class AddPatientViewController: UITableViewController {
         }
     }
     func savePatient(){
-        patient.name = name.text
-        patient.gender = gender.text
-        patient.birthday = birthday.text
-        patient.caseNo = caseNo.text
+        patient.name = nameText.text
+        patient.gender = genderText.text
+        patient.birthday = birthdayText.text
+        patient.caseNo = caseNoText.text
         
        let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let calendar = NSCalendar.currentCalendar()
         let now = NSDate()
         let ageComponents = calendar.components(.CalendarUnitYear,
-                fromDate: dateFormatter.dateFromString(birthday.text)!,
+                fromDate: dateFormatter.dateFromString(birthdayText.text)!,
                 toDate: now,
                 options: nil)
         let age = ageComponents.year
@@ -123,11 +123,12 @@ class AddPatientViewController: UITableViewController {
     
     func handleDatePicker(sender: UIBarButtonItem) {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        var datePicker = birthday.inputView as UIDatePicker?
+       
+        var datePicker = birthdayText.inputView as UIDatePicker?
         if let date = datePicker?.date {
-            birthday.text = dateFormatter.stringFromDate(date)
-            birthday.endEditing(true)
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                birthdayText.text = dateFormatter.stringFromDate(date)
+                birthdayText.endEditing(true)
         }
         
     }
@@ -138,10 +139,10 @@ class AddPatientViewController: UITableViewController {
     }
     
     func handleSelectPicker(sender: UIBarButtonItem) {
-        var uiPicker = gender.inputView as UIPickerView?
+        var uiPicker = genderText.inputView as UIPickerView?
         if let index = uiPicker?.selectedRowInComponent(0) {
-            gender.text = self.options[index]
-            gender.endEditing(true)
+            genderText.text = self.options[index]
+            genderText.endEditing(true)
         }
     }
     
