@@ -41,7 +41,9 @@ class Visit {
         }
         
         if let endTime = self.endTime {
-            detailString += "\n结束时间：" + endTime
+            if !endTime.isEmpty {
+                 detailString += "\n结束时间：" + endTime
+            }
         }
         
         return detailString

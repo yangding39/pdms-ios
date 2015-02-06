@@ -96,9 +96,6 @@ class AddVisitViewController: UITableViewController {
             } else if startTime.text.isEmpty{
                 CustomAlertView.showMessage("开始时间必填", parentViewController: self)
                 return false
-            } else if endTime.text.isEmpty{
-                CustomAlertView.showMessage("结束时间必填", parentViewController: self)
-                return false
             }
             saveVisit()
         }

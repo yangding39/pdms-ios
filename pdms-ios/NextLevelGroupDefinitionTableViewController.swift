@@ -97,6 +97,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
             formTableViewController.navigationItem.title = groupDefinition.name
             formTableViewController.parentGroupDefinition = groupDefinition
             formTableViewController.crowDefinition = crowDefinition
+            formTableViewController.navigationItem.backBarButtonItem?.title = "返回"
         }
     }
     

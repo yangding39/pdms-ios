@@ -1658,7 +1658,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="必填" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hWQ-vS-6oL">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入结束时间" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hWQ-vS-6oL">
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -4560,6 +4560,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="添加指标" id="J9e-ld-ZBj">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="nxd-pp-ms9"/>
                         <barButtonItem key="rightBarButtonItem" title="保存" id="eWk-1C-IRI">
                             <connections>
                                 <segue destination="PXq-5c-FA5" kind="unwind" identifier="addQuotaCompleteSegue" unwindAction="addQuotaByVisitComplete:" id="Nnq-01-wTu"/>
@@ -5338,7 +5339,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="必填" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dmd-XZ-qgp">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入结束时间" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dmd-XZ-qgp">
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
