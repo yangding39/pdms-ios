@@ -82,6 +82,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     }
     
     func searchPatient(controller: UISearchDisplayController, searchString: String) {
+        self.searchResult.removeAll(keepCapacity: true)
         let url = SERVER_DOMAIN + "patients/search"
         let parameters = ["token": TOKEN, "q": searchString]
         HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillSearchData, fail : nil)
