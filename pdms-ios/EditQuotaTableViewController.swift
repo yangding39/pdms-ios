@@ -10,7 +10,7 @@
 
 import UIKit
 
-class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate,UITextFieldDelegate {
+class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     var visit : Visit!
     var patient : Patient!
     var crowDefinition : GroupDefinition!
@@ -445,60 +445,7 @@ class EditQuotaTableViewController: UITableViewController, UIActionSheetDelegate
         }
         return ""
     }
-    @IBAction func didDeleteAction(sender: AnyObject) {
-        if NSClassFromString("UIAlertController") != nil {
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let deleteAction = UIAlertAction(title: "删除", style: .Default, handler: {
-                (alert: UIAlertAction!) -> Void in
-                self.removeQuota()
-            })
-            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: {
-                (alert: UIAlertAction!) -> Void in
-                println("Cancelled")
-            })
-            
-            optionMenu.addAction(deleteAction)
-            optionMenu.addAction(cancelAction)
-            self.presentViewController(optionMenu, animated: true, completion: nil)
-        } else {
-            let myActionSheet = UIActionSheet()
-            myActionSheet.addButtonWithTitle("删除")
-            myActionSheet.addButtonWithTitle("取消")
-            myActionSheet.cancelButtonIndex = 1
-            myActionSheet.showInView(self.view)
-            myActionSheet.delegate = self
-        }
-    }
-    
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int){
-        if buttonIndex == 0 {
-            removeQuota()
-        }
-    }
-    
-    func removeQuota() {
-        let url = SERVER_DOMAIN + "quota/delete"
-        let params : [String : AnyObject] = ["token" : TOKEN, "quotaDataId" : quota.id]
-        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removeResult, fail: nil)
-    }
-    
-    func removeResult(json : JSON) {
-        var fieldErrors = Array<String>()
-        var removeResult = false
-        //set result and error from server
-        removeResult = json["stat"].int == 0 ? true : false
-        for (index: String, errorJson: JSON) in json["fieldErrors"] {
-            if let error = errorJson[index].string {
-                fieldErrors.append(error)
-            }
-        }
-        if removeResult && fieldErrors.count == 0 {
-            self.dismissViewControllerAnimated(false, completion: nil)
-            self.performSegueWithIdentifier("completeDeleteQuotaSegue", sender: self)
-
-        }
-    }
-    
+        
     func endTextFieldEditing() {
         for key in inputDict.keys {
             if let textField = key as? UITextField {

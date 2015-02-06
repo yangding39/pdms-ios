@@ -8,14 +8,14 @@
 
 import UIKit
 
-class QuotaDetailTabelViewController: UITableViewController{
+class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegate{
     var quota : Quota!
     var patient : Patient!
     var datas = Array<Data>()
     var crowDefition : GroupDefinition!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        //self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func didReceiveMemoryWarning() {
@@ -169,4 +169,68 @@ class QuotaDetailTabelViewController: UITableViewController{
         self.loadData()
     }
    
+    @IBAction func didDeleteAction(sender: AnyObject) {
+        if NSClassFromString("UIAlertController") != nil {
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let deleteAction = UIAlertAction(title: "删除", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.removeQuota()
+            })
+            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                println("Cancelled")
+            })
+            
+            optionMenu.addAction(deleteAction)
+            optionMenu.addAction(cancelAction)
+            self.presentViewController(optionMenu, animated: true, completion: nil)
+        } else {
+            let myActionSheet = UIActionSheet()
+            myActionSheet.addButtonWithTitle("删除")
+            myActionSheet.addButtonWithTitle("取消")
+            myActionSheet.cancelButtonIndex = 1
+            myActionSheet.showInView(self.view)
+            myActionSheet.delegate = self
+        }
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int){
+        if buttonIndex == 0 {
+            removeQuota()
+        }
+    }
+    
+    func removeQuota() {
+        let url = SERVER_DOMAIN + "quota/delete"
+        let params : [String : AnyObject] = ["token" : TOKEN, "quotaDataId" : quota.id]
+        HttpApiClient.sharedInstance.save(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.FULL_SRCEEN, viewController: self, success: removeResult, fail: nil)
+    }
+    
+    func removeResult(json : JSON) {
+        var fieldErrors = Array<String>()
+        var removeResult = false
+        //set result and error from server
+        removeResult = json["stat"].int == 0 ? true : false
+        for (index: String, errorJson: JSON) in json["fieldErrors"] {
+            if let error = errorJson[index].string {
+                fieldErrors.append(error)
+            }
+        }
+        if removeResult && fieldErrors.count == 0 {
+            if let viewControllers = self.navigationController?.viewControllers{
+                for viewController in viewControllers {
+                    if let quotaByPatientTableViewController = viewController as? QuotaByPatientTableViewController {
+                        self.navigationController?.popToViewController(quotaByPatientTableViewController, animated: true)
+                        break
+                    }
+                    
+                    if let quotaByVisitTableViewController = viewController as? QuotaByVisitTableViewController {
+                        self.navigationController?.popToViewController(quotaByVisitTableViewController, animated: true)
+                        break
+                    }
+                }
+            }
+        }
+    }
+
 }

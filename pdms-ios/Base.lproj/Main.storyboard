@@ -1994,7 +1994,7 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="女   20  1994-07-09    病案号：0102034" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-oK-SQX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="女   20  1994-07-09    病案号：0102034" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-oK-SQX">
                                                     <rect key="frame" x="8" y="41" width="28" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="28" id="0Au-By-ybp"/>
@@ -2490,6 +2490,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Gjp-Ad-Nl3">
+                            <rect key="frame" x="0.0" y="130" width="600" height="568"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="df0-dW-Ksm">
+                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="Igd-Tq-xhv"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <state key="normal" title="删  除">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="9"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Igd-Tq-xhv"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="Igd-Tq-xhv"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="didDeleteAction:" destination="uU4-w9-qRI" eventType="touchUpInside" id="Hg8-CS-Azv"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="df0-dW-Ksm" firstAttribute="top" secondItem="Gjp-Ad-Nl3" secondAttribute="top" id="EJi-hm-joR"/>
+                                <constraint firstItem="df0-dW-Ksm" firstAttribute="centerX" secondItem="Gjp-Ad-Nl3" secondAttribute="centerX" id="gl4-jJ-CAE"/>
+                                <constraint firstItem="df0-dW-Ksm" firstAttribute="leading" secondItem="Gjp-Ad-Nl3" secondAttribute="leading" constant="13" id="px9-4m-ida"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="df0-dW-Ksm"/>
+                                </mask>
+                                <mask key="constraints">
+                                    <exclude reference="EJi-hm-joR"/>
+                                    <exclude reference="px9-4m-ida"/>
+                                    <exclude reference="gl4-jJ-CAE"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="subviews">
+                                    <include reference="df0-dW-Ksm"/>
+                                </mask>
+                                <mask key="constraints">
+                                    <include reference="EJi-hm-joR"/>
+                                    <include reference="px9-4m-ida"/>
+                                    <include reference="gl4-jJ-CAE"/>
+                                </mask>
+                            </variation>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="showQuotaCell" id="w4o-zr-aF1" customClass="QuotaDetailCell" customModule="pdms_ios" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -4708,6 +4770,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="mjH-2w-cx1">
+                            <rect key="frame" x="0.0" y="268" width="600" height="568"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="el3-SX-SYj">
+                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="xZt-dR-5Yh"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <state key="normal" title="删  除">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="9"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="xZt-dR-5Yh"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="xZt-dR-5Yh"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="didDeleteAction:" destination="zVD-xV-piO" eventType="touchUpInside" id="bQZ-Wt-DLm"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="el3-SX-SYj" firstAttribute="top" secondItem="mjH-2w-cx1" secondAttribute="top" id="NIx-D6-6Ty"/>
+                                <constraint firstItem="el3-SX-SYj" firstAttribute="centerX" secondItem="mjH-2w-cx1" secondAttribute="centerX" id="aPh-1l-a2b"/>
+                                <constraint firstItem="el3-SX-SYj" firstAttribute="leading" secondItem="mjH-2w-cx1" secondAttribute="leading" constant="13" id="rI9-YX-Dd2"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="el3-SX-SYj"/>
+                                </mask>
+                                <mask key="constraints">
+                                    <exclude reference="NIx-D6-6Ty"/>
+                                    <exclude reference="aPh-1l-a2b"/>
+                                    <exclude reference="rI9-YX-Dd2"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="subviews">
+                                    <include reference="el3-SX-SYj"/>
+                                </mask>
+                                <mask key="constraints">
+                                    <include reference="NIx-D6-6Ty"/>
+                                    <include reference="aPh-1l-a2b"/>
+                                    <include reference="rI9-YX-Dd2"/>
+                                </mask>
+                            </variation>
+                        </view>
                         <sections>
                             <tableViewSection id="gGI-7y-YHw">
                                 <cells>
@@ -4876,69 +5000,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="mjH-2w-cx1">
-                            <rect key="frame" x="0.0" y="268" width="600" height="568"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="el3-SX-SYj">
-                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                    <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="xZt-dR-5Yh"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" title="删  除">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="9"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="xZt-dR-5Yh"/>
-                                        </mask>
-                                    </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
-                                        <mask key="constraints">
-                                            <include reference="xZt-dR-5Yh"/>
-                                        </mask>
-                                    </variation>
-                                    <connections>
-                                        <action selector="didDeleteAction:" destination="wJg-6q-wyZ" eventType="touchUpInside" id="raM-UO-V1l"/>
-                                        <segue destination="iMI-75-5Td" kind="unwind" identifier="completeDeleteVisitSegue" unwindAction="completeDeleteVisit:" id="bP2-Q5-iaz"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="el3-SX-SYj" firstAttribute="top" secondItem="mjH-2w-cx1" secondAttribute="top" id="NIx-D6-6Ty"/>
-                                <constraint firstItem="el3-SX-SYj" firstAttribute="centerX" secondItem="mjH-2w-cx1" secondAttribute="centerX" id="aPh-1l-a2b"/>
-                                <constraint firstItem="el3-SX-SYj" firstAttribute="leading" secondItem="mjH-2w-cx1" secondAttribute="leading" constant="13" id="rI9-YX-Dd2"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="subviews">
-                                    <exclude reference="el3-SX-SYj"/>
-                                </mask>
-                                <mask key="constraints">
-                                    <exclude reference="NIx-D6-6Ty"/>
-                                    <exclude reference="aPh-1l-a2b"/>
-                                    <exclude reference="rI9-YX-Dd2"/>
-                                </mask>
-                            </variation>
-                            <variation key="heightClass=regular-widthClass=compact">
-                                <mask key="subviews">
-                                    <include reference="el3-SX-SYj"/>
-                                </mask>
-                                <mask key="constraints">
-                                    <include reference="NIx-D6-6Ty"/>
-                                    <include reference="aPh-1l-a2b"/>
-                                    <include reference="rI9-YX-Dd2"/>
-                                </mask>
-                            </variation>
-                        </view>
                         <sections>
                             <tableViewSection id="dc2-gL-vNE">
                                 <cells>
@@ -5508,69 +5569,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="qvH-MA-acb">
-                            <rect key="frame" x="0.0" y="130" width="600" height="568"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHv-2a-D9E">
-                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                    <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="44" id="CDy-B8-De1"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" title="删  除">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="9"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="CDy-B8-De1"/>
-                                        </mask>
-                                    </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
-                                        <mask key="constraints">
-                                            <include reference="CDy-B8-De1"/>
-                                        </mask>
-                                    </variation>
-                                    <connections>
-                                        <action selector="didDeleteAction:" destination="9eV-j9-bjf" eventType="touchUpInside" id="0dP-Kp-g8c"/>
-                                        <segue destination="Ry3-06-3py" kind="unwind" identifier="completeDeleteQuotaSegue" unwindAction="completeDeleteQuota:" id="ABk-TT-sVP"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="dHv-2a-D9E" firstAttribute="top" secondItem="qvH-MA-acb" secondAttribute="top" id="Wqb-hJ-lH1"/>
-                                <constraint firstItem="dHv-2a-D9E" firstAttribute="leading" secondItem="qvH-MA-acb" secondAttribute="leading" constant="13" id="Xlf-ev-ziO"/>
-                                <constraint firstItem="dHv-2a-D9E" firstAttribute="centerX" secondItem="qvH-MA-acb" secondAttribute="centerX" id="rHV-d2-uVv"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="subviews">
-                                    <exclude reference="dHv-2a-D9E"/>
-                                </mask>
-                                <mask key="constraints">
-                                    <exclude reference="Wqb-hJ-lH1"/>
-                                    <exclude reference="Xlf-ev-ziO"/>
-                                    <exclude reference="rHV-d2-uVv"/>
-                                </mask>
-                            </variation>
-                            <variation key="heightClass=regular-widthClass=compact">
-                                <mask key="subviews">
-                                    <include reference="dHv-2a-D9E"/>
-                                </mask>
-                                <mask key="constraints">
-                                    <include reference="Wqb-hJ-lH1"/>
-                                    <include reference="Xlf-ev-ziO"/>
-                                    <include reference="rHV-d2-uVv"/>
-                                </mask>
-                            </variation>
-                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="quotaFormCell" id="s1O-JB-9xX" customClass="QuotaFormCell" customModule="pdms_ios" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -5956,6 +5954,6 @@
         <segue reference="QeM-cy-n9e"/>
         <segue reference="GdD-IB-jUL"/>
         <segue reference="7hT-QL-6mm"/>
-        <segue reference="mza-cw-LKh"/>
+        <segue reference="l5R-dC-wfa"/>
     </inferredMetricsTieBreakers>
 </document>
