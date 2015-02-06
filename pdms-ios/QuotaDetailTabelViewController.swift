@@ -72,25 +72,34 @@ class QuotaDetailTabelViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("showQuotaCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("showQuotaCell", forIndexPath: indexPath) as QuotaDetailCell
         let data = datas[indexPath.row]
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = data.columnName
-        //cell.detailTextLabel?.numberOfLines = 0
+        cell.columnNameLabel.numberOfLines = 0
+        cell.columnNameLabel.text = data.columnName
+        cell.columnNameLabel.sizeToFit()
+        cell.valueLabel.numberOfLines = 0
+
         if data.unitName != nil {
-            cell.detailTextLabel?.text = "\(data.value) \(data.unitName)"
+            cell.valueLabel.text = "\(data.value) \(data.unitName)"
         } else {
-            cell.detailTextLabel?.text = data.value
+            cell.valueLabel.text = data.value
         }
         if !data.isValid {
-            cell.detailTextLabel?.textColor = UIColor.redColor()
+            cell.valueLabel.textColor = UIColor.redColor()
         } else {
-            cell.detailTextLabel?.textColor = UIColor.lightGrayColor()
+            cell.valueLabel.textColor = UIColor.lightGrayColor()
         }
+        cell.valueLabel.sizeToFit()
         return cell
     }
   
-    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let data = datas[indexPath.row]
+        let nameHeight = UILabel.heightForDynamicText(data.columnName, font: UIFont.systemFontOfSize(16.0), width: 129)
+        let valueHeight = UILabel.heightForDynamicText(data.value, font: UIFont.systemFontOfSize(16.0), width: self.tableView.frame.width - 159)
+        let cellHeight = nameHeight > valueHeight ? nameHeight : valueHeight
+        return cellHeight + 23.0
+    }
     func loadData() {
         let url = SERVER_DOMAIN + "quota/quotaDetails"
         let parameters : [ String : AnyObject] = ["token": TOKEN, "quotaDataId": quota.id]
@@ -128,7 +137,10 @@ class QuotaDetailTabelViewController: UITableViewController{
                 let fieldData = Data()
                 //fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].number
                 fieldData.columnName = fieldDatasJson["columnName"].string
-                fieldData.value = fieldDatasJson["quotaFieldValue"].string
+            
+                if let value = fieldDatasJson["quotaFieldValue"].string {
+                  fieldData.value = value
+                }
                 fieldData.unitName = fieldDatasJson["unitName"].string
                 //fieldData.columnType = fieldDatasJson["columnType"].int
                 //fieldData.isRequired = getBool(fieldDatasJson["isRequired"].int!)

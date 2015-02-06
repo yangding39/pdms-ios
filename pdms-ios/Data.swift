@@ -39,7 +39,7 @@ class Data {
     var id : NSNumber!
     var definitionId : NSNumber!
     var columnName : String!
-    var value : String!
+    var value : String! = ""
     var columnType : Int!
     var isRequired = false
     var visibleType :  Int!
