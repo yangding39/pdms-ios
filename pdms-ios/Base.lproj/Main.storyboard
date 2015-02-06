@@ -2027,10 +2027,10 @@
             </objects>
             <point key="canvasLocation" x="1839" y="975.75"/>
         </scene>
-        <!--病例详情-->
+        <!--病例管理-->
         <scene sceneID="45e-eg-p42">
             <objects>
-                <tableViewController storyboardIdentifier="patitentDetailViewController" title="病例详情" id="osC-G2-2iC" customClass="PatientDetailViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="patitentDetailViewController" title="病例管理" id="osC-G2-2iC" customClass="PatientDetailViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ONd-6B-ubp">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2209,7 +2209,7 @@
                             <outlet property="delegate" destination="osC-G2-2iC" id="4iR-Cv-Avy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="病例详情" id="zKe-dm-NjQ"/>
+                    <navigationItem key="navigationItem" title="病例管理" id="zKe-dm-NjQ"/>
                     <connections>
                         <outlet property="detailLabel" destination="cdj-oK-SQX" id="3AM-2Q-Scj"/>
                         <outlet property="name" destination="Nlc-RN-RHJ" id="y84-M4-M3z"/>
