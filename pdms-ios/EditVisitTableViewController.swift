@@ -331,7 +331,11 @@ extension EditVisitTableViewController : UIPickerViewDelegate {
                 let index = pickerView.selectedRowInComponent(0)
                 let key = self.departmentOptions.keys.array[index]
                 if let options = self.departmentOptions[key] {
-                    return  options[row].label
+                    if row < options.count {
+                        return  options[row].label
+                    } else {
+                        return nil
+                    }
                 } else {
                     return nil
                 }

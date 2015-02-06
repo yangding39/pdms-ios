@@ -96,6 +96,7 @@ class LoginTableViewController: UITableViewController, UITextFieldDelegate {
                     if let viewControllers = tabBarController.viewControllers {
                         for viewController in viewControllers {
                             if let navigationController = viewController as? UINavigationController {
+                                //setTotalViewController(navigationController)
                                 navigationController.popToRootViewControllerAnimated(false)
                             }
                         }
@@ -109,5 +110,14 @@ class LoginTableViewController: UITableViewController, UITextFieldDelegate {
         
     }
    
+    func setTotalViewController(navigationController : UINavigationController) {
+        if let inNavControllers = navigationController.viewControllers {
+            for inController in inNavControllers {
+                if let totalViewController = inController as? TotalViewController {
+                    totalViewController.page = 1
+                }
+            }
+        }
+    }
 }
 

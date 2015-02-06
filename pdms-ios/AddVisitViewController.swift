@@ -206,7 +206,9 @@ class AddVisitViewController: UITableViewController {
         } else {
             isDepartmentOptions = true
         }
-        sender.inputView = UIPickerView().customPickerStyle(self.view, delegate: self, dataSource: self)
+        let pickerView = UIPickerView().customPickerStyle(self.view, delegate: self, dataSource: self)
+        pickerView.showsSelectionIndicator = true
+        sender.inputView = pickerView
         sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleSelectPicker:"), target : self)
         currentTextField = sender
     }
@@ -273,7 +275,12 @@ extension AddVisitViewController : UIPickerViewDelegate {
                 let index = pickerView.selectedRowInComponent(0)
                 let key = self.departmentOptions.keys.array[index]
                 if let options = self.departmentOptions[key] {
-                    return  options[row].label
+                    if row < options.count {
+                        return  options[row].label
+                    } else {
+                        return nil
+                    }
+                    
                 } else {
                     return nil
                 }

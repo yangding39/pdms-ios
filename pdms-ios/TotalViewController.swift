@@ -8,18 +8,19 @@
 
 import UIKit
 
-class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
-    var loadMoreTableFooterView : LoadMoreTableFooterView!
-    var isLoadMoreing = false
+class TotalViewController: UITableViewController {
     var tableDatas = Array<Patient>()
     var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewDidAppear(animated: Bool) {
+        setPullToRefreshTitle()
+        page = 1
         self.loadData()
     }
     override func didReceiveMemoryWarning() {
@@ -42,10 +43,9 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
     }
     
     func loadData() {
-        
         let url = SERVER_DOMAIN + "patients/list?token=" + TOKEN
         let params : [String : AnyObject] = ["page" : page]
-        HttpApiClient.sharedInstance.getLoading(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: params, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: fail)
         
     }
     func fillData(json: JSON) {
@@ -53,9 +53,8 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
              self.tableDatas.removeAll(keepCapacity: true)
         }
         if json["stat"].int == 0 {
-            var hasData = false
+            var noData = true
             for (index: String, data: JSON) in json["data"]["data"] {
-                hasData = true
                 let patient = Patient()
                 patient.id = data["patientId"].number
                 patient.name = data["patientName"].string
@@ -67,23 +66,31 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
                 }
                 patient.birthday = data["birthday"].string
                 patient.caseNo = data["patientNo"].string
-                self.tableDatas.append(patient)
+                let result = addPatientToArray(patient)
+                if result {
+                    noData = false
+                }
             }
-            if hasData {
-                page += 1
+            page = self.tableDatas.count / 20 + 1
+            if self.tableDatas.count < 20 {
+                noData = true
+            }
+            if noData {
+                self.tableView.pullToRefreshView.setTitle("已加载全部", forState: SVPullToRefreshState.All)
+                self.tableView.pullToRefreshView.arrowColor = UIColor.whiteColor()
+            } else {
+                setPullToRefreshTitle()
             }
         } else {
             
         }
-         self.tableView.reloadData()
-        if loadMoreTableFooterView != nil {
-            loadMoreTableFooterView.frame = CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height)
-        }
-        isLoadMoreing = false
        
+        self.tableView.pullToRefreshView.stopAnimating()
+        self.tableView.reloadData()
     }
     
     func fail() {
+        self.tableView.pullToRefreshView.stopAnimating()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -97,36 +104,35 @@ class TotalViewController: UITableViewController, LoadMoreTableFooterDelegate {
         }
     }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        let contentOffset = scrollView.contentOffset
-        if contentOffset.y == 0 {
-            scrollView.contentOffset = CGPointMake(0, -63)
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        if self.tableView.pullToRefreshView == nil {
+            self.tableView.addPullToRefreshWithActionHandler(loadData, position: SVPullToRefreshPosition.Bottom)
         }
-        if loadMoreTableFooterView != nil {
-            self.loadMoreTableFooterView.loadMoreScrollViewDidScroll(scrollView)
-        }
+        setPullToRefreshTitle()
     }
     
-    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if (loadMoreTableFooterView == nil) {
-            loadMoreTableFooterView = LoadMoreTableFooterView(frame: CGRectMake(0.0, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height))
-            loadMoreTableFooterView.delegate = self
-            self.tableView.addSubview(loadMoreTableFooterView)
+    func addPatientToArray(patient : Patient) -> Bool {
+        var notExisted = true
+        for existPatient in self.tableDatas {
+            if existPatient.id == patient.id {
+                notExisted = false
+            }
         }
-        self.loadMoreTableFooterView.loadMoreScrollViewDidEndDragging(scrollView)
+        if notExisted {
+            self.tableDatas.append(patient)
+        }
+        return notExisted
     }
     
-    override func scrollViewDidScrollToTop(scrollView: UIScrollView) {
-        scrollView.contentOffset = CGPointMake(0, 0)
+    func setPullToRefreshTitle() {
+       if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.setTitle("上拉加载更多...", forState: SVPullToRefreshState.Stopped)
+            pullToRefreshView.setTitle("松开开始刷新...", forState: SVPullToRefreshState.Triggered)
+            pullToRefreshView.setTitle("加载中...", forState: SVPullToRefreshState.Loading)
+            pullToRefreshView.arrowColor = UIColor.grayColor()
+        }
+       
     }
-   func loadMoreTableFooterDidTriggerLoadMore(view : LoadMoreTableFooterView) {
-       isLoadMoreing = true
-       self.loadData()
-    }
-    
-    func loadMoreTableFooterDataSourceIsLoading(view : LoadMoreTableFooterView) -> Bool {
-        return isLoadMoreing
-    }
-
 }
 
