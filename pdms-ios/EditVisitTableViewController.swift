@@ -154,7 +154,7 @@ class EditVisitTableViewController: UITableViewController {
     }
     
     func showDatePicker(sender: UITextField) {
-        sender.inputView = UIDatePicker().customPickerStyle(self.view)
+        sender.inputView = CustomDatePicker(frame : CGRectMake(0, 0, self.view.bounds.width, 160))
         
         var selector : Selector!
         if (sender == self.startTime) {
@@ -167,35 +167,22 @@ class EditVisitTableViewController: UITableViewController {
     
     func handleStartTimeDatePicker(sender: UIBarButtonItem) {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        var datePicker = startTime.inputView as UIDatePicker?
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        var datePicker = startTime.inputView as? CustomDatePicker
         if let date = datePicker?.date {
-            if datePicker?.datePickerMode == UIDatePickerMode.Date {
-                datePicker?.datePickerMode = UIDatePickerMode.Time
-            } else {
-                var dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-                startTime.text = dateFormatter.stringFromDate(date)
-                startTime.endEditing(true)
-            }
+            startTime.text = dateFormatter.stringFromDate(date)
+            startTime.endEditing(true)
         }
     }
     
     func handleEndTimeDatePicker(sender: UIBarButtonItem) {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        var datePicker = endTime.inputView as UIDatePicker?
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        var datePicker = endTime.inputView as? CustomDatePicker
         if let date = datePicker?.date {
-            if datePicker?.datePickerMode == UIDatePickerMode.Date {
-                datePicker?.datePickerMode = UIDatePickerMode.Time
-            } else {
-                var dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-                endTime.text = dateFormatter.stringFromDate(date)
-                endTime.endEditing(true)
-            }
+            endTime.text = dateFormatter.stringFromDate(date)
+            endTime.endEditing(true)
         }
-        
     }
     
     func showSelectPicker(sender: UITextField) {

@@ -150,7 +150,7 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
     func showDatePicker(sender: UITextField) {
         if sender.tag == Data.VisibleType.TIME {
             currentEditField = sender
-            sender.inputView = UIDatePicker().customPickerStyle(self.view)
+            sender.inputView = CustomDatePicker(frame : CGRectMake(0, 0, self.view.bounds.width, 160))
             sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleDatePicker:"), target : self)
         } else {
             sender.inputView = nil
@@ -160,18 +160,11 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
     
     func handleDatePicker(sender: UIBarButtonItem) {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        var datePicker = currentEditField.inputView as UIDatePicker?
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        var datePicker = currentEditField.inputView as? CustomDatePicker
         if let date = datePicker?.date {
-            if datePicker?.datePickerMode == UIDatePickerMode.Date {
-                datePicker?.datePickerMode = UIDatePickerMode.Time
-            } else {
-                var dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-                currentEditField.text = dateFormatter.stringFromDate(date)
-                currentEditField.endEditing(true)
-            }
-            
+            currentEditField.text = dateFormatter.stringFromDate(date)
+            currentEditField.endEditing(true)
         }
     }
    

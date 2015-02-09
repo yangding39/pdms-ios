@@ -15,6 +15,8 @@ extension UIDatePicker {
         datePicker.datePickerMode = UIDatePickerMode.Date        //datePicker.locale = NSLocale(localeIdentifier: "en_GB")
         //self.backgroundColor = UIColor(red: 147.0, green: 146.0, blue: 144.0, alpha: 40.0)
         self.backgroundColor = UIColor.clearColor()
+        let locale = NSLocale.currentLocale()
+        datePicker.locale = locale
         return datePicker
     }
 }
@@ -37,6 +39,8 @@ extension UIPickerView {
         selectPicker.dataSource = dataSource
         selectPicker.delegate = delegate
         self.backgroundColor = UIColor.clearColor()
+        selectPicker.showsSelectionIndicator = true
         return selectPicker
     }
+    
 }
