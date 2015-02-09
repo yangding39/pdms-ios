@@ -2537,8 +2537,8 @@
                                 </mask>
                                 <mask key="constraints">
                                     <exclude reference="EJi-hm-joR"/>
-                                    <exclude reference="px9-4m-ida"/>
                                     <exclude reference="gl4-jJ-CAE"/>
+                                    <exclude reference="px9-4m-ida"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
@@ -2547,8 +2547,8 @@
                                 </mask>
                                 <mask key="constraints">
                                     <include reference="EJi-hm-joR"/>
-                                    <include reference="px9-4m-ida"/>
                                     <include reference="gl4-jJ-CAE"/>
+                                    <include reference="px9-4m-ida"/>
                                 </mask>
                             </variation>
                         </view>
@@ -4397,7 +4397,9 @@
                             <outlet property="delegate" destination="pXc-Ey-Uyh" id="5uC-49-cKx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="title" id="bU5-hC-Tnj"/>
+                    <navigationItem key="navigationItem" title="title" id="bU5-hC-Tnj">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="WPr-aa-32h"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Us6-y4-t6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -5953,7 +5955,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="QeM-cy-n9e"/>
         <segue reference="GdD-IB-jUL"/>
-        <segue reference="7hT-QL-6mm"/>
         <segue reference="l5R-dC-wfa"/>
+        <segue reference="Fd9-kg-HK9"/>
     </inferredMetricsTieBreakers>
 </document>

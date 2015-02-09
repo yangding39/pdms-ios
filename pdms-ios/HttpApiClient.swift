@@ -106,6 +106,11 @@ class HttpApiClient {
                 }
                 let message =  ";".join(fieldErrors)
                 CustomAlertView.showMessage(message, parentViewController:viewController)
+                if let state = json["stat"].int {
+                    if fieldErrors.count == 0 && state == -1 {
+                        CustomAlertView.showMessage("服务器异常", parentViewController:viewController)
+                    }
+                }
                 
                 success(json)
                 self.dismissLoadingIndicator(loadingPosition, activityIndicator: activityIndicator, viewController: viewController, completeView: completeView)

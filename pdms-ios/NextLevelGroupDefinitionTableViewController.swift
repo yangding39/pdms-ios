@@ -73,12 +73,12 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
         if hasNext {
              let nextGroupDefinitionVC = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("nextLevelGroupDefinitionTableViewController") as NextLevelGroupDefinitionTableViewController
             let indexPath = self.tableView.indexPathForCell(sender as UITableViewCell)!
-            nextGroupDefinitionVC.navigationItem.title = groupDefinitions[indexPath.row].name
+            let parentGroupDefinition = groupDefinitions[indexPath.row]
+            nextGroupDefinitionVC.navigationItem.title = parentGroupDefinition.name
             nextGroupDefinitionVC.visit = visit
             nextGroupDefinitionVC.patient = patient
-            nextGroupDefinitionVC.parentGroupDefinition = groupDefinitions[indexPath.row]
+            nextGroupDefinitionVC.parentGroupDefinition = parentGroupDefinition
             nextGroupDefinitionVC.crowDefinition = crowDefinition
-            self.navigationController?.navigationItem.backBarButtonItem?.title = parentGroupDefinition.name
             self.navigationController?.pushViewController(nextGroupDefinitionVC, animated: true)
             
             return false
