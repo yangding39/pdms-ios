@@ -112,7 +112,7 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
                 let switchData = Data()
                 switchData.definitionId = Data.DefinitionId.DIAG_MAIN
                 switchData.columnName = "主要诊断"
-                switchData.value = ""
+                switchData.value = "\(Data.BoolIntValue.FALSE)"
                 switchData.columnType = Data.ColumnType.NUMBER
                 switchData.isRequired = true
                 switchData.visibleType = Data.VisibleType.DERAIL
