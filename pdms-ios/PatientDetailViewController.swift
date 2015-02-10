@@ -18,6 +18,7 @@ class PatientDetailViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.saveToRecent()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,6 +45,14 @@ class PatientDetailViewController: UITableViewController{
             return 52 + labelHeight
         } else {
             return 44
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 40.0
+        } else {
+            return 20.0
         }
     }
     func saveToRecent() {
