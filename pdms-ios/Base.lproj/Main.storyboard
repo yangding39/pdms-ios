@@ -5605,6 +5605,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="编辑指标" id="akj-cG-arV">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="sPa-Rf-8h3"/>
                         <barButtonItem key="rightBarButtonItem" title="保存" id="AL5-20-enx">
                             <connections>
                                 <segue destination="Ry3-06-3py" kind="unwind" identifier="completeEditQuotaSegue" unwindAction="completeEditQuota:" id="hdP-yu-1fe"/>
