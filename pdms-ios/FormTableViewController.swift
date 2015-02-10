@@ -34,7 +34,6 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let fieldData = fieldDatas[indexPath.row]
-        
         if fieldData.visibleType == Data.VisibleType.DERAIL {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormSwitchCell", forIndexPath: indexPath) as QuotaFormSwitchCell
             cell.name.text = fieldData.columnName
@@ -69,6 +68,8 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
                 case Data.VisibleType.TIME :
                     cell.value.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
                 case Data.VisibleType.RADIO, Data.VisibleType.CHECKBOX,Data.VisibleType.SELECT :
+                     cell.value.addTarget(self, action: "showOptionsPicker:", forControlEvents: UIControlEvents.EditingDidBegin)
+                case Data.VisibleType.CHECKBOX :
                     cell.value.userInteractionEnabled = false
                 default :
                     if let value = cell.value {
@@ -167,13 +168,39 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
             currentEditField.endEditing(true)
         }
     }
+    
+    func showOptionsPicker(sender: UITextField) {
+        if sender.tag == Data.VisibleType.SELECT  ||  sender.tag == Data.VisibleType.RADIO {
+            currentEditField = sender
+            if let row  = self.inputDict[sender] {
+                let optionPicker = CustomOptionPicker(frame: CGRectMake(0, 0, self.view.bounds.width, 160))
+                optionPicker.data = self.fieldDatas[row]
+                sender.inputView = optionPicker
+                optionPicker.commonInit()
+                sender.inputAccessoryView = UIToolbar().customPickerToolBarStyle(self.view, doneSelector: Selector("handleOptionsPicker:"), target : self)
+            }
+            
+        } else {
+            sender.inputView = nil
+            sender.inputAccessoryView = nil
+        }
+
+    }
+    
+    func handleOptionsPicker(sender: UIBarButtonItem) {
+        let optionsPicker = currentEditField.inputView as? CustomOptionPicker
+        if let value = optionsPicker?.value {
+            currentEditField.text = value
+        }
+        currentEditField.endEditing(true)
+    }
    
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if identifier == "showOptionSegue" {
             if let cell = sender as? QuotaFormCell {
                 let indexPath = self.tableView.indexPathForCell(cell)!
                 let data = fieldDatas[indexPath.row]
-                if data.visibleType == Data.VisibleType.SELECT ||  data.visibleType == Data.VisibleType.CHECKBOX ||  data.visibleType == Data.VisibleType.RADIO {
+                if  data.visibleType == Data.VisibleType.CHECKBOX {
                     return true
                 }
             }
@@ -237,7 +264,7 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         if let row = inputDict[textField] {
             let data = fieldDatas[row]
-            if data.visibleType == Data.VisibleType.INPUT || data.visibleType == Data.VisibleType.TIME {
+            if data.visibleType != Data.VisibleType.CHECKBOX {
                 data.value = textField.text
                 setDrugQuantityAndTime()
             }

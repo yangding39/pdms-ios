@@ -55,6 +55,7 @@
 		85E530BF1A397596002888AC /* QuotaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530BE1A397596002888AC /* QuotaCell.swift */; };
 		85E530C21A3977A6002888AC /* QuotaByPatientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */; };
 		85E70B2B1A84715400045DFE /* QuotaDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E70B2A1A84715400045DFE /* QuotaDetailCell.swift */; };
+		85F4D8391A89ACC300E57229 /* CustomOptionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F4D8381A89ACC300E57229 /* CustomOptionPicker.swift */; };
 		B6082E8F1A3AC5DE00C6E0FF /* UserCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E8E1A3AC5DE00C6E0FF /* UserCenterViewController.swift */; };
 		B6082E911A3AC87500C6E0FF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E901A3AC87500C6E0FF /* User.swift */; };
 		B6082E931A3AD81A00C6E0FF /* UserSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6082E921A3AD81A00C6E0FF /* UserSettingViewController.swift */; };
@@ -129,6 +130,7 @@
 		85E530BE1A397596002888AC /* QuotaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaCell.swift; sourceTree = "<group>"; };
 		85E530C11A3977A6002888AC /* QuotaByPatientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaByPatientTableViewController.swift; sourceTree = "<group>"; };
 		85E70B2A1A84715400045DFE /* QuotaDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotaDetailCell.swift; sourceTree = "<group>"; };
+		85F4D8381A89ACC300E57229 /* CustomOptionPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOptionPicker.swift; sourceTree = "<group>"; };
 		9CF5AE119AD28CCFB89A6953 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B6082E8E1A3AC5DE00C6E0FF /* UserCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCenterViewController.swift; sourceTree = "<group>"; };
 		B6082E901A3AC87500C6E0FF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				859B6C011A415DC3004EC0A2 /* CustomPickerView.swift */,
 				8578F8531A7B3338004B6A67 /* CustomDatePicker.swift */,
+				85F4D8381A89ACC300E57229 /* CustomOptionPicker.swift */,
 				858361B91A7F6A4D0037369E /* CustomUITableViewController.swift */,
 				8532C5A31A73A52600EA3444 /* CustomLabel.swift */,
 				853ED9F11A41757F00AA67A8 /* CustomColor.swift */,
@@ -480,6 +483,7 @@
 				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
 				85566DC41A314226004B44AB /* AppDelegate.swift in Sources */,
 				8547F4BD1A64F64D0094AE6B /* EditQuotaTableViewController.swift in Sources */,
+				85F4D8391A89ACC300E57229 /* CustomOptionPicker.swift in Sources */,
 				8561A3201A3A8A4E00D3BDA5 /* GroupDefinition.swift in Sources */,
 				85E530C21A3977A6002888AC /* QuotaByPatientTableViewController.swift in Sources */,
 				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
