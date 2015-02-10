@@ -11,6 +11,7 @@ import UIKit
 class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegate{
     var quota : Quota!
     var patient : Patient!
+    var visit : Visit!
     var datas = Array<Data>()
     var crowDefition : GroupDefinition!
     override func viewDidLoad() {
@@ -172,6 +173,7 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
             let editQuotaTableViewController = segue.destinationViewController  as EditQuotaTableViewController
             editQuotaTableViewController.quota = quota
             editQuotaTableViewController.patient = patient
+            editQuotaTableViewController.visit = visit
             editQuotaTableViewController.crowDefinition = crowDefition
         }
     }

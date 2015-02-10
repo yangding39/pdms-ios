@@ -288,6 +288,7 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
             }
         }
         if saveResult && fieldErrors.count == 0 {
+            visit.setVisitMainDiagnose(fieldDatas, mainDiagnose : parentGroupDefinition.name)
             self.performSegueWithIdentifier("addQuotaCompleteSegue", sender: self)
         }
     }
@@ -426,5 +427,6 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         return ""
     }
 
+    
 }
 

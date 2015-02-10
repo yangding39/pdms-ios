@@ -156,6 +156,7 @@ class QuotaByVisitTableViewController: UITableViewController {
                 let quotaDetailViewController = segue.destinationViewController as QuotaDetailTabelViewController
                 quotaDetailViewController.quota = quota
                 quotaDetailViewController.patient = patient
+                quotaDetailViewController.visit = visit
                 quotaDetailViewController.crowDefition = groupDefinitions[indexPath.section - 1]
             }
            

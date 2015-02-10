@@ -312,6 +312,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
             }
         }
         if saveResult && fieldErrors.count == 0 {
+            visit.setVisitMainDiagnose(fieldDatas, mainDiagnose : quota.name)
             self.performSegueWithIdentifier("completeEditQuotaSegue", sender: self)
         }
     }

@@ -48,4 +48,19 @@ class Visit {
         
         return detailString
     }
+    
+    func setVisitMainDiagnose(fieldDatas : Array<Data>, mainDiagnose : String) {
+        for data in fieldDatas {
+            if data.definitionId == Data.DefinitionId.DIAG_MAIN {
+                if self.mainDiagonse == nil || self.mainDiagonse.isEmpty {
+                    self.mainDiagonse = "疾病诊断：\(mainDiagnose)"
+                } else {
+                    if data.value.toInt() == Data.BoolIntValue.TRUE {
+                        self.mainDiagonse = "疾病诊断：\(mainDiagnose)"
+                    }
+                }
+                break;
+            }
+        }
+    }
 }
