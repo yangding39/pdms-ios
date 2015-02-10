@@ -80,16 +80,19 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         cell.columnNameLabel.numberOfLines = 0
         //cell.columnNameLabel.sizeToFit()
         //cell.columnNameLabel.updateConstraintsIfNeeded()
-
+        var value = ""
         if data.unitName != nil {
-            cell.valueLabel.text = "\(data.value) \(data.unitName)"
+            value = "\(data.value) \(data.unitName)"
         } else {
-            cell.valueLabel.text = data.value
+            value = data.value
         }
         if !data.isValid {
-            cell.valueLabel.textColor = UIColor.redColor()
+            let text = NSMutableAttributedString(string: value)
+            text.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(0, countElements(data.value)))
+            cell.valueLabel.attributedText = text
         } else {
             cell.valueLabel.textColor = UIColor.lightGrayColor()
+            cell.valueLabel.text = value
         }
         cell.valueLabel.numberOfLines = 0
         //cell.valueLabel.sizeToFit()
