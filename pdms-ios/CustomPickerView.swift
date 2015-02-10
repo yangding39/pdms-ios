@@ -17,6 +17,7 @@ extension UIDatePicker {
         self.backgroundColor = UIColor.clearColor()
         let locale = NSLocale.currentLocale()
         datePicker.locale = locale
+        //datePicker.t
         return datePicker
     }
 }

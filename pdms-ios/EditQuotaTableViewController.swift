@@ -113,6 +113,11 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
         quota.name = json["data"]["groupDefinitionName"].string
         quota.groupNamePath = json["data"]["groupNamePath"].string
         
+        if let dDate = Data.generateCheckTime(crowDefinition, forForm : true) {
+            dDate.value = json["data"]["checkTimestampStr"].string
+            dDate.id = Data.DefinitionId.DIAG_DATE
+            fieldDatas.append(dDate)
+        }
         if let type = json["data"]["groupDefinitionType"].int {
             if type == GroupDefinition.TYPE.TEXT {
                 if crowDefinition.name == "疾病诊断" {
@@ -137,11 +142,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
             }
             
         }
-        if let dDate = Data.generateCheckTime(crowDefinition, forForm : true) {
-            dDate.value = json["data"]["checkTimestampStr"].string
-            dDate.id = Data.DefinitionId.DIAG_DATE
-            fieldDatas.append(dDate)
-        }
+        
         for (index: String, fieldDatasJson: JSON) in json["data"]["quotaFieldDatas"]  {
             let fieldData = Data()
             fieldData.id = fieldDatasJson["quotaFieldDataId"].number

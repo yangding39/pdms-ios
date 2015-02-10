@@ -58,14 +58,29 @@ class QuotaByPatientTableViewController: UITableViewController {
         let quota = groupDefinitions[indexPath.section].quota[indexPath.row]
         cell.name.text = quota.name
         cell.name.adjustsFontSizeToFitWidth = true
-        cell.checkTime.text = "诊断时间：\(quota.checkTime)"
-        cell.createTime.text = "创建时间：\(quota.createTime)"
-        cell.lastModifiedTime.text = "修改时间：\(quota.lastModifiedTime)"
+        var detailString = ""
+        if let dDate = Data.generateCheckTime(groupDefinitions[indexPath.section], forForm: false) {
+            if let dateName = dDate.columnName {
+                detailString += "\(dDate.columnName)：\(quota.checkTime)\n"
+            }
+        }
+        
+        detailString +=  "创建时间：\(quota.createTime)\n"
+        detailString +=  "修改时间：\(quota.lastModifiedTime)"
+        cell.detailLabel.numberOfLines = 0
+        cell.detailLabel.text = detailString
+        cell.detailLabel.sizeToFit()
         return cell
     }
     
-    
-    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if let dDate = Data.generateCheckTime(groupDefinitions[indexPath.section], forForm: false) {
+            if dDate.columnName == nil{
+                return 80.0
+            }
+        }
+        return 96.0
+    }
     func loadData() {
         let url = SERVER_DOMAIN + "visit/patientQuotas"
         let parameters : [String : AnyObject] = ["token": TOKEN, "patientId": patient.id]

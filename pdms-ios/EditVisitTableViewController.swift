@@ -59,7 +59,7 @@ class EditVisitTableViewController: UITableViewController {
     func loadOptions() {
         let url = SERVER_DOMAIN + "visit/add"
         let parameters = ["token": TOKEN]
-        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.NAIGATIONBAR, viewController: self, success: fillOptions, fail: nil)
+        HttpApiClient.sharedInstance.getLoading(url, paramters: parameters, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillOptions, fail: nil)
     }
     
     func fillOptions(json : JSON) {

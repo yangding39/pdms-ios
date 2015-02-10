@@ -56,7 +56,7 @@ class Data {
         let crowName = crowDefinition.name
         let dDate = Data()
         dDate.definitionId = Data.DefinitionId.DIAG_DATE
-        dDate.columnName = "诊断日期"
+        dDate.columnName = "诊断时间"
         dDate.value = ""
         dDate.columnType = Data.ColumnType.DATE
         dDate.isRequired = true
@@ -65,11 +65,11 @@ class Data {
         dDate.isDrug = false
         dDate.isValid = true
         if crowName == "个人史" || crowName == "遗传家族史"{
-            dDate.columnName = "记录时间"
+            dDate.columnName = nil
         } else if crowName == "药物治疗" {
             dDate.columnName = "医嘱时间"
         }else if crowName == "疾病诊断" || crowName == "症状体征" {
-            dDate.columnName = "诊断日期"
+            dDate.columnName = "诊断时间"
         } else if crowName == "体格检查" || crowName == "实验室检查" || crowName == "辅助检查"{
             dDate.columnName = "检查时间"
         } else if crowName == "治疗操作" {

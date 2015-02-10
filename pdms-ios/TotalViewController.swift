@@ -21,6 +21,7 @@ class TotalViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         setPullToRefreshTitle()
         page = 1
+        self.tableDatas.removeAll(keepCapacity: true)
         self.loadData()
     }
     override func didReceiveMemoryWarning() {
@@ -109,7 +110,8 @@ class TotalViewController: UITableViewController {
         if self.tableView.pullToRefreshView == nil {
             self.tableView.addPullToRefreshWithActionHandler(loadData, position: SVPullToRefreshPosition.Bottom)
         }
-        setPullToRefreshTitle()
+        self.tableView.pullToRefreshView.setTitle("加载中...", forState: SVPullToRefreshState.All)
+        self.tableView.pullToRefreshView.arrowColor = UIColor.whiteColor()
     }
     
     func addPatientToArray(patient : Patient) -> Bool {

@@ -32,6 +32,7 @@ class PatientDetailViewController: UITableViewController{
         detailLabel.numberOfLines = 0
         detailLabel.text = detailString
         detailLabel.sizeToFit()
+        self.tableView.reloadData()
     }
     
     

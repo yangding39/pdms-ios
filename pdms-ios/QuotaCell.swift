@@ -10,8 +10,6 @@ import  UIKit
 
 class QuotaCell : UITableViewCell {
     
+    @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var checkTime: UILabel!
-    @IBOutlet weak var createTime: UILabel!
-    @IBOutlet weak var lastModifiedTime: UILabel!
 }

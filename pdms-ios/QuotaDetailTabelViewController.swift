@@ -46,11 +46,11 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         var title = ""
         if let namePath = quota.groupNamePath {
             title += namePath
-            if let checkTime = quota.checkTime {
-                if let checkDate = Data.generateCheckTime(crowDefition,forForm : false) {
-                    title += "\n\(checkDate.columnName)：" + checkTime
-                }
-            }
+//            if let checkTime = quota.checkTime {
+//                if let checkDate = Data.generateCheckTime(crowDefition,forForm : false) {
+//                    title += "\n\(checkDate.columnName)：" + checkTime
+//                }
+//            }
         }
        
         return title
@@ -74,10 +74,11 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("showQuotaCell", forIndexPath: indexPath) as QuotaDetailCell
         let data = datas[indexPath.row]
-        cell.columnNameLabel.numberOfLines = 0
+        
         cell.columnNameLabel.text = data.columnName
-        cell.columnNameLabel.sizeToFit()
-        cell.valueLabel.numberOfLines = 0
+        cell.columnNameLabel.numberOfLines = 0
+        //cell.columnNameLabel.sizeToFit()
+        //cell.columnNameLabel.updateConstraintsIfNeeded()
 
         if data.unitName != nil {
             cell.valueLabel.text = "\(data.value) \(data.unitName)"
@@ -89,7 +90,9 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         } else {
             cell.valueLabel.textColor = UIColor.lightGrayColor()
         }
-        cell.valueLabel.sizeToFit()
+        cell.valueLabel.numberOfLines = 0
+        //cell.valueLabel.sizeToFit()
+        //cell.valueLabel.updateConstraintsIfNeeded()
         return cell
     }
   
@@ -110,6 +113,12 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         datas.removeAll(keepCapacity: true)
         quota.groupNamePath = json["data"]["groupNamePath"].string
         quota.checkTime = json["data"]["checkTimestampStr"].string
+        
+        if let dDate = Data.generateCheckTime(crowDefition, forForm : true) {
+            dDate.value = json["data"]["checkTimestampStr"].string
+            dDate.id = Data.DefinitionId.DIAG_DATE
+            datas.append(dDate)
+        }
         if let type = json["data"]["groupDefinitionType"].int {
             if type == GroupDefinition.TYPE.TEXT {
                if crowDefition.name == "疾病诊断" {
@@ -133,6 +142,7 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
             }
             
         }
+        
         for (groupIndex: String, fieldDatasJson : JSON) in json["data"]["quotaFieldDatas"]  {
                 let fieldData = Data()
                 //fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].number

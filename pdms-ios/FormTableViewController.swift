@@ -106,7 +106,9 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
         }
         crowDefinition.id = crowDefinitionId
         crowDefinition.name = crowDefinitionName
-        
+        if let dDate = Data.generateCheckTime(crowDefinition, forForm : true) {
+            fieldDatas.append(dDate)
+        }
         if parentGroupDefinition.type == GroupDefinition.TYPE.TEXT {
             if crowDefinition.name == "疾病诊断" {
                 let switchData = Data()
@@ -122,9 +124,7 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
                 fieldDatas.append(switchData)
             }
         }
-        if let dDate = Data.generateCheckTime(crowDefinition, forForm : true) {
-            fieldDatas.append(dDate)
-        }
+        
         for (index: String, fieldDatasJson: JSON) in json["data"]["quotaFieldDatas"]  {
             let fieldData = Data()
             fieldData.definitionId = fieldDatasJson["quotaDefinitionId"].number
