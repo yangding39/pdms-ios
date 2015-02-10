@@ -27,22 +27,22 @@ class Visit {
         var detailString = ""
         
         if let number = self.number {
-            detailString +=  "就诊号：\(self.number)"
+            detailString +=  "就诊号:   \(self.number)"
         }
         if let department = self.departmentLabel {
-            detailString += "\n科室：\(self.departmentLabel)"
+            detailString += "\n科室:      \(self.departmentLabel)"
         }
         if let mainDiagonse = self.mainDiagonse {
             detailString += "\n\(self.mainDiagonse)"
         }
         
         if let startTime =  self.startTime {
-            detailString += "\n开始时间：" + startTime
+            detailString += "\n开始时间:" + startTime
         }
         
         if let endTime = self.endTime {
             if !endTime.isEmpty {
-                 detailString += "\n结束时间：" + endTime
+                 detailString += "\n结束时间:" + endTime
             }
         }
         
