@@ -25,6 +25,7 @@ class Data {
         static let TIME = 4 //日期控件
         static let DERAIL = 5 //开关控件
         static let TEXT = 6 //不可编辑文本
+        static let SELECT_INPUT = 7 //选择输入框
     }
     
     struct BoolIntValue {

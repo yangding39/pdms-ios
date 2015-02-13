@@ -7,7 +7,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--最近浏览-->
+        <!--首页-->
         <scene sceneID="alm-3k-1IR">
             <objects>
                 <tableViewController id="hWb-FI-i7j" customClass="HistoryViewController" customModule="pdms_ios" customModuleProvider="target" sceneMemberID="viewController">
@@ -176,7 +176,7 @@
                             <outlet property="delegate" destination="hWb-FI-i7j" id="TPq-WG-Q3X"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="最近浏览" id="ZLX-OK-dGZ">
+                    <navigationItem key="navigationItem" title="首页" id="ZLX-OK-dGZ">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SKc-99-8dA">
                             <connections>
                                 <segue destination="Z1W-rR-hb2" kind="presentation" identifier="showAddPatientSegue" id="Zdu-JW-I2r"/>

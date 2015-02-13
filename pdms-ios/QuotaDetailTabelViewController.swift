@@ -16,7 +16,11 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
     var crowDefition : GroupDefinition!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        if var frame = self.tableView.tableFooterView?.frame {
+            frame.size.height = 44
+            self.tableView.tableFooterView?.frame = frame
+            self.tableView.updateConstraintsIfNeeded()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,6 +81,12 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         let data = datas[indexPath.row]
         
         cell.columnNameLabel.text = data.columnName
+        if data.columnName == "天" {
+            cell.columnNameLabel.text = "用量（天）"
+        }
+        if data.columnName == "次" {
+            cell.columnNameLabel.text = "用量（次）"
+        }
         cell.columnNameLabel.numberOfLines = 0
         //cell.columnNameLabel.sizeToFit()
         //cell.columnNameLabel.updateConstraintsIfNeeded()

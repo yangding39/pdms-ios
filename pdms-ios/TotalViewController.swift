@@ -14,7 +14,6 @@ class TotalViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     

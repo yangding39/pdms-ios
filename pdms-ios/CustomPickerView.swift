@@ -32,6 +32,17 @@ extension UIToolbar {
         toolbar.setItems([flexSpace, barItem], animated: true)
         return toolbar
     }
+    
+    func customPickerToolBarAndKeyBoard(parentView : UIView , doneSelector : Selector, inputSelector : Selector, target : AnyObject) -> UIToolbar {
+        var toolbar = UIToolbar(frame: CGRectMake(0, 0, parentView.bounds.width, 44))
+        //toolbar.backgroundColor = UIColor(red: 241, green: 241, blue: 239, alpha: 100)
+        toolbar.backgroundColor = UIColor.clearColor()
+        var inputItem = UIBarButtonItem(title: "手动输入", style: UIBarButtonItemStyle.Plain, target: target, action: inputSelector)
+        var flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        var barItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Done, target: target, action: doneSelector)
+        toolbar.setItems([inputItem,flexSpace, barItem], animated: true)
+        return toolbar
+    }
 }
 
 extension UIPickerView {

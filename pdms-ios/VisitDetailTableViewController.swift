@@ -23,7 +23,11 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
     var editCompelete = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        if var frame = self.tableView.tableFooterView?.frame {
+            frame.size.height = 44
+            self.tableView.tableFooterView?.frame = frame
+            self.tableView.updateConstraintsIfNeeded()
+        }
         // Do any additional setup after loading the view, typically from a nib.
             }
     override func viewWillAppear(animated: Bool) {
