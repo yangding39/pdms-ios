@@ -343,9 +343,9 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func setVisibleTypeForDrug(data : Data) {
-        if data.columnName == "中文商品名" ||  data.columnName == "英文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
+        if data.columnName == "英文通用名" || data.columnName == "中文商品名" ||  data.columnName == "英文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
              data.visibleType = Data.VisibleType.SELECT_INPUT
-        }  else if data.columnName == "中文通用名" || data.columnName == "英文通用名" || data.columnName == "日剂量" || data.columnName == "总天数" || data.columnName == "总剂量" {
+        }  else if data.columnName == "中文通用名"  || data.columnName == "日剂量" || data.columnName == "总天数" || data.columnName == "总剂量" {
             data.visibleType = Data.VisibleType.TEXT
         }
     }

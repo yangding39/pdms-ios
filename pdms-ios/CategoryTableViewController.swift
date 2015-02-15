@@ -43,6 +43,7 @@ class CategoryTableViewController : UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == self.searchDisplayController?.searchResultsTableView {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("categorySearchCell") as UITableViewCell
+            cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = searchQuotaData[indexPath.row].name
             return cell
         } else {
