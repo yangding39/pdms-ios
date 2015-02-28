@@ -88,6 +88,15 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillSearchData, fail : nil)
     }
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tableView == self.tableView {
+             return "最近浏览"
+        } else {
+            return nil
+        }
+    }
+   
+    
     func loadData() {
         let url = SERVER_DOMAIN + "patients/recent?token=" + TOKEN
         HttpApiClient.sharedInstance.getLoading(url, paramters: nil, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)

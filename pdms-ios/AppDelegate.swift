@@ -9,15 +9,15 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UITabBarControllerDelegate {
 
     var window: UIWindow?
-
-
+    var previousViewController : UIViewController?
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         if let controller = window?.rootViewController as? UITabBarController {
+            controller.delegate = self
             if let barItems = controller.tabBar.items {
                 if let homeBarItem = barItems[0] as? UITabBarItem {
                     homeBarItem.image = UIImage(named: "home")
@@ -60,6 +60,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        self.previousViewController = tabBarController.selectedViewController
+        return true
+    }
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        if self.previousViewController == viewController {
+            if let navigationController = viewController as? UINavigationController {
+                for viewController in navigationController.viewControllers {
+                    if let tableViewController = viewController as? UITableViewController {
+                        tableViewController.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+                    }
+                }
+            }
+        }
+    }
 
 }
 

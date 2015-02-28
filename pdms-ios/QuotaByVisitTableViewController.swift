@@ -40,16 +40,16 @@ class QuotaByVisitTableViewController: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderView = UIView()
-        let label = UILabel(frame: CGRectMake(15, 8, self.tableView.bounds.width, 20))
-        label.font = UIFont.systemFontOfSize(18)
-        label.textColor = UIColor.grayColor()
-        label.text = self.tableView(tableView, titleForHeaderInSection: section)
-        sectionHeaderView.addSubview(label)
-        sectionHeaderView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        return sectionHeaderView
-    }
+//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let sectionHeaderView = UIView()
+//        let label = UILabel(frame: CGRectMake(15, 8, self.tableView.bounds.width, 20))
+//        label.font = UIFont.systemFontOfSize(18)
+//        label.textColor = UIColor.grayColor()
+//        label.text = self.tableView(tableView, titleForHeaderInSection: section)
+//        sectionHeaderView.addSubview(label)
+//        sectionHeaderView.backgroundColor = UIColor.groupTableViewBackgroundColor()
+//        return sectionHeaderView
+//    }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
@@ -58,14 +58,14 @@ class QuotaByVisitTableViewController: UITableViewController {
             if section - 1 < groupDefinitions.count {
                 return groupDefinitions[section - 1].name
             } else {
-                return ""
+                return nil
             }
             
         }
     }
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
+//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40
+//    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("visitDetailCell", forIndexPath: indexPath) as VisitTableCell

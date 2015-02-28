@@ -30,11 +30,7 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
         birthdayText.addTarget(self, action: "showDatePicker:", forControlEvents: UIControlEvents.EditingDidBegin)
         genderText.addTarget(self, action: "showSelectPicker:", forControlEvents: UIControlEvents.EditingDidBegin)
         
-        if var frame = self.tableView.tableFooterView?.frame {
-            frame.size.height = 44
-            self.tableView.tableFooterView?.frame = frame
-            self.tableView.updateConstraintsIfNeeded()
-        }
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {

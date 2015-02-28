@@ -20,7 +20,8 @@ class TotalViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         setPullToRefreshTitle()
         page = 1
-        self.tableDatas.removeAll(keepCapacity: true)
+//        self.tableDatas.removeAll(keepCapacity: true)
+//        self.tableView.reloadData()
         self.loadData()
     }
     override func didReceiveMemoryWarning() {

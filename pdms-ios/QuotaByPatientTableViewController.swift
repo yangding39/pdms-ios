@@ -36,23 +36,23 @@ class QuotaByPatientTableViewController: UITableViewController {
         return groupDefinitions[section].quota.count
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderView = UIView()
-        let label = UILabel(frame: CGRectMake(15, 8, self.tableView.bounds.width, 20))
-        label.font = UIFont.systemFontOfSize(18)
-        label.textColor = UIColor.grayColor()
-        label.text = self.tableView(tableView, titleForHeaderInSection: section)
-        sectionHeaderView.addSubview(label)
-        sectionHeaderView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        return sectionHeaderView
-    }
+//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let sectionHeaderView = UIView()
+//        let label = UILabel(frame: CGRectMake(15, 8, self.tableView.bounds.width, 20))
+//        label.font = UIFont.systemFontOfSize(18)
+//        label.textColor = UIColor.grayColor()
+//        label.text = self.tableView(tableView, titleForHeaderInSection: section)
+//        sectionHeaderView.addSubview(label)
+//        sectionHeaderView.backgroundColor = UIColor.groupTableViewBackgroundColor()
+//        return sectionHeaderView
+//    }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return groupDefinitions[section].name
     }
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
+//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40
+//    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
         let quota = groupDefinitions[indexPath.section].quota[indexPath.row]

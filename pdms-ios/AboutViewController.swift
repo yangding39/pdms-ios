@@ -32,7 +32,7 @@ class AboutViewController: UIViewController {
         let label2 = UILabel(frame: CGRectMake(0 + label1.frame.width, 0, 100, 21))
         label2.textColor = UIColor.blueColor()
         label2.font = UIFont.systemFontOfSize(14)
-        label2.text = "www.ydata.org"
+        label2.text = "http://pdms.ydata.org"
         linkView.addSubview(label2)
         self.view.addSubview(linkView)
         
@@ -47,7 +47,7 @@ class AboutViewController: UIViewController {
     }
 
     func openWebPage() {
-        let url = NSURL(string: "http://www.ydata.org")
+        let url = NSURL(string: "http://pdms.ydata.org")
         UIApplication.sharedApplication().openURL(url!)
     }
 
