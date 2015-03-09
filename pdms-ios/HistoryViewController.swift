@@ -25,10 +25,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     }
     override func viewWillAppear(animated: Bool) {
         if toDetail {
-            let patientDetailView = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("patitentDetailViewController") as PatientDetailViewController
-            patientDetailView.patient = detailPatient
-            self.navigationController?.pushViewController(patientDetailView, animated: false)
-            toDetail = false
+            
         } else {
             self.loadData()
         }
@@ -65,9 +62,15 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             patient = self.recentPatients[indexPath.row]
         }
         cell.name.text = patient.name
+        cell.gender.textColor = UIColor.valueColor()
         cell.gender.text = patient.gender
-        cell.age.text = "年龄：\(patient.age)"
-        cell.birthday.text = "出生日期：" + patient.birthday
+        let ageString = NSMutableAttributedString(string: "年龄：\(patient.age)")
+        ageString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 3))
+        cell.age.attributedText = ageString
+        let birthString = NSMutableAttributedString(string: "出生日期：" + patient.birthday)
+        birthString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 5))
+        cell.birthday.attributedText = birthString
+        
         return cell
     }
     
@@ -87,16 +90,22 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         let parameters = ["token": TOKEN, "q": searchString]
         HttpApiClient.sharedInstance.get(url, paramters : parameters, success: fillSearchData, fail : nil)
     }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+   
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         if tableView == self.tableView {
-             return "最近浏览"
+            let view = UIView(frame: CGRectMake(0, 0, self.view.bounds.width, 20))
+            var label = UILabel(frame: CGRectMake(13, 0, 100, 20))
+            view.backgroundColor = UIColor.sectionHeaderColor()
+            label.font = UIFont.systemFontOfSize(14.0)
+            label.textColor = UIColor.sectionTextColor()
+            label.text = "最近浏览"
+            view.addSubview(label)
+            return view
         } else {
             return nil
         }
     }
-   
-    
     func loadData() {
         let url = SERVER_DOMAIN + "patients/recent?token=" + TOKEN
         HttpApiClient.sharedInstance.getLoading(url, paramters: nil, loadingPosition: HttpApiClient.LOADING_POSTION.AFTER_TABLEVIEW, viewController: self, success: fillData, fail: nil)
@@ -114,7 +123,10 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             patient.caseNo = patientJson["patientNo"].string
             self.recentPatients.append(patient)
         }
-         self.tableView.reloadData()        
+        if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.stopAnimating()
+        }
+        self.tableView.reloadData()
     }
     
     func fillSearchData(json: JSON) -> Void{
@@ -149,12 +161,21 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
 //
         }
     }
-    @IBAction func completeAddPatient(segue : UIStoryboardSegue) {
-        let addPatientViewController = segue.sourceViewController as AddPatientViewController
-        let patient = addPatientViewController.patient
-        detailPatient = patient
-        toDetail = true
+    
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        if self.tableView.pullToRefreshView == nil {
+            self.tableView.addPullToRefreshWithActionHandler(loadData, position: SVPullToRefreshPosition.Top)
+        }
+        setPullToRefreshTitle()
     }
-   
+    func setPullToRefreshTitle() {
+        if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.setTitle("下拉刷新...", forState: SVPullToRefreshState.Stopped)
+            pullToRefreshView.setTitle("松开刷新...", forState: SVPullToRefreshState.Triggered)
+            pullToRefreshView.setTitle("加载中...", forState: SVPullToRefreshState.Loading)
+            pullToRefreshView.arrowColor = UIColor.grayColor()
+        }
+    }
 }
 

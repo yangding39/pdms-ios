@@ -48,14 +48,14 @@ class VisitTableViewController : UITableViewController {
         
         let detailString = visit.generateDetail()
         cell.detailLabel.numberOfLines = 0
-        cell.detailLabel.text = detailString
+        cell.detailLabel.attributedText = detailString
         cell.detailLabel.sizeToFit()
         return cell
     }
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let visit = visits[indexPath.row]
         let detailString = visit.generateDetail()
-        let labelHeight = UILabel.heightForDynamicText(detailString, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 59 )
+        let labelHeight = UILabel.heightForDynamicText(detailString.string, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 59 )
         return 46 + labelHeight
     }
     
@@ -77,6 +77,9 @@ class VisitTableViewController : UITableViewController {
             visit.startTime = visitJson["startDate"].string
             visit.endTime = visitJson["endDate"].string
             visits.append(visit)
+        }
+        if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.stopAnimating()
         }
         self.tableView.reloadData()
     }
@@ -100,6 +103,20 @@ class VisitTableViewController : UITableViewController {
         detailVisit = addVisitViewController.visit
         toDetail = true
     }
-    
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        if self.tableView.pullToRefreshView == nil {
+            self.tableView.addPullToRefreshWithActionHandler(loadData, position: SVPullToRefreshPosition.Top)
+        }
+        setPullToRefreshTitle()
+    }
+    func setPullToRefreshTitle() {
+        if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.setTitle("下拉刷新...", forState: SVPullToRefreshState.Stopped)
+            pullToRefreshView.setTitle("松开刷新...", forState: SVPullToRefreshState.Triggered)
+            pullToRefreshView.setTitle("加载中...", forState: SVPullToRefreshState.Loading)
+            pullToRefreshView.arrowColor = UIColor.grayColor()
+        }
+    }
 }
 

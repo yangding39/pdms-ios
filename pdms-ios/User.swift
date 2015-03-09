@@ -9,6 +9,7 @@
 class User {
     var id : NSNumber!
     var name = ""
+    var loginName = ""
     var mobile = ""
     var email = ""
     var address = ""

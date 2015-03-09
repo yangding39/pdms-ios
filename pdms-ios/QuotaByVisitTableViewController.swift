@@ -63,16 +63,35 @@ class QuotaByVisitTableViewController: UITableViewController {
             
         }
     }
-//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 40
-//    }
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRectMake(0, 0, self.view.bounds.width, 40))
+        var label = UILabel(frame: CGRectMake(40, 0, 100, 40))
+        view.backgroundColor = UIColor.sectionHeaderColor()
+        
+        if section == 0 {
+            let imageView = UIImageView(frame: CGRectMake(13, 5, 18, 24))
+            imageView.image = UIImage(named: "visits")
+            view.addSubview(imageView)
+            label.text = "就诊记录"
+        } else {
+            label = UILabel(frame: CGRectMake(13, 0, 100, 40))
+            label.text = groupDefinitions[section - 1].name
+        }
+        label.textColor = UIColor.sectionTextColor()
+        label.font = UIFont.systemFontOfSize(14.0)
+        view.addSubview(label)
+        return view
+    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("visitDetailCell", forIndexPath: indexPath) as VisitTableCell
             cell.typeLabel.text = visit.typeLabel
             let detailString = visit.generateDetail()
             cell.detailLabel.numberOfLines = 0
-            cell.detailLabel.text = detailString
+            cell.detailLabel.attributedText = detailString
             cell.detailLabel.sizeToFit()
             return cell
 
@@ -103,7 +122,7 @@ class QuotaByVisitTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             let detailString = visit.generateDetail()
-            let labelHeight = UILabel.heightForDynamicText(detailString, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 59 )
+            let labelHeight = UILabel.heightForDynamicText(detailString.string, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 59 )
             return 46 + labelHeight
         } else {
             if let dDate = Data.generateCheckTime(groupDefinitions[indexPath.section - 1], forForm: false) {
@@ -116,7 +135,6 @@ class QuotaByVisitTableViewController: UITableViewController {
         
     }
     
-    
     func loadData() {
        let url = SERVER_DOMAIN + "visit/\(visit.id)/quota/list"
         let parameters = ["token": TOKEN]
@@ -125,6 +143,12 @@ class QuotaByVisitTableViewController: UITableViewController {
     
     func fillData(json : JSON) {
         groupDefinitions.removeAll(keepCapacity: true)
+        visit.typeLabel = json["data"]["visitBean"]["visitTypeLabel"].string
+        visit.number = json["data"]["visitBean"]["visitNumber"].string
+        visit.departmentLabel = json["data"]["visitBean"]["departmentLabel"].string
+        visit.mainDiagonse = json["data"]["visitBean"]["mainDiagnose"].string
+        visit.startTime = json["data"]["visitBean"]["startDate"].string
+        visit.endTime = json["data"]["visitBean"]["endDate"].string
         for (groupIndex: String, groupJson : JSON) in json["data"]["crowdDefinitions"]  {
             let groupDefinition = GroupDefinition()
             groupDefinition.id = groupJson["crowdDefinitionId"].number
@@ -140,6 +164,9 @@ class QuotaByVisitTableViewController: UITableViewController {
             }
             groupDefinitions.append(groupDefinition)
        }
+        if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.stopAnimating()
+        }
         self.tableView.reloadData()
     }
     
@@ -173,6 +200,21 @@ class QuotaByVisitTableViewController: UITableViewController {
     
     @IBAction func completeDeleteQuota(segue : UIStoryboardSegue) {
         
+    }
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        if self.tableView.pullToRefreshView == nil {
+            self.tableView.addPullToRefreshWithActionHandler(loadData, position: SVPullToRefreshPosition.Top)
+        }
+        setPullToRefreshTitle()
+    }
+    func setPullToRefreshTitle() {
+        if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.setTitle("下拉刷新...", forState: SVPullToRefreshState.Stopped)
+            pullToRefreshView.setTitle("松开刷新...", forState: SVPullToRefreshState.Triggered)
+            pullToRefreshView.setTitle("加载中...", forState: SVPullToRefreshState.Loading)
+            pullToRefreshView.arrowColor = UIColor.grayColor()
+        }
     }
 }
 

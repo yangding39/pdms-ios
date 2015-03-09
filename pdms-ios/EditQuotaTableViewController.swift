@@ -16,7 +16,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     var crowDefinition : GroupDefinition!
     var quota : Quota!
     var fieldDatas = Array<Data>()
-    var inputDict = Dictionary<UIView, Int>()
+    var inputTexts = Dictionary<UIView, Int>()
     var currentEditField : UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
             let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormSwitchCell", forIndexPath: indexPath) as QuotaFormSwitchCell
             cell.name.text = fieldData.columnName
             cell.swtichBtn.on = getBool(fieldData.value.toInt()!)
-            inputDict[cell.swtichBtn] = indexPath.row
+            inputTexts[cell.swtichBtn] = indexPath.row
             return cell
         } else if fieldData.visibleType == Data.VisibleType.TEXT {
             
@@ -63,7 +63,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
             cell.value.text = fieldData.value
             cell.value.tag = fieldData.visibleType
             cell.value.delegate = self
-            inputDict[cell.value] = indexPath.row
+            inputTexts[cell.value] = indexPath.row
             cell.value.userInteractionEnabled = true
 //            if !fieldData.isValid {
 //                cell.value.textColor = UIColor.redColor()
@@ -201,7 +201,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     func showOptionsPicker(sender: UITextField) {
         if sender.tag == Data.VisibleType.SELECT  ||  sender.tag == Data.VisibleType.RADIO || sender.tag == Data.VisibleType.SELECT_INPUT {
             currentEditField = sender
-            if let row  = self.inputDict[sender] {
+            if let row  = self.inputTexts[sender] {
                 let optionPicker = CustomOptionPicker(frame: CGRectMake(0, 0, self.view.bounds.width, 160))
                 optionPicker.data = self.fieldDatas[row]
                 sender.inputView = optionPicker
@@ -223,7 +223,28 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     func handleOptionsPicker(sender: UIBarButtonItem) {
         let optionsPicker = currentEditField.inputView as? CustomOptionPicker
         if let value = optionsPicker?.value {
-            currentEditField.text = value
+            if optionsPicker?.data.columnName == "中文商品名" {
+                let optionPickerValue = value
+                currentEditField.text = optionsPicker?.getTradeCN(optionPickerValue)
+                var index = 0
+                for data in self.fieldDatas {
+                    if data.columnName == "英文商品名" {
+                        for (view, row) in inputTexts {
+                            if row == index {
+                                if let tradeENTextField = view as? UITextField {
+                                    let tradeENValue = optionsPicker?.getTradeEN(optionPickerValue)
+                                    tradeENTextField.text = tradeENValue
+                                    data.value = tradeENValue
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    index++
+                }
+            } else {
+                currentEditField.text = value
+            }
         }
         currentEditField.endEditing(true)
     }
@@ -307,7 +328,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
         fieldDatas[indexPath.row].value = dataValue
     }
     func textFieldDidEndEditing(textField: UITextField) {
-        if let row = inputDict[textField] {
+        if let row = inputTexts[textField] {
             let data = fieldDatas[row]
             if data.visibleType != Data.VisibleType.CHECKBOX {
                 data.value = textField.text
@@ -317,7 +338,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func swithcDidEndEditing(sender: UISwitch) {
-        if let row = inputDict[sender] {
+        if let row = inputTexts[sender] {
           let data = fieldDatas[row]
           if sender.on {
               data.value = "\(Data.BoolIntValue.TRUE)"
@@ -367,9 +388,9 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func setVisibleTypeForDrug(data : Data) {
-        if data.columnName == "英文通用名" || data.columnName == "中文商品名" ||  data.columnName == "英文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
+        if data.columnName == "英文通用名" || data.columnName == "中文商品名" || data.columnName == "剂型" || data.columnName == "规格" || data.columnName == "单位" || data.columnName == "用法" {
             data.visibleType = Data.VisibleType.SELECT_INPUT
-        } else if data.columnName == "中文通用名" || data.columnName == "英文通用名" || data.columnName == "日剂量" || data.columnName == "总天数" || data.columnName == "总剂量" {
+        } else if data.columnName == "中文通用名" || data.columnName == "日剂量" || data.columnName == "总天数" || data.columnName == "总剂量" {
             data.visibleType = Data.VisibleType.TEXT
         }
     }
@@ -492,7 +513,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     }
         
     func endTextFieldEditing() {
-        for key in inputDict.keys {
+        for key in inputTexts.keys {
             if let textField = key as? UITextField {
                 textField.endEditing(true)
             }

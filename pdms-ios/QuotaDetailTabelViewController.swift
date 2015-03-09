@@ -36,14 +36,14 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         
         
         let label = UILabel(frame: CGRectMake(15, 8, self.tableView.bounds.width - 30, 40))
-        label.font = UIFont.systemFontOfSize(18)
-        label.textColor = UIColor.grayColor()
+        label.font = UIFont.systemFontOfSize(14)
         label.numberOfLines = 0
         label.text = self.tableView(tableView, titleForHeaderInSection: section)
+        label.textColor = UIColor.sectionTextColor()
         label.sizeToFit()
         let sectionHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.bounds.width, label.frame.height))
         sectionHeaderView.addSubview(label)
-        sectionHeaderView.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        sectionHeaderView.backgroundColor = UIColor.sectionHeaderColor()
         
         return sectionHeaderView
     }
@@ -62,7 +62,7 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
     }
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if let title = self.tableView(tableView, titleForHeaderInSection: section) {
-            let height = UILabel.heightForDynamicText(title, font: UIFont.systemFontOfSize(18.0), width: self.tableView.bounds.width - 30 )
+            let height = UILabel.heightForDynamicText(title, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 30 )
             if height == 0 {
                 return 0
             } else {
@@ -116,6 +116,10 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         let valueHeight = UILabel.heightForDynamicText(data.value, font: UIFont.systemFontOfSize(16.0), width: self.tableView.frame.width - 159)
         let cellHeight = nameHeight > valueHeight ? nameHeight : valueHeight
         return cellHeight + 23.0
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 18
     }
     func loadData() {
         let url = SERVER_DOMAIN + "quota/quotaDetails"
@@ -191,7 +195,7 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         }
     }
     @IBAction func completeEditQuota(segue : UIStoryboardSegue) {
-        self.loadData()
+        //self.loadData()
     }
    
     @IBAction func didDeleteAction(sender: AnyObject) {

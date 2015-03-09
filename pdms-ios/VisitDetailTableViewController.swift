@@ -29,7 +29,7 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
             self.tableView.updateConstraintsIfNeeded()
         }
         // Do any additional setup after loading the view, typically from a nib.
-            }
+    }
     override func viewWillAppear(animated: Bool) {
         if editCompelete {
             self.navigationController?.popViewControllerAnimated(false)
@@ -47,6 +47,9 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
         // Dispose of any resources that can be recreated.
     }
     
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 18
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editVisitSegue" {
             let navigateController =  segue.destinationViewController as UINavigationController
