@@ -38,8 +38,8 @@ class Patient {
         }
         if let caseNo = self.caseNo {
             if !caseNo.isEmpty {
-                let tmpString = NSMutableAttributedString(string: "病案号：\(caseNo)")
-                tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 4))
+                let tmpString = NSMutableAttributedString(string: "\n病案号：\(caseNo)")
+                tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 5))
                 detailString.appendAttributedString(tmpString)
             }
         }

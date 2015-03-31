@@ -67,7 +67,7 @@ class CategoryTableViewController : UITableViewController {
         var url = SERVER_DOMAIN + "quota/favoriteCategory"
         isFavorite = true
         if categoryIndex == 1 {
-            var url = SERVER_DOMAIN + "quota/allQuotas"
+            url = SERVER_DOMAIN + "quota/allQuotas"
             isFavorite = false
         }
         let parameters = ["token": TOKEN]

@@ -18,7 +18,6 @@ class PatientDetailViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.saveToRecent()
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -48,9 +47,9 @@ class PatientDetailViewController: UITableViewController{
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 40.0
+            return 0
         } else {
             return 20.0
         }
@@ -66,7 +65,7 @@ class PatientDetailViewController: UITableViewController{
             label.font = UIFont.systemFontOfSize(14.0)
             label.text = "基本信息"
             view.addSubview(label)
-            return view
+            return nil
         }
         return nil
     }

@@ -254,7 +254,15 @@ class FormTableViewController: UITableViewController, UITextFieldDelegate {
             for var i = 0 ; i < fieldDatas.count; ++i {
                 let fieldData = fieldDatas[i]
                 if fieldData.isRequired && (fieldData.value == nil || fieldData.value.isEmpty) {
-                    CustomAlertView.showMessage(fieldDatas[i].columnName + "必填", parentViewController: self)
+                    var error = ""
+                    if fieldDatas[i].columnName == "天" {
+                        error = "用量（天）"
+                    } else if fieldDatas[i].columnName == "次" {
+                        error = "用量（次）"
+                    } else {
+                        error = fieldDatas[i].columnName
+                    }
+                    CustomAlertView.showMessage( error + "必填", parentViewController: self)
                     return false
                 }
             }

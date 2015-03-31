@@ -64,6 +64,9 @@ class QuotaByVisitTableViewController: UITableViewController {
         }
     }
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }
         return 40
     }
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

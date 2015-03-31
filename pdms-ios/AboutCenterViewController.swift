@@ -14,10 +14,12 @@ class AboutCenterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if var frame = self.tableView.tableHeaderView?.frame {
-            frame.size.height = 180
+            
+            frame.size.height = 130
             self.tableView.tableHeaderView?.frame = frame
             self.tableView.tableHeaderView?.backgroundColor = UIColor.sectionHeaderColor()
-            self.tableView.updateConstraintsIfNeeded()
+            self.tableView.tableHeaderView?.updateConstraintsIfNeeded()
+            
         }
         // Do any additional setup after loading the view, typically from a nib.
     }
