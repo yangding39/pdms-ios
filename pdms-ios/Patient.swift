@@ -33,7 +33,7 @@ class Patient {
         }
         if let birthday = self.birthday {
             let tmpString = NSMutableAttributedString(string: "\n出生日期：" + self.birthday + "     ")
-            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 5))
+            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 6))
             detailString.appendAttributedString(tmpString)
         }
         if let caseNo = self.caseNo {

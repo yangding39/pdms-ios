@@ -2997,6 +2997,7 @@
                                     <exclude reference="0aK-gP-f8D"/>
                                 </mask>
                                 <mask key="constraints">
+                                    <exclude reference="Ctz-Yx-GFe"/>
                                     <exclude reference="6oy-fG-IOJ"/>
                                     <exclude reference="9Kb-Dk-qHw"/>
                                     <exclude reference="F4g-cY-gaW"/>
@@ -3004,7 +3005,6 @@
                                     <exclude reference="jZ7-De-wei"/>
                                     <exclude reference="neW-Sp-ntV"/>
                                     <exclude reference="yPM-aC-K2J"/>
-                                    <exclude reference="Ctz-Yx-GFe"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
@@ -3013,6 +3013,7 @@
                                     <include reference="0aK-gP-f8D"/>
                                 </mask>
                                 <mask key="constraints">
+                                    <exclude reference="Ctz-Yx-GFe"/>
                                     <include reference="6oy-fG-IOJ"/>
                                     <include reference="9Kb-Dk-qHw"/>
                                     <include reference="F4g-cY-gaW"/>
@@ -3020,7 +3021,6 @@
                                     <exclude reference="jZ7-De-wei"/>
                                     <include reference="neW-Sp-ntV"/>
                                     <include reference="yPM-aC-K2J"/>
-                                    <exclude reference="Ctz-Yx-GFe"/>
                                 </mask>
                             </variation>
                         </view>
