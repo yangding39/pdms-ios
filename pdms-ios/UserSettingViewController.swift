@@ -8,6 +8,8 @@
 import UIKit
 
 class UserSettingViewController: UITableViewController {
+    
+    @IBOutlet weak var loginNameText: UILabel!
     @IBOutlet weak var mobileText: UITextField!
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var addressText: UITextField!
@@ -33,6 +35,7 @@ class UserSettingViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginNameText.text = LOGIN_USER.loginName
         self.loadData()
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }

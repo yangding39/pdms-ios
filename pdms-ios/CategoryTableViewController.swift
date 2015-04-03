@@ -67,7 +67,7 @@ class CategoryTableViewController : UITableViewController {
         var url = SERVER_DOMAIN + "quota/favoriteCategory"
         isFavorite = true
         if categoryIndex == 1 {
-            var url = SERVER_DOMAIN + "quota/allQuotas"
+            url = SERVER_DOMAIN + "quota/allQuotas"
             isFavorite = false
         }
         let parameters = ["token": TOKEN]
@@ -105,8 +105,15 @@ class CategoryTableViewController : UITableViewController {
         for (index: String, favoriteJson: JSON) in json["data"]  {
             let groupDefintion = GroupDefinition()
             groupDefintion.id = favoriteJson["groupDefinitionId"].number
-            groupDefintion.name = favoriteJson["groupDefinitionName"].string
+            var crowName = ""
+            if let namePath = favoriteJson["namePath"].string {
+                if let range = namePath.rangeOfString("/") {
+                    crowName = namePath.substringToIndex(range.startIndex) + "-"
+                }
+            }
+            groupDefintion.name = crowName + favoriteJson["groupDefinitionName"].string!
             groupDefintion.type = favoriteJson["groupDefinitionType"].int
+            
             searchQuotaData.append(groupDefintion)
         }
 

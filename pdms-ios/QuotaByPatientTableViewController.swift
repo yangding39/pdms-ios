@@ -47,8 +47,18 @@ class QuotaByPatientTableViewController: UITableViewController {
 //        return sectionHeaderView
 //    }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return groupDefinitions[section].name
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRectMake(0, 0, self.view.bounds.width, 40))
+        var label = UILabel(frame: CGRectMake(13, 0, 100, 40))
+        view.backgroundColor = UIColor.sectionHeaderColor()
+        label.text = groupDefinitions[section].name
+        label.textColor = UIColor.sectionTextColor()
+        label.font = UIFont.systemFontOfSize(14.0)
+        view.addSubview(label)
+        return view
     }
 //    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        return 40
@@ -104,6 +114,9 @@ class QuotaByPatientTableViewController: UITableViewController {
             }
             groupDefinitions.append(groupDefinition)
         }
+        if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.stopAnimating()
+        }
         self.tableView.reloadData()
     }
 
@@ -117,6 +130,20 @@ class QuotaByPatientTableViewController: UITableViewController {
             quotaDetailViewController.crowDefition = groupDefinitions[indexPath.section]
         } 
     }
-
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        if self.tableView.pullToRefreshView == nil {
+            self.tableView.addPullToRefreshWithActionHandler(loadData, position: SVPullToRefreshPosition.Top)
+        }
+        setPullToRefreshTitle()
+    }
+    func setPullToRefreshTitle() {
+        if let pullToRefreshView = self.tableView.pullToRefreshView {
+            pullToRefreshView.setTitle("下拉刷新...", forState: SVPullToRefreshState.Stopped)
+            pullToRefreshView.setTitle("松开刷新...", forState: SVPullToRefreshState.Triggered)
+            pullToRefreshView.setTitle("加载中...", forState: SVPullToRefreshState.Loading)
+            pullToRefreshView.arrowColor = UIColor.grayColor()
+        }
+    }
 }
 

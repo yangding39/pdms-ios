@@ -9,11 +9,14 @@
 import UIKit
 
 class UserPasswordViewController: UITableViewController {
+    
+    @IBOutlet weak var loginNameText: UILabel!
     @IBOutlet weak var passwordConfirmText: UITextField!
     @IBOutlet weak var newPasswordText: UITextField!
     @IBOutlet weak var oldPasswordText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginNameText.text = LOGIN_USER.loginName
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     

@@ -23,26 +23,36 @@ class Visit {
         
     }
     
-    func generateDetail() -> String {
-        var detailString = ""
+    func generateDetail() -> NSMutableAttributedString {
+        var detailString : NSMutableAttributedString = NSMutableAttributedString()
         
         if let number = self.number {
-            detailString +=  "就诊号:   \(self.number)"
+            let tmpString = NSMutableAttributedString(string: "就诊号：    \(self.number)")
+            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 4))
+            detailString.appendAttributedString(tmpString)
         }
         if let department = self.departmentLabel {
-            detailString += "\n科室:      \(self.departmentLabel)"
+            let tmpString = NSMutableAttributedString(string: "\n科室：       \(self.departmentLabel)")
+            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 4))
+            detailString.appendAttributedString(tmpString)
         }
         if let mainDiagonse = self.mainDiagonse {
-            detailString += "\n\(self.mainDiagonse)"
+            let tmpString = NSMutableAttributedString(string: "\n\(self.mainDiagonse)")
+            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 6))
+            detailString.appendAttributedString(tmpString)
         }
         
         if let startTime =  self.startTime {
-            detailString += "\n开始时间:" + startTime
+            let tmpString = NSMutableAttributedString(string: "\n开始时间：" + startTime)
+            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 6))
+            detailString.appendAttributedString(tmpString)
         }
         
         if let endTime = self.endTime {
             if !endTime.isEmpty {
-                 detailString += "\n结束时间:" + endTime
+                let tmpString = NSMutableAttributedString(string: "\n结束时间：" + endTime)
+                tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 6))
+                detailString.appendAttributedString(tmpString)
             }
         }
         

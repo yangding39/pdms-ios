@@ -18,7 +18,6 @@ class PatientDetailViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.saveToRecent()
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -31,7 +30,7 @@ class PatientDetailViewController: UITableViewController{
         name.text = patient.name
         let detailString = patient.generateDetail()
         detailLabel.numberOfLines = 0
-        detailLabel.text = detailString
+        detailLabel.attributedText = detailString
         detailLabel.sizeToFit()
         self.tableView.reloadData()
     }
@@ -41,19 +40,34 @@ class PatientDetailViewController: UITableViewController{
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             let detailString = patient.generateDetail()
-            let labelHeight = UILabel.heightForDynamicText(detailString, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 49 )
+            let labelHeight = UILabel.heightForDynamicText(detailString.string, font: UIFont.systemFontOfSize(14.0), width: self.tableView.bounds.width - 49 )
             return 52 + labelHeight
         } else {
             return 44
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 40.0
+            return 0
         } else {
             return 20.0
         }
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let view = UIView(frame: CGRectMake(0, 0, 200, 40))
+            let imageView = UIImageView(frame: CGRectMake(13, 10, 22, 20))
+            imageView.image = UIImage(named: "basic-info")
+            view.addSubview(imageView)
+            let label = UILabel(frame: CGRectMake(40, 0, 100, 40))
+            label.font = UIFont.systemFontOfSize(14.0)
+            label.text = "基本信息"
+            view.addSubview(label)
+            return nil
+        }
+        return nil
     }
     func saveToRecent() {
         let url = SERVER_DOMAIN + "patients/searchView"

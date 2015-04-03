@@ -18,21 +18,29 @@ class Patient {
         
     }
     
-    func generateDetail() -> String {
-        var detailString = ""
+    func generateDetail() -> NSMutableAttributedString {
+        let detailString : NSMutableAttributedString = NSMutableAttributedString()
         
         if let gender = self.gender {
-            detailString += self.gender
+            let tmpString = NSMutableAttributedString(string: "性别：\(self.gender)       ")
+            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 3))
+            detailString.appendAttributedString(tmpString)
         }
         if let age = self.age {
-            detailString += "   年龄：\(self.age)   "
+            let tmpString = NSMutableAttributedString(string: "年龄：\(self.age)")
+            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 3))
+            detailString.appendAttributedString(tmpString)
         }
         if let birthday = self.birthday {
-            detailString += "出生日期：" + self.birthday
+            let tmpString = NSMutableAttributedString(string: "\n出生日期：" + self.birthday + "     ")
+            tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 6))
+            detailString.appendAttributedString(tmpString)
         }
         if let caseNo = self.caseNo {
             if !caseNo.isEmpty {
-                detailString += "\n病案号：\(caseNo)"
+                let tmpString = NSMutableAttributedString(string: "\n病案号：\(caseNo)")
+                tmpString.addAttribute(NSForegroundColorAttributeName, value: UIColor.columnColor(), range: NSMakeRange(0, 5))
+                detailString.appendAttributedString(tmpString)
             }
         }
         return detailString

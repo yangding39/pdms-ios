@@ -25,6 +25,8 @@ class AddVisitViewController: UITableViewController {
     
     var departmentOptions : Dictionary<String, Array<Option>> = [:]
     
+    var rootDepartments = Array<String>()
+    
     var isDepartmentOptions = false
     
     var currentTextField : UITextField?
@@ -73,6 +75,7 @@ class AddVisitViewController: UITableViewController {
                 if dictName == "就诊类型" {
                     self.typeOptions = subOptions
                 } else {
+                    rootDepartments.append(dictName)
                     self.departmentOptions[dictName] = subOptions
                 }
             }
@@ -203,7 +206,7 @@ class AddVisitViewController: UITableViewController {
         var uiPicker = currentTextField!.inputView as UIPickerView?
         if let index = uiPicker?.selectedRowInComponent(0) {
             if isDepartmentOptions {
-                let fisrtLabel = self.departmentOptions.keys.array[index]
+                let fisrtLabel = self.rootDepartments[index]
                 if let subIndex = uiPicker?.selectedRowInComponent(1) {
                     if let options = self.departmentOptions[fisrtLabel] {
                          currentTextField!.text = options[subIndex].label
@@ -238,7 +241,7 @@ extension AddVisitViewController : UIPickerViewDataSource {
                 return self.departmentOptions.keys.array.count
             } else {
                 let index = pickerView.selectedRowInComponent(0)
-                let key = self.departmentOptions.keys.array[index]
+                let key = self.rootDepartments[index]
                 if let options = self.departmentOptions[key] {
                      return  options.count
                 } else {
@@ -255,10 +258,10 @@ extension AddVisitViewController : UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         if isDepartmentOptions {
             if component == 0 {
-                return self.departmentOptions.keys.array[row]
+                return self.rootDepartments[row]
             } else {
                 let index = pickerView.selectedRowInComponent(0)
-                let key = self.departmentOptions.keys.array[index]
+                let key = self.rootDepartments[index]
                 if let options = self.departmentOptions[key] {
                     if row < options.count {
                         return  options[row].label

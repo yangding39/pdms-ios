@@ -88,6 +88,7 @@ class LoginTableViewController: UITableViewController, UITextFieldDelegate {
             if let department = json["data"]["organizationName"].string {
                 user.department = department
             }
+            user.loginName = userNameTextField.text
             LOGIN_USER = user
             if let token = json["data"]["token"].string {
                 TOKEN = token

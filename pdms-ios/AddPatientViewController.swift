@@ -35,33 +35,25 @@ class AddPatientViewController: UITableViewController {
     }
     override func viewWillAppear(animated: Bool) {
     }
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        
+  
+    @IBAction func clickSaveBtn(sender: AnyObject) {
         if nameText.text.isEmpty {
             CustomAlertView.showMessage("姓名必填", parentViewController: self)
-            return false
+            return
         } else if countElements(nameText.text) > 10 {
             CustomAlertView.showMessage("姓名不能超过10", parentViewController: self)
-            return false
+            return
         } else if genderText.text.isEmpty {
             CustomAlertView.showMessage("性别必填", parentViewController: self)
-            return false
+            return
         } else if birthdayText.text.isEmpty {
             CustomAlertView.showMessage("出生日期必填", parentViewController: self)
-            return false
+            return
         } else if countElements(caseNoText.text) > 20 {
             CustomAlertView.showMessage("病案号不能超过20", parentViewController: self)
-            return false
+            return 
         }
         savePatient()
-        return false
-    }
-   
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "completeAddPatientSegue" {
-//            let patientDetailViewController = segue.destinationViewController as PatientDetailViewController
-//            patientDetailViewController.patient = patient
-        }
     }
     func savePatient(){
         patient.name = nameText.text
@@ -111,7 +103,25 @@ class AddPatientViewController: UITableViewController {
             }
             patient.birthday = json["data"]["birthday"].string
             patient.caseNo = json["data"]["patientNo"].string
-            self.performSegueWithIdentifier("completeAddPatientSegue", sender: self)
+            //self.performSegueWithIdentifier("completeAddPatientSegue", sender: self)
+            if let tabBarController = self.presentingViewController as? UITabBarController {
+                if let viewControllers = tabBarController.viewControllers {
+                    var tabSelectedIndex = 0
+                    for viewController in viewControllers {
+                        if let navigationController = viewController as? UINavigationController {
+                            if tabBarController.selectedIndex == tabSelectedIndex {
+                                 navigationController.popToRootViewControllerAnimated(false)
+                                let patientDetailView = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("patitentDetailViewController") as PatientDetailViewController
+                                patientDetailView.patient = patient
+                                navigationController.pushViewController(patientDetailView, animated: false)
+                            }
+                            tabSelectedIndex++
+                        }
+                    }
+                }
+                
+            }
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
 
     }

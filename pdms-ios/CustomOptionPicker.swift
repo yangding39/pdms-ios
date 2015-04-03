@@ -40,7 +40,11 @@ class CustomOptionPicker : UIPickerView, UIPickerViewDataSource, UIPickerViewDel
         }
         
         if component == 0 {
-            label?.text = options[row].label
+            if data.columnName == "中文商品名" {
+                label?.text = getTradeCN(options[row].label)
+            } else {
+                label?.text = options[row].label
+            }
         }
         label?.adjustsFontSizeToFitWidth = true
         return label!
@@ -94,4 +98,19 @@ class CustomOptionPicker : UIPickerView, UIPickerViewDataSource, UIPickerViewDel
         self.reloadAllComponents()
     }
 
+    func getTradeCN(label : String) -> String {
+        if let range = label.rangeOfString("-") {
+            let newLabel = label.substringToIndex(range.startIndex)
+            return newLabel
+        }
+       return label
+    }
+    
+    func getTradeEN(label : String) -> String? {
+        if let range = label.rangeOfString("-") {
+            let newLabel = label.substringFromIndex(range.endIndex)
+            return newLabel
+        }
+        return nil
+    }
 }

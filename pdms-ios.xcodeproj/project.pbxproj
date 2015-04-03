@@ -43,6 +43,9 @@
 		85C0E2161A37E7A100132AD5 /* AddVisitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */; };
 		85C0E2191A381D6900132AD5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0E2181A381D6900132AD5 /* Option.swift */; };
 		85C1AB0F1A3697AA00968A1F /* HttpApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */; };
+		85CBF3411AA18A6700119215 /* CategorySearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBF3401AA18A6700119215 /* CategorySearchBar.swift */; };
+		85CBF3431AA857E500119215 /* AboutCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBF3421AA857E500119215 /* AboutCenterViewController.swift */; };
+		85CBF3451AA93EA000119215 /* AboutComanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CBF3441AA93EA000119215 /* AboutComanyViewController.swift */; };
 		85D169071A6F4FF400FCDE40 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D169061A6F4FF400FCDE40 /* Images.xcassets */; };
 		85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A491A3153D600D2C7EF /* GlobalConst.swift */; };
 		85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D24A4D1A31599900D2C7EF /* PatientTableCell.swift */; };
@@ -117,6 +120,9 @@
 		85C0E2151A37E7A000132AD5 /* AddVisitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddVisitViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		85C0E2181A381D6900132AD5 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		85C1AB0E1A3697AA00968A1F /* HttpApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpApiClient.swift; sourceTree = "<group>"; };
+		85CBF3401AA18A6700119215 /* CategorySearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySearchBar.swift; sourceTree = "<group>"; };
+		85CBF3421AA857E500119215 /* AboutCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCenterViewController.swift; sourceTree = "<group>"; };
+		85CBF3441AA93EA000119215 /* AboutComanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutComanyViewController.swift; sourceTree = "<group>"; };
 		85D169061A6F4FF400FCDE40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		85D24A481A314F9400D2C7EF /* SwiftObjectcBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftObjectcBridge.h; sourceTree = "<group>"; };
 		85D24A491A3153D600D2C7EF /* GlobalConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConst.swift; sourceTree = "<group>"; };
@@ -309,6 +315,7 @@
 				85473C721A3ED9BE00DC678B /* QuotaDetailTabelViewController.swift */,
 				85E70B2A1A84715400045DFE /* QuotaDetailCell.swift */,
 				852EF0EE1A5BCF3C00FC1229 /* OptionsTableViewController.swift */,
+				85CBF3401AA18A6700119215 /* CategorySearchBar.swift */,
 			);
 			name = Quota;
 			sourceTree = "<group>";
@@ -328,7 +335,9 @@
 				B6082E8E1A3AC5DE00C6E0FF /* UserCenterViewController.swift */,
 				B6082E921A3AD81A00C6E0FF /* UserSettingViewController.swift */,
 				859752541A70F914005CE917 /* AboutViewController.swift */,
+				85CBF3421AA857E500119215 /* AboutCenterViewController.swift */,
 				B681A4DB1A3E7668005C48EE /* UserPasswordViewController.swift */,
+				85CBF3441AA93EA000119215 /* AboutComanyViewController.swift */,
 				859752521A70CFC9005CE917 /* LoginTableViewController.swift */,
 			);
 			name = User;
@@ -483,12 +492,15 @@
 				85D24A4A1A3153D600D2C7EF /* GlobalConst.swift in Sources */,
 				85566DC41A314226004B44AB /* AppDelegate.swift in Sources */,
 				8547F4BD1A64F64D0094AE6B /* EditQuotaTableViewController.swift in Sources */,
+				85CBF3431AA857E500119215 /* AboutCenterViewController.swift in Sources */,
 				85F4D8391A89ACC300E57229 /* CustomOptionPicker.swift in Sources */,
 				8561A3201A3A8A4E00D3BDA5 /* GroupDefinition.swift in Sources */,
 				85E530C21A3977A6002888AC /* QuotaByPatientTableViewController.swift in Sources */,
 				85D24A531A3165DA00D2C7EF /* SwiftyJSON.swift in Sources */,
 				85C0E20F1A37D26D00132AD5 /* Visit.swift in Sources */,
 				85D24A4E1A31599900D2C7EF /* PatientTableCell.swift in Sources */,
+				85CBF3451AA93EA000119215 /* AboutComanyViewController.swift in Sources */,
+				85CBF3411AA18A6700119215 /* CategorySearchBar.swift in Sources */,
 				B681A4DE1A3EB2CE005C48EE /* EditPatientViewController.swift in Sources */,
 				8561A31A1A399A4900D3BDA5 /* QuotaByVisitTableViewController.swift in Sources */,
 				85C0E2111A37D3DD00132AD5 /* VisitTableCell.swift in Sources */,
