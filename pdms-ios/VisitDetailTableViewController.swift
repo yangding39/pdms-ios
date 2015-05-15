@@ -52,8 +52,8 @@ class VisitDetailTableViewController: UITableViewController, UIActionSheetDelega
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editVisitSegue" {
-            let navigateController =  segue.destinationViewController as UINavigationController
-            let editVisitViewController = navigateController.topViewController as EditVisitTableViewController
+            let navigateController =  segue.destinationViewController as! UINavigationController
+            let editVisitViewController = navigateController.topViewController as! EditVisitTableViewController
             editVisitViewController.patient = patient
             editVisitViewController.visit = visit
         }

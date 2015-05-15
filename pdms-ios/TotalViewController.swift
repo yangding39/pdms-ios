@@ -36,7 +36,7 @@ class TotalViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("patientCell", forIndexPath: indexPath) as PatientTableCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("patientCell", forIndexPath: indexPath) as! PatientTableCell
         let patient = self.tableDatas[indexPath.row]
         cell.name.text = patient.name
         cell.gender.textColor = UIColor.valueColor()
@@ -151,9 +151,9 @@ class TotalViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "patientDetailSegue") {
-            let indexPath = self.tableView.indexPathForCell(sender as PatientTableCell)!
+            let indexPath = self.tableView.indexPathForCell(sender as! PatientTableCell)!
             let patient = self.tableDatas[indexPath.row]
-            let patientDetailViewController = segue.destinationViewController as PatientDetailViewController
+            let patientDetailViewController = segue.destinationViewController as!PatientDetailViewController
             patientDetailViewController.patient = patient
         } else {
             

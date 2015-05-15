@@ -80,13 +80,13 @@ class PatientDetailViewController: UITableViewController{
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "visitByPatientSegue" {
-            let visitTabelViewController = segue.destinationViewController as VisitTableViewController
+            let visitTabelViewController = segue.destinationViewController as! VisitTableViewController
             visitTabelViewController.patient = patient
         } else if segue.identifier == "quotaByPatientSegue" {
-            let quotaViewController = segue.destinationViewController as QuotaByPatientTableViewController
+            let quotaViewController = segue.destinationViewController as!QuotaByPatientTableViewController
             quotaViewController.patient = patient
         } else if segue.identifier == "basicDetailPatitentSegue" {
-            let basicDetailPatientController = segue.destinationViewController as BasciDetailPatientTableViewController
+            let basicDetailPatientController = segue.destinationViewController as! BasciDetailPatientTableViewController
             basicDetailPatientController.patient = patient
         }
     }

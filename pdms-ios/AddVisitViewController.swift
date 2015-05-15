@@ -90,7 +90,7 @@ class AddVisitViewController: UITableViewController {
             } else if number.text.isEmpty{
                 CustomAlertView.showMessage("就诊号必填", parentViewController: self)
                 return false
-            } else if countElements(number.text) > 20 {
+            } else if count(number.text) > 20 {
                 CustomAlertView.showMessage("就诊号长度不能超过20", parentViewController: self)
                 return false
             } else if departmentLabel.text.isEmpty{
@@ -203,7 +203,7 @@ class AddVisitViewController: UITableViewController {
     
     func handleSelectPicker(sender: UIBarButtonItem) {
         
-        var uiPicker = currentTextField!.inputView as UIPickerView?
+        var uiPicker = currentTextField!.inputView as! UIPickerView?
         if let index = uiPicker?.selectedRowInComponent(0) {
             if isDepartmentOptions {
                 let fisrtLabel = self.rootDepartments[index]

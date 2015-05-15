@@ -36,7 +36,7 @@ class OptionsTableViewController: UITableViewController {
         return options.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("optionCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("optionCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = options[indexPath.row].label
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         return cell

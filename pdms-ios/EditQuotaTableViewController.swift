@@ -35,21 +35,21 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let fieldData = fieldDatas[indexPath.row]
         if fieldData.visibleType == Data.VisibleType.DERAIL {
-            let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormSwitchCell", forIndexPath: indexPath) as QuotaFormSwitchCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormSwitchCell", forIndexPath: indexPath) as! QuotaFormSwitchCell
             cell.name.text = fieldData.columnName
             cell.swtichBtn.on = getBool(fieldData.value.toInt()!)
             inputTexts[cell.swtichBtn] = indexPath.row
             return cell
         } else if fieldData.visibleType == Data.VisibleType.TEXT {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormTextCell", forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormTextCell", forIndexPath: indexPath) as! UITableViewCell
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = fieldData.columnName
             cell.detailTextLabel?.numberOfLines = 0
             cell.detailTextLabel?.text = fieldData.value
             return cell
         }  else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormCell", forIndexPath: indexPath) as QuotaFormCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("quotaFormCell", forIndexPath: indexPath)as! QuotaFormCell
             cell.name.numberOfLines = 0
             cell.name.text = fieldData.columnName
             if fieldData.columnName == "天" {
@@ -302,8 +302,8 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showEditOptionSegue" {
             endTextFieldEditing()
-            let optionsTableViewController = segue.destinationViewController as OptionsTableViewController
-            let cell = sender as QuotaFormCell
+            let optionsTableViewController = segue.destinationViewController as! OptionsTableViewController
+            let cell = sender as! QuotaFormCell
             let indexPath = self.tableView.indexPathForCell(cell)!
             let data = fieldDatas[indexPath.row]
             optionsTableViewController.navigationItem.title = data.columnName
@@ -318,7 +318,7 @@ class EditQuotaTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func completeSelectOption(segue : UIStoryboardSegue) {
-        let optionsTableViewController = segue.sourceViewController as OptionsTableViewController
+        let optionsTableViewController = segue.sourceViewController as! OptionsTableViewController
         if optionsTableViewController.selectedOptions.count > 0 {
             let selectedLabel = ",".join(optionsTableViewController.selectedOptions.map({ "\($0.label)" }))
             //let selectedValue = ",".join(optionsTableViewController.selectedOptions.map({ "\($0.value)" }))

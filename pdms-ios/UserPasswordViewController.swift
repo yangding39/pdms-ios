@@ -28,7 +28,7 @@ class UserPasswordViewController: UITableViewController {
             CustomAlertView.showMessage("原密码必填", parentViewController:self)
         } else if newPasswordText.text.isEmpty {
             CustomAlertView.showMessage("新密码必填", parentViewController:self)
-        } else if countElements(newPasswordText.text) < 0 || countElements(newPasswordText.text) > 32 {
+        } else if count(newPasswordText.text) < 0 || count(newPasswordText.text) > 32 {
             CustomAlertView.showMessage("新密码必须是1-32个字符", parentViewController:self)
         } else if (newPassword != passwordConfirm) {
             CustomAlertView.showMessage("两次密码不一致", parentViewController:self)

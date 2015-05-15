@@ -22,7 +22,7 @@ class VisitTableViewController : UITableViewController {
     }
     override func viewWillAppear(animated: Bool) {
         if toDetail {
-            let quotaByVisitTableViewController = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("quotaByVisitTableViewController") as QuotaByVisitTableViewController
+            let quotaByVisitTableViewController = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("quotaByVisitTableViewController") as! QuotaByVisitTableViewController
             quotaByVisitTableViewController.patient = patient
             quotaByVisitTableViewController.visit = detailVisit
             self.navigationController?.pushViewController(quotaByVisitTableViewController, animated: false)
@@ -42,7 +42,7 @@ class VisitTableViewController : UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("visitAllCell", forIndexPath: indexPath) as VisitTableCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("visitAllCell", forIndexPath: indexPath) as! VisitTableCell
         let visit  = visits[indexPath.row]
         cell.typeLabel.text = visit.typeLabel
         
@@ -86,12 +86,12 @@ class VisitTableViewController : UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addVisitSegue" {
-            let navigateController =  segue.destinationViewController as UINavigationController
-            let addVisitViewController = navigateController.topViewController as AddVisitViewController
+            let navigateController =  segue.destinationViewController as! UINavigationController
+            let addVisitViewController = navigateController.topViewController as! AddVisitViewController
             addVisitViewController.patient = patient
         } else if segue.identifier == "quotaByVisitSegue" {
-            let quotaByVisitTableViewController = segue.destinationViewController as QuotaByVisitTableViewController
-            let indexPath = self.tableView.indexPathForCell(sender as VisitTableCell)!
+            let quotaByVisitTableViewController = segue.destinationViewController as! QuotaByVisitTableViewController
+            let indexPath = self.tableView.indexPathForCell(sender as! VisitTableCell)!
             let visit = visits[indexPath.row]
             quotaByVisitTableViewController.visit = visit
             quotaByVisitTableViewController.patient = patient
@@ -99,7 +99,7 @@ class VisitTableViewController : UITableViewController {
     }
     
     @IBAction func completeAddVisit(segue : UIStoryboardSegue) {
-        let addVisitViewController = segue.sourceViewController as AddVisitViewController
+        let addVisitViewController = segue.sourceViewController as! AddVisitViewController
         detailVisit = addVisitViewController.visit
         toDetail = true
     }

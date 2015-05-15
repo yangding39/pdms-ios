@@ -39,7 +39,7 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
             if nameText.text.isEmpty {
                 CustomAlertView.showMessage("姓名必填", parentViewController: self)
                 return false
-            } else if countElements(nameText.text) > 10 {
+            } else if count(nameText.text) > 10 {
                 CustomAlertView.showMessage("姓名不能超过10", parentViewController: self)
                 return false
             } else if genderText.text.isEmpty {
@@ -48,7 +48,7 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
             } else if birthdayText.text.isEmpty {
                 CustomAlertView.showMessage("出生日期必填", parentViewController: self)
                 return false
-            } else if countElements(caseNoText.text) > 20 {
+            } else if count(caseNoText.text) > 20 {
                 CustomAlertView.showMessage("病案号不能超过20", parentViewController: self)
                 return false
             }
@@ -107,7 +107,7 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
     func handleDatePicker(sender: UIBarButtonItem) {
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        var datePicker = birthdayText.inputView as UIDatePicker?
+        var datePicker = birthdayText.inputView as! UIDatePicker?
         if let date = datePicker?.date {
             birthdayText.text = dateFormatter.stringFromDate(date)
             birthdayText.endEditing(true)
@@ -121,7 +121,7 @@ class EditPatientViewController: UITableViewController, UIActionSheetDelegate  {
     }
     
     func handleSelectPicker(sender: UIBarButtonItem) {
-        var uiPicker = genderText.inputView as UIPickerView?
+        var uiPicker = genderText.inputView as! UIPickerView?
         if let index = uiPicker?.selectedRowInComponent(0) {
             genderText.text = self.options[index]
             genderText.endEditing(true)

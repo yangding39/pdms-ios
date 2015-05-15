@@ -90,7 +90,7 @@ class QuotaByVisitTableViewController: UITableViewController {
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("visitDetailCell", forIndexPath: indexPath) as VisitTableCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("visitDetailCell", forIndexPath: indexPath) as! VisitTableCell
             cell.typeLabel.text = visit.typeLabel
             let detailString = visit.generateDetail()
             cell.detailLabel.numberOfLines = 0
@@ -99,7 +99,7 @@ class QuotaByVisitTableViewController: UITableViewController {
             return cell
 
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as! QuotaCell
             let quota = groupDefinitions[indexPath.section - 1].quota[indexPath.row]
             cell.name.text = quota.name
             cell.name.adjustsFontSizeToFitWidth = true
@@ -176,14 +176,14 @@ class QuotaByVisitTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
      
         if segue.identifier == "showSearchCatgorySegue" {
-            let categoryTableviewController = segue.destinationViewController  as CategoryTableViewController
+            let categoryTableviewController = segue.destinationViewController  as! CategoryTableViewController
             categoryTableviewController.visit = visit
             categoryTableviewController.patient = patient
         } else if segue.identifier == "showQuotaDetailSegue" {
-            let indexPath = self.tableView.indexPathForCell(sender as QuotaCell)!
+            let indexPath = self.tableView.indexPathForCell(sender as! QuotaCell)!
             if indexPath.section != 0  {
                 let quota = groupDefinitions[indexPath.section - 1].quota[indexPath.row]
-                let quotaDetailViewController = segue.destinationViewController as QuotaDetailTabelViewController
+                let quotaDetailViewController = segue.destinationViewController as! QuotaDetailTabelViewController
                 quotaDetailViewController.quota = quota
                 quotaDetailViewController.patient = patient
                 quotaDetailViewController.visit = visit
@@ -191,7 +191,7 @@ class QuotaByVisitTableViewController: UITableViewController {
             }
            
         } else if segue.identifier == "detailVisitSegue" {
-            let visitDeatilViewController = segue.destinationViewController  as VisitDetailTableViewController
+            let visitDeatilViewController = segue.destinationViewController  as! VisitDetailTableViewController
             visitDeatilViewController.patient = patient
             visitDeatilViewController.visit = visit
         }

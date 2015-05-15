@@ -8,6 +8,6 @@
 
 import Foundation
 
-let SERVER_DOMAIN = "http://192.168.10.8:9090/"
+let SERVER_DOMAIN = "http://192.168.10.114:7070/"
 var TOKEN = ""
 var LOGIN_USER = User()

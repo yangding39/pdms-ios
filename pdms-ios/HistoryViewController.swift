@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
    
@@ -15,10 +16,13 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
     var searchResult: [Patient] = []
     var toDetail = false
     var detailPatient : Patient!
+    
+    let managedObectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     override func viewDidLoad() {
         super.viewDidLoad()
+        getUserInfoFromLocal()
         if TOKEN.isEmpty {
-            let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("loginTableViewController") as LoginTableViewController
+            let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("loginTableViewController") as! LoginTableViewController
             self.presentViewController(loginViewController, animated: true, completion: nil)
         }
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -27,6 +31,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
         if toDetail {
             
         } else {
+            //getUserInfoFromLocal()
             self.loadData()
         }
         
@@ -54,7 +59,7 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCellWithIdentifier("historyCell", forIndexPath: indexPath) as HistoryTableCell
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("patientCell") as PatientTableCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("patientCell") as! PatientTableCell
         var patient : Patient!
         if tableView == self.searchDisplayController?.searchResultsTableView {
             patient = self.searchResult[indexPath.row]
@@ -148,14 +153,14 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             let fromSearch = self.searchDisplayController?.active == true
             var patient: Patient!
             if (fromSearch) {
-                var indexPath = self.searchDisplayController?.searchResultsTableView.indexPathForCell(sender as PatientTableCell)
+                var indexPath = self.searchDisplayController?.searchResultsTableView.indexPathForCell(sender as! PatientTableCell)
                 patient = self.searchResult[indexPath!.row]
             } else {
-                var indexPath = self.tableView.indexPathForCell(sender as PatientTableCell)
+                var indexPath = self.tableView.indexPathForCell(sender as! PatientTableCell)
                 patient = self.recentPatients[indexPath!.row]
             }
             
-            let patientDetailViewController = segue.destinationViewController as PatientDetailViewController
+            let patientDetailViewController = segue.destinationViewController as! PatientDetailViewController
             patientDetailViewController.patient = patient
         } else if segue.identifier == "showAddPatientSegue" {
 //
@@ -175,6 +180,26 @@ class HistoryViewController: UITableViewController, UISearchBarDelegate, UISearc
             pullToRefreshView.setTitle("松开刷新...", forState: SVPullToRefreshState.Triggered)
             pullToRefreshView.setTitle("加载中...", forState: SVPullToRefreshState.Loading)
             pullToRefreshView.arrowColor = UIColor.grayColor()
+        }
+    }
+    
+    func getUserInfoFromLocal() {
+        let fetchRequest = NSFetchRequest(entityName:"UserLocal")
+        let predicate = NSPredicate(format: "isLogined == %@", true)
+        fetchRequest.predicate = predicate
+        if let fetchResult = self.managedObectContext?.executeFetchRequest(fetchRequest, error: nil) as? [UserLocal] {
+            if fetchResult.count > 0 {
+                LOGIN_USER.id = fetchResult[0].id
+                LOGIN_USER.name = fetchResult[0].name
+                LOGIN_USER.loginName = fetchResult[0].loginName
+                LOGIN_USER.mobile = fetchResult[0].mobile
+                LOGIN_USER.email = fetchResult[0].email
+                LOGIN_USER.address = fetchResult[0].address
+                LOGIN_USER.hospital = fetchResult[0].hospital
+                LOGIN_USER.department = fetchResult[0].department
+                LOGIN_USER.title = fetchResult[0].title
+                TOKEN = fetchResult[0].token
+            }
         }
     }
 }

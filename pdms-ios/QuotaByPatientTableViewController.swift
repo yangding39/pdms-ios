@@ -64,7 +64,7 @@ class QuotaByPatientTableViewController: UITableViewController {
 //        return 40
 //    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as QuotaCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("quotaCell", forIndexPath: indexPath) as! QuotaCell
         let quota = groupDefinitions[indexPath.section].quota[indexPath.row]
         cell.name.text = quota.name
         cell.name.adjustsFontSizeToFitWidth = true
@@ -122,9 +122,9 @@ class QuotaByPatientTableViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
          if segue.identifier == "showQuotaDetailSegue" {
-            let indexPath = self.tableView.indexPathForCell(sender as QuotaCell)!
+            let indexPath = self.tableView.indexPathForCell(sender as! QuotaCell)!
             let quota = groupDefinitions[indexPath.section].quota[indexPath.row]
-            let quotaDetailViewController = segue.destinationViewController as QuotaDetailTabelViewController
+            let quotaDetailViewController = segue.destinationViewController as! QuotaDetailTabelViewController
             quotaDetailViewController.quota = quota
             quotaDetailViewController.patient = patient
             quotaDetailViewController.crowDefition = groupDefinitions[indexPath.section]

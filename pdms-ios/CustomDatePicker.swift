@@ -19,8 +19,8 @@ class CustomDatePicker : UIPickerView, UIPickerViewDataSource, UIPickerViewDeleg
     var selectedMonthRow : Int! = 0
     var date : NSDate!
     
-    override init() {
-        super.init()
+     convenience init() {
+        self.init()
         commonInit()
     }
     
@@ -63,7 +63,7 @@ class CustomDatePicker : UIPickerView, UIPickerViewDataSource, UIPickerViewDeleg
         date = NSDate()
         self.delegate = self
         self.dataSource = self
-        setDate(date)
+        setDateV(date)
         self.showsSelectionIndicator = true
     }
     
@@ -173,7 +173,7 @@ class CustomDatePicker : UIPickerView, UIPickerViewDataSource, UIPickerViewDeleg
         return false
     }
     
-    func setDate(date : NSDate) {
+    func setDateV(date : NSDate) {
         let dateFormatter = NSDateFormatter()
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitHour | .CalendarUnitMinute, fromDate: date)

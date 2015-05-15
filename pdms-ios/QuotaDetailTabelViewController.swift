@@ -77,7 +77,7 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("showQuotaCell", forIndexPath: indexPath) as QuotaDetailCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("showQuotaCell", forIndexPath: indexPath) as! QuotaDetailCell
         let data = datas[indexPath.row]
         
         cell.columnNameLabel.text = data.columnName
@@ -98,7 +98,7 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
         }
         if !data.isValid {
             let text = NSMutableAttributedString(string: value)
-            text.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(0, countElements(data.value)))
+            text.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(0,count(data.value)))
             cell.valueLabel.attributedText = text
         } else {
             cell.valueLabel.textColor = UIColor.lightGrayColor()
@@ -187,7 +187,7 @@ class QuotaDetailTabelViewController: UITableViewController,UIActionSheetDelegat
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editQuotaSegue" {
-            let editQuotaTableViewController = segue.destinationViewController  as EditQuotaTableViewController
+            let editQuotaTableViewController = segue.destinationViewController  as! EditQuotaTableViewController
             editQuotaTableViewController.quota = quota
             editQuotaTableViewController.patient = patient
             editQuotaTableViewController.visit = visit

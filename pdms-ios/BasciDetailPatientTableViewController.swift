@@ -71,8 +71,8 @@ class BasciDetailPatientTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editPatitentSegue" {
-            let navigateController = segue.destinationViewController as UINavigationController
-           let editPatitentViewController =  navigateController.topViewController as EditPatientViewController
+            let navigateController = segue.destinationViewController as! UINavigationController
+           let editPatitentViewController =  navigateController.topViewController as! EditPatientViewController
             editPatitentViewController.patient = patient
         }
     }

@@ -200,7 +200,7 @@ class HttpApiClient {
     }
     
     func showLoginView(viewController : UIViewController) {
-            let loginViewController = viewController.storyboard?.instantiateViewControllerWithIdentifier("loginTableViewController") as LoginTableViewController
+            let loginViewController = viewController.storyboard?.instantiateViewControllerWithIdentifier("loginTableViewController") as! LoginTableViewController
             viewController.presentViewController(loginViewController, animated: true, completion: nil)
     }
 }

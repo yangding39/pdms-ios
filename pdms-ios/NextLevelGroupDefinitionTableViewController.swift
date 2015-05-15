@@ -33,7 +33,7 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("groupDefinitionCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("groupDefinitionCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = groupDefinitions[indexPath.row].name
         cell.textLabel?.sizeToFit()
@@ -71,8 +71,8 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         let hasNext = hasNextLevelGroup(sender)
         if hasNext {
-             let nextGroupDefinitionVC = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("nextLevelGroupDefinitionTableViewController") as NextLevelGroupDefinitionTableViewController
-            let indexPath = self.tableView.indexPathForCell(sender as UITableViewCell)!
+             let nextGroupDefinitionVC = self.navigationController?.storyboard?.instantiateViewControllerWithIdentifier("nextLevelGroupDefinitionTableViewController") as! NextLevelGroupDefinitionTableViewController
+            let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
             let parentGroupDefinition = groupDefinitions[indexPath.row]
             nextGroupDefinitionVC.navigationItem.title = parentGroupDefinition.name
             nextGroupDefinitionVC.visit = visit
@@ -89,10 +89,10 @@ class NextLevelGroupDefinitionTableViewController : UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "formSegue" {
-            let formTableViewController = segue.destinationViewController as FormTableViewController
+            let formTableViewController = segue.destinationViewController as! FormTableViewController
             formTableViewController.visit = visit
             formTableViewController.patient = patient
-            let indexPath = self.tableView.indexPathForCell(sender as UITableViewCell)!
+            let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
             let groupDefinition = groupDefinitions[indexPath.row]
             formTableViewController.navigationItem.title = groupDefinition.name
             formTableViewController.parentGroupDefinition = groupDefinition

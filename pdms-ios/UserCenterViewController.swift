@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class UserCenterViewController: UITableViewController,UIAlertViewDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hospitalLabel: UILabel!
     @IBOutlet weak var departmentLabel: UILabel!
+    let managedObectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     override func viewDidLoad() {
         
 //        let backgroundImage = UIImage(named: "user-bg")
@@ -65,7 +67,8 @@ class UserCenterViewController: UITableViewController,UIAlertViewDelegate {
         }
         if saveResult && fieldErrors.count == 0 {
             TOKEN = ""
-            let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("loginTableViewController") as LoginTableViewController
+            deleteUserFromLocal()
+            let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("loginTableViewController")as! LoginTableViewController
             self.presentViewController(loginViewController, animated: true, completion: nil)
         }
         
@@ -73,6 +76,18 @@ class UserCenterViewController: UITableViewController,UIAlertViewDelegate {
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 0 {
             self.logout()
+        }
+    }
+    
+    func deleteUserFromLocal() {
+        let fetchRequest = NSFetchRequest(entityName:"UserLocal")
+        let predicate = NSPredicate(format: "loginName == %@", LOGIN_USER.loginName)
+        fetchRequest.predicate = predicate
+        if let fetchResult = self.managedObectContext?.executeFetchRequest(fetchRequest, error: nil) as? [UserLocal] {
+            for user in fetchResult {
+                user.isLogined = false
+                user.token = ""
+                self.managedObectContext?.save(nil)            }
         }
     }
 }

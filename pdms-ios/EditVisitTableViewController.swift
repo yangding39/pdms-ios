@@ -93,7 +93,7 @@ class EditVisitTableViewController: UITableViewController {
             } else if number.text.isEmpty{
                 CustomAlertView.showMessage("就诊号必填", parentViewController: self)
                 return false
-            }  else if countElements(number.text) > 20 {
+            }  else if count(number.text) > 20 {
                 CustomAlertView.showMessage("就诊号长度不能超过20", parentViewController: self)
                 return false
             } else if departmentLabel.text.isEmpty{
@@ -203,21 +203,20 @@ class EditVisitTableViewController: UITableViewController {
     
     func handleSelectPicker(sender: UIBarButtonItem) {
         
-        var uiPicker = currentTextField!.inputView as UIPickerView?
-        if let index = uiPicker?.selectedRowInComponent(0) {
+        var uiPicker = currentTextField!.inputView as! UIPickerView
+        let index = uiPicker.selectedRowInComponent(0)
             if isDepartmentOptions {
                 let fisrtLabel = self.rootDepartments[index]
-                if let subIndex = uiPicker?.selectedRowInComponent(1) {
+                let subIndex = uiPicker.selectedRowInComponent(1)
                     if let options = self.departmentOptions[fisrtLabel] {
                         currentTextField!.text = options[subIndex].label
                     }
-                }
+                
             } else {
                 currentTextField!.text = self.typeOptions[index].label
             }
             
             currentTextField!.endEditing(true)
-        }
     }
     
     @IBAction func didCancelBtn(sender: AnyObject) {
